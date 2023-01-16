@@ -24,6 +24,19 @@ class ProductScreen extends StatelessWidget {
           children: [
             kProductScreenTopBottomBlancSizedBox,
             Image(image: NetworkImage(product.imgUrl)),
+            Text(
+              '-  1  +',
+              style: TextStyle(
+                fontSize: 35,
+              ),
+            ),
+            Container(
+              height: 60.0,
+              color: Colors.blue,
+              child: Center(
+                child: Text('Buy Now', style: TextStyle(fontSize: 20, color: Colors.white),),
+              ),
+            ),
             SizedBox(
               height: 30.0,
             ),
