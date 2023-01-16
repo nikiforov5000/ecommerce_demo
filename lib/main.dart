@@ -3,8 +3,8 @@ import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:flutter/material.dart';
 
 
-void main() {
-  productData.fetchData();
+void main() async {
+  await productData.fetchData();
   runApp(const MyApp());
 }
 

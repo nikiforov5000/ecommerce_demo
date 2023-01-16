@@ -18,9 +18,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       body: GridView.count(
         crossAxisCount: 3,
         children: List.generate(
-          20,
-          (index) => Container(child: Text(index.toString()),),
-          // (index) => ProductTile(product: productData.getProduct(index),),
+          productData.getLength(),
+          // (index) => Container(child: Text(index.toString()),),
+          (index) => ProductTile(product: productData.getProduct(index),),
         ),
       ),
       bottomNavigationBar: NavBar(),
