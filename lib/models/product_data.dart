@@ -8,7 +8,7 @@ ProductData productData = ProductData();
 class ProductData {
   List<Product> _products = [];
 
-  void fetchData() async {
+  Future<bool> fetchData() async {
     http.Client client = http.Client();
     String url = 'https://fakestoreapi.com/products';
     var uri = Uri.parse(url);
@@ -27,10 +27,11 @@ class ProductData {
       print('uri ' + uri.toString());
       print('product_data.dart -> fetchData() error:' + e.toString());
     }
+    return true;
   }
 
   void fillProductList(decodedResponse) {
-    for (int i = 6; i < 20; ++i) {
+    for (int i = 0; i < 20; ++i) {
       var response = decodedResponse[i];
       print(response);
       print('${response['title']} ${response['price']} ${response['image']}');
@@ -47,5 +48,9 @@ class ProductData {
   getProduct(int index) {
     print(_products.length > index);
     return _products[index];
+  }
+
+  int getLength() {
+    return _products.length;
   }
 }
