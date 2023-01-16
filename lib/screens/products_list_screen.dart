@@ -20,7 +20,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         children: List.generate(
           productData.getLength(),
           // (index) => Container(child: Text(index.toString()),),
-          (index) => ProductTile(product: productData.getProduct(index),),
+          (index) => ProductTile(product: productData.getProduct(index), onTapCallback: () {},),
         ),
       ),
       bottomNavigationBar: NavBar(),

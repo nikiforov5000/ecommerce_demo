@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import '../models/product.dart';
 
 class ProductTile extends StatelessWidget {
-  ProductTile({required this.product});
+  ProductTile({required this.product, required this.onTapCallback});
 
   final Product product;
+  final VoidCallback onTapCallback;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return InkWell(
+      onTap: onTapCallback,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
