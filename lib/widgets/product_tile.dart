@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ProductTile extends StatelessWidget {
-  ProductTile({required this.text});
+import '../models/product.dart';
 
-  final String text;
+class ProductTile extends StatelessWidget {
+  ProductTile({required this.product});
+
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
-    return Text(text);
+    return Container();
   }
 }
