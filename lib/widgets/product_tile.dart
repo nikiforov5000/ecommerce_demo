@@ -44,6 +44,9 @@ class ProductTile extends StatelessWidget {
               ),
             ),
           ),
+          Container(
+            child: Text('\$${product.price}', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.w700),),
+          ),
         ],
       ),
     );
