@@ -41,6 +41,7 @@ class ProductData {
           price: response['price'].toDouble(),
           imgUrl: response['image'],
           discription: response['description'],
+          rate: response['rating']['rate'].toDouble(),
         )
       );
     }

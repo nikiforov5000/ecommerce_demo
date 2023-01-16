@@ -22,9 +22,24 @@ class ProductScreen extends StatelessWidget {
             Image(image: NetworkImage(product.imgUrl)),
             SizedBox(height: 30.0,),
             Text(product.title, style: kProductScreenTitleTextStyle, textAlign: TextAlign.center,),
+            Text(product.rate.toString(), style: TextStyle(backgroundColor: getRatingColor(product.rate)),),
+            Text(product.discription),
           ],
         ),
       ),
     );
+  }
+
+  getRatingColor(double rating) {
+    if (rating > 4.0) {
+      return Colors.green;
+    }
+    if (rating > 3.0) {
+      return Colors.yellow;
+    }
+    if (rating > 2.0) {
+      return Colors.orange;
+    }
+    return Colors.red;
   }
 }
