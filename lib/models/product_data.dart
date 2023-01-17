@@ -80,4 +80,8 @@ class ProductData {
   String getCategoryAt(int index) {
     return _categoriesMap.keys.toList()[index];
   }
+
+  getProductsOfCategory(String currentCategory) {
+    return _products.where((product) => product.category == currentCategory).toList();
+  }
 }

@@ -18,6 +18,8 @@ class ProductsListScreen extends StatefulWidget {
 class _ProductsListScreenState extends State<ProductsListScreen> {
   @override
   Widget build(BuildContext context) {
+    String currentCategory = 'Jewelery';
+
     return Scaffold(
       body: Column(
         children: [
@@ -38,11 +40,11 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                     width: 100,
                     child: InkWell(
                       onTap: () {
-                        print('Category');
                         setState(() {
-
+                          currentCategory = productData.getCategoryAt(index);
+                          print(currentCategory);
                         });
-                        },
+                      },
                       child: Center(
                         child: Text(productData.getCategoryAt(index)),
                       ),
@@ -54,22 +56,28 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
           ),
           Expanded(
             flex: 9,
-            child: GridView.count(
-              // shrinkWrap: true,
-              // physics: NeverScrollableScrollPhysics(),
-              crossAxisCount: 3,
-              children: List.generate(
-                productData.getLength(),
-                // (index) => Container(child: Text(index.toString()),),
-                (index) => ProductTile(
-                  product: productData.getProduct(index),
+            child: GridView.count(crossAxisCount: 3, children: [
+              for (var product
+                  in productData.getProductsOfCategory(currentCategory))
+                ProductTile(
+                  product: product,
                   onTapCallback: () {
                     Navigator.pushNamed(context, ProductScreen.id,
-                        arguments: productData.getProduct(index));
+                        arguments: product);
                   },
                 ),
-              ),
-            ),
+            ]
+                // children: List.generate(
+                //   productData.getLength(),
+                //   (index) => ProductTile(
+                //     product: productData.getProduct(index),
+                //     onTapCallback: () {
+                //       Navigator.pushNamed(context, ProductScreen.id,
+                //           arguments: productData.getProduct(index));
+                //     },
+                //   ),
+                // ),
+                ),
           ),
         ],
       ),
