@@ -27,7 +27,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: List.generate(
-                5,
+                productData.getCategoriesLength(),
                 (index) => Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
@@ -37,9 +37,14 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                     height: 50,
                     width: 100,
                     child: InkWell(
-                      onTap: () { print('Category'); },
+                      onTap: () {
+                        print('Category');
+                        setState(() {
+
+                        });
+                        },
                       child: Center(
-                        child: Text('Category'),
+                        child: Text(productData.getCategoryAt(index)),
                       ),
                     ),
                   ),
