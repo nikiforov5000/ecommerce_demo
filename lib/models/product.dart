@@ -4,6 +4,7 @@ class Product {
   final String imgUrl;
   final String discription;
   final double rate;
+  final String category;
 
   Product({
     required this.title,
@@ -11,5 +12,6 @@ class Product {
     required this.imgUrl,
     required this.discription,
     required this.rate,
+    required this.category,
   });
 }

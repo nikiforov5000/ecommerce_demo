@@ -7,6 +7,7 @@ ProductData productData = ProductData();
 
 class ProductData {
   List<Product> _products = [];
+  Map<String, int> _categoriesMap = {};
 
   Future<bool> fetchData() async {
     http.Client client = http.Client();
@@ -31,10 +32,12 @@ class ProductData {
   }
 
   void fillProductList(decodedResponse) {
+    int k = 0;
     for (int i = 0; i < 20; ++i) {
       var response = decodedResponse[i];
-      print(response);
-      print('${response['title']} ${response['price']} ${response['image']}');
+      if ( !_categoriesMap.containsKey(response['category']) ) {
+        _categoriesMap.putIfAbsent(response['category'], () => k++);
+      }
       _products.add(
         Product(
           title: response['title'],
@@ -42,9 +45,14 @@ class ProductData {
           imgUrl: response['image'],
           discription: response['description'],
           rate: response['rating']['rate'].toDouble(),
+          category: response['category'],
         )
       );
     }
+  }
+
+  getCategories() {
+    return _categoriesMap;
   }
 
   getProduct(int index) {
