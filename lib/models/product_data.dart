@@ -82,6 +82,9 @@ class ProductData {
   }
 
   getProductsOfCategory(String currentCategory) {
-    return _products.where((product) => product.category == currentCategory).toList();
+    if (_categoriesMap.containsKey(currentCategory)) {
+      return _products.where((product) => product.category == currentCategory).toList();
+    }
+    return _products;
   }
 }
