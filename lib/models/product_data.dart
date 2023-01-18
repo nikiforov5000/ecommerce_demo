@@ -87,4 +87,8 @@ class ProductData {
     }
     return _products;
   }
+
+  List<Product> getAllProducts() {
+    return _products;
+  }
 }

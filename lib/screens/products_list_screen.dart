@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../models/product.dart';
 import '../widgets/bottom_navbar.dart';
+import '../widgets/category_button.dart';
 import '../widgets/product_tile.dart';
 
 class ProductsListScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class ProductsListScreen extends StatefulWidget {
 }
 
 class _ProductsListScreenState extends State<ProductsListScreen> {
-  List<Product> currentProducts = productData.getProductsOfCategory('');
+  List<Product> currentProducts = productData.getAllProducts();
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +35,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                   label: 'All products',
                   onTapCallback: () {
                     setState(() {
-                      currentProducts = productData
-                          .getProductsOfCategory('non existing category');
+                      currentProducts = productData.getAllProducts();
                     });
                   },
                 ),
@@ -68,32 +68,6 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         ],
       ),
       bottomNavigationBar: NavBar(),
-    );
-  }
-}
-
-class CategoryButton extends StatelessWidget {
-  final String label;
-  final VoidCallback onTapCallback;
-
-  CategoryButton({required this.label, required this.onTapCallback});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-        height: 50,
-        width: 100,
-        child: InkWell(
-          onTap: onTapCallback,
-          child: Center(
-            child: Text(label),
-          ),
-        ),
-      ),
     );
   }
 }
