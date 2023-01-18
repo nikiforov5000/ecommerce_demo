@@ -3,6 +3,7 @@ import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:ecommerce_demo/widgets/sized_box_vertical_separator.dart';
 import 'package:flutter/material.dart';
 
+import '../models/product.dart';
 import '../widgets/bottom_navbar.dart';
 import '../widgets/product_tile.dart';
 
@@ -16,49 +17,52 @@ class ProductsListScreen extends StatefulWidget {
 }
 
 class _ProductsListScreenState extends State<ProductsListScreen> {
+
+
+
   @override
   Widget build(BuildContext context) {
-    String currentCategory = 'Jewelery';
-
+    List<Product> currentProducts = [];
+    print('product_list_screen.dart -> build');
     return Scaffold(
       body: Column(
         children: [
           kProductScreenTopBottomBlancSizedBox,
+          Text(currentProducts.isNotEmpty ? currentProducts[0].title : 'empty list'),
           Expanded(
             flex: 1,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: List.generate(
-                productData.getCategoriesLength(),
-                (index) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10)),
-                    height: 50,
-                    width: 100,
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          currentCategory = productData.getCategoryAt(index);
-                          print(currentCategory);
-                        });
-                      },
-                      child: Center(
-                        child: Text(productData.getCategoryAt(index)),
+              children: [
+                for (String category in productData.getCategoriesList())
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(10)),
+                      height: 50,
+                      width: 100,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            currentProducts = productData.getProductsOfCategory(category);
+                            print(currentProducts.map((e) => e.title).toList());
+                          });
+                        },
+                        child: Center(
+                          child: Text(category),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
+              ],
             ),
           ),
           Expanded(
             flex: 9,
             child: GridView.count(crossAxisCount: 3, children: [
-              for (var product
-                  in productData.getProductsOfCategory(currentCategory))
+              for (var product in currentProducts)
                 ProductTile(
                   product: product,
                   onTapCallback: () {
@@ -66,18 +70,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                         arguments: product);
                   },
                 ),
-            ]
-                // children: List.generate(
-                //   productData.getLength(),
-                //   (index) => ProductTile(
-                //     product: productData.getProduct(index),
-                //     onTapCallback: () {
-                //       Navigator.pushNamed(context, ProductScreen.id,
-                //           arguments: productData.getProduct(index));
-                //     },
-                //   ),
-                // ),
-                ),
+            ]),
           ),
         ],
       ),
