@@ -17,18 +17,14 @@ class ProductsListScreen extends StatefulWidget {
 }
 
 class _ProductsListScreenState extends State<ProductsListScreen> {
-
-
+    List<Product> currentProducts = [];
 
   @override
   Widget build(BuildContext context) {
-    List<Product> currentProducts = [];
-    print('product_list_screen.dart -> build');
     return Scaffold(
       body: Column(
         children: [
           kProductScreenTopBottomBlancSizedBox,
-          Text(currentProducts.isNotEmpty ? currentProducts[0].title : 'empty list'),
           Expanded(
             flex: 1,
             child: ListView(
