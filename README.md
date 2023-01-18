@@ -1,6 +1,6 @@
 # ecommerce_demo
 
-A new Flutter project.
+A Flutter project to practice creating a very common type of mobile app.
 
 ## Getting Started
 
