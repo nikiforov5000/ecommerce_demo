@@ -5,8 +5,15 @@ import 'package:http/http.dart' as http;
 
 ProductData productData = ProductData();
 
+extension StringExtension on String {
+  String capitalize() {
+    return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
+  }
+}
+
 class ProductData {
   List<Product> _products = [];
+  Map<String, int> _categoriesMap = {};
 
   Future<bool> fetchData() async {
     http.Client client = http.Client();
@@ -31,10 +38,15 @@ class ProductData {
   }
 
   void fillProductList(decodedResponse) {
+    int k = 0;
     for (int i = 0; i < 20; ++i) {
       var response = decodedResponse[i];
-      print(response);
-      print('${response['title']} ${response['price']} ${response['image']}');
+
+      String category = response['category'];
+      category = category.capitalize();
+
+      _categoriesMap.putIfAbsent(category, () => k++);
+
       _products.add(
         Product(
           title: response['title'],
@@ -42,9 +54,14 @@ class ProductData {
           imgUrl: response['image'],
           discription: response['description'],
           rate: response['rating']['rate'].toDouble(),
+          category: category,
         )
       );
     }
+  }
+
+  getCategoriesList() {
+    return _categoriesMap.keys;
   }
 
   getProduct(int index) {
@@ -54,5 +71,24 @@ class ProductData {
 
   int getLength() {
     return _products.length;
+  }
+
+  int getCategoriesLength() {
+    return _categoriesMap.length;
+  }
+
+  String getCategoryAt(int index) {
+    return _categoriesMap.keys.toList()[index];
+  }
+
+  getProductsOfCategory(String currentCategory) {
+    if (_categoriesMap.containsKey(currentCategory)) {
+      return _products.where((product) => product.category == currentCategory).toList();
+    }
+    return _products;
+  }
+
+  List<Product> getAllProducts() {
+    return _products;
   }
 }

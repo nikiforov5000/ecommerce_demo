@@ -1,9 +1,11 @@
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
+import 'package:ecommerce_demo/widgets/sized_box_vertical_separator.dart';
 import 'package:flutter/material.dart';
 
 import '../models/product.dart';
 import '../widgets/bottom_navbar.dart';
+import '../widgets/category_button.dart';
 import '../widgets/product_tile.dart';
 
 class ProductsListScreen extends StatefulWidget {
@@ -16,25 +18,56 @@ class ProductsListScreen extends StatefulWidget {
 }
 
 class _ProductsListScreenState extends State<ProductsListScreen> {
+  List<Product> currentProducts = productData.getAllProducts();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GridView.count(
-        crossAxisCount: 3,
-        children: List.generate(
-          productData.getLength(),
-          // (index) => Container(child: Text(index.toString()),),
-          (index) => ProductTile(
-            product: productData.getProduct(index),
-            onTapCallback: () {
-              Navigator.pushNamed(context, ProductScreen.id, arguments: productData.getProduct(index));
-            },
+      body: Column(
+        children: [
+          kProductScreenTopBottomBlancSizedBox,
+          Expanded(
+            flex: 1,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                CategoryButton(
+                  label: 'All products',
+                  onTapCallback: () {
+                    setState(() {
+                      currentProducts = productData.getAllProducts();
+                    });
+                  },
+                ),
+                for (String category in productData.getCategoriesList())
+                  CategoryButton(
+                    label: category,
+                    onTapCallback: () {
+                      setState(() {
+                        currentProducts =
+                            productData.getProductsOfCategory(category);
+                      });
+                    },
+                  ),
+              ],
+            ),
           ),
-        ),
+          Expanded(
+            flex: 9,
+            child: GridView.count(crossAxisCount: 3, children: [
+              for (var product in currentProducts)
+                ProductTile(
+                  product: product,
+                  onTapCallback: () {
+                    Navigator.pushNamed(context, ProductScreen.id,
+                        arguments: product);
+                  },
+                ),
+            ]),
+          ),
+        ],
       ),
       bottomNavigationBar: NavBar(),
     );
   }
 }
-
-
