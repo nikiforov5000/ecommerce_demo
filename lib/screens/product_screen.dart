@@ -1,9 +1,11 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/text_styles.dart';
 import '../models/product.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import '../widgets/sized_box_vertical_separator.dart';
+
+int _quantity = 0;
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({super.key});
@@ -23,15 +25,12 @@ class ProductScreen extends StatelessWidget {
         ),
         child: ListView(
           children: [
-            kProductScreenTopBottomBlancSizedBox,
-           // Image(image: NetworkImage(product.imgUrl)),
-            ProductImageCarousel(product: product,),
-            Text(
-              '-  1  +',
-              style: TextStyle(
-                fontSize: 35,
-              ),
+            // Image(image: NetworkImage(product.imgUrl)),
+            ProductImageCarousel(
+              product: product,
             ),
+            PlusMinusButtons(),
+            SizedBox(height: 30.0,),
             Container(
               height: 60.0,
               color: Colors.blue,
@@ -82,27 +81,65 @@ class ProductScreen extends StatelessWidget {
   }
 }
 
-class ProductImageCarousel extends StatelessWidget {
+class PlusMinusButtons extends StatefulWidget {
+  const PlusMinusButtons({
+    Key? key,
+  }) : super(key: key);
 
+  @override
+  State<PlusMinusButtons> createState() => _PlusMinusButtonsState();
+}
+
+class _PlusMinusButtonsState extends State<PlusMinusButtons> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        FloatingActionButton(
+          child: Icon(const IconData(0x2212), size: 35,),
+          onPressed: () {
+            setState(() {
+              _quantity--;
+            });
+          },
+        ),
+        SizedBox(width: 30,),
+        Text(_quantity.toString(), style: TextStyle(fontSize: 40),),
+        SizedBox(width: 30,),
+        FloatingActionButton(
+          child: Icon(const IconData(0x002B), size: 35,),
+          onPressed: () {
+            setState(() {
+              _quantity++;
+            });
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class ProductImageCarousel extends StatelessWidget {
   final Product product;
 
   const ProductImageCarousel({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    return             CarouselSlider(
+    return CarouselSlider(
       options: CarouselOptions(height: 400.0),
-      items: [1,2,3,4,5].map((i) {
+      items: [1, 2, 3, 4, 5].map((i) {
         return Builder(
           builder: (BuildContext context) {
             return Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                // decoration: BoxDecoration(
-                //     color: Colors.amber
-                // ),
-                // child: Text('text $i', style: TextStyle(fontSize: 16.0),)
-                child: Image(image: NetworkImage(product.imgUrl)),
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.symmetric(horizontal: 5.0),
+              // decoration: BoxDecoration(
+              //     color: Colors.amber
+              // ),
+              // child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+              child: Image(image: NetworkImage(product.imgUrl)),
             );
           },
         );
@@ -110,4 +147,3 @@ class ProductImageCarousel extends StatelessWidget {
     );
   }
 }
-

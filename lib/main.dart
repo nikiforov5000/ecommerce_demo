@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'screens/product_screen.dart';
 
 void main() async {
+
   await productData.fetchData();
   runApp(const MyApp());
 }
