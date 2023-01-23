@@ -14,4 +14,8 @@ class Product {
     required this.rate,
     required this.category,
   });
+
+  String getShortTitle() {
+    return title.split(' ').getRange(0, 2).join(' ');
+  }
 }
