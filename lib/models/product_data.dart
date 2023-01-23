@@ -47,16 +47,14 @@ class ProductData {
 
       _categoriesMap.putIfAbsent(category, () => k++);
 
-      _products.add(
-        Product(
-          title: response['title'],
-          price: response['price'].toDouble(),
-          imgUrl: response['image'],
-          discription: response['description'],
-          rate: response['rating']['rate'].toDouble(),
-          category: category,
-        )
-      );
+      _products.add(Product(
+        title: response['title'],
+        price: response['price'].toDouble(),
+        imgUrl: response['image'],
+        discription: response['description'],
+        rate: response['rating']['rate'].toDouble(),
+        category: category,
+      ));
     }
   }
 
@@ -65,7 +63,6 @@ class ProductData {
   }
 
   getProduct(int index) {
-    print(_products.length > index);
     return _products[index];
   }
 
@@ -83,7 +80,9 @@ class ProductData {
 
   getProductsOfCategory(String currentCategory) {
     if (_categoriesMap.containsKey(currentCategory)) {
-      return _products.where((product) => product.category == currentCategory).toList();
+      return _products
+          .where((product) => product.category == currentCategory)
+          .toList();
     }
     return _products;
   }

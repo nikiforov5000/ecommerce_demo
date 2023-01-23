@@ -1,6 +1,4 @@
 import 'package:ecommerce_demo/models/product.dart';
-import 'package:ecommerce_demo/models/product_data.dart';
-
 
 class ShoppingCart {
   Map<Product, int> _shoppingCart = {};

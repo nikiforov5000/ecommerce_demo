@@ -12,9 +12,6 @@ class ShoppingCartPage extends StatefulWidget {
 
   @override
   State<ShoppingCartPage> createState() => _ShoppingCartPageState();
-
-
-
 }
 
 class _ShoppingCartPageState extends State<ShoppingCartPage> {
@@ -22,17 +19,11 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
 
   @override
   void initState() {
-    shoppingCart.addProduct(productData.getProduct(0), 3);
-    shoppingCart.addProduct(productData.getProduct(4), 6);
-    shoppingCart.addProduct(productData.getProduct(6), 1);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
-
-
     List<Product> products = shoppingCart.getCartMap().keys.toList();
     List<int> quantities = shoppingCart.getCartMap().values.toList();
 
@@ -77,7 +68,10 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Total price: '),
-                    Text(total.toStringAsFixed(2), style: TextStyle(fontWeight: FontWeight.bold),),
+                    Text(
+                      total.toStringAsFixed(2),
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ],
                 ),
               ),
