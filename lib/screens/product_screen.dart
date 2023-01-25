@@ -1,11 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/text_styles.dart';
 import '../models/product.dart';
+import '../models/shopping_cart.dart';
 import '../widgets/sized_box_vertical_separator.dart';
 
-int _quantity = 0;
+int quantity = 0;
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({super.key});
@@ -14,9 +16,11 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('productScreen().build');
     final product = ModalRoute.of(context)!.settings.arguments as Product;
     return Scaffold(
       appBar: AppBar(
+        leading: ArrowBackWidget(),
         title: Text(product.title),
       ),
       body: Padding(
@@ -30,14 +34,39 @@ class ProductScreen extends StatelessWidget {
               product: product,
             ),
             PlusMinusButtons(),
-            SizedBox(height: 30.0,),
-            Container(
-              height: 60.0,
-              color: Colors.blue,
-              child: Center(
-                child: Text(
-                  'Buy Now',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+            SizedBox(
+              height: 30.0,
+            ),
+            InkWell(
+              onTap: () {
+                shoppingCart.addProduct(product, quantity);
+              },
+              child: Container(
+                height: 60.0,
+                color: Colors.blue,
+                child: const Center(
+                  child: Text(
+                    'Add to Cart',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30.0,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, ShoppingCartScreen.id);
+              },
+              child: Container(
+                height: 60.0,
+                color: Colors.blue,
+                child: const Center(
+                  child: Text(
+                    'Go to Cart',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -53,13 +82,13 @@ class ProductScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Rating: ',
                   style: kProductScreenRatingTextStyle,
                 ),
                 Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 5.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: getRatingColor(product.rate),
@@ -81,11 +110,32 @@ class ProductScreen extends StatelessWidget {
   }
 }
 
-class PlusMinusButtons extends StatefulWidget {
-  const PlusMinusButtons({
-    Key? key,
-  }) : super(key: key);
+class ArrowBackWidget extends StatefulWidget {
+  const ArrowBackWidget({Key? key}) : super(key: key);
 
+  @override
+  State<ArrowBackWidget> createState() => _ArrowBackWidgetState();
+}
+
+class _ArrowBackWidgetState extends State<ArrowBackWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          print('back');
+          quantity = 0;
+          Navigator.pop;
+        });
+      },
+      child: Container(
+        child: Icon(Icons.arrow_back),
+      ),
+    );
+  }
+}
+
+class PlusMinusButtons extends StatefulWidget {
   @override
   State<PlusMinusButtons> createState() => _PlusMinusButtonsState();
 }
@@ -97,21 +147,34 @@ class _PlusMinusButtonsState extends State<PlusMinusButtons> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         FloatingActionButton(
-          child: Icon(const IconData(0x2212), size: 35,),
+          child: Icon(
+            const IconData(0x2212),
+            size: 35,
+          ),
           onPressed: () {
             setState(() {
-              _quantity--;
+              quantity--;
             });
           },
         ),
-        SizedBox(width: 30,),
-        Text(_quantity.toString(), style: TextStyle(fontSize: 40),),
-        SizedBox(width: 30,),
+        SizedBox(
+          width: 30,
+        ),
+        Text(
+          quantity.toString(),
+          style: TextStyle(fontSize: 40),
+        ),
+        SizedBox(
+          width: 30,
+        ),
         FloatingActionButton(
-          child: Icon(const IconData(0x002B), size: 35,),
+          child: Icon(
+            const IconData(0x002B),
+            size: 35,
+          ),
           onPressed: () {
             setState(() {
-              _quantity++;
+              quantity++;
             });
           },
         ),

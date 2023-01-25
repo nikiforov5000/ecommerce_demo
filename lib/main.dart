@@ -4,10 +4,10 @@ import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/registration_screen.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
 import 'package:flutter/material.dart';
+import 'models/shopping_cart.dart';
 import 'screens/product_screen.dart';
 
 void main() async {
-
   await productData.fetchData();
   runApp(const MyApp());
 }
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: ProductsListScreen.id,
       routes: {
-        ShoppingCartPage.id: (context) => ShoppingCartPage(),
+        ShoppingCartScreen.id: (context) => ShoppingCartScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         ProductsListScreen.id: (context) => ProductsListScreen(),

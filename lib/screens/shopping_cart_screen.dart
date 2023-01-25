@@ -1,22 +1,19 @@
-import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_demo/models/shopping_cart.dart';
 
 import '../models/product.dart';
-import '../models/shopping_cart.dart';
 import '../widgets/rounded_button_widget.dart';
 
-class ShoppingCartPage extends StatefulWidget {
-  const ShoppingCartPage({Key? key}) : super(key: key);
+class ShoppingCartScreen extends StatefulWidget {
+  const ShoppingCartScreen({Key? key}) : super(key: key);
 
   static const String id = 'shopping_cart_screen';
 
   @override
-  State<ShoppingCartPage> createState() => _ShoppingCartPageState();
+  State<ShoppingCartScreen> createState() => _ShoppingCartScreenState();
 }
 
-class _ShoppingCartPageState extends State<ShoppingCartPage> {
-  ShoppingCart shoppingCart = ShoppingCart();
-
+class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   @override
   void initState() {
     super.initState();
