@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
+import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/text_styles.dart';
@@ -7,12 +8,17 @@ import '../models/product.dart';
 import '../models/shopping_cart.dart';
 import '../widgets/sized_box_vertical_separator.dart';
 
-int quantity = 0;
-
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
 
   static const String id = '/productScreen';
+
+  @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
+  int quantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,6 @@ class ProductScreen extends StatelessWidget {
     final product = ModalRoute.of(context)!.settings.arguments as Product;
     return Scaffold(
       appBar: AppBar(
-        leading: ArrowBackWidget(),
         title: Text(product.title),
       ),
       body: Padding(
@@ -33,43 +38,68 @@ class ProductScreen extends StatelessWidget {
             ProductImageCarousel(
               product: product,
             ),
-            PlusMinusButtons(),
-            SizedBox(
-              height: 30.0,
-            ),
-            InkWell(
-              onTap: () {
-                shoppingCart.addProduct(product, quantity);
-              },
-              child: Container(
-                height: 60.0,
-                color: Colors.blue,
-                child: const Center(
-                  child: Text(
-                    'Add to Cart',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: RoundedButton(
+                    color: Colors.blue,
+                    text: '-', //2212
+                    onPress: () {
+                      setState(() {
+                        if (quantity > 1) {
+                          quantity--;
+                        }
+                      });
+                    },
                   ),
                 ),
-              ),
+                // SizedBox(
+                //   width: 30,
+                // ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                  ),
+                  child: Text(
+                    quantity.toString(),
+                    style: TextStyle(fontSize: 40),
+                  ),
+                ),
+                // SizedBox(
+                //   width: 30,
+                // ),
+                Expanded(
+                  child: RoundedButton(
+                    color: Colors.blue,
+                    text: '+', //002b
+                    onPress: () {
+                      setState(() {
+                        quantity++;
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 30.0,
             ),
             const SizedBox(
               height: 30.0,
             ),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, ShoppingCartScreen.id);
-              },
-              child: Container(
-                height: 60.0,
+            RoundedButton(
+                text: 'Add to Cart',
                 color: Colors.blue,
-                child: const Center(
-                  child: Text(
-                    'Go to Cart',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
+                onPress: () {
+                  shoppingCart.addProduct(product, quantity);
+                }),
+            RoundedButton(
+                text: 'Go to Cart',
+                color: Colors.blue,
+                onPress: () {
+                  Navigator.pushNamed(context, ShoppingCartScreen.id);
+                }),
             SizedBox(
               height: 30.0,
             ),
@@ -106,79 +136,6 @@ class ProductScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class ArrowBackWidget extends StatefulWidget {
-  const ArrowBackWidget({Key? key}) : super(key: key);
-
-  @override
-  State<ArrowBackWidget> createState() => _ArrowBackWidgetState();
-}
-
-class _ArrowBackWidgetState extends State<ArrowBackWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          print('back');
-          quantity = 0;
-          Navigator.pop;
-        });
-      },
-      child: Container(
-        child: Icon(Icons.arrow_back),
-      ),
-    );
-  }
-}
-
-class PlusMinusButtons extends StatefulWidget {
-  @override
-  State<PlusMinusButtons> createState() => _PlusMinusButtonsState();
-}
-
-class _PlusMinusButtonsState extends State<PlusMinusButtons> {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        FloatingActionButton(
-          child: Icon(
-            const IconData(0x2212),
-            size: 35,
-          ),
-          onPressed: () {
-            setState(() {
-              quantity--;
-            });
-          },
-        ),
-        SizedBox(
-          width: 30,
-        ),
-        Text(
-          quantity.toString(),
-          style: TextStyle(fontSize: 40),
-        ),
-        SizedBox(
-          width: 30,
-        ),
-        FloatingActionButton(
-          child: Icon(
-            const IconData(0x002B),
-            size: 35,
-          ),
-          onPressed: () {
-            setState(() {
-              quantity++;
-            });
-          },
-        ),
-      ],
     );
   }
 }
