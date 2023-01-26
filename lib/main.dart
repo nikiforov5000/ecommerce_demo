@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         RegistrationScreen.id: (context) => RegistrationScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         ProductsListScreen.id: (context) => ProductsListScreen(),
-        ProductScreen.id: (context) => const ProductScreen(),
+        ProductScreen.id: (context) => ProductScreen(),
       },
     );
   }
