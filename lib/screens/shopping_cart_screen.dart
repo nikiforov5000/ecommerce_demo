@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/screens/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_demo/models/shopping_cart.dart';
 
@@ -79,7 +80,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               RoundedButton(
                 text: 'Continue',
                 color: Colors.blue,
-                onPress: () {},
+                onPress: () {
+                  Navigator.pushNamed(context, CheckoutScreen.id);
+                },
               ),
             ],
           )),
