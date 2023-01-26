@@ -20,10 +20,16 @@ class ShoppingCart {
   }
 
   addProduct(Product product, int quantity) {
-    print(product.title);
-    print(quantity);
-    _shoppingCart[product] = quantity;
-    sum += product.price * quantity;
+    if (_shoppingCart.keys.contains(product)) {
+      print('contains');
+      int? currentQuantity = _shoppingCart[product];
+      _shoppingCart[product] = quantity + currentQuantity!;
+    }
+    else {
+      print('doesnt contains');
+      _shoppingCart[product] = quantity;
+      sum += product.price * quantity;
+    }
   }
 
 }
