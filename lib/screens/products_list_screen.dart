@@ -1,7 +1,7 @@
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
-import 'package:ecommerce_demo/widgets/sized_box_vertical_separator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../models/product.dart';
 import '../widgets/bottom_navbar.dart';
@@ -23,9 +23,18 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+          },
+          child: Icon(Icons.arrow_back),
+        ),
+        title: Text('eCommerce Demo'),
+      ),
       body: Column(
         children: [
-          kProductScreenTopBottomBlancSizedBox,
+          // kProductScreenTopBottomBlancSizedBox,
           Expanded(
             flex: 1,
             child: ListView(
