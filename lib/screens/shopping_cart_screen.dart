@@ -27,6 +27,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 
     double total = shoppingCart.getSum();
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Your Cart'),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
