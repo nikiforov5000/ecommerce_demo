@@ -34,7 +34,6 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       ),
       body: Column(
         children: [
-          // kProductScreenTopBottomBlancSizedBox,
           Expanded(
             flex: 1,
             child: ListView(
