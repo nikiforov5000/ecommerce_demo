@@ -4,6 +4,7 @@ import 'package:ecommerce_demo/screens/login_screen.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/registration_screen.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
+import 'package:ecommerce_demo/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/product_screen.dart';
 
@@ -19,8 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      initialRoute: ProductsListScreen.id,
+      initialRoute: WelcomeScreen.id,
       routes: {
+        WelcomeScreen.id: (context) => WelcomeScreen(),
         CheckoutScreen.id: (context) => CheckoutScreen(),
         ShoppingCartScreen.id: (context) => ShoppingCartScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),
