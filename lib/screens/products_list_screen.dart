@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
@@ -6,7 +7,6 @@ import 'package:flutter/services.dart';
 
 import '../models/product.dart';
 import '../widgets/bottom_navbar.dart';
-import '../widgets/category_button.dart';
 import '../widgets/product_tile.dart';
 
 class ProductsListScreen extends StatefulWidget {
@@ -34,7 +34,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         title: Text('eCommerce Demo'),
       ),
       body: Container(
-        color: Color(0xffF5F6FD),
+        color: kTileColor,
         child: Column(
           children: [
             Expanded(
@@ -65,16 +65,19 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
             ),
             Expanded(
               flex: 10,
-              child: GridView.count(crossAxisCount: 3, children: [
-                for (var product in currentProducts)
-                  ProductTile(
-                    product: product,
-                    onTapCallback: () {
-                      Navigator.pushNamed(context, ProductScreen.id,
-                          arguments: product);
-                    },
-                  ),
-              ]),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: GridView.count(crossAxisCount: 2, children: [
+                  for (var product in currentProducts)
+                    ProductTile(
+                      product: product,
+                      onTapCallback: () {
+                        Navigator.pushNamed(context, ProductScreen.id,
+                            arguments: product);
+                      },
+                    ),
+                ]),
+              ),
             ),
           ],
         ),
