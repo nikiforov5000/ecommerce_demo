@@ -8,6 +8,10 @@ const kProductScreenTitleTextStyle = TextStyle(
 const kProductScreenRatingTextStyle = TextStyle(
     fontSize: 20.0,);
 
+const kCategoryButtonTextStyle = TextStyle(
+  fontFamily: 'Arsenal'
+);
+
 
 getRatingColor(double rating) {
   if (rating > 4.0) {
