@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class RoundedButton extends StatelessWidget {
@@ -24,7 +25,7 @@ class RoundedButton extends StatelessWidget {
         height: 42.0,
         child: Text(
           label,
-          style: TextStyle(color: Colors.white),
+          style: kButtonTextStyle,
         ),
       ),
     );
