@@ -96,8 +96,8 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
               Expanded(
                 child: RoundedButton(
                   color: Colors.blue,
-                  text: '-',
-                  onPress: () {
+                  label: '-',
+                  onTapCallback: () {
                     setState(() {
                       if (quantity > 1) {
                         quantity--;
@@ -118,8 +118,8 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
               Expanded(
                 child: RoundedButton(
                   color: Colors.blue,
-                  text: '+', //002b
-                  onPress: () {
+                  label: '+', //002b
+                  onTapCallback: () {
                     setState(() {
                       quantity++;
                     });
@@ -132,18 +132,18 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
             height: 15,
           ),
           RoundedButton(
-              text: 'Add to Cart',
+              label: 'Add to Cart',
               color: Colors.blue,
-              onPress: () {
+              onTapCallback: () {
                 shoppingCart.addProduct(widget.product, quantity);
               }),
           SizedBox(
             height: 15,
           ),
           RoundedButton(
-              text: 'Go to Cart',
+              label: 'Go to Cart',
               color: Colors.blue,
-              onPress: () {
+              onTapCallback: () {
                 Navigator.pushNamed(context, ShoppingCartScreen.id);
               }),
         ]);

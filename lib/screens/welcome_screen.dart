@@ -23,18 +23,18 @@ class WelcomeScreen extends StatelessWidget {
             children: <Widget>[
               LogoHero(),
               RoundedButton(
-                  text: 'Login',
+                  label: 'Login',
                   color: Colors.blue,
-                  onPress: () {
+                  onTapCallback: () {
                     Navigator.pushNamed(context, LoginScreen.id);
                   }),
               SizedBox(
                 height: 20.0,
               ),
               RoundedButton(
-                  text: 'Register',
+                  label: 'Register',
                   color: Colors.blue,
-                  onPress: () {
+                  onTapCallback: () {
                     Navigator.pushNamed(context, RegistrationScreen.id);
                   }),
             ],
