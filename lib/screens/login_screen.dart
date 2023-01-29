@@ -62,9 +62,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 24.0,
                   ),
                   RoundedButton(
-                    text: 'Log in',
+                    label: 'Log in',
                     color: Colors.lightBlueAccent,
-                    onPress: () async {
+                    onTapCallback: () async {
                       Navigator.pushNamed(context, ProductsListScreen.id);
                     },
                   ),

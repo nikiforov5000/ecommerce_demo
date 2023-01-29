@@ -1,5 +1,6 @@
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
+import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -34,14 +35,14 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       ),
       body: Column(
         children: [
-          // kProductScreenTopBottomBlancSizedBox,
           Expanded(
             flex: 1,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                CategoryButton(
+                RoundedButton(
                   label: 'All products',
+                  color: Colors.blue,
                   onTapCallback: () {
                     setState(() {
                       currentProducts = productData.getAllProducts();
@@ -49,8 +50,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                   },
                 ),
                 for (String category in productData.getCategoriesList())
-                  CategoryButton(
+                  RoundedButton(
                     label: category,
+                    color: Colors.blue,
                     onTapCallback: () {
                       setState(() {
                         currentProducts =

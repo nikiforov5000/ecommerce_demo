@@ -1,15 +1,16 @@
+import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class RoundedButton extends StatelessWidget {
-  final VoidCallback onPress;
-  final String text;
+  final VoidCallback onTapCallback;
+  final String label;
   final Color color;
 
   const RoundedButton({
     Key? key,
-    required this.text,
+    required this.label,
     required this.color,
-    required this.onPress,
+    required this.onTapCallback,
   }) : super(key: key);
 
   @override
@@ -19,12 +20,12 @@ class RoundedButton extends StatelessWidget {
       color: color,
       borderRadius: BorderRadius.circular(30.0),
       child: MaterialButton(
-        onPressed: onPress,
+        onPressed: onTapCallback,
         minWidth: 200.0,
         height: 42.0,
         child: Text(
-          text,
-          style: TextStyle(color: Colors.white),
+          label,
+          style: kButtonTextStyle,
         ),
       ),
     );

@@ -63,9 +63,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 24.0,
               ),
               RoundedButton(
-                text: 'Register',
+                label: 'Register',
                 color: Colors.blueAccent,
-                onPress: () async {
+                onTapCallback: () async {
                   Navigator.pushNamed(context, ProductsListScreen.id);
                 },
               ),
