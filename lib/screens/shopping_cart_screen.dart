@@ -82,7 +82,6 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               ),
               RoundedButton(
                 label: 'Continue',
-                color: Colors.blue,
                 onTapCallback: () {
                   Navigator.pushNamed(context, CheckoutScreen.id);
                 },

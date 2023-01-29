@@ -10,10 +10,8 @@ const kProductScreenRatingTextStyle = TextStyle(
 
 const kButtonTextStyle = TextStyle(
   fontFamily: 'Arsenal',
-  // fontWeight: FontWeight.bold,
-  fontSize: 20.0,
-  letterSpacing: -0.7,
-  color: Colors.white,
+  fontSize: 17.0,
+  color: Colors.black87,
 );
 
 

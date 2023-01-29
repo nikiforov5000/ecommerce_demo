@@ -95,7 +95,6 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
             children: [
               Expanded(
                 child: RoundedButton(
-                  color: Colors.blue,
                   label: '-',
                   onTapCallback: () {
                     setState(() {
@@ -117,7 +116,6 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
               ),
               Expanded(
                 child: RoundedButton(
-                  color: Colors.blue,
                   label: '+', //002b
                   onTapCallback: () {
                     setState(() {
@@ -133,7 +131,6 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
           ),
           RoundedButton(
               label: 'Add to Cart',
-              color: Colors.blue,
               onTapCallback: () {
                 shoppingCart.addProduct(widget.product, quantity);
               }),
@@ -142,7 +139,6 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
           ),
           RoundedButton(
               label: 'Go to Cart',
-              color: Colors.blue,
               onTapCallback: () {
                 Navigator.pushNamed(context, ShoppingCartScreen.id);
               }),

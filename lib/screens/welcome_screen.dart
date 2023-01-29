@@ -24,7 +24,6 @@ class WelcomeScreen extends StatelessWidget {
               LogoHero(),
               RoundedButton(
                   label: 'Login',
-                  color: Colors.blue,
                   onTapCallback: () {
                     Navigator.pushNamed(context, LoginScreen.id);
                   }),
@@ -33,7 +32,6 @@ class WelcomeScreen extends StatelessWidget {
               ),
               RoundedButton(
                   label: 'Register',
-                  color: Colors.blue,
                   onTapCallback: () {
                     Navigator.pushNamed(context, RegistrationScreen.id);
                   }),

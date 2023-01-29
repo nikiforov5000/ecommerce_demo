@@ -33,50 +33,51 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         ),
         title: Text('eCommerce Demo'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                RoundedButton(
-                  label: 'All products',
-                  color: Colors.blue,
-                  onTapCallback: () {
-                    setState(() {
-                      currentProducts = productData.getAllProducts();
-                    });
-                  },
-                ),
-                for (String category in productData.getCategoriesList())
+      body: Container(
+        color: Color(0xffF5F6FD),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
                   RoundedButton(
-                    label: category,
-                    color: Colors.blue,
+                    label: 'All products',
                     onTapCallback: () {
                       setState(() {
-                        currentProducts =
-                            productData.getProductsOfCategory(category);
+                        currentProducts = productData.getAllProducts();
                       });
                     },
                   ),
-              ],
+                  for (String category in productData.getCategoriesList())
+                    RoundedButton(
+                      label: category,
+                      onTapCallback: () {
+                        setState(() {
+                          currentProducts =
+                              productData.getProductsOfCategory(category);
+                        });
+                      },
+                    ),
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            flex: 9,
-            child: GridView.count(crossAxisCount: 3, children: [
-              for (var product in currentProducts)
-                ProductTile(
-                  product: product,
-                  onTapCallback: () {
-                    Navigator.pushNamed(context, ProductScreen.id,
-                        arguments: product);
-                  },
-                ),
-            ]),
-          ),
-        ],
+            Expanded(
+              flex: 10,
+              child: GridView.count(crossAxisCount: 3, children: [
+                for (var product in currentProducts)
+                  ProductTile(
+                    product: product,
+                    onTapCallback: () {
+                      Navigator.pushNamed(context, ProductScreen.id,
+                          arguments: product);
+                    },
+                  ),
+              ]),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: NavBar(),
     );
