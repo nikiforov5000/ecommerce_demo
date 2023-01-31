@@ -102,7 +102,6 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
                     Icons.remove,
                     color: kDarkTextColor,
                   ),
-                  //002b
                   onTapCallback: () {
                     setState(() {
                       if (quantity > 1) {
@@ -118,7 +117,7 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
                 ),
                 child: Text(
                   quantity.toString(),
-                  style: TextStyle(fontSize: 40),
+                  style: kProductScreenQuantityTextStyle,
                 ),
               ),
               Expanded(
@@ -126,7 +125,7 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
                   labelWidget: Icon(
                     Icons.add,
                     color: kDarkTextColor,
-                  ), //002b
+                  ),
                   onTapCallback: () {
                     setState(() {
                       quantity++;

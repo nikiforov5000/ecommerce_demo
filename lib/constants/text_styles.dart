@@ -28,6 +28,13 @@ const kAppbarTextStyle = TextStyle(
   color: kDarkTextColor,
 );
 
+const kProductScreenQuantityTextStyle = TextStyle(
+  fontFamily: 'Arsenal',
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+  color: kDarkTextColor,
+);
+
 const kProductTilePriceTextStyle = TextStyle(fontWeight: FontWeight.w700,
 fontSize: 15,
     color: kDarkTextColor,
