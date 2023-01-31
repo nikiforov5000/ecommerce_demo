@@ -21,10 +21,8 @@ class ProductData {
     var uri = Uri.parse(url);
     try {
       var response = await client.get(uri);
-      // client.close();
       if (response.statusCode == 200 && response.body.length > 10) {
         var decodedResponse = jsonDecode(response.body);
-        // print(decodedResponse[6]);
         fillProductList(decodedResponse);
       } else {
         print('response BAD');

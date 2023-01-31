@@ -1,7 +1,9 @@
 import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/widgets/product_tile_image.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/decorations.dart';
+import '../constants/text_styles.dart';
 import '../models/product.dart';
 
 class ProductTile extends StatelessWidget {
@@ -24,18 +26,7 @@ class ProductTile extends StatelessWidget {
             children: [
               Flexible(
                 flex: 3,
-                child: Container(
-                  alignment: Alignment.bottomCenter,
-                  padding: EdgeInsets.only(top: 20, left: 30, right: 30),
-                  child: ColorFiltered(
-                    colorFilter: ColorFilter.mode(kTileColor, BlendMode.darken),
-                    child: Image(
-                      image: NetworkImage(
-                        product.imgUrl,
-                      ),
-                    ),
-                  ),
-                ),
+                child: ProductTileImage(product: product),
               ),
               SizedBox(
                 height: 10,
@@ -45,14 +36,16 @@ class ProductTile extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Container(
-                    // color: Colors.blue,
                     child: Text(
                       product.getShortTitle(),
                       textAlign: TextAlign.center,
-                      // style: TextStyle(backgroundColor: Colors.green),
+                      style: kProductTileTitleTextStyle,
                     ),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 5,
               ),
               Container(
                 padding: EdgeInsets.only(bottom: 15),
@@ -69,3 +62,5 @@ class ProductTile extends StatelessWidget {
     );
   }
 }
+
+

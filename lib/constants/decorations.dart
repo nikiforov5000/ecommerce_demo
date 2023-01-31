@@ -7,5 +7,4 @@ BoxDecoration kButtonDecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(8),
   color: kTileColor,
   boxShadow: kTreeDShadows,
-  // color: Color(0xff000000),
 );

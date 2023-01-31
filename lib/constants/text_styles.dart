@@ -14,6 +14,11 @@ const kButtonTextStyle = TextStyle(
   color: Colors.black87,
 );
 
+TextStyle kProductTileTitleTextStyle = TextStyle(
+    color: Colors.grey.shade600,
+  fontSize: 13.0,
+);
+
 
 getRatingColor(double rating) {
   if (rating > 4.0) {

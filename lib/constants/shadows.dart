@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-double blurRadius = 10;
-double offset = 10;
+double blurRadius = 8;
+double offset = 5;
 
 List<BoxShadow> kTreeDShadows = [
   BoxShadow(

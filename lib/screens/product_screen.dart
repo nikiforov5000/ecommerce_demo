@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../constants/text_styles.dart';
 import '../models/product.dart';
 import '../models/shopping_cart.dart';
+import '../widgets/product_tile_image.dart';
 import '../widgets/sized_box_vertical_separator.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -63,7 +64,7 @@ class ProductImageCarousel extends StatelessWidget {
             return Container(
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Image(image: NetworkImage(product.imgUrl)),
+              child: ColorFilteredImage(product: product),
             );
           },
         );
