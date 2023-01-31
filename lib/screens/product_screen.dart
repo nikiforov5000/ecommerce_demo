@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,8 @@ class ProductScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(product.title),
       ),
-      body: Padding(
+      body: Container(
+        color: kBackgroundColor,
         padding: const EdgeInsets.symmetric(
           horizontal: 20.0,
         ),

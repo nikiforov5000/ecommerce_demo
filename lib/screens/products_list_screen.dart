@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,9 @@ class ProductsListScreen extends StatelessWidget {
         ),
         title: Text('eCommerce Demo'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        color: kBackgroundColor,
         child: Column(
           children: [
             Expanded(
