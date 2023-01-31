@@ -6,6 +6,9 @@ import 'package:ecommerce_demo/screens/registration_screen.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'constants/colors.dart';
+import 'constants/text_styles.dart';
 import 'screens/product_screen.dart';
 
 void main() async {
@@ -18,8 +21,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
+      theme: ThemeData().copyWith(
+        appBarTheme: AppBarTheme().copyWith(
+            color: kTileColor,
+            titleTextStyle: kAppbarTextStyle,
+          elevation: 0.5,
+          iconTheme: IconThemeData(color: kDarkTextColor),
+        ),
+      ),
       initialRoute: ProductsListScreen.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
@@ -33,4 +43,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
