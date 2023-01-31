@@ -39,7 +39,7 @@ const kAppbarTextStyle = TextStyle(
 
 const kProductScreenQuantityTextStyle = TextStyle(
   fontFamily: 'Arsenal',
-  fontSize: 25.0,
+  fontSize: 20.0,
   fontWeight: FontWeight.bold,
   color: kDarkTextColor,
 );

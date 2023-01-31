@@ -96,11 +96,13 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Expanded(child: Container(), flex: 2,),
               Expanded(
                 child: RoundedButton(
                   labelWidget: Icon(
                     Icons.remove,
                     color: kDarkTextColor,
+                    size: 15,
                   ),
                   onTapCallback: () {
                     setState(() {
@@ -113,7 +115,7 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 35,
+                  horizontal: 15,
                 ),
                 child: Text(
                   quantity.toString(),
@@ -125,6 +127,7 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
                   labelWidget: Icon(
                     Icons.add,
                     color: kDarkTextColor,
+                    size: 15,
                   ),
                   onTapCallback: () {
                     setState(() {
@@ -133,19 +136,15 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
                   },
                 ),
               ),
+              Expanded(child: Container(), flex: 2,),
+
             ],
-          ),
-          SizedBox(
-            height: 15,
           ),
           RoundedButton(
               labelWidget: ButtonText(text: 'Add to Cart'),
               onTapCallback: () {
                 shoppingCart.addProduct(widget.product, quantity);
               }),
-          SizedBox(
-            height: 15,
-          ),
           RoundedButton(
               labelWidget: ButtonText(text: 'Go to Cart'),
               onTapCallback: () {
