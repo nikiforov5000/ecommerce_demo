@@ -92,11 +92,14 @@ class ProductsList extends StatelessWidget {
     print('ProductList build');
     return GridView.count(crossAxisCount: 2, children: [
       for (var product in currentProducts)
-        ProductTile(
-          product: product,
-          onTapCallback: () {
-            Navigator.pushNamed(context, ProductScreen.id, arguments: product);
-          },
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+          child: ProductTile(
+            product: product,
+            onTapCallback: () {
+              Navigator.pushNamed(context, ProductScreen.id, arguments: product);
+            },
+          ),
         ),
     ]);
   }

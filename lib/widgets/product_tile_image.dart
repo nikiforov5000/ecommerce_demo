@@ -14,8 +14,6 @@ class ProductTileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.bottomCenter,
-      padding: EdgeInsets.only(top: 20, left: 30, right: 30),
       child: ColorFilteredImage(product: product),
     );
   }

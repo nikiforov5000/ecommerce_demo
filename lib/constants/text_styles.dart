@@ -28,6 +28,11 @@ const kAppbarTextStyle = TextStyle(
   color: kDarkTextColor,
 );
 
+const kProductTilePriceTextStyle = TextStyle(fontWeight: FontWeight.w700,
+fontSize: 15,
+    color: kDarkTextColor,
+);
+
 getRatingColor(double rating) {
   if (rating > 4.0) {
     return Colors.green;
