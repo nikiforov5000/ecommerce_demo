@@ -3,6 +3,7 @@ import 'package:ecommerce_demo/screens/registration_screen.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/buttonText.dart';
 import '../widgets/logo_hero.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -23,7 +24,7 @@ class WelcomeScreen extends StatelessWidget {
             children: <Widget>[
               LogoHero(),
               RoundedButton(
-                  label: 'Login',
+                  labelWidget: ButtonText(text: 'Login'),
                   onTapCallback: () {
                     Navigator.pushNamed(context, LoginScreen.id);
                   }),
@@ -31,7 +32,7 @@ class WelcomeScreen extends StatelessWidget {
                 height: 20.0,
               ),
               RoundedButton(
-                  label: 'Register',
+                  labelWidget: ButtonText(text: 'Register'),
                   onTapCallback: () {
                     Navigator.pushNamed(context, RegistrationScreen.id);
                   }),

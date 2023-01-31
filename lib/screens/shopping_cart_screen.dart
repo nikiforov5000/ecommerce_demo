@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_demo/models/shopping_cart.dart';
 
 import '../models/product.dart';
+import '../widgets/buttonText.dart';
 import '../widgets/rounded_button_widget.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
@@ -82,7 +83,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               color: Colors.grey,
             ),
             RoundedButton(
-              label: 'Continue',
+              labelWidget: ButtonText(text: 'Continue'),
               onTapCallback: () {
                 Navigator.pushNamed(context, CheckoutScreen.id);
               },

@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import '../constants/text_styles.dart';
 import '../models/product.dart';
 import '../models/shopping_cart.dart';
+import '../widgets/buttonText.dart';
 import '../widgets/product_tile_image.dart';
-import '../widgets/sized_box_vertical_separator.dart';
 
 class ProductScreen extends StatelessWidget {
   static const String id = '/productScreen';
@@ -98,7 +98,11 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
             children: [
               Expanded(
                 child: RoundedButton(
-                  label: '-',
+                  labelWidget: Icon(
+                    Icons.remove,
+                    color: kDarkTextColor,
+                  ),
+                  //002b
                   onTapCallback: () {
                     setState(() {
                       if (quantity > 1) {
@@ -110,7 +114,7 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
+                  horizontal: 35,
                 ),
                 child: Text(
                   quantity.toString(),
@@ -119,7 +123,10 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
               ),
               Expanded(
                 child: RoundedButton(
-                  label: '+', //002b
+                  labelWidget: Icon(
+                    Icons.add,
+                    color: kDarkTextColor,
+                  ), //002b
                   onTapCallback: () {
                     setState(() {
                       quantity++;
@@ -133,7 +140,7 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
             height: 15,
           ),
           RoundedButton(
-              label: 'Add to Cart',
+              labelWidget: ButtonText(text: 'Add to Cart'),
               onTapCallback: () {
                 shoppingCart.addProduct(widget.product, quantity);
               }),
@@ -141,7 +148,7 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
             height: 15,
           ),
           RoundedButton(
-              label: 'Go to Cart',
+              labelWidget: ButtonText(text: 'Go to Cart'),
               onTapCallback: () {
                 Navigator.pushNamed(context, ShoppingCartScreen.id);
               }),
@@ -187,7 +194,7 @@ class AboutProduct extends StatelessWidget {
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
-              child: Text(product.discription),
+            child: Text(product.discription),
           ),
         ),
       ],

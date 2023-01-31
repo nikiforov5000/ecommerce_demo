@@ -39,7 +39,6 @@ class ProductTile extends StatelessWidget {
                 style: kProductTilePriceTextStyle,
               ),
             ),
-
           ],
         ),
       ),

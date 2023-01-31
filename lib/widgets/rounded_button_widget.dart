@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import '../constants/decorations.dart';
 
 class RoundedButton extends StatelessWidget {
-  final String label;
+  final Widget labelWidget;
   final VoidCallback onTapCallback;
 
   const RoundedButton({
     Key? key,
-    required this.label,
+    required this.labelWidget,
     required this.onTapCallback,
   }) : super(key: key);
 
@@ -23,10 +23,7 @@ class RoundedButton extends StatelessWidget {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(label,
-              textAlign: TextAlign.center,
-              style: kButtonTextStyle
-            ),
+            child: labelWidget,
           ),
         ),
       ),
