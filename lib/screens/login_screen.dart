@@ -63,7 +63,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   RoundedButton(
                     label: 'Log in',
-                    color: Colors.lightBlueAccent,
                     onTapCallback: () async {
                       Navigator.pushNamed(context, ProductsListScreen.id);
                     },

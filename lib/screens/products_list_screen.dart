@@ -1,6 +1,5 @@
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
-import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,20 +8,17 @@ import '../widgets/bottom_navbar.dart';
 import '../widgets/category_button.dart';
 import '../widgets/product_tile.dart';
 
-class ProductsListScreen extends StatefulWidget {
+List<Product> currentProducts = productData.getAllProducts();
+
+class ProductsListScreen extends StatelessWidget {
   static const String id = 'productListScreen';
 
   const ProductsListScreen({Key? key}) : super(key: key);
 
   @override
-  State<ProductsListScreen> createState() => _ProductsListScreenState();
-}
-
-class _ProductsListScreenState extends State<ProductsListScreen> {
-  List<Product> currentProducts = productData.getAllProducts();
-
-  @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -33,52 +29,73 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         ),
         title: Text('eCommerce Demo'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                RoundedButton(
-                  label: 'All products',
-                  color: Colors.blue,
-                  onTapCallback: () {
-                    setState(() {
-                      currentProducts = productData.getAllProducts();
-                    });
-                  },
-                ),
-                for (String category in productData.getCategoriesList())
-                  RoundedButton(
-                    label: category,
-                    color: Colors.blue,
-                    onTapCallback: () {
-                      setState(() {
-                        currentProducts =
-                            productData.getProductsOfCategory(category);
-                      });
-                    },
-                  ),
-              ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: CategoryListview(),
             ),
-          ),
-          Expanded(
-            flex: 9,
-            child: GridView.count(crossAxisCount: 3, children: [
-              for (var product in currentProducts)
-                ProductTile(
-                  product: product,
-                  onTapCallback: () {
-                    Navigator.pushNamed(context, ProductScreen.id,
-                        arguments: product);
-                  },
-                ),
-            ]),
-          ),
-        ],
+            Expanded(
+              flex: 10,
+              child: ProductsList(),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: NavBar(),
     );
+  }
+}
+
+class CategoryListview extends StatefulWidget {
+  @override
+  State<CategoryListview> createState() => _CategoryListviewState();
+}
+
+class _CategoryListviewState extends State<CategoryListview> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      scrollDirection: Axis.horizontal,
+      children: [
+        CategoryButton(
+          label: 'All products',
+          onTapCallback: () {
+            setState(() {
+              currentProducts = productData.getAllProducts();
+            });
+          },
+        ),
+        for (String category in productData.getCategoriesList())
+          CategoryButton(
+            label: category,
+            onTapCallback: () {
+              setState(() {
+                currentProducts = productData.getProductsOfCategory(category);
+              });
+            },
+          ),
+      ],
+    );
+  }
+}
+
+class ProductsList extends StatelessWidget {
+  const ProductsList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print('ProductList build');
+    return GridView.count(crossAxisCount: 2, children: [
+      for (var product in currentProducts)
+        ProductTile(
+          product: product,
+          onTapCallback: () {
+            Navigator.pushNamed(context, ProductScreen.id, arguments: product);
+          },
+        ),
+    ]);
   }
 }

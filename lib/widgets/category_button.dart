@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../constants/decorations.dart';
+import '../constants/text_styles.dart';
+
 class CategoryButton extends StatelessWidget {
   final String label;
   final VoidCallback onTapCallback;
@@ -8,17 +11,18 @@ class CategoryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return InkWell(
+      onTap: onTapCallback,
       child: Container(
-        decoration: BoxDecoration(
-            color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-        height: 50,
-        width: 100,
-        child: InkWell(
-          onTap: onTapCallback,
-          child: Center(
-            child: Text(label),
+        margin: EdgeInsets.all(9),
+        decoration: kButtonDecoration,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(label,
+                textAlign: TextAlign.center,
+                style: kButtonTextStyle
+            ),
           ),
         ),
       ),

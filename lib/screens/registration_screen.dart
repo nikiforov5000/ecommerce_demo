@@ -64,7 +64,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               RoundedButton(
                 label: 'Register',
-                color: Colors.blueAccent,
                 onTapCallback: () async {
                   Navigator.pushNamed(context, ProductsListScreen.id);
                 },

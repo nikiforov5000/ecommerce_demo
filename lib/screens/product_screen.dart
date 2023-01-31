@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../constants/text_styles.dart';
 import '../models/product.dart';
 import '../models/shopping_cart.dart';
+import '../widgets/product_tile_image.dart';
 import '../widgets/sized_box_vertical_separator.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -63,7 +64,7 @@ class ProductImageCarousel extends StatelessWidget {
             return Container(
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Image(image: NetworkImage(product.imgUrl)),
+              child: ColorFilteredImage(product: product),
             );
           },
         );
@@ -95,7 +96,6 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
             children: [
               Expanded(
                 child: RoundedButton(
-                  color: Colors.blue,
                   label: '-',
                   onTapCallback: () {
                     setState(() {
@@ -117,7 +117,6 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
               ),
               Expanded(
                 child: RoundedButton(
-                  color: Colors.blue,
                   label: '+', //002b
                   onTapCallback: () {
                     setState(() {
@@ -133,7 +132,6 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
           ),
           RoundedButton(
               label: 'Add to Cart',
-              color: Colors.blue,
               onTapCallback: () {
                 shoppingCart.addProduct(widget.product, quantity);
               }),
@@ -142,7 +140,6 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
           ),
           RoundedButton(
               label: 'Go to Cart',
-              color: Colors.blue,
               onTapCallback: () {
                 Navigator.pushNamed(context, ShoppingCartScreen.id);
               }),
