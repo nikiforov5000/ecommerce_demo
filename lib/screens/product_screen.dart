@@ -169,6 +169,7 @@ class AboutProduct extends StatelessWidget {
           style: kProductScreenTitleTextStyle,
           textAlign: TextAlign.center,
         ),
+        SizedBox(height: 10.0,),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -176,6 +177,7 @@ class AboutProduct extends StatelessWidget {
               'Rating: ',
               style: kProductScreenRatingTextStyle,
             ),
+
             Container(
               padding:
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
@@ -190,10 +192,12 @@ class AboutProduct extends StatelessWidget {
             ),
           ],
         ),
+        SizedBox(height: 10.0,),
+
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
-            child: Text(product.discription),
+            child: Text(product.discription, style: kProductDescriptionTextStyle,),
           ),
         ),
       ],
