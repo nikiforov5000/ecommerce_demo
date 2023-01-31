@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -11,10 +12,14 @@ class CheckoutScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Checkout'),
       ),
-      body: Center(
-        child: const Placeholder(
+      body: Container(
+        color: kBackgroundColor,
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        child: Center(
+          child: const Placeholder(
 
-          child: Text('CheckoutScreen'),
+            child: Text('CheckoutScreen'),
+          ),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,9 @@ class ProductsListScreen extends StatelessWidget {
         ),
         title: Text('eCommerce Demo'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        color: kBackgroundColor,
         child: Column(
           children: [
             Expanded(
@@ -90,11 +92,14 @@ class ProductsList extends StatelessWidget {
     print('ProductList build');
     return GridView.count(crossAxisCount: 2, children: [
       for (var product in currentProducts)
-        ProductTile(
-          product: product,
-          onTapCallback: () {
-            Navigator.pushNamed(context, ProductScreen.id, arguments: product);
-          },
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+          child: ProductTile(
+            product: product,
+            onTapCallback: () {
+              Navigator.pushNamed(context, ProductScreen.id, arguments: product);
+            },
+          ),
         ),
     ]);
   }

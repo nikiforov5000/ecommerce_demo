@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,8 @@ import 'package:flutter/material.dart';
 import '../constants/text_styles.dart';
 import '../models/product.dart';
 import '../models/shopping_cart.dart';
-import '../widgets/product_tile_image.dart';
-import '../widgets/sized_box_vertical_separator.dart';
+import '../widgets/buttonText.dart';
+import '../widgets/color_filtered_image.dart';
 
 class ProductScreen extends StatelessWidget {
   static const String id = '/productScreen';
@@ -22,7 +23,8 @@ class ProductScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(product.title),
       ),
-      body: Padding(
+      body: Container(
+        color: kBackgroundColor,
         padding: const EdgeInsets.symmetric(
           horizontal: 20.0,
         ),
@@ -95,8 +97,16 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
+                child: Container(),
+                flex: 2,
+              ),
+              Expanded(
                 child: RoundedButton(
-                  label: '-',
+                  labelWidget: Icon(
+                    Icons.remove,
+                    color: kDarkTextColor,
+                    size: 15,
+                  ),
                   onTapCallback: () {
                     setState(() {
                       if (quantity > 1) {
@@ -108,16 +118,20 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
+                  horizontal: 15,
                 ),
                 child: Text(
                   quantity.toString(),
-                  style: TextStyle(fontSize: 40),
+                  style: kProductScreenQuantityTextStyle,
                 ),
               ),
               Expanded(
                 child: RoundedButton(
-                  label: '+', //002b
+                  labelWidget: Icon(
+                    Icons.add,
+                    color: kDarkTextColor,
+                    size: 15,
+                  ),
                   onTapCallback: () {
                     setState(() {
                       quantity++;
@@ -125,21 +139,19 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
                   },
                 ),
               ),
+              Expanded(
+                child: Container(),
+                flex: 2,
+              ),
             ],
           ),
-          SizedBox(
-            height: 15,
-          ),
           RoundedButton(
-              label: 'Add to Cart',
+              labelWidget: ButtonText(text: 'Add to Cart'),
               onTapCallback: () {
                 shoppingCart.addProduct(widget.product, quantity);
               }),
-          SizedBox(
-            height: 15,
-          ),
           RoundedButton(
-              label: 'Go to Cart',
+              labelWidget: ButtonText(text: 'Go to Cart'),
               onTapCallback: () {
                 Navigator.pushNamed(context, ShoppingCartScreen.id);
               }),
@@ -160,6 +172,9 @@ class AboutProduct extends StatelessWidget {
           product.title,
           style: kProductScreenTitleTextStyle,
           textAlign: TextAlign.center,
+        ),
+        SizedBox(
+          height: 10.0,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -182,10 +197,16 @@ class AboutProduct extends StatelessWidget {
             ),
           ],
         ),
+        SizedBox(
+          height: 10.0,
+        ),
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
-              child: Text(product.discription),
+            child: Text(
+              product.discription,
+              style: kProductDescriptionTextStyle,
+            ),
           ),
         ),
       ],

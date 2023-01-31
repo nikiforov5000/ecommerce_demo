@@ -1,6 +1,7 @@
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/buttonText.dart';
 import '../widgets/rounded_button_widget.dart';
 import '../widgets/rounded_text_field.dart';
 
@@ -62,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 24.0,
                   ),
                   RoundedButton(
-                    label: 'Log in',
+                    labelWidget: ButtonText(text: 'Log in'),
                     onTapCallback: () async {
                       Navigator.pushNamed(context, ProductsListScreen.id);
                     },

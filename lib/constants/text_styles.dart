@@ -3,12 +3,21 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 
 const kProductScreenTitleTextStyle = TextStyle(
-  fontWeight: FontWeight.normal,
-  fontSize: 20.0,
+  fontFamily: 'Arsenal',
+  fontSize: 23.0,
+  color: kDarkTextColor,
+);
+
+const kProductDescriptionTextStyle = TextStyle(
+  fontFamily: 'Arsenal',
+  fontSize: 17.0,
+  color: kDarkTextColor,
 );
 
 const kProductScreenRatingTextStyle = TextStyle(
-  fontSize: 20.0,
+  fontFamily: 'Arsenal',
+  fontSize: 17.0,
+  color: kDarkTextColor,
 );
 
 const kButtonTextStyle = TextStyle(
@@ -26,6 +35,18 @@ const kAppbarTextStyle = TextStyle(
   fontFamily: 'Arsenal',
   fontSize: 20.0,
   color: kDarkTextColor,
+);
+
+const kProductScreenQuantityTextStyle = TextStyle(
+  fontFamily: 'Arsenal',
+  fontSize: 20.0,
+  fontWeight: FontWeight.bold,
+  color: kDarkTextColor,
+);
+
+const kProductTilePriceTextStyle = TextStyle(fontWeight: FontWeight.w700,
+fontSize: 15,
+    color: kDarkTextColor,
 );
 
 getRatingColor(double rating) {

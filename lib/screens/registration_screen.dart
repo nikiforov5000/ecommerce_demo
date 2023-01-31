@@ -1,6 +1,7 @@
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/buttonText.dart';
 import '../widgets/rounded_button_widget.dart';
 import '../widgets/rounded_text_field.dart';
 
@@ -63,7 +64,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 24.0,
               ),
               RoundedButton(
-                label: 'Register',
+                labelWidget: ButtonText(text: 'Register'),
                 onTapCallback: () async {
                   Navigator.pushNamed(context, ProductsListScreen.id);
                 },
