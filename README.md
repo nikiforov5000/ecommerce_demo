@@ -3,7 +3,7 @@
 A Flutter project to practice creating a very common type of mobile app.
 
 
-<img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/Screenshot_20230118_133008.png" width=250px>
+<img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/Screenshot_20230131_214613.png" width=250px><img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/Screenshot_20230131_214714.png" width=250px><img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/Screenshot_20230131_214805.png" width=250px>
 
 
 ## Getting Started
