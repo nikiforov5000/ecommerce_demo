@@ -1,7 +1,9 @@
 import 'package:ecommerce_demo/constants/colors.dart';
-import 'package:ecommerce_demo/screens/checkout_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:ecommerce_demo/constants/decorations.dart';
 import 'package:ecommerce_demo/models/shopping_cart.dart';
+import 'package:ecommerce_demo/screens/checkout_screen.dart';
+import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
+import 'package:flutter/material.dart';
 
 import '../models/product.dart';
 import '../widgets/buttonText.dart';
@@ -34,7 +36,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       ),
       body: Container(
         color: kBackgroundColor,
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
         child: Container(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -48,16 +50,23 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                       shoppingCart.getCartMap().values.elementAt(index);
                   Product product =
                       shoppingCart.getCartMap().keys.elementAt(index);
-                  return ListTile(
-                    leading: Image(
-                      image: NetworkImage(
-                        product.imgUrl,
-                      ),
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 15),
+                    padding: EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+                    decoration: kButtonDecoration,
+                    height: 70,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: ColorFilteredImage(product: product),
+                        ),
+                        Flexible(child: Text(product.getShortTitle())),
+                        Flexible(flex: 1, child: Container()),
+                        Flexible(child: Text('x ' + quantity.toString())),
+                      ],
                     ),
-                    title: Text(product.getShortTitle()),
-                    trailing: Text('x ' + quantity.toString()),
                   );
-                  // return FittedBox(child: ProductTile(product: product, onTapCallback: () {},));
                 },
               ),
             ),

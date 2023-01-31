@@ -8,7 +8,7 @@ import '../constants/text_styles.dart';
 import '../models/product.dart';
 import '../models/shopping_cart.dart';
 import '../widgets/buttonText.dart';
-import '../widgets/product_tile_image.dart';
+import '../widgets/color_filtered_image.dart';
 
 class ProductScreen extends StatelessWidget {
   static const String id = '/productScreen';
@@ -96,7 +96,10 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(child: Container(), flex: 2,),
+              Expanded(
+                child: Container(),
+                flex: 2,
+              ),
               Expanded(
                 child: RoundedButton(
                   labelWidget: Icon(
@@ -136,8 +139,10 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
                   },
                 ),
               ),
-              Expanded(child: Container(), flex: 2,),
-
+              Expanded(
+                child: Container(),
+                flex: 2,
+              ),
             ],
           ),
           RoundedButton(
@@ -168,7 +173,9 @@ class AboutProduct extends StatelessWidget {
           style: kProductScreenTitleTextStyle,
           textAlign: TextAlign.center,
         ),
-        SizedBox(height: 10.0,),
+        SizedBox(
+          height: 10.0,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -176,7 +183,6 @@ class AboutProduct extends StatelessWidget {
               'Rating: ',
               style: kProductScreenRatingTextStyle,
             ),
-
             Container(
               padding:
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
@@ -191,12 +197,16 @@ class AboutProduct extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 10.0,),
-
+        SizedBox(
+          height: 10.0,
+        ),
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
-            child: Text(product.discription, style: kProductDescriptionTextStyle,),
+            child: Text(
+              product.discription,
+              style: kProductDescriptionTextStyle,
+            ),
           ),
         ),
       ],
