@@ -11,15 +11,18 @@ import '../widgets/product_tile.dart';
 
 List<Product> currentProducts = productData.getAllProducts();
 
-class ProductsListScreen extends StatelessWidget {
+class ProductsListScreen extends StatefulWidget {
   static const String id = 'productListScreen';
 
   const ProductsListScreen({Key? key}) : super(key: key);
 
   @override
+  State<ProductsListScreen> createState() => _ProductsListScreenState();
+}
+
+class _ProductsListScreenState extends State<ProductsListScreen> {
+  @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -37,7 +40,28 @@ class ProductsListScreen extends StatelessWidget {
           children: [
             Expanded(
               flex: 1,
-              child: CategoryListview(),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  CategoryButton(
+                    label: 'All products',
+                    onTapCallback: () {
+                      setState(() {
+                        currentProducts = productData.getAllProducts();
+                      });
+                    },
+                  ),
+                  for (String category in productData.getCategoriesList())
+                    CategoryButton(
+                      label: category,
+                      onTapCallback: () {
+                        setState(() {
+                          currentProducts = productData.getProductsOfCategory(category);
+                        });
+                      },
+                    ),
+                ],
+              ),
             ),
             Expanded(
               flex: 10,
@@ -51,38 +75,6 @@ class ProductsListScreen extends StatelessWidget {
   }
 }
 
-class CategoryListview extends StatefulWidget {
-  @override
-  State<CategoryListview> createState() => _CategoryListviewState();
-}
-
-class _CategoryListviewState extends State<CategoryListview> {
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.horizontal,
-      children: [
-        CategoryButton(
-          label: 'All products',
-          onTapCallback: () {
-            setState(() {
-              currentProducts = productData.getAllProducts();
-            });
-          },
-        ),
-        for (String category in productData.getCategoriesList())
-          CategoryButton(
-            label: category,
-            onTapCallback: () {
-              setState(() {
-                currentProducts = productData.getProductsOfCategory(category);
-              });
-            },
-          ),
-      ],
-    );
-  }
-}
 
 class ProductsList extends StatelessWidget {
   const ProductsList({Key? key}) : super(key: key);
