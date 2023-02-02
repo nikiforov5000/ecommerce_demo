@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../models/product.dart';
-import '../widgets/bottom_navbar.dart';
 import '../widgets/category_button.dart';
 import '../widgets/product_tile.dart';
 
@@ -56,7 +55,8 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                       label: category,
                       onTapCallback: () {
                         setState(() {
-                          currentProducts = productData.getProductsOfCategory(category);
+                          currentProducts =
+                              productData.getProductsOfCategory(category);
                         });
                       },
                     ),
@@ -70,11 +70,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: NavBar(),
     );
   }
 }
-
 
 class ProductsList extends StatelessWidget {
   const ProductsList({Key? key}) : super(key: key);
@@ -89,7 +87,8 @@ class ProductsList extends StatelessWidget {
           child: ProductTile(
             product: product,
             onTapCallback: () {
-              Navigator.pushNamed(context, ProductScreen.id, arguments: product);
+              Navigator.pushNamed(context, ProductScreen.id,
+                  arguments: product);
             },
           ),
         ),

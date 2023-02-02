@@ -5,6 +5,7 @@ import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/registration_screen.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/screens/welcome_screen.dart';
+import 'package:ecommerce_demo/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
 import 'constants/colors.dart';
@@ -13,7 +14,7 @@ import 'screens/product_screen.dart';
 
 void main() async {
   await productData.fetchData();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -21,16 +22,53 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return EcommerceDemoApp();
+  }
+}
+
+class EcommerceDemoApp extends StatefulWidget {
+  EcommerceDemoApp({Key? key}) : super(key: key);
+
+  @override
+  State<EcommerceDemoApp> createState() => _EcommerceDemoAppState();
+}
+
+class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
+  int _selectedScreenIndex = 0;
+
+  List<Widget> _screens = [
+    ProductsListScreen(),
+    ShoppingCartScreen(),
+    WelcomeScreen(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedScreenIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData().copyWith(
         appBarTheme: AppBarTheme().copyWith(
-            color: kTileColor,
-            titleTextStyle: kAppbarTextStyle,
+          color: kTileColor,
+          titleTextStyle: kAppbarTextStyle,
           elevation: 0.5,
           iconTheme: IconThemeData(color: kDarkTextColor),
         ),
       ),
-      initialRoute: ProductsListScreen.id,
+      home: Scaffold(
+        body: _screens.elementAt(_selectedScreenIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          items: navbarItems,
+          currentIndex: _selectedScreenIndex,
+          unselectedItemColor: kUnselectedNavItem,
+          selectedItemColor: kDarkTextColor,
+          onTap: _onItemTapped,
+        ),
+      ),
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         CheckoutScreen.id: (context) => CheckoutScreen(),
