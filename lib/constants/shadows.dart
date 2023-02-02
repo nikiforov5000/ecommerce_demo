@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-double blurRadius = 8;
-double offset = 5;
+double blurRadius = 6;
+double offset = 3;
 
 List<BoxShadow> k3DShadows = [
   BoxShadow(
