@@ -11,14 +11,17 @@ import '../widgets/buttonText.dart';
 import '../widgets/color_filtered_image.dart';
 
 class ProductScreen extends StatelessWidget {
-  static const String id = '/productScreen';
+  static const String id = 'product_screen';
+ProductScreen({required this.product});
+  final Product product;
+
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    final product = ModalRoute.of(context)!.settings.arguments as Product;
+    // final product = ModalRoute.of(context)!.settings.arguments as Product;
     return Scaffold(
       appBar: AppBar(
         title: Text(product.title),
