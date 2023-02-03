@@ -47,62 +47,65 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
 
   Widget screen = WelcomeScreen();
 
+  void _updateScreen(index) {
+    setState(() {
+      switch (index) {
+        case 0:
+          _selectedScreenIndex = index;
+          screen = ProductsListScreen();
+          break;
+        case 1:
+          _selectedScreenIndex = index;
+          screen = ShoppingCartScreen();
+          break;
+        case 2:
+          _selectedScreenIndex = index;
+          screen = WelcomeScreen();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-          items: navbarItems,
-          unselectedItemColor: kUnselectedNavItem,
-          selectedItemColor: kDarkTextColor,
-          currentIndex: _selectedScreenIndex,
-          onTap: (index) {
-            setState(() {
-              switch (index) {
-                case 0:
-                  _selectedScreenIndex = index;
-                  screen = ProductsListScreen();
-                  print(screen);
-                  break;
-                case 1:
-                  _selectedScreenIndex = index;
-                  screen = ShoppingCartScreen();
-                  print(screen);
-                  break;
-                case 2:
-                  _selectedScreenIndex = index;
-                  screen = WelcomeScreen();
-                  print(screen);
-                  ;
-              }
-            });
-          }),
-      body: Navigator(
-        onGenerateRoute: (settings) {
-          if (settings.name == ProductsListScreen.id) {
-            screen = ProductsListScreen();
-          }
-          if (settings.name == ShoppingCartScreen.id) {
-            screen = ShoppingCartScreen();
-          }
-          if (settings.name == WelcomeScreen.id) {
-            screen = WelcomeScreen();
-          }
-          if (settings.name == ProductScreen.id) {
-            final Product product = settings.arguments as Product;
-            screen = ProductScreen(product: product);
-          }
-          if (settings.name == CheckoutScreen.id) {
-            screen = CheckoutScreen();
-          }
-          if (settings.name == RegistrationScreen.id) {
-            screen = RegistrationScreen();
-          }
-          if (settings.name == LoginScreen.id) {
-            screen = LoginScreen();
-          }
-          return MaterialPageRoute(builder: (_) => screen);
-        },
+        items: navbarItems,
+        unselectedItemColor: kUnselectedNavItem,
+        selectedItemColor: kDarkTextColor,
+        currentIndex: _selectedScreenIndex,
+        onTap: _updateScreen,
       ),
+      body: buildNavigator(),
+    );
+  }
+
+  Navigator buildNavigator() {
+    return Navigator(
+      onGenerateRoute: (settings) {
+        if (settings.name == ProductsListScreen.id) {
+          screen = ProductsListScreen();
+        }
+        if (settings.name == ShoppingCartScreen.id) {
+          screen = ShoppingCartScreen();
+        }
+        if (settings.name == WelcomeScreen.id) {
+          screen = WelcomeScreen();
+        }
+        if (settings.name == ProductScreen.id) {
+          final Product product = settings.arguments as Product;
+          screen = ProductScreen(product: product);
+        }
+        if (settings.name == CheckoutScreen.id) {
+          screen = CheckoutScreen();
+        }
+        if (settings.name == RegistrationScreen.id) {
+          screen = RegistrationScreen();
+        }
+        if (settings.name == LoginScreen.id) {
+          screen = LoginScreen();
+        }
+        return MaterialPageRoute(builder: (_) => screen);
+      },
     );
   }
 }
