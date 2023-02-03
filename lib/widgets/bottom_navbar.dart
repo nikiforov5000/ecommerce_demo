@@ -10,7 +10,7 @@ const navbarItems = <BottomNavigationBarItem>[
     label: 'Cart',
   ),
   BottomNavigationBarItem(
-    icon: Icon(Icons.logout),
-    label: 'Logout',
+    icon: Icon(Icons.login),
+    label: 'Log In',
   ),
 ];

@@ -11,7 +11,7 @@ import '../widgets/buttonText.dart';
 import '../widgets/color_filtered_image.dart';
 
 class ProductScreen extends StatelessWidget {
-  static const String id = '/productScreen';
+  static const String id = 'product_screen';
 ProductScreen({required this.product});
   final Product product;
 

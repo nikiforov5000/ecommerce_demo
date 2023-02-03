@@ -45,7 +45,7 @@ class EcommerceDemoApp extends StatefulWidget {
 class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
   int _selectedScreenIndex = 0;
 
-  Widget screen = WelcomeScreen();
+  Widget screen = ProductsListScreen();
 
   void _updateScreen(index) {
     setState(() {
@@ -82,27 +82,19 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
   Navigator buildNavigator() {
     return Navigator(
       onGenerateRoute: (settings) {
-        if (settings.name == ProductsListScreen.id) {
-          screen = ProductsListScreen();
+        Map<String, Widget> _screens = {
+          ProductsListScreen.id: ProductsListScreen(),
+          ShoppingCartScreen.id: ShoppingCartScreen(),
+          WelcomeScreen.id: WelcomeScreen(),
+          CheckoutScreen.id: CheckoutScreen(),
+          RegistrationScreen.id: RegistrationScreen(),
+          LoginScreen.id: LoginScreen(),
+        };
+        if (_screens[settings.name] != null) {
+          screen = _screens[settings.name]!;
         }
-        if (settings.name == ShoppingCartScreen.id) {
-          screen = ShoppingCartScreen();
-        }
-        if (settings.name == WelcomeScreen.id) {
-          screen = WelcomeScreen();
-        }
-        if (settings.name == ProductScreen.id) {
-          final Product product = settings.arguments as Product;
-          screen = ProductScreen(product: product);
-        }
-        if (settings.name == CheckoutScreen.id) {
-          screen = CheckoutScreen();
-        }
-        if (settings.name == RegistrationScreen.id) {
-          screen = RegistrationScreen();
-        }
-        if (settings.name == LoginScreen.id) {
-          screen = LoginScreen();
+        else if (settings.name == ProductScreen.id) {
+          screen = ProductScreen(product: settings.arguments as Product);
         }
         return MaterialPageRoute(builder: (_) => screen);
       },
