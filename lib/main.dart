@@ -24,15 +24,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        // WelcomeScreen.id: (context) => WelcomeScreen(),
-        // CheckoutScreen.id: (context) => CheckoutScreen(),
-        // ShoppingCartScreen.id: (context) => ShoppingCartScreen(),
-        // RegistrationScreen.id: (context) => RegistrationScreen(),
-        // LoginScreen.id: (context) => LoginScreen(),
-        // ProductsListScreen.id: (context) => ProductsListScreen(),
-        // ProductScreen.id: (context) => ProductScreen(),
-      },
       home: EcommerceDemoApp(),
       theme: ThemeData().copyWith(
         appBarTheme: AppBarTheme().copyWith(
@@ -54,18 +45,11 @@ class EcommerceDemoApp extends StatefulWidget {
 class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
   int _selectedScreenIndex = 0;
 
-  void _onItemTapped(int index, BuildContext context) {
-    print(index);
+  Widget screen = WelcomeScreen();
 
-    _selectedScreenIndex = index;
-  }
-
-    Widget screen = WelcomeScreen();
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       bottomNavigationBar: BottomNavigationBar(
           items: navbarItems,
           unselectedItemColor: kUnselectedNavItem,
@@ -94,46 +78,31 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
           }),
       body: Navigator(
         onGenerateRoute: (settings) {
-            if (settings.name == ProductsListScreen.id) {
-              screen = ProductsListScreen();
-            }
-            if (settings.name == ShoppingCartScreen.id) {
-              screen = ShoppingCartScreen();
-            }
-            if (settings.name == WelcomeScreen.id) {
-              screen = WelcomeScreen();
-            }
-            if (settings.name == ProductScreen.id) {
-              final Product product = settings.arguments as Product;
-              screen = ProductScreen(product: product);
-            }
-
-
-            if (settings.name == CheckoutScreen.id) {
-              screen = CheckoutScreen();
-            }
-            if (settings.name == RegistrationScreen.id) {
-              screen = RegistrationScreen();
-            }
-            if (settings.name == LoginScreen.id) {
-              screen = LoginScreen();
-            }
-            // CheckoutScreen.id: (context) =>     CheckoutScreen(),
-// RegistrationScreen.id: (context) => RegistrationScreen(),
-// LoginScreen.id: (context) =>        LoginScreen(),
-
-            return MaterialPageRoute(builder: (_) => screen);
-
+          if (settings.name == ProductsListScreen.id) {
+            screen = ProductsListScreen();
+          }
+          if (settings.name == ShoppingCartScreen.id) {
+            screen = ShoppingCartScreen();
+          }
+          if (settings.name == WelcomeScreen.id) {
+            screen = WelcomeScreen();
+          }
+          if (settings.name == ProductScreen.id) {
+            final Product product = settings.arguments as Product;
+            screen = ProductScreen(product: product);
+          }
+          if (settings.name == CheckoutScreen.id) {
+            screen = CheckoutScreen();
+          }
+          if (settings.name == RegistrationScreen.id) {
+            screen = RegistrationScreen();
+          }
+          if (settings.name == LoginScreen.id) {
+            screen = LoginScreen();
+          }
+          return MaterialPageRoute(builder: (_) => screen);
         },
       ),
     );
   }
 }
-
-// WelcomeScreen.id: (context) =>      WelcomeScreen(),
-// CheckoutScreen.id: (context) =>     CheckoutScreen(),
-// ShoppingCartScreen.id: (context) => ShoppingCartScreen(),
-// RegistrationScreen.id: (context) => RegistrationScreen(),
-// LoginScreen.id: (context) =>        LoginScreen(),
-// ProductsListScreen.id: (context) => ProductsListScreen(),
-// ProductScreen.id: (context) =>      ProductScreen(),
