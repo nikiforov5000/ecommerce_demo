@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< HEAD
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),
@@ -40,6 +41,10 @@ class MyApp extends StatelessWidget {
         EcommerceDemoApp.id: (context) => EcommerceDemoApp(),
       },
       home: WelcomeScreen(),
+=======
+      debugShowCheckedModeBanner: false,
+      home: EcommerceDemoApp(),
+>>>>>>> 2ff649a (removed debug label)
       theme: ThemeData().copyWith(
         appBarTheme: AppBarTheme().copyWith(
           color: kTileColor,
