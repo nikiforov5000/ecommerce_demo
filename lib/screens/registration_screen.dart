@@ -1,5 +1,6 @@
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../widgets/buttonText.dart';
 import '../widgets/rounded_button_widget.dart';
@@ -13,6 +14,7 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  final _auth = FirebaseAuth.instance;
   late String email;
   late String password;
 
@@ -66,7 +68,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               RoundedButton(
                 labelWidget: ButtonText(text: 'Register'),
                 onTapCallback: () async {
-                  Navigator.pushNamed(context, ProductsListScreen.id);
+                  print(email + ' ' + password);
+                  try {
+                    final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                    if (newUser != null) {
+                      Navigator.pushNamed(context, ProductsListScreen.id);
+                    }
+                  }
+                  catch (e) {
+                    print('registrationScreen.register trycath');
+                    print(e);
+                  }
                 },
               ),
             ],
