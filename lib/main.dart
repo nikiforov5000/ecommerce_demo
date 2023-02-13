@@ -12,9 +12,18 @@ import 'package:flutter/material.dart';
 import 'constants/colors.dart';
 import 'constants/text_styles.dart';
 import 'models/product.dart';
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await productData.fetchData();
+  await Firebase.initializeApp(
+    // options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
