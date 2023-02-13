@@ -21,7 +21,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await productData.fetchData();
   await Firebase.initializeApp(
-    // options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.currentPlatform,
   );
 
   runApp(const MyApp());
@@ -92,9 +92,9 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
     return Navigator(
       onGenerateRoute: (settings) {
         Map<String, Widget> _screens = {
+          WelcomeScreen.id: WelcomeScreen(),
           ProductsListScreen.id: ProductsListScreen(),
           ShoppingCartScreen.id: ShoppingCartScreen(),
-          WelcomeScreen.id: WelcomeScreen(),
           CheckoutScreen.id: CheckoutScreen(),
           RegistrationScreen.id: RegistrationScreen(),
           LoginScreen.id: LoginScreen(),
