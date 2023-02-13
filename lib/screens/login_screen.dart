@@ -1,5 +1,6 @@
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../widgets/buttonText.dart';
 import '../widgets/rounded_button_widget.dart';
@@ -13,8 +14,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late User loggedInUser;
   late String email;
   late String password;
+  var _auth = FirebaseAuth.instance;
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +69,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   RoundedButton(
                     labelWidget: ButtonText(text: 'Log in'),
                     onTapCallback: () async {
-                      Navigator.pushNamed(context, ProductsListScreen.id);
+                      try {
+                        final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
+                        if (user != null) {
+                          Navigator.pushNamed(context, ProductsListScreen.id);
+                        }
+                      }
+                      catch (e) {
+                        print(e);
+                      }
                     },
                   ),
                 ],
