@@ -91,7 +91,7 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        items: navbarItems,
+        items: getNavbarItems(_auth.currentUser != null),
         unselectedItemColor: kUnselectedNavItem,
         selectedItemColor: kDarkTextColor,
         currentIndex: _selectedScreenIndex,
