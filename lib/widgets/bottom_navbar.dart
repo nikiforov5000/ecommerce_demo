@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 List<BottomNavigationBarItem> getNavbarItems(bool isLoggedIn) {
-  print('isLoggedIn ' + isLoggedIn.toString());
   return [
     BottomNavigationBarItem(
       icon: Icon(Icons.grid_view_sharp),

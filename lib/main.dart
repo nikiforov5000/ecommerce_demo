@@ -77,7 +77,6 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
           screen = ShoppingCartScreen();
           break;
         case 2:
-          print('login pressed');
           if (_auth.currentUser != null) {
             _auth.signOut();
           }
