@@ -33,7 +33,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: EcommerceDemoApp(),
+      routes: {
+        // WelcomeScreen.id: (context) => WelcomeScreen(),
+        // ProductsListScreen.id: (context) => ProductsListScreen(),
+        // ShoppingCartScreen.id: (context) => ShoppingCartScreen(),
+        // CheckoutScreen.id: (context) => CheckoutScreen(),
+        RegistrationScreen.id: (context) => RegistrationScreen(),
+        LoginScreen.id: (context) => LoginScreen(),
+        EcommerceDemoApp.id: (context) => EcommerceDemoApp(),
+      },
+      home: WelcomeScreen(),
       theme: ThemeData().copyWith(
         appBarTheme: AppBarTheme().copyWith(
           color: kTileColor,
@@ -47,6 +56,8 @@ class MyApp extends StatelessWidget {
 }
 
 class EcommerceDemoApp extends StatefulWidget {
+  static String id = 'ecommerce_demo_app';
+
   @override
   State<EcommerceDemoApp> createState() => _EcommerceDemoAppState();
 }
@@ -89,6 +100,7 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
   }
 
   Navigator buildNavigator() {
+    print('buildNavigator');
     return Navigator(
       onGenerateRoute: (settings) {
         Map<String, Widget> _screens = {
@@ -98,6 +110,7 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
           CheckoutScreen.id: CheckoutScreen(),
           RegistrationScreen.id: RegistrationScreen(),
           LoginScreen.id: LoginScreen(),
+          EcommerceDemoApp.id: EcommerceDemoApp(),
         };
         if (_screens[settings.name] != null) {
           screen = _screens[settings.name]!;

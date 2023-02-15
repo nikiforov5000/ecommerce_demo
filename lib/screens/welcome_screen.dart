@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/main.dart';
 import 'package:ecommerce_demo/screens/login_screen.dart';
 import 'package:ecommerce_demo/screens/registration_screen.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
@@ -24,18 +25,25 @@ class WelcomeScreen extends StatelessWidget {
             children: <Widget>[
               LogoHero(),
               RoundedButton(
-                  labelWidget: ButtonText(text: 'Login'),
-                  onTapCallback: () {
-                    Navigator.pushNamed(context, LoginScreen.id);
-                  }),
-              SizedBox(
-                height: 20.0,
+                labelWidget: ButtonText(text: 'Login'),
+                onTapCallback: () {
+                  Navigator.pushNamed(context, LoginScreen.id);
+                },
               ),
+              SizedBox(height: 20.0),
               RoundedButton(
-                  labelWidget: ButtonText(text: 'Register'),
-                  onTapCallback: () {
-                    Navigator.pushNamed(context, RegistrationScreen.id);
-                  }),
+                labelWidget: ButtonText(text: 'Register'),
+                onTapCallback: () {
+                  Navigator.pushNamed(context, RegistrationScreen.id);
+                },
+              ),
+              SizedBox(height: 20.0),
+              RoundedButton(
+                labelWidget: ButtonText(text: 'Continue without account'),
+                onTapCallback: () {
+                  Navigator.pushNamed(context, EcommerceDemoApp.id);
+                },
+              ),
             ],
           ),
         ),
@@ -43,5 +51,3 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 }
-
-
