@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/main.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -72,11 +73,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   try {
                     final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
                     if (newUser != null) {
-                      Navigator.pushNamed(context, ProductsListScreen.id);
+                      Navigator.pushNamed(context, EcommerceDemoApp.id);
                     }
                   }
                   catch (e) {
-                    print('registrationScreen.register trycath');
                     print(e);
                   }
                 },

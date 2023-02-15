@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/main.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -72,7 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       try {
                         final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
                         if (user != null) {
-                          Navigator.pushNamed(context, ProductsListScreen.id);
+                          print('user != null');
+                          Navigator.pushNamed(context, EcommerceDemoApp.id);
                         }
                       }
                       catch (e) {

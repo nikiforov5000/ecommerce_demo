@@ -33,7 +33,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: EcommerceDemoApp(),
+      routes: {
+        WelcomeScreen.id: (context) => WelcomeScreen(),
+        RegistrationScreen.id: (context) => RegistrationScreen(),
+        LoginScreen.id: (context) => LoginScreen(),
+        EcommerceDemoApp.id: (context) => EcommerceDemoApp(),
+      },
+      home: WelcomeScreen(),
       theme: ThemeData().copyWith(
         appBarTheme: AppBarTheme().copyWith(
           color: kTileColor,
@@ -47,11 +53,14 @@ class MyApp extends StatelessWidget {
 }
 
 class EcommerceDemoApp extends StatefulWidget {
+  static String id = 'ecommerce_demo_app';
+
   @override
   State<EcommerceDemoApp> createState() => _EcommerceDemoAppState();
 }
 
 class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
+  final _auth = FirebaseAuth.instance;
   int _selectedScreenIndex = 0;
 
   Widget screen = ProductsListScreen();
@@ -68,8 +77,11 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
           screen = ShoppingCartScreen();
           break;
         case 2:
-          _selectedScreenIndex = index;
-          screen = WelcomeScreen();
+          if (_auth.currentUser != null) {
+            _auth.signOut();
+          }
+          Navigator.popUntil(context, (route) => route == WelcomeScreen.id);
+          Navigator.pushNamed(context, WelcomeScreen.id);
       }
     });
   }
@@ -78,7 +90,7 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        items: navbarItems,
+        items: getNavbarItems(_auth.currentUser != null),
         unselectedItemColor: kUnselectedNavItem,
         selectedItemColor: kDarkTextColor,
         currentIndex: _selectedScreenIndex,
@@ -89,6 +101,7 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
   }
 
   Navigator buildNavigator() {
+    print('buildNavigator');
     return Navigator(
       onGenerateRoute: (settings) {
         Map<String, Widget> _screens = {
@@ -98,6 +111,7 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
           CheckoutScreen.id: CheckoutScreen(),
           RegistrationScreen.id: RegistrationScreen(),
           LoginScreen.id: LoginScreen(),
+          EcommerceDemoApp.id: EcommerceDemoApp(),
         };
         if (_screens[settings.name] != null) {
           screen = _screens[settings.name]!;
