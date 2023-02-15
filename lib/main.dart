@@ -34,10 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        // WelcomeScreen.id: (context) => WelcomeScreen(),
-        // ProductsListScreen.id: (context) => ProductsListScreen(),
-        // ShoppingCartScreen.id: (context) => ShoppingCartScreen(),
-        // CheckoutScreen.id: (context) => CheckoutScreen(),
+        WelcomeScreen.id: (context) => WelcomeScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         EcommerceDemoApp.id: (context) => EcommerceDemoApp(),
@@ -63,6 +60,7 @@ class EcommerceDemoApp extends StatefulWidget {
 }
 
 class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
+  final _auth = FirebaseAuth.instance;
   int _selectedScreenIndex = 0;
 
   Widget screen = ProductsListScreen();
@@ -79,8 +77,12 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
           screen = ShoppingCartScreen();
           break;
         case 2:
-          _selectedScreenIndex = index;
-          screen = WelcomeScreen();
+          print('login pressed');
+          if (_auth.currentUser != null) {
+            _auth.signOut();
+          }
+          Navigator.popUntil(context, (route) => route == WelcomeScreen.id);
+          Navigator.pushNamed(context, WelcomeScreen.id);
       }
     });
   }
