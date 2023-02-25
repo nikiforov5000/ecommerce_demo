@@ -23,7 +23,7 @@ class Product {
 
   static Product buildFromMap(DocumentSnapshot data) {
     return Product(
-        title: data!['title'],
+        title: data['title'],
         price: data['price'],
         imgUrl: data['imgUrl'],
         description: data['description'],
@@ -31,12 +31,3 @@ class Product {
         category: data['category']);
   }
 }
-
-// return Product(
-// title: data!['title'],
-// price: data['price'],
-// imgUrl: data['imgUrl'],
-// description: data['description'],
-// rate: data['rate'],
-// category: data['category']
-// );

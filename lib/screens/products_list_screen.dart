@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
-import 'package:ecommerce_demo/models/products_controller.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +11,6 @@ import '../widgets/category_button.dart';
 import '../widgets/product_tile.dart';
 
 List<Product> currentProducts = productData.getAllProducts();
-// var currentProducts = ProductsController().getAllProducts();
 
 class ProductsListScreen extends StatefulWidget {
   static const String id = 'productListScreen';
@@ -47,7 +45,6 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ProductsController.getAllProducts();
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -106,17 +103,10 @@ class ProductsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ProductsController.getStreamBuilder();
     print('ProductList build');
-    // return GridView.count(
-    //   crossAxisCount: 2,
-    //   children: <Widget>[ProductsController.getStreamBuilder()],
-    // );
-
     return StreamBuilder<QuerySnapshot>(
       stream: _firestore.collection('products').snapshots(),
       builder: (context, snapshot) {
-        print('getStreamBuilder ->');
         if (snapshot.hasData) {
           final products = snapshot.data!.docs;
           return GridView.count(
