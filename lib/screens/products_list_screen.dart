@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
+import 'package:ecommerce_demo/models/products_controller.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +12,7 @@ import '../widgets/category_button.dart';
 import '../widgets/product_tile.dart';
 
 List<Product> currentProducts = productData.getAllProducts();
+// var currentProducts = ProductsController().getAllProducts();
 
 class ProductsListScreen extends StatefulWidget {
   static const String id = 'productListScreen';
@@ -37,15 +40,14 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         loggedInUser = user;
         print(loggedInUser!.email);
       }
-    }
-    catch (e) {
+    } catch (e) {
       print(e);
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
+    ProductsController.getAllProducts();
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -99,23 +101,44 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
 }
 
 class ProductsList extends StatelessWidget {
-  const ProductsList({Key? key}) : super(key: key);
+  final _auth = FirebaseAuth.instance;
+  static FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
+    // ProductsController.getStreamBuilder();
     print('ProductList build');
-    return GridView.count(crossAxisCount: 2, children: [
-      for (var product in currentProducts)
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-          child: ProductTile(
-            product: product,
-            onTapCallback: () {
-              Navigator.pushNamed(context, ProductScreen.id,
-                  arguments: product);
-            },
-          ),
-        ),
-    ]);
+    // return GridView.count(
+    //   crossAxisCount: 2,
+    //   children: <Widget>[ProductsController.getStreamBuilder()],
+    // );
+
+    return StreamBuilder<QuerySnapshot>(
+      stream: _firestore.collection('products').snapshots(),
+      builder: (context, snapshot) {
+        print('getStreamBuilder ->');
+        if (snapshot.hasData) {
+          final products = snapshot.data!.docs;
+          return GridView.count(
+            crossAxisCount: 2,
+            children: [
+              for (var productData in products)
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 15.0, vertical: 10.0),
+                  child: ProductTile(
+                    product: Product.buildFromMap(productData),
+                    onTapCallback: () {
+                      Navigator.pushNamed(context, ProductScreen.id,
+                          arguments: Product.buildFromMap(productData));
+                    },
+                  ),
+                )
+            ],
+          );
+        }
+        return Text('no data');
+      },
+    );
   }
 }

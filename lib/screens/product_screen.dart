@@ -207,7 +207,7 @@ class AboutProduct extends StatelessWidget {
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Text(
-              product.discription,
+              product.description,
               style: kProductDescriptionTextStyle,
             ),
           ),
