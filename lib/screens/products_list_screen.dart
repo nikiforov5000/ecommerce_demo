@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
@@ -9,7 +10,7 @@ import '../models/product.dart';
 import '../widgets/category_button.dart';
 import '../widgets/product_tile.dart';
 
-List<Product> currentProducts = productData.getAllProducts();
+List<Product> currentProducts = [];
 
 class ProductsListScreen extends StatefulWidget {
   static const String id = 'productListScreen';
@@ -28,7 +29,11 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   void initState() {
     super.initState();
     getCurrentUser();
-  }
+    ProductData.getAllProducts().then((products) {
+      setState(() {
+        currentProducts = products;
+      });
+    });  }
 
   void getCurrentUser() async {
     try {
@@ -37,11 +42,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         loggedInUser = user;
         print(loggedInUser!.email);
       }
-    }
-    catch (e) {
+    } catch (e) {
       print(e);
     }
-
   }
 
   @override
@@ -69,8 +72,10 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                   CategoryButton(
                     label: 'All products',
                     onTapCallback: () {
-                      setState(() {
-                        currentProducts = productData.getAllProducts();
+                      ProductData.getAllProducts().then((products) {
+                        setState(() {
+                        currentProducts = products;
+                        });
                       });
                     },
                   ),
@@ -78,9 +83,10 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                     CategoryButton(
                       label: category,
                       onTapCallback: () {
-                        setState(() {
-                          currentProducts =
-                              productData.getProductsOfCategory(category);
+                        ProductData.getProductsOfCategory(category).then((products) {
+                          setState(() {
+                            currentProducts = products;
+                          });
                         });
                       },
                     ),
@@ -99,23 +105,26 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
 }
 
 class ProductsList extends StatelessWidget {
-  const ProductsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     print('ProductList build');
-    return GridView.count(crossAxisCount: 2, children: [
-      for (var product in currentProducts)
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-          child: ProductTile(
-            product: product,
-            onTapCallback: () {
-              Navigator.pushNamed(context, ProductScreen.id,
-                  arguments: product);
-            },
-          ),
-        ),
-    ]);
+    return GridView.count(
+      crossAxisCount: 2,
+      children: [
+        for (var product in currentProducts)
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+            child: ProductTile(
+              product: product,
+              onTapCallback: () {
+                Navigator.pushNamed(context, ProductScreen.id,
+                    arguments: product);
+              },
+            ),
+          )
+      ],
+    );
   }
 }
