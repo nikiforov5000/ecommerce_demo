@@ -19,7 +19,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await productData.fetchData();
+  // await productData.fetchData();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

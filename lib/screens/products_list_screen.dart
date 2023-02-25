@@ -10,7 +10,7 @@ import '../models/product.dart';
 import '../widgets/category_button.dart';
 import '../widgets/product_tile.dart';
 
-List<Product> currentProducts = productData.getAllProducts();
+List<Product> currentProducts = [];
 
 class ProductsListScreen extends StatefulWidget {
   static const String id = 'productListScreen';
@@ -29,7 +29,11 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   void initState() {
     super.initState();
     getCurrentUser();
-  }
+    ProductData.getAllProducts().then((products) {
+      setState(() {
+        currentProducts = products;
+      });
+    });  }
 
   void getCurrentUser() async {
     try {
@@ -68,8 +72,10 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                   CategoryButton(
                     label: 'All products',
                     onTapCallback: () {
-                      setState(() {
-                        currentProducts = productData.getAllProducts();
+                      ProductData.getAllProducts().then((products) {
+                        setState(() {
+                        currentProducts = products;
+                        });
                       });
                     },
                   ),
@@ -77,9 +83,10 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                     CategoryButton(
                       label: category,
                       onTapCallback: () {
-                        setState(() {
-                          currentProducts =
-                              productData.getProductsOfCategory(category);
+                        ProductData.getProductsOfCategory(category).then((products) {
+                          setState(() {
+                            currentProducts = products;
+                          });
                         });
                       },
                     ),
@@ -98,37 +105,26 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
 }
 
 class ProductsList extends StatelessWidget {
-  final _auth = FirebaseAuth.instance;
-  static FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
     print('ProductList build');
-    return StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection('products').snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          final products = snapshot.data!.docs;
-          return GridView.count(
-            crossAxisCount: 2,
-            children: [
-              for (var productData in products)
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 15.0, vertical: 10.0),
-                  child: ProductTile(
-                    product: Product.buildFromMap(productData),
-                    onTapCallback: () {
-                      Navigator.pushNamed(context, ProductScreen.id,
-                          arguments: Product.buildFromMap(productData));
-                    },
-                  ),
-                )
-            ],
-          );
-        }
-        return Text('no data');
-      },
+    return GridView.count(
+      crossAxisCount: 2,
+      children: [
+        for (var product in currentProducts)
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+            child: ProductTile(
+              product: product,
+              onTapCallback: () {
+                Navigator.pushNamed(context, ProductScreen.id,
+                    arguments: product);
+              },
+            ),
+          )
+      ],
     );
   }
 }
