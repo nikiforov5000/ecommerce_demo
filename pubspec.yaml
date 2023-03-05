@@ -86,6 +86,10 @@ flutter:
       fonts:
         - asset: assets/fonts/Arsenal/Arsenal-Regular.ttf
         - asset: assets/fonts/Arsenal/Arsenal-Bold.ttf
+        - asset: assets/fonts/souse_code_font/SourceCodePro-VariableFont_wght.ttf
+    - family: source-code
+      fonts:
+        - asset: assets/fonts/souse_code_font/SourceCodePro-VariableFont_wght.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
