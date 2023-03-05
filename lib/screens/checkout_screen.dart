@@ -25,59 +25,15 @@ class CheckoutScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BankCard(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    SectionNameText(text: 'Choose payment method'),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    PaymentMethods(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    SectionNameText(text: 'Promo Code'),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: TextField(
-                            onChanged: (value) {},
-                          ),
-                        ),
-                        RoundedButton(
-                            labelWidget: Text('Apply'), onTapCallback: () {})
-                      ],
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SectionNameText(
-                          text: 'Total Payment',
-                        ),
-                        Text(
-                          '\$344',
-                          style:
-                              TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 50,),
-                    RoundedButton(
-                        labelWidget: Text(
-                          'Pay',
-                          style: kButtonTextStyle,
-                        ),
-                        onTapCallback: () {}),
-                  ],
-                ),
+                BankCard(),
+                SizedBox(height: 20),
+                SectionNameText(text: 'Choose payment method'),
+                SizedBox(height: 20),
+                PaymentMethods(),
+                SizedBox(height: 20),
+                PromoCodeSection(),
+                SizedBox(height: 80),
+                PayButtonSection(),
               ],
             ),
           ],
@@ -85,6 +41,64 @@ class CheckoutScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class PayButtonSection extends StatelessWidget {
+  const PayButtonSection({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SectionNameText(
+              text: 'Total Payment',
+            ),
+            Text(
+              '\$344',
+              style: TextStyle(
+                  fontWeight: FontWeight.w700, fontSize: 20),
+            ),
+          ],
+        ),
+        SizedBox(height: 10.0,),
+        RoundedButton(
+            labelWidget: Text(
+              'Pay',
+              style: kButtonTextStyle,
+            ),
+            onTapCallback: () {}),
+      ],
+    );
+  }
+}
+
+class PromoCodeSection extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SectionNameText(text: 'Promo Code'),
+        Row(
+          children: [
+            Flexible(
+              child: TextField(
+                onChanged: (value) {},
+              ),
+            ),
+            RoundedButton(
+                labelWidget: Text('Apply'), onTapCallback: () {})
+          ],
+        )
+      ],
+    );
+  }
+
 }
 
 class PaymentMethods extends StatefulWidget {
