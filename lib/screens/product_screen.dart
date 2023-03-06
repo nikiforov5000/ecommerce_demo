@@ -62,14 +62,21 @@ class ProductImageCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      options: CarouselOptions(height: 200.0),
+      // options: CarouselOptions(height: 200.0),
+      options: CarouselOptions(viewportFraction: 1, enlargeCenterPage: true),
       items: [1, 2, 3, 4, 5].map((i) {
         return Builder(
           builder: (BuildContext context) {
-            return Container(
-              width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.symmetric(horizontal: 5.0),
+            return GestureDetector(
               child: ColorFilteredImage(product: product),
+              onTap: () {
+                Navigator.push<Widget>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ImageScreen(product: product, index: i),
+                  ),
+                );
+              },
             );
           },
         );
@@ -216,3 +223,35 @@ class AboutProduct extends StatelessWidget {
     );
   }
 }
+
+class ImageScreen extends StatelessWidget {
+  const ImageScreen({required this.product ,required this.index});
+  final int index;
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(product.title),),
+      body: CarouselSlider(
+        options: CarouselOptions(
+          initialPage: index,
+          enlargeCenterPage: true,
+          height: MediaQuery.of(context).size.height,
+        ),
+        items: [1, 2, 3, 4, 5].map((i) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Image.network(
+                product.imgUrl,
+                fit: BoxFit.fitWidth,
+                width: double.infinity,
+              );
+            },
+          );
+        }).toList(),
+      ),
+    );;
+  }
+}
+
