@@ -25,6 +25,8 @@ ProductScreen({required this.product});
     return Scaffold(
       appBar: AppBar(
         title: Text(product.title),
+
+
       ),
       body: Container(
         color: kBackgroundColor,
