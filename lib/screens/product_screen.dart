@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/text_styles.dart';
@@ -9,24 +10,41 @@ import '../models/product.dart';
 import '../models/shopping_cart.dart';
 import '../widgets/buttonText.dart';
 import '../widgets/color_filtered_image.dart';
+import '../widgets/user_avatar.dart';
 
 class ProductScreen extends StatelessWidget {
   static const String id = 'product_screen';
-ProductScreen({required this.product});
+  ProductScreen({required this.product}) {
+    getCurrentUser();
+  }
+
   final Product product;
+  final _auth = FirebaseAuth.instance;
+  User? loggedInUser;
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser!;
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser!.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-
-    // final product = ModalRoute.of(context)!.settings.arguments as Product;
     return Scaffold(
       appBar: AppBar(
         title: Text(product.title),
-
-
+        actions: [
+          UserAvatarWidget(user: loggedInUser),
+        ],
       ),
       body: Container(
         color: kBackgroundColor,
@@ -75,7 +93,8 @@ class ProductImageCarousel extends StatelessWidget {
                 Navigator.push<Widget>(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ImageScreen(product: product, index: i),
+                    builder: (context) =>
+                        ImageScreen(product: product, index: i),
                   ),
                 );
               },
@@ -227,14 +246,17 @@ class AboutProduct extends StatelessWidget {
 }
 
 class ImageScreen extends StatelessWidget {
-  const ImageScreen({required this.product ,required this.index});
+  const ImageScreen({required this.product, required this.index});
+
   final int index;
   final Product product;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(product.title),),
+      appBar: AppBar(
+        title: Text(product.title),
+      ),
       body: CarouselSlider(
         options: CarouselOptions(
           initialPage: index,
@@ -253,7 +275,7 @@ class ImageScreen extends StatelessWidget {
           );
         }).toList(),
       ),
-    );;
+    );
+    ;
   }
 }
-

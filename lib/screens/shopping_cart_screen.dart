@@ -3,11 +3,13 @@ import 'package:ecommerce_demo/constants/decorations.dart';
 import 'package:ecommerce_demo/models/shopping_cart.dart';
 import 'package:ecommerce_demo/screens/checkout_screen.dart';
 import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../models/product.dart';
 import '../widgets/buttonText.dart';
 import '../widgets/rounded_button_widget.dart';
+import '../widgets/user_avatar.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
   const ShoppingCartScreen({Key? key}) : super(key: key);
@@ -22,6 +24,22 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   @override
   void initState() {
     super.initState();
+    getCurrentUser();
+  }
+
+  final _auth = FirebaseAuth.instance;
+  User? loggedInUser;
+
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser!;
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser!.email);
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -33,6 +51,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Cart'),
+        actions: [
+          UserAvatarWidget(user: loggedInUser),
+        ],
       ),
       body: Container(
         color: kBackgroundColor,
