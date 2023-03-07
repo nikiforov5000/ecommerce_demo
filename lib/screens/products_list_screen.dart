@@ -1,14 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/product.dart';
 import '../widgets/category_button.dart';
 import '../widgets/product_tile.dart';
+import '../widgets/user_avatar.dart';
 
 List<Product> currentProducts = [];
 
@@ -33,7 +33,8 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       setState(() {
         currentProducts = products;
       });
-    });  }
+    });
+  }
 
   void getCurrentUser() async {
     try {
@@ -58,6 +59,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
           child: Icon(Icons.arrow_back),
         ),
         title: Text('eCommerce Demo'),
+        actions: [
+          UserAvatarWidget(user: loggedInUser),
+        ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -74,7 +78,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                     onTapCallback: () {
                       ProductData.getAllProducts().then((products) {
                         setState(() {
-                        currentProducts = products;
+                          currentProducts = products;
                         });
                       });
                     },
@@ -83,7 +87,8 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                     CategoryButton(
                       label: category,
                       onTapCallback: () {
-                        ProductData.getProductsOfCategory(category).then((products) {
+                        ProductData.getProductsOfCategory(category)
+                            .then((products) {
                           setState(() {
                             currentProducts = products;
                           });
@@ -105,7 +110,6 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
 }
 
 class ProductsList extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     print('ProductList build');
