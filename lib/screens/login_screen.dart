@@ -1,8 +1,10 @@
 import 'package:ecommerce_demo/main.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/buttonText.dart';
 import '../widgets/rounded_button_widget.dart';
@@ -20,10 +22,12 @@ class _LoginScreenState extends State<LoginScreen> {
   late User loggedInUser;
   late String email;
   late String password;
-  var _auth = FirebaseAuth.instance;
+
+  // var _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       backgroundColor: Colors.purple,
       body: Builder(
@@ -78,16 +82,20 @@ class _LoginScreenState extends State<LoginScreen> {
               RoundedButton(
                 labelWidget: ButtonText(text: 'Log in'),
                 onTapCallback: () async {
-                  try {
-                    final user = await _auth.signInWithEmailAndPassword(
-                        email: email, password: password);
-                    if (user != null) {
-                      print('user != null');
-                      Navigator.pushNamed(context, EcommerceDemoApp.id);
-                    }
-                  } catch (e) {
-                    print(e);
-                  }
+                  await authService.signInWithEmailAndPassword(
+                    email,
+                    password,
+                  );
+                  // try {
+                  //   final user = await _auth.signInWithEmailAndPassword(
+                  //       email: email, password: password);
+                  //   if (user != null) {
+                  //     print('user != null');
+                  //     Navigator.pushNamed(context, EcommerceDemoApp.id);
+                  //   }
+                  // } catch (e) {
+                  //   print(e);
+                  // }
                 },
               ),
               RoundedButton(
@@ -103,11 +111,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         accessToken: googleAuth.accessToken,
                         idToken: googleAuth.idToken,
                       );
-                      final userCredential = await _auth.signInWithCredential(credential);
+                      final userCredential =
+                          await _auth.signInWithCredential(credential);
                       if (userCredential.additionalUserInfo!.isNewUser) {
                         final currentUser = _auth.currentUser;
                         if (currentUser != null) {
-                          await currentUser.updateDisplayName(googleUser.displayName);
+                          await currentUser
+                              .updateDisplayName(googleUser.displayName);
                         }
                       }
                       print('all good, next is navigator');

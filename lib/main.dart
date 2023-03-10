@@ -6,8 +6,10 @@ import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/registration_screen.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/screens/welcome_screen.dart';
+import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'constants/colors.dart';
 import 'constants/text_styles.dart';
@@ -17,9 +19,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'wrapper.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await productData.fetchData();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -32,21 +35,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: {
-        WelcomeScreen.id: (context) => WelcomeScreen(),
-        RegistrationScreen.id: (context) => RegistrationScreen(),
-        LoginScreen.id: (context) => LoginScreen(),
-        EcommerceDemoApp.id: (context) => EcommerceDemoApp(),
-      },
-      home: WelcomeScreen(),
-      theme: ThemeData().copyWith(
-        appBarTheme: AppBarTheme().copyWith(
-          color: kTileColor,
-          titleTextStyle: kAppbarTextStyle,
-          elevation: 0.5,
-          iconTheme: IconThemeData(color: kDarkTextColor),
+    return MultiProvider(
+      providers: [
+        Provider<AuthService>(
+            create: (_) => AuthService(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: Wrapper.id,
+        routes: {
+          WelcomeScreen.id: (context) => WelcomeScreen(),
+          RegistrationScreen.id: (context) => RegistrationScreen(),
+          LoginScreen.id: (context) => LoginScreen(),
+          EcommerceDemoApp.id: (context) => EcommerceDemoApp(),
+          Wrapper.id: (context) => Wrapper(),
+        },
+        // home: WelcomeScreen(),
+        theme: ThemeData().copyWith(
+          appBarTheme: AppBarTheme().copyWith(
+            color: kTileColor,
+            titleTextStyle: kAppbarTextStyle,
+            elevation: 0.5,
+            iconTheme: IconThemeData(color: kDarkTextColor),
+          ),
         ),
       ),
     );
@@ -61,13 +73,14 @@ class EcommerceDemoApp extends StatefulWidget {
 }
 
 class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
-  final _auth = FirebaseAuth.instance;
+  // final _auth = FirebaseAuth.instance;
   int _selectedScreenIndex = 0;
 
   Widget screen = ProductsListScreen();
 
   void _updateScreen(index) {
-    setState(() {
+    final authService = Provider.of<AuthService>(context);
+    setState(() async {
       switch (index) {
         case 0:
           _selectedScreenIndex = index;
@@ -78,11 +91,12 @@ class _EcommerceDemoAppState extends State<EcommerceDemoApp> {
           screen = ShoppingCartScreen();
           break;
         case 2:
-          if (_auth.currentUser != null) {
-            _auth.signOut();
-          }
-          Navigator.popUntil(context, (route) => route == WelcomeScreen.id);
-          Navigator.pushNamed(context, WelcomeScreen.id);
+          // if (_auth.currentUser != null) {
+          //   _auth.signOut();
+          // }
+          await authService.signOut();
+          // Navigator.popUntil(context, (route) => route == WelcomeScreen.id);
+          // Navigator.pushNamed(context, WelcomeScreen.id);
       }
     });
   }
