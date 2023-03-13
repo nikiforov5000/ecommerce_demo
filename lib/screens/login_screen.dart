@@ -1,6 +1,7 @@
 import 'package:ecommerce_demo/main.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
+import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -27,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
-    final user
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       backgroundColor: Colors.purple,
       body: Builder(
@@ -85,14 +86,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   await authService.signInWithEmailAndPassword(
                     email,
                     password,
-                  );
-
+                  ).then((value) => userProvider.setUser = value!);
                 },
               ),
               RoundedButton(
                 labelWidget: ButtonText(text: 'Sign-in with Google'),
                 onTapCallback: () async {
-                  await authService.signInWithGoogle();
+                  await authService.signInWithGoogle()
+                      .then((value) => userProvider.setUser = value!);
                 },
               ),
             ],
