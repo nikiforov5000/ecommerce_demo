@@ -3,7 +3,10 @@ import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../services/auth_service.dart';
+import '../services/user_provider.dart';
 import '../widgets/text_on_bankcard.dart';
 import '../widgets/user_avatar.dart';
 
@@ -29,11 +32,27 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final authService = Provider.of<AuthService>(context);
+    final userProvider = Provider.of<UserProvider>(context);
+    final user = userProvider.user;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Checkout'),
         actions: [
-          UserAvatarWidget(user: loggedInUser),
+          InkWell(
+            // todo this should be an avatar
+            child: Center(
+                child: Text(
+                  'logout',
+                  style: TextStyle(color: Colors.black),
+                )),
+            onTap: () {
+              print(user!.email);
+              // authService.signOut();
+            },
+          )
         ],      ),
       body: Container(
         color: kBackgroundColor,

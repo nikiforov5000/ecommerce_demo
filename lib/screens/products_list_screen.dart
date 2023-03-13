@@ -58,15 +58,14 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         actions: [
           InkWell(
             // todo this should be an avatar
+            // child: UserAvatarWidget(user: user),
             child: Center(child: Text('logout', style: TextStyle(color: Colors.black),)),
             onTap: () {
               print(user!.email);
               authService.signOut();
             },
           )
-          // Text(userProvider.user == null ? 'null' : userProvider.user.email),
           // todo update UserAvatar to receive User
-          // UserAvatarWidget(user: user),
         ],
       ),
       body: Container(

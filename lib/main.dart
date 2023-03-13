@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
           LoginScreen.id: (context) => LoginScreen(),
           RegistrationScreen.id: (context) => RegistrationScreen(),
           ShoppingCartScreen.id: (context) => ShoppingCartScreen(),
+          CheckoutScreen.id: (context) => CheckoutScreen(),
         },
         onGenerateRoute: (settings) {
           if (settings.name == ProductScreen.id) {

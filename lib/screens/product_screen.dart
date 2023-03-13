@@ -4,16 +4,19 @@ import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/text_styles.dart';
 import '../models/product.dart';
 import '../models/shopping_cart.dart';
+import '../services/auth_service.dart';
+import '../services/user_provider.dart';
 import '../widgets/buttonText.dart';
 import '../widgets/color_filtered_image.dart';
-import '../widgets/user_avatar.dart';
 
 class ProductScreen extends StatelessWidget {
   static const String id = 'product_screen';
+
   ProductScreen({required this.product}) {}
 
   final Product product;
@@ -32,17 +35,34 @@ class ProductScreen extends StatelessWidget {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
+    final authService = Provider.of<AuthService>(context);
+    final userProvider = Provider.of<UserProvider>(context);
+    final user = userProvider.user;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(product!.title),
         actions: [
-          UserAvatarWidget(user: loggedInUser),
+          InkWell(
+            // todo this should be an avatar
+            child: Center(
+                child: Text(
+              'logout',
+              style: TextStyle(color: Colors.black),
+            )),
+            onTap: () {
+              print(user!.email);
+              // authService.signOut();
+            },
+          )
+          // Text(userProvider.user == null ? 'null' : userProvider.user.email),
+          // todo update UserAvatar to receive User
+          // UserAvatarWidget(user: user),
         ],
       ),
       body: Container(
