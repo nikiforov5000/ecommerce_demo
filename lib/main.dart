@@ -7,6 +7,7 @@ import 'package:ecommerce_demo/screens/registration_screen.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/screens/welcome_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
+import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
         Provider<AuthService>(create: (_) => AuthService()),
       ],
       child: MaterialApp(

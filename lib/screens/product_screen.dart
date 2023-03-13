@@ -16,9 +16,9 @@ class ProductScreen extends StatelessWidget {
   static const String id = 'product_screen';
   ProductScreen({required this.product}) {}
 
-  Product? product;
-  final _auth = FirebaseAuth.instance;
-  User? loggedInUser;
+  final Product product;
+  // final _auth = FirebaseAuth.instance;
+  // User? loggedInUser;
 
   void getCurrentUser() async {
     try {

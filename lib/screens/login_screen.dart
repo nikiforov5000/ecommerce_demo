@@ -27,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
+    final user
     return Scaffold(
       backgroundColor: Colors.purple,
       body: Builder(
@@ -85,6 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     email,
                     password,
                   );
+
                 },
               ),
               RoundedButton(
