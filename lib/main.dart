@@ -44,8 +44,14 @@ class MyApp extends StatelessWidget {
           LoginScreen.id: (context) => LoginScreen(),
           RegistrationScreen.id: (context) => RegistrationScreen(),
           ShoppingCartScreen.id: (context) => ShoppingCartScreen(),
-          // ProductScreen.id: (context) => ProductScreen(),
-
+        },
+        onGenerateRoute: (settings) {
+          if (settings.name == ProductScreen.id) {
+            final product = settings.arguments as Product;
+            return MaterialPageRoute(
+                builder: (context) => ProductScreen(product: product),
+            );
+          }
         },
         theme: ThemeData().copyWith(
           appBarTheme: AppBarTheme().copyWith(

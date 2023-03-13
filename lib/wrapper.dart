@@ -28,7 +28,6 @@ class Wrapper extends StatelessWidget {
           );
         }
       },
-
     );
   }
 }

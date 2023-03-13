@@ -123,8 +123,8 @@ class ProductsList extends StatelessWidget {
             child: ProductTile(
               product: product,
               onTapCallback: () {
-                Navigator.pushNamed(context, ProductScreen.id,
-                    arguments: product);
+                print('ProductList.buld ' + product.title + ' was tapped');
+                Navigator.pushNamed(context, ProductScreen.id, arguments: product);
               },
             ),
           )

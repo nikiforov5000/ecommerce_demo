@@ -14,11 +14,9 @@ import '../widgets/user_avatar.dart';
 
 class ProductScreen extends StatelessWidget {
   static const String id = 'product_screen';
-  ProductScreen({required this.product}) {
-    getCurrentUser();
-  }
+  ProductScreen({required this.product}) {}
 
-  final Product product;
+  Product? product;
   final _auth = FirebaseAuth.instance;
   User? loggedInUser;
 
@@ -39,9 +37,10 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(product.title),
+        title: Text(product!.title),
         actions: [
           UserAvatarWidget(user: loggedInUser),
         ],
@@ -57,16 +56,16 @@ class ProductScreen extends StatelessWidget {
               height: screenHeight * .03,
             ),
             ProductImageCarousel(
-              product: product,
+              product: product!,
             ),
             SizedBox(
               height: screenHeight * .03,
             ),
-            ButtonsBlock(product: product),
+            ButtonsBlock(product: product!),
             SizedBox(
               height: screenHeight * .03,
             ),
-            Expanded(child: AboutProduct(product: product)),
+            Expanded(child: AboutProduct(product: product!)),
           ],
         ),
       ),
