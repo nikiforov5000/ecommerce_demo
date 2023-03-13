@@ -1,4 +1,5 @@
 import 'package:ecommerce_demo/main.dart';
+import 'package:ecommerce_demo/screens/login_screen.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/welcome_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
@@ -18,7 +19,7 @@ class Wrapper extends StatelessWidget {
       builder: (_, AsyncSnapshot<User?> snapshot){
         if (snapshot.connectionState == ConnectionState.active) {
           final User? user = snapshot.data;
-          return user == null ? WelcomeScreen() : ProductsListScreen();
+          return user == null ? LoginScreen() : ProductsListScreen();
         } else {
           return Scaffold(
             body: Center(

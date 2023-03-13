@@ -1,5 +1,7 @@
+import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserAvatarWidget extends StatelessWidget {
   UserAvatarWidget({required this.user});
@@ -9,6 +11,8 @@ class UserAvatarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+
     buildUserAvatar();
     return Padding(
       padding: EdgeInsets.only(right: 20.0),
@@ -16,7 +20,10 @@ class UserAvatarWidget extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: Colors.greenAccent,
             radius: 21,
-            child: avatar!,
+            child: InkWell(
+              onTap: () { authService.signOut(); },
+              child: avatar!,
+            ),
           )
       ),
     );
