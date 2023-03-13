@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-List<BottomNavigationBarItem> getNavbarItems(bool isLoggedIn) {
+List<BottomNavigationBarItem> getNavbarItems() {
   return [
     BottomNavigationBarItem(
       icon: Icon(Icons.grid_view_sharp),
@@ -11,8 +11,8 @@ List<BottomNavigationBarItem> getNavbarItems(bool isLoggedIn) {
       label: 'Cart',
     ),
     BottomNavigationBarItem(
-      icon: Icon(isLoggedIn ? Icons.logout : Icons.login),
-      label: isLoggedIn ? 'Log Out' : 'Log In',
+      icon: Icon(Icons.logout),
+      label: 'Log Out',
     ),
   ];
 }

@@ -1,9 +1,5 @@
-import 'package:ecommerce_demo/main.dart';
-import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/buttonText.dart';
@@ -18,9 +14,6 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  final _googleSignIn = GoogleSignIn();
-
-  // final _auth = FirebaseAuth.instance;
   late String email;
   late String password;
 
@@ -88,43 +81,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     password,
                   );
                   Navigator.pop(context);
-                  // print(email + ' ' + password);
-                  // try {
-                  //   final newUser = await _auth.createUserWithEmailAndPassword(
-                  //       email: email, password: password);
-                  //   if (newUser != null) {
-                  //     Navigator.pushNamed(context, EcommerceDemoApp.id);
-                  //   }
-                  // } catch (e) {
-                  //   print(e);
-                  // }
                 },
               ),
               RoundedButton(
-                labelWidget: Text('Sign-in with Google'),
+                labelWidget: ButtonText(text: 'Sign-in with Google'),
                 onTapCallback: () async {
-                  // try {
-                  //   final googleUser = await _googleSignIn.signIn();
-                  //   if (googleUser != null) {
-                  //     final googleAuth = await googleUser.authentication;
-                  //     final credential = GoogleAuthProvider.credential(
-                  //       accessToken: googleAuth.accessToken,
-                  //       idToken: googleAuth.idToken,
-                  //     );
-                  //     final userCredential =
-                  //         await _auth.signInWithCredential(credential);
-                  //     if (userCredential.additionalUserInfo!.isNewUser) {
-                  //       final currentUser = _auth.currentUser;
-                  //       if (currentUser != null) {
-                  //         await currentUser
-                  //             .updateDisplayName(googleUser.displayName);
-                  //       }
-                  //     }
-                  //     Navigator.pushNamed(context, ProductsListScreen.id);
-                  //   }
-                  // } catch (e) {
-                  //   print(e);
-                  // }
+                  await authService.signInWithGoogle();
                 },
               ),
             ],
@@ -133,27 +95,4 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
     );
   }
-
-  // Future<void> onGoogleSignIn(BuildContext context) async {
-  //   try {
-  //     final googleUser = await _googleSignIn.signIn();
-  //     if (googleUser != null) {
-  //       final googleAuth = await googleUser.authentication;
-  //       final credential = GoogleAuthProvider.credential(
-  //         accessToken: googleAuth.accessToken,
-  //         idToken: googleAuth.idToken,
-  //       );
-  //       final userCredential = await _auth.signInWithCredential(credential);
-  //       if (userCredential.additionalUserInfo!.isNewUser) {
-  //         final currentUser = _auth.currentUser;
-  //         if (currentUser != null) {
-  //           await currentUser.updateDisplayName(googleUser.displayName);
-  //         }
-  //       }
-  //       Navigator.pushNamed(context, ProductsListScreen.id);
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
 }

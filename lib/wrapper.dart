@@ -18,7 +18,7 @@ class Wrapper extends StatelessWidget {
       builder: (_, AsyncSnapshot<User?> snapshot){
         if (snapshot.connectionState == ConnectionState.active) {
           final User? user = snapshot.data;
-          return user == null ? WelcomeScreen() : EcommerceDemoApp();
+          return user == null ? WelcomeScreen() : ProductsListScreen();
         } else {
           return Scaffold(
             body: Center(
