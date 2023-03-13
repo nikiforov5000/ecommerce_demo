@@ -41,7 +41,7 @@ class WelcomeScreen extends StatelessWidget {
               RoundedButton(
                 labelWidget: ButtonText(text: 'Continue without account'),
                 onTapCallback: () {
-                  Navigator.pushNamed(context, EcommerceDemoApp.id);
+                  // Navigator.pushNamed(context, EcommerceDemoApp.id);
                 },
               ),
             ],

@@ -1,5 +1,7 @@
+import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserAvatarWidget extends StatelessWidget {
   UserAvatarWidget({required this.user});
@@ -9,17 +11,18 @@ class UserAvatarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+
     buildUserAvatar();
     return Padding(
-      padding: EdgeInsets.only(right: 20.0),
-      child: Center(
+        padding: EdgeInsets.only(right: 20.0),
+        child: Center(
           child: CircleAvatar(
             backgroundColor: Colors.greenAccent,
             radius: 21,
             child: avatar!,
-          )
-      ),
-    );
+          ),
+        ));
   }
 
   void buildUserAvatar() {
@@ -27,18 +30,16 @@ class UserAvatarWidget extends StatelessWidget {
     if (user != null) {
       if (user!.photoURL != null) {
         buildFromPhoto();
-      }
-      else if (user!.displayName != null) {
+      } else if (user!.displayName != null) {
         buildFromName();
-      }
-      else if (user!.email != null) {
+      } else if (user!.email != null) {
         buildFromEmail();
       }
     }
   }
 
   void buildFromPhoto() {
-    avatar =  CircleAvatar(
+    avatar = CircleAvatar(
       backgroundImage: NetworkImage(user!.photoURL!),
       radius: 18,
     );

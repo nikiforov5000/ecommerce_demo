@@ -1,11 +1,15 @@
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ecommerce_demo/services/user_provider.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../models/product.dart';
+import '../models/user.dart';
+import '../services/auth_service.dart';
 import '../widgets/category_button.dart';
 import '../widgets/product_tile.dart';
 import '../widgets/user_avatar.dart';
@@ -22,13 +26,13 @@ class ProductsListScreen extends StatefulWidget {
 }
 
 class _ProductsListScreenState extends State<ProductsListScreen> {
-  final _auth = FirebaseAuth.instance;
-  User? loggedInUser;
+  // final _auth = FirebaseAuth.instance;
+  // User? loggedInUser;
+
 
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
     ProductData.getAllProducts().then((products) {
       setState(() {
         currentProducts = products;
@@ -36,20 +40,12 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
     });
   }
 
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser!;
-      if (user != null) {
-        loggedInUser = user;
-        print(loggedInUser!.email);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+
+    final authService = Provider.of<AuthService>(context);
+    final userProvider = Provider.of<UserProvider>(context);
+    final user = userProvider.user;
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -60,7 +56,16 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         ),
         title: Text('eCommerce Demo'),
         actions: [
-          UserAvatarWidget(user: loggedInUser),
+          InkWell(
+            // todo this should be an avatar
+            // child: UserAvatarWidget(user: user),
+            child: Center(child: Text('logout', style: TextStyle(color: Colors.black),)),
+            onTap: () {
+              print(user!.email);
+              authService.signOut();
+            },
+          )
+          // todo update UserAvatar to receive User
         ],
       ),
       body: Container(
@@ -123,8 +128,8 @@ class ProductsList extends StatelessWidget {
             child: ProductTile(
               product: product,
               onTapCallback: () {
-                Navigator.pushNamed(context, ProductScreen.id,
-                    arguments: product);
+                print('ProductList.buld ' + product.title + ' was tapped');
+                Navigator.pushNamed(context, ProductScreen.id, arguments: product);
               },
             ),
           )
