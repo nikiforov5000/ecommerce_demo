@@ -1,14 +1,13 @@
-import 'package:ecommerce_demo/constants/colors.dart';
-import 'package:ecommerce_demo/constants/text_styles.dart';
-import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../constants/colors.dart';
+import '../constants/text_styles.dart';
 import '../services/auth_service.dart';
 import '../services/user_provider.dart';
+import '../widgets/rounded_button_widget.dart';
 import '../widgets/text_on_bankcard.dart';
-import '../widgets/user_avatar.dart';
 
 class CheckoutScreen extends StatelessWidget {
   static const String id = 'checkout_screen';
@@ -32,7 +31,6 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final authService = Provider.of<AuthService>(context);
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
@@ -45,15 +43,16 @@ class CheckoutScreen extends StatelessWidget {
             // todo this should be an avatar
             child: Center(
                 child: Text(
-                  'logout',
-                  style: TextStyle(color: Colors.black),
-                )),
+              'logout',
+              style: TextStyle(color: Colors.black),
+            )),
             onTap: () {
               print(user!.email);
               // authService.signOut();
             },
           )
-        ],      ),
+        ],
+      ),
       body: Container(
         color: kBackgroundColor,
         padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20),
@@ -98,12 +97,13 @@ class PayButtonSection extends StatelessWidget {
             ),
             Text(
               '\$344',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700, fontSize: 20),
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
             ),
           ],
         ),
-        SizedBox(height: 10.0,),
+        SizedBox(
+          height: 10.0,
+        ),
         RoundedButton(
             labelWidget: Text(
               'Pay',
@@ -115,7 +115,7 @@ class PayButtonSection extends StatelessWidget {
   }
 }
 
-class PromoCodeSection extends StatelessWidget{
+class PromoCodeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -129,14 +129,12 @@ class PromoCodeSection extends StatelessWidget{
                 onChanged: (value) {},
               ),
             ),
-            RoundedButton(
-                labelWidget: Text('Apply'), onTapCallback: () {})
+            RoundedButton(labelWidget: Text('Apply'), onTapCallback: () {})
           ],
         )
       ],
     );
   }
-
 }
 
 class PaymentMethods extends StatefulWidget {
@@ -150,6 +148,7 @@ class PaymentMethods extends StatefulWidget {
 
 class _PaymentMethodsState extends State<PaymentMethods> {
   int _selectedIcon = 0;
+
   @override
   Widget build(BuildContext context) {
     return Row(

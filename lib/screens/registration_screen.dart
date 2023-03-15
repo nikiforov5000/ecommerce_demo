@@ -1,7 +1,7 @@
-import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../services/auth_service.dart';
 import '../widgets/buttonText.dart';
 import '../widgets/rounded_button_widget.dart';
 import '../widgets/rounded_text_field.dart';

@@ -1,18 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:ecommerce_demo/constants/colors.dart';
-import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
-import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../constants/colors.dart';
 import '../constants/text_styles.dart';
 import '../models/product.dart';
 import '../models/shopping_cart.dart';
+import '../screens/shopping_cart_screen.dart';
 import '../services/auth_service.dart';
 import '../services/user_provider.dart';
 import '../widgets/buttonText.dart';
 import '../widgets/color_filtered_image.dart';
+import '../widgets/rounded_button_widget.dart';
 
 class ProductScreen extends StatelessWidget {
   static const String id = 'product_screen';

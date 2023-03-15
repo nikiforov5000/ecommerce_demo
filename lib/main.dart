@@ -1,25 +1,17 @@
-import 'package:ecommerce_demo/models/product_data.dart';
-import 'package:ecommerce_demo/screens/checkout_screen.dart';
-import 'package:ecommerce_demo/screens/login_screen.dart';
-import 'package:ecommerce_demo/screens/product_screen.dart';
-import 'package:ecommerce_demo/screens/products_list_screen.dart';
-import 'package:ecommerce_demo/screens/registration_screen.dart';
-import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
-import 'package:ecommerce_demo/screens/welcome_screen.dart';
-import 'package:ecommerce_demo/services/auth_service.dart';
-import 'package:ecommerce_demo/services/user_provider.dart';
-import 'package:ecommerce_demo/widgets/bottom_navbar.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/checkout_screen.dart';
+import '../screens/login_screen.dart';
+import '../screens/product_screen.dart';
+import '../screens/registration_screen.dart';
+import '../screens/shopping_cart_screen.dart';
+import '../services/auth_service.dart';
+import '../services/user_provider.dart';
 import 'constants/colors.dart';
 import 'constants/text_styles.dart';
 import 'models/product.dart';
-import 'firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'wrapper.dart';
 
 void main() async {

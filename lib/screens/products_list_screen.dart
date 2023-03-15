@@ -1,18 +1,15 @@
-import 'package:ecommerce_demo/constants/colors.dart';
-import 'package:ecommerce_demo/models/product_data.dart';
-import 'package:ecommerce_demo/screens/product_screen.dart';
-import 'package:ecommerce_demo/services/user_provider.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../constants/colors.dart';
 import '../models/product.dart';
-import '../models/user.dart';
+import '../models/product_data.dart';
+import '../screens/product_screen.dart';
 import '../services/auth_service.dart';
+import '../services/user_provider.dart';
 import '../widgets/category_button.dart';
 import '../widgets/product_tile.dart';
-import '../widgets/user_avatar.dart';
 
 List<Product> currentProducts = [];
 
@@ -29,7 +26,6 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   // final _auth = FirebaseAuth.instance;
   // User? loggedInUser;
 
-
   @override
   void initState() {
     super.initState();
@@ -42,7 +38,6 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final authService = Provider.of<AuthService>(context);
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
@@ -59,7 +54,11 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
           InkWell(
             // todo this should be an avatar
             // child: UserAvatarWidget(user: user),
-            child: Center(child: Text('logout', style: TextStyle(color: Colors.black),)),
+            child: Center(
+                child: Text(
+              'logout',
+              style: TextStyle(color: Colors.black),
+            )),
             onTap: () {
               print(user!.email);
               authService.signOut();
@@ -129,7 +128,8 @@ class ProductsList extends StatelessWidget {
               product: product,
               onTapCallback: () {
                 print('ProductList.buld ' + product.title + ' was tapped');
-                Navigator.pushNamed(context, ProductScreen.id, arguments: product);
+                Navigator.pushNamed(context, ProductScreen.id,
+                    arguments: product);
               },
             ),
           )
