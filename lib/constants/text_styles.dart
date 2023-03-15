@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
 
 const kProductScreenTitleTextStyle = TextStyle(
   fontFamily: 'Arsenal',
