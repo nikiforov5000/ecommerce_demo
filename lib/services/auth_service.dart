@@ -23,26 +23,41 @@ class AuthService {
     String email,
     String password,
   ) async {
-    final credential = await _firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return _userFromFirebase(credential.user);
+    try {
+      final credential = await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return _userFromFirebase(credential.user);
+    }
+      catch (e) {
+        print('auth_service.dart -> signInWithEmailAndPassword:$e');
+      }
   }
 
   Future<User?> createUserWithEmailAndPassword(
     String email,
     String password,
   ) async {
-    final credential = await _firebaseAuth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return _userFromFirebase(credential.user);
+    try {
+      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return _userFromFirebase(credential.user);
+    }
+    catch (e) {
+      print('auth_service.dart -> createUserWithEmailAndPassword:$e');
+    }
   }
 
   Future<void> signOut() async {
-    return await _firebaseAuth.signOut();
+    try {
+      return await _firebaseAuth.signOut();
+    }
+    catch (e) {
+      print('auth_service.dart -> signOut:$e');
+    }
   }
 
   Future<User?> signInWithGoogle() async {
@@ -57,7 +72,10 @@ class AuthService {
         );
         final userCredential =
             await _firebaseAuth.signInWithCredential(credential);
-        if (userCredential.additionalUserInfo!.isNewUser) {
+        if (userCredential != null
+            && userCredential.additionalUserInfo != null
+            && userCredential.additionalUserInfo!.isNewUser
+            ) {
           final currentUser = _firebaseAuth.currentUser;
           if (currentUser != null) {
             await currentUser.updateDisplayName(googleUser.displayName);
@@ -67,7 +85,7 @@ class AuthService {
         print('all good, next is navigator');
       }
     } catch (e) {
-      print(e);
+      print('Error signing in with Google: $e');
     }
   }
 }

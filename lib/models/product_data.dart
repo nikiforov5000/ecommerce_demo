@@ -52,16 +52,21 @@ class ProductData {
 
   static Future<List<Product>> getAllProducts() async {
     List<Product> products = [];
-    QuerySnapshot<Map<String, dynamic>> snapshot =
-        await _firestore.collection('products').get();
-    snapshot.docs.forEach((document) {
-      if (!_categories.contains(document['category'])) {
-        _categories.add(document['category']);
-      }
-      products.add(Product.buildFromMap(document));
-    });
-    print('product_data.getAllProducts products.length:' +
-        products.length.toString());
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot =
+          await _firestore.collection('products').get();
+      snapshot.docs.forEach((document) {
+        if (!_categories.contains(document['category'])) {
+          _categories.add(document['category']);
+        }
+        products.add(Product.buildFromMap(document));
+      });
+      print('product_data.getAllProducts products.length:' +
+          products.length.toString());
+    }
+    catch (e) {
+      print('product_data.dart -> getAllProducts() catch');
+    }
     return products;
   }
 
