@@ -46,7 +46,7 @@ class ProductScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(product!.title),
+        title: Text(product.title),
         actions: [
           InkWell(
             // todo this should be an avatar
@@ -76,16 +76,16 @@ class ProductScreen extends StatelessWidget {
               height: screenHeight * .03,
             ),
             ProductImageCarousel(
-              product: product!,
+              product: product,
             ),
             SizedBox(
               height: screenHeight * .03,
             ),
-            ButtonsBlock(product: product!),
+            ButtonsBlock(product: product),
             SizedBox(
               height: screenHeight * .03,
             ),
-            Expanded(child: AboutProduct(product: product!)),
+            Expanded(child: AboutProduct(product: product)),
           ],
         ),
       ),

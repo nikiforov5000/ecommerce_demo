@@ -12,7 +12,7 @@ import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/models/product.dart';
-import 'wrapper.dart';
+import 'package:ecommerce_demo/wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
