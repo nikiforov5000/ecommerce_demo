@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../models/product.dart';
+import 'package:ecommerce_demo/models/product.dart';
 
 ProductData productData = ProductData();
 

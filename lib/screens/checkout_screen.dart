@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/colors.dart';
-import '../constants/text_styles.dart';
-import '../services/auth_service.dart';
-import '../services/user_provider.dart';
-import '../widgets/rounded_button_widget.dart';
-import '../widgets/text_on_bankcard.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/constants/text_styles.dart';
+import 'package:ecommerce_demo/services/auth_service.dart';
+import 'package:ecommerce_demo/services/user_provider.dart';
+import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
+import 'package:ecommerce_demo/widgets/text_on_bankcard.dart';
 
 class CheckoutScreen extends StatelessWidget {
   static const String id = 'checkout_screen';

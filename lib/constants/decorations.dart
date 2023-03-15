@@ -1,6 +1,6 @@
+import 'package:ecommerce_demo/constants/shadows.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/shadows.dart';
 import 'colors.dart';
 
 BoxDecoration kButtonDecoration = BoxDecoration(

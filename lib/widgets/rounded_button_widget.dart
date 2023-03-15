@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/decorations.dart';
+import 'package:ecommerce_demo/constants/decorations.dart';
 
 class RoundedButton extends StatelessWidget {
   final Widget labelWidget;

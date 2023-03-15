@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../models/user.dart';
+import 'package:ecommerce_demo/models/user.dart';
 
 class AuthService {
   final _googleSignIn = GoogleSignIn();

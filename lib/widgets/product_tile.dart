@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../constants/decorations.dart';
-import '../constants/text_styles.dart';
-import '../models/product.dart';
-import '../widgets/product_tile_image.dart';
+import 'package:ecommerce_demo/constants/decorations.dart';
+import 'package:ecommerce_demo/constants/text_styles.dart';
+import 'package:ecommerce_demo/models/product.dart';
+import 'package:ecommerce_demo/widgets/product_tile_image.dart';
 
 class ProductTile extends StatelessWidget {
   ProductTile({required this.product, required this.onTapCallback});

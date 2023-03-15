@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../services/auth_service.dart';
-import '../widgets/buttonText.dart';
-import '../widgets/rounded_button_widget.dart';
-import '../widgets/rounded_text_field.dart';
+import 'package:ecommerce_demo/services/auth_service.dart';
+import 'package:ecommerce_demo/widgets/buttonText.dart';
+import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
+import 'package:ecommerce_demo/widgets/rounded_text_field.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = 'registration_screen';

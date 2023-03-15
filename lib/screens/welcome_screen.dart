@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../screens/login_screen.dart';
-import '../screens/registration_screen.dart';
-import '../widgets/buttonText.dart';
-import '../widgets/logo_hero.dart';
-import '../widgets/rounded_button_widget.dart';
+import 'package:ecommerce_demo/screens/login_screen.dart';
+import 'package:ecommerce_demo/screens/registration_screen.dart';
+import 'package:ecommerce_demo/widgets/buttonText.dart';
+import 'package:ecommerce_demo/widgets/logo_hero.dart';
+import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
