@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,30 +26,27 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
   }
 
-  final _auth = FirebaseAuth.instance;
-  User? loggedInUser;
 
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser!;
-      if (user != null) {
-        loggedInUser = user;
-        print(loggedInUser!.email);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
+  // void getCurrentUser() async {
+  //   try {
+  //     final user = await _auth.currentUser!;
+  //     if (user != null) {
+  //       loggedInUser = user;
+  //       print(loggedInUser!.email);
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     List<Product> products = shoppingCart.getCartMap().keys.toList();
     List<int> quantities = shoppingCart.getCartMap().values.toList();
 
-    final authService = Provider.of<AuthService>(context);
+    // final authService = Provider.of<AuthService>(context);
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
 
