@@ -1,4 +1,3 @@
-import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/decorations.dart';

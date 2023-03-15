@@ -1,4 +1,4 @@
-import 'package:ecommerce_demo/models/product.dart';
+import '../models/product.dart';
 
 ShoppingCart shoppingCart = ShoppingCart();
 
