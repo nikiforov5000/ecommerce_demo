@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/product.dart';
+import 'package:ecommerce_demo/models/product.dart';
 import 'color_filtered_image.dart';
 
 class ProductTileImage extends StatelessWidget {

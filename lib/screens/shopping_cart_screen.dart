@@ -2,16 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/colors.dart';
-import '../constants/decorations.dart';
-import '../models/product.dart';
-import '../models/shopping_cart.dart';
-import '../screens/checkout_screen.dart';
-import '../services/auth_service.dart';
-import '../services/user_provider.dart';
-import '../widgets/buttonText.dart';
-import '../widgets/color_filtered_image.dart';
-import '../widgets/rounded_button_widget.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/constants/decorations.dart';
+import 'package:ecommerce_demo/models/product.dart';
+import 'package:ecommerce_demo/models/shopping_cart.dart';
+import 'package:ecommerce_demo/screens/checkout_screen.dart';
+import 'package:ecommerce_demo/services/auth_service.dart';
+import 'package:ecommerce_demo/services/user_provider.dart';
+import 'package:ecommerce_demo/widgets/buttonText.dart';
+import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
+import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
   const ShoppingCartScreen({Key? key}) : super(key: key);

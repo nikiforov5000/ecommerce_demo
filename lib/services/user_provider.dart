@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/user.dart';
+import 'package:ecommerce_demo/models/user.dart';
 
 class UserProvider with ChangeNotifier {
   User? _user;

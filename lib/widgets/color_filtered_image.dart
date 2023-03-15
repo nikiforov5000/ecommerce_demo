@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../constants/colors.dart';
-import '../models/product.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/models/product.dart';
 
 class ColorFilteredImage extends StatelessWidget {
   const ColorFilteredImage({

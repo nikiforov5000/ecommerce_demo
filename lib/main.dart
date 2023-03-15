@@ -2,16 +2,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../screens/checkout_screen.dart';
-import '../screens/login_screen.dart';
-import '../screens/product_screen.dart';
-import '../screens/registration_screen.dart';
-import '../screens/shopping_cart_screen.dart';
-import '../services/auth_service.dart';
-import '../services/user_provider.dart';
-import 'constants/colors.dart';
-import 'constants/text_styles.dart';
-import 'models/product.dart';
+import 'package:ecommerce_demo/screens/checkout_screen.dart';
+import 'package:ecommerce_demo/screens/login_screen.dart';
+import 'package:ecommerce_demo/screens/product_screen.dart';
+import 'package:ecommerce_demo/screens/registration_screen.dart';
+import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
+import 'package:ecommerce_demo/services/auth_service.dart';
+import 'package:ecommerce_demo/services/user_provider.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/constants/text_styles.dart';
+import 'package:ecommerce_demo/models/product.dart';
 import 'wrapper.dart';
 
 void main() async {

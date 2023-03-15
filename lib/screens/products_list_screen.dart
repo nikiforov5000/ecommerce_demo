@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/colors.dart';
-import '../models/product.dart';
-import '../models/product_data.dart';
-import '../screens/product_screen.dart';
-import '../services/auth_service.dart';
-import '../services/user_provider.dart';
-import '../widgets/category_button.dart';
-import '../widgets/product_tile.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/models/product.dart';
+import 'package:ecommerce_demo/models/product_data.dart';
+import 'package:ecommerce_demo/screens/product_screen.dart';
+import 'package:ecommerce_demo/services/auth_service.dart';
+import 'package:ecommerce_demo/services/user_provider.dart';
+import 'package:ecommerce_demo/widgets/category_button.dart';
+import 'package:ecommerce_demo/widgets/product_tile.dart';
 
 List<Product> currentProducts = [];
 
