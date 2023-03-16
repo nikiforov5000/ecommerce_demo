@@ -16,24 +16,9 @@ import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 
 class ProductScreen extends StatelessWidget {
   static const String id = 'product_screen';
+  final Product product;
 
   ProductScreen({required this.product}) {}
-
-  final Product product;
-  final _auth = FirebaseAuth.instance;
-  User? loggedInUser;
-
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser!;
-      if (user != null) {
-        loggedInUser = user;
-        print(loggedInUser!.email);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +42,7 @@ class ProductScreen extends StatelessWidget {
             )),
             onTap: () {
               print(user!.email);
-              // authService.signOut();
+              authService.signOut();
             },
           )
           // Text(userProvider.user == null ? 'null' : userProvider.user.email),

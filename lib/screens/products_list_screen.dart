@@ -23,8 +23,6 @@ class ProductsListScreen extends StatefulWidget {
 }
 
 class _ProductsListScreenState extends State<ProductsListScreen> {
-  // final _auth = FirebaseAuth.instance;
-  // User? loggedInUser;
 
   @override
   void initState() {
@@ -42,7 +40,6 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
     final authService = Provider.of<AuthService>(context);
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
-    // print('user email:${user!.email}');
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(

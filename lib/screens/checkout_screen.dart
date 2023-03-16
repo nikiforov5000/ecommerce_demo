@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,21 +12,6 @@ class CheckoutScreen extends StatelessWidget {
   static const String id = 'checkout_screen';
 
   CheckoutScreen({Key? key}) : super(key: key);
-
-  final _auth = FirebaseAuth.instance;
-  User? loggedInUser;
-
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser!;
-      if (user != null) {
-        loggedInUser = user;
-        print(loggedInUser!.email);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +32,7 @@ class CheckoutScreen extends StatelessWidget {
             )),
             onTap: () {
               print(user!.email);
-              // authService.signOut();
+              authService.signOut();
             },
           )
         ],
