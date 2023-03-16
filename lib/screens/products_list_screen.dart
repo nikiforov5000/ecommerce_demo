@@ -38,9 +38,11 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('ProductsListScreen().build');
     final authService = Provider.of<AuthService>(context);
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
+    // print('user email:${user!.email}');
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(

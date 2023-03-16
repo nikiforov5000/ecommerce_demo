@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
+// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -100,28 +100,29 @@ class ProductImageCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      // options: CarouselOptions(height: 200.0),
-      options: CarouselOptions(viewportFraction: 1, enlargeCenterPage: true),
-      items: [1, 2, 3, 4, 5].map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return GestureDetector(
-              child: ColorFilteredImage(product: product),
-              onTap: () {
-                Navigator.push<Widget>(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        ImageScreen(product: product, index: i),
-                  ),
-                );
-              },
-            );
-          },
-        );
-      }).toList(),
-    );
+    return const Placeholder();
+    // return CarouselSlider(
+    //   // options: CarouselOptions(height: 200.0),
+    //   options: CarouselOptions(viewportFraction: 1, enlargeCenterPage: true),
+    //   items: [1, 2, 3, 4, 5].map((i) {
+    //     return Builder(
+    //       builder: (BuildContext context) {
+    //         return GestureDetector(
+    //           child: ColorFilteredImage(product: product),
+    //           onTap: () {
+    //             Navigator.push<Widget>(
+    //               context,
+    //               MaterialPageRoute(
+    //                 builder: (context) =>
+    //                     ImageScreen(product: product, index: i),
+    //               ),
+    //             );
+    //           },
+    //         );
+    //       },
+    //     );
+    //   }).toList(),
+    // );
   }
 }
 
@@ -272,29 +273,30 @@ class ImageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(product.title),
-      ),
-      body: CarouselSlider(
-        options: CarouselOptions(
-          initialPage: index,
-          enlargeCenterPage: true,
-          height: MediaQuery.of(context).size.height,
-        ),
-        items: [1, 2, 3, 4, 5].map((i) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Image.network(
-                product.imgUrl,
-                fit: BoxFit.fitWidth,
-                width: double.infinity,
-              );
-            },
-          );
-        }).toList(),
-      ),
-    );
+    return const Placeholder();
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text(product.title),
+    //   ),
+    //   body: CarouselSlider(
+    //     options: CarouselOptions(
+    //       initialPage: index,
+    //       enlargeCenterPage: true,
+    //       height: MediaQuery.of(context).size.height,
+    //     ),
+    //     items: [1, 2, 3, 4, 5].map((i) {
+    //       return Builder(
+    //         builder: (BuildContext context) {
+    //           return Image.network(
+    //             product.imgUrl,
+    //             fit: BoxFit.fitWidth,
+    //             width: double.infinity,
+    //           );
+    //         },
+    //       );
+    //     }).toList(),
+    //   ),
+    // );
     ;
   }
 }
