@@ -18,8 +18,6 @@ class _LoginScreenState extends State<LoginScreen> {
   late String email;
   late String password;
 
-  // var _auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
