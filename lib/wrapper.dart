@@ -17,7 +17,7 @@ class Wrapper extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           final User? user = snapshot.data;
 
-          return user == null ? LoginScreen() : ProductsListScreen();
+          return user == null ? LoginScreen() : LoginScreen();
         } else {
           return Scaffold(
             body: Center(
