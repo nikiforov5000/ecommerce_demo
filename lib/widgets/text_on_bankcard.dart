@@ -9,7 +9,7 @@ class TextOnBankCard extends StatelessWidget {
       text,
       style: TextStyle(
           fontSize: 17.0,
-          fontFamily: 'source-code',
+          // fontFamily: 'source-code',
           fontWeight: FontWeight.w900,
           color: Colors.white
       ),

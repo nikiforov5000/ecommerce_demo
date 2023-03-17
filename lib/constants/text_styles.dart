@@ -3,25 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_demo/constants/colors.dart';
 
 const kProductScreenTitleTextStyle = TextStyle(
-  fontFamily: 'Arsenal',
+  // fontFamily: 'Arsenal',
   fontSize: 23.0,
   color: kDarkTextColor,
 );
 
 const kProductDescriptionTextStyle = TextStyle(
-  fontFamily: 'Arsenal',
+  // fontFamily: 'Arsenal',
   fontSize: 17.0,
   color: kDarkTextColor,
 );
 
 const kProductScreenRatingTextStyle = TextStyle(
-  fontFamily: 'Arsenal',
+  // fontFamily: 'Arsenal',
   fontSize: 17.0,
   color: kDarkTextColor,
 );
 
 const kButtonTextStyle = TextStyle(
-  fontFamily: 'Arsenal',
+  // fontFamily: 'Arsenal',
   fontSize: 17.0,
   color: kDarkTextColor,
 );
@@ -32,13 +32,13 @@ TextStyle kProductTileTitleTextStyle = TextStyle(
 );
 
 const kAppbarTextStyle = TextStyle(
-  fontFamily: 'Arsenal',
+  // fontFamily: 'Arsenal',
   fontSize: 20.0,
   color: kDarkTextColor,
 );
 
 const kProductScreenQuantityTextStyle = TextStyle(
-  fontFamily: 'Arsenal',
+  // fontFamily: 'Arsenal',
   fontSize: 20.0,
   fontWeight: FontWeight.bold,
   color: kDarkTextColor,
