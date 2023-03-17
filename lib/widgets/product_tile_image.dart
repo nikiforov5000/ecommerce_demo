@@ -13,8 +13,6 @@ class ProductTileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ColorFilteredImage(product: product),
-    );
+    return ColorFilteredImage(product: product);
   }
 }
