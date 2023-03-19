@@ -45,6 +45,7 @@ class ProductScreen extends StatelessWidget {
               },
             ),
             onTap: () {
+              userProvider.setUserToNull();
               authService.signOut();
             },
           ),
