@@ -1,5 +1,4 @@
 import 'package:ecommerce_demo/constants/colors.dart';
-import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
@@ -7,7 +6,6 @@ import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/category_button.dart';
 import 'package:ecommerce_demo/widgets/product_tile.dart';
-import 'package:ecommerce_demo/widgets/product_tile_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +38,8 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
     print('ProductsListScreen().build');
     final authService = Provider.of<AuthService>(context);
     final userProvider = Provider.of<UserProvider>(context);
-    final user = userProvider.user;
+    // authService.user.first.then((value) => userProvider.setUser = value!);
+    // final user = userProvider.user;
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -52,18 +51,21 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         title: Text('eCommerce Demo'),
         actions: [
           InkWell(
-            // todo this should be an avatar
-            // child: UserAvatarWidget(user: user),
-            child: Center(
-                child: Text(
-              'logout',
-              style: TextStyle(color: Colors.black),
-            )),
+            child: Consumer<UserProvider>(
+              builder: (context, userProvider, _) {
+                return Text(
+                  userProvider.user!.email,
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                );
+              },
+            ),
             onTap: () {
-              print(user!.email);
+              userProvider.setUserToNull();
               authService.signOut();
             },
-          )
+          ),
           // todo update UserAvatar to receive User
         ],
       ),

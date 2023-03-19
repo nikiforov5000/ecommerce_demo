@@ -34,17 +34,20 @@ class ProductScreen extends StatelessWidget {
         title: Text(product.title),
         actions: [
           InkWell(
-            // todo this should be an avatar
-            child: Center(
-                child: Text(
-              'logout',
-              style: TextStyle(color: Colors.black),
-            )),
+            child: Consumer<UserProvider>(
+              builder: (context, userProvider, _) {
+                return Text(
+                  userProvider.user!.email,
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                );
+              },
+            ),
             onTap: () {
-              print(user!.email);
               authService.signOut();
             },
-          )
+          ),
           // Text(userProvider.user == null ? 'null' : userProvider.user.email),
           // todo update UserAvatar to receive User
           // UserAvatarWidget(user: user),

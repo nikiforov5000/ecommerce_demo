@@ -11,4 +11,10 @@ class UserProvider with ChangeNotifier {
     _user = user;
     notifyListeners();
   }
+
+  void setUserToNull() {
+    _user = null;
+    notifyListeners();
+  }
+
 }
