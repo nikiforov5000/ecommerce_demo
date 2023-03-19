@@ -53,6 +53,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               },
             ),
             onTap: () {
+              userProvider.setUserToNull();
               authService.signOut();
             },
           ),

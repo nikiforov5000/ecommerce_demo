@@ -35,6 +35,7 @@ class CheckoutScreen extends StatelessWidget {
               },
             ),
             onTap: () {
+              userProvider.setUserToNull();
               authService.signOut();
             },
           ),
