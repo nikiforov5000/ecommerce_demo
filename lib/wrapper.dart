@@ -22,6 +22,7 @@ class Wrapper extends StatelessWidget {
           // return user == null ? LoginScreen() : ProductsListScreen();
           if (user == null) {
             print('Wrapper().build user is null');
+            userProvider.setUserToNull();
             return LoginScreen();
           }
           else {
