@@ -42,17 +42,20 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         title: Text('Your Cart'),
         actions: [
           InkWell(
-            // todo this should be an avatar
-            child: Center(
-                child: Text(
-              'logout',
-              style: TextStyle(color: Colors.black),
-            )),
+            child: Consumer<UserProvider>(
+              builder: (context, userProvider, _) {
+                return Text(
+                  userProvider.user!.email,
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                );
+              },
+            ),
             onTap: () {
-              print(user!.email);
               authService.signOut();
             },
-          )
+          ),
         ],
       ),
       body: Container(
