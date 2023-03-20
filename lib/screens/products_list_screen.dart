@@ -6,6 +6,7 @@ import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/category_button.dart';
 import 'package:ecommerce_demo/widgets/product_tile.dart';
+import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -50,22 +51,8 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         ),
         title: Text('eCommerce Demo'),
         actions: [
-          InkWell(
-            child: Consumer<UserProvider>(
-              builder: (context, userProvider, _) {
-                return Text(
-                  userProvider.user!.email,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                );
-              },
-            ),
-            onTap: () {
-              userProvider.setUserToNull();
-              authService.signOut();
-            },
-          ),
+            UserAvatarWidget(),
+
           // todo update UserAvatar to receive User
         ],
       ),
