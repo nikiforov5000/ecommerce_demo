@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,22 +24,7 @@ class CheckoutScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Checkout'),
         actions: [
-          InkWell(
-            child: Consumer<UserProvider>(
-              builder: (context, userProvider, _) {
-                return Text(
-                  userProvider.user!.email,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                );
-              },
-            ),
-            onTap: () {
-              userProvider.setUserToNull();
-              authService.signOut();
-            },
-          ),
+          UserAvatarWidget(),
         ],
       ),
       body: Container(

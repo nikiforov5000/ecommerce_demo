@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,22 +34,8 @@ class ProductScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(product.title),
         actions: [
-          InkWell(
-            child: Consumer<UserProvider>(
-              builder: (context, userProvider, _) {
-                return Text(
-                  userProvider.user!.email,
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                );
-              },
-            ),
-            onTap: () {
-              userProvider.setUserToNull();
-              authService.signOut();
-            },
-          ),
+          UserAvatarWidget(),
+
           // Text(userProvider.user == null ? 'null' : userProvider.user.email),
           // todo update UserAvatar to receive User
           // UserAvatarWidget(user: user),

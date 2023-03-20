@@ -7,6 +7,8 @@ class UserProvider with ChangeNotifier {
 
   User? get user => _user == null ? null : _user;
 
+
+
   set setUser(User user) {
     _user = user;
     notifyListeners();
