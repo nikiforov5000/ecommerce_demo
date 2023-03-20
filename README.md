@@ -1,20 +1,16 @@
-# ecommerce_demo
+# eCommerce mobile app
 
-A Flutter project to practice creating a very common type of mobile app.
+<h2> A Flutter mobile eCommerce application. </h2>
+
+You can try this app in your browser in responsive mode: https://ecommerce-demo-9fa8b.web.app/
+
+Authentication: Firebase
+Database: Cloud Firestore
 
 
-<img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/Screenshot_20230131_214613.png" width=250px><img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/Screenshot_20230131_214714.png" width=250px><img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/Screenshot_20230131_214805.png" width=250px>
+<img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/login-screen.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/register.png" width=250px>
 
+<img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/products-list-screen.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/product-screen.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/product-large-image-screen.png" width=250px>  
 
-## Getting Started
+<img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/shopping-cart-screen.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/checkout-screen.png" width=250px>
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
