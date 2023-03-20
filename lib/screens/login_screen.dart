@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
+import 'package:ecommerce_demo/constants/text_styles.dart';
+import 'package:ecommerce_demo/screens/registration_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:ecommerce_demo/widgets/rounded_text_field.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -84,12 +85,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       .then((value) => userProvider.setUser = value!);
                 },
               ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 20.0),
+                child: Text('Or', textAlign: TextAlign.center, style: kButtonTextStyle,),
+              ),
               RoundedButton(
                 labelWidget: ButtonText(text: 'Sign-in with Google'),
                 onTapCallback: () async {
                   await authService
                       .signInWithGoogle()
                       .then((value) => userProvider.setUser = value!);
+                },
+              ),
+              RoundedButton(
+                labelWidget: ButtonText(text: 'Register'),
+                onTapCallback: () {
+                  Navigator.pushNamed(context, RegistrationScreen.id);
                 },
               ),
             ],
