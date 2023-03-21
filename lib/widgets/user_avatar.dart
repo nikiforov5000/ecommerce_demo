@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ecommerce_demo/services/auth_service.dart';
+import 'package:ecommerce_demo/screens/user_account_screen.dart';
 
 class UserAvatarWidget extends StatelessWidget {
 
@@ -18,7 +19,10 @@ class UserAvatarWidget extends StatelessWidget {
 
     buildUserAvatar();
     return GestureDetector(
-      onTap: (){ authService.signOut(); },
+      onTap: (){
+        print('user account');
+        Navigator.pushNamed(context, UserAccountScreen.id);
+      },
       child: Padding(
           padding: EdgeInsets.only(right: 20.0),
           child: Center(
