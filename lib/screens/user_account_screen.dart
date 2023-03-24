@@ -10,11 +10,12 @@ import 'package:provider/provider.dart';
 class UserAccountScreen extends StatelessWidget {
   static String id = 'user_account_screen';
   User? user;
+  UserProvider? _userProvider;
 
   @override
   Widget build(BuildContext context) {
-    final _userProvider = Provider.of<UserProvider>(context);
-    user = _userProvider.user;
+    _userProvider = Provider.of<UserProvider>(context);
+    user = _userProvider!.user;
     return Scaffold(
       appBar: AppBar(
         title: Text(user!.email),
@@ -53,7 +54,6 @@ class UserAccountScreen extends StatelessWidget {
   }
 
   userProfileInput() {
-    final _firebase = FirebaseFirestore.instance;
     TextEditingController nameController = TextEditingController();
     TextEditingController addressController = TextEditingController();
 
@@ -76,12 +76,10 @@ class UserAccountScreen extends StatelessWidget {
         RoundedButton(
           labelWidget: Text('Save'),
           onTapCallback: () {
-            final updates = {
+            _userProvider!.updateUserInfo({
               'name': nameController.text,
               'address': addressController.text,
-            };
-            final userRef = _firebase.collection('users').doc(user!.uid);
-            userRef.update(updates);
+            });
           },
         ),
       ],
