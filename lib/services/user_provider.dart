@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ecommerce_demo/models/user.dart';
@@ -17,8 +18,21 @@ class UserProvider with ChangeNotifier {
   }
 
   void setUserToNull() {
-    _user = null;
-    notifyListeners();
+    if (_user != null) {
+      _user = null;
+      notifyListeners();
+    }
+  }
+
+  saveUserInFirestore(User user) async {
+    setUser = user;
+    final _firestore = FirebaseFirestore.instance;
+    await _firestore.collection('users').doc(user.uid).set({
+      'email': user.email,
+    }).then(
+      (userSnapshot) => userSnapshot,
+      onError: (e) => print('user_provider.dart -> error:$e'),
+    );
   }
 
 }
