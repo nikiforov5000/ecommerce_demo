@@ -1,5 +1,7 @@
 import 'package:ecommerce_demo/models/user.dart';
 import 'package:ecommerce_demo/services/user_provider.dart';
+import 'package:ecommerce_demo/widgets/logout_button.dart';
+import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,16 +15,27 @@ class UserAccountScreen extends StatelessWidget {
     final _userProvider = Provider.of<UserProvider>(context);
     final user = _userProvider.user;
     return Scaffold(
-      body: user != null
-          ? Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          userInfo(user),
-          userProfileInput(),
+      appBar: AppBar(
+        title: Text(user!.email),
+        actions: [
+          LogoutButton(),
+          UserAvatarWidget(),
         ],
-      )
-          : Text('user is null'),
-
+      ),
+      body: Column(
+        children: [
+          Text('User Account'),
+          user != null
+            ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                userInfo(user),
+                userProfileInput(),
+              ]
+            )
+            : Text('user is null'),
+        ],
+      ),
     );
   }
 
@@ -58,7 +71,7 @@ class UserAccountScreen extends StatelessWidget {
             hintText: 'Enter your address',
           ),
         ),
-        
+
       ],
     );
   }
