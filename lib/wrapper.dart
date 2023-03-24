@@ -1,4 +1,5 @@
 import 'package:ecommerce_demo/models/user.dart';
+import 'package:ecommerce_demo/screens/categories_screen.dart';
 import 'package:ecommerce_demo/screens/login_screen.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
@@ -30,7 +31,7 @@ class Wrapper extends StatelessWidget {
             userProvider.setUser = user;
             print('Wrapper().build user is NOT null');
             print(user.email);
-            return ProductsListScreen();
+            return CategoriesScreen();
           }
 
         } else {
