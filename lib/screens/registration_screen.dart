@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       backgroundColor: Colors.orange,
       body: Builder(
@@ -76,10 +78,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               RoundedButton(
                 labelWidget: ButtonText(text: 'Register'),
                 onTapCallback: () async {
-                  await authService.createUserWithEmailAndPassword(
+
+                  final user = await authService.createUserWithEmailAndPassword(
                     email,
                     password,
                   );
+                  await userProvider.saveUserInFirestore(user!);
                   Navigator.pop(context);
                 },
               ),
