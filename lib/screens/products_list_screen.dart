@@ -5,6 +5,7 @@ import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/category_button.dart';
+import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/product_tile.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
@@ -51,8 +52,8 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         ),
         title: Text('eCommerce Demo'),
         actions: [
+            LogoutButton(),
             UserAvatarWidget(),
-
           // todo update UserAvatar to receive User
         ],
       ),
