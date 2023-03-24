@@ -12,9 +12,14 @@ class UserProvider with ChangeNotifier {
 
 
   set setUser(User user) {
-    if(_user == null || _user!.uid != user.uid) {
-      _user = user;
-      notifyListeners();
+    try {
+      if(_user == null || _user!.uid != user.uid) {
+        _user = user;
+        notifyListeners();
+      }
+    }
+    catch (e) {
+      print(e);
     }
   }
 

@@ -11,8 +11,10 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductData.getAllProducts();
     final categories = productData.getCategoriesList();
-
+    final categoriesImgUrls = productData.getCategoriesImgUrls();
+    print('categories_screen.dart -> categories.length:${categories.length}');
     return Scaffold(
       appBar: AppBar(
         title: Text('eCommerce'),
@@ -25,14 +27,15 @@ class CategoriesScreen extends StatelessWidget {
       GridView.count(
         crossAxisCount: 2,
         children: [
-          for (var category in categories)
+          for (int i = 0; i < categories.length; ++i)
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 15.0,
                 vertical: 10.0,
               ),
               child: CategoryTile(
-                category: category,
+                category: categories[i],
+                imageUrl: categoriesImgUrls[i],
                 onTapCallback: () {
                   // Navigator.pushNamed(context, ProductScreen.id,
                   //     arguments: product);

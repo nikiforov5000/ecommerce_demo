@@ -70,7 +70,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
-                          child: ColorFilteredImage(product: product),
+                          child: ColorFilteredImage(imgUrl: product.imgUrl),
                         ),
                         Flexible(child: Text(product.getShortTitle())),
                         Flexible(flex: 1, child: Container()),

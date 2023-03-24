@@ -6,16 +6,16 @@ import 'package:ecommerce_demo/models/product.dart';
 class ColorFilteredImage extends StatelessWidget {
   const ColorFilteredImage({
     Key? key,
-    required this.product,
+    required this.imgUrl,
   }) : super(key: key);
 
-  final Product product;
+  final String imgUrl;
 
   @override
   Widget build(BuildContext context) {
     return ColorFiltered(
       colorFilter: ColorFilter.mode(kTileColor, BlendMode.darken),
-      child: Image.network(product.imgUrl),
+      child: Image.network(imgUrl),
     );
   }
 }

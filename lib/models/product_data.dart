@@ -12,6 +12,7 @@ extension StringExtension on String {
 }
 
 class ProductData {
+  static List<String> _categoriesImgUrls = [];
   final _auth = FirebaseAuth.instance;
   static FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -20,6 +21,10 @@ class ProductData {
 
   getCategoriesList() {
     return _categories;
+  }
+
+  getCategoriesImgUrls() {
+    return _categoriesImgUrls;
   }
 
   getProduct(int index) {
@@ -58,6 +63,7 @@ class ProductData {
       snapshot.docs.forEach((document) {
         if (!_categories.contains(document['category'])) {
           _categories.add(document['category']);
+          _categoriesImgUrls.add(document['imgUrl']);
         }
         products.add(Product.buildFromMap(document));
       });
