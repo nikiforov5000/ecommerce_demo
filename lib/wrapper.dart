@@ -26,6 +26,7 @@ class Wrapper extends StatelessWidget {
             return LoginScreen();
           }
           else {
+
             userProvider.setUser = user;
             print('Wrapper().build user is NOT null');
             print(user.email);

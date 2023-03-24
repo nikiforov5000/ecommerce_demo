@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/models/user.dart';
 import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,22 +10,56 @@ class UserAccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final _authService = Provider.of<AuthService>(context);
-    // final _authUser = _authService.user.first.then((value) => value!.uid);
     final _userProvider = Provider.of<UserProvider>(context);
     final user = _userProvider.user;
     return Scaffold(
       body: user != null
-          ? Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(user.uid),
-                  Text(user.email),
-                ],
-              ),
-          )
+          ? Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          userInfo(user),
+          userProfileInput(),
+        ],
+      )
           : Text('user is null'),
+
+    );
+  }
+
+  userInfo(User user) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(user.uid),
+          Text(user.email),
+        ],
+      ),
+    );
+  }
+
+  userProfileInput() {
+    TextEditingController nameController = TextEditingController();
+    TextEditingController addressController = TextEditingController();
+    return Column(
+      children: [
+
+        TextField(
+          controller: nameController,
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+            hintText: 'Enter your name',
+          ),
+        ),
+        TextField(
+          controller: addressController,
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+            hintText: 'Enter your address',
+          ),
+        ),
+        
+      ],
     );
   }
 }

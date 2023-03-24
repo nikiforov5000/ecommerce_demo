@@ -10,8 +10,10 @@ class UserProvider with ChangeNotifier {
 
 
   set setUser(User user) {
-    _user = user;
-    notifyListeners();
+    if(_user == null || _user!.uid != user.uid) {
+      _user = user;
+      notifyListeners();
+    }
   }
 
   void setUserToNull() {
