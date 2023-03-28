@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_demo/models/product_category.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:ecommerce_demo/models/product.dart';
@@ -53,6 +54,24 @@ class ProductData {
       products.add(Product.buildFromMap(document));
     });
     return products;
+  }
+
+  static Future<List<ProductCategory>>? getCategories() async {
+    List<ProductCategory> _categories = [];
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot =
+        await _firestore.collection('categories').get();
+      snapshot.docs.forEach((document) {
+        _categories.add(ProductCategory(
+          name: document['name'],
+          imgUrl: document['imgUrl'],
+        ));
+      });
+    }
+    catch (e) {
+      print('product_data.dart -> getCategories() catch');
+    }
+    return _categories;
   }
 
   static Future<List<Product>> getAllProducts() async {

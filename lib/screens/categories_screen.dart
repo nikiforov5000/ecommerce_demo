@@ -11,7 +11,7 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProductData.getAllProducts();
+    ProductData.getAllProducts().then((value) => null);
     final categories = productData.getCategoriesList();
     final categoriesImgUrls = productData.getCategoriesImgUrls();
     print('categories_screen.dart -> categories.length:${categories.length}');
