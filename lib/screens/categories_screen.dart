@@ -1,5 +1,6 @@
 import 'package:ecommerce_demo/models/product_category.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
+import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/widgets/category_tile.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/product_tile.dart';
@@ -57,9 +58,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               ),
               child: CategoryTile(
                 category: category,
-                onTapCallback: () {
-                  // Navigator.pushNamed(context, ProductScreen.id,
-                  //     arguments: product);
+                onTapCallback: () async {
+                  print('categories_screen.dart -> tapped ${category.name}');
+                  await ProductData.getProductsOfCategory(category.name);
+                  Navigator.pushNamed(context, ProductsListScreen.id);
                 },
               ),
             )

@@ -1,5 +1,6 @@
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/product.dart';
+import 'package:ecommerce_demo/models/product_category.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
@@ -28,10 +29,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   @override
   void initState() {
     super.initState();
-    ProductData.getAllProducts().then((products) {
-      setState(() {
-        currentProducts = products;
-      });
+    setState(() {
+      currentProducts = ProductData.products;
+      print('product_list_screen.dart -> currentProducts.length:${currentProducts.length}');
     });
   }
 
@@ -77,11 +77,11 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                       });
                     },
                   ),
-                  for (String category in productData.getCategoriesList())
+                  for (ProductCategory category in productData.getCategoriesList())
                     CategoryButton(
-                      label: category,
+                      label: category.name,
                       onTapCallback: () {
-                        ProductData.getProductsOfCategory(category)
+                        ProductData.getProductsOfCategory(category.name)
                             .then((products) {
                           setState(() {
                             currentProducts = products;

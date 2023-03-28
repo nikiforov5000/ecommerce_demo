@@ -45,14 +45,18 @@ class ProductData {
   }
 
   static getProductsOfCategory(String category) async {
-    List<Product> products = [];
+    List<Product> _categoryProducts = [];
+    print('product_data.dart -> getProductsOfCategory');
     QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
         .collection('products')
-        .where('category', isEqualTo: category)
+        .where('category', whereIn: [category, category.toUpperCase(), category.toLowerCase(), category.capitalize()])
+        // .where('category', isEqualTo: category)
         .get();
-    snapshot.docs.forEach((document) {
-      products.add(Product.buildFromMap(document));
-    });
+    print(snapshot.size);
+    for (var document in snapshot.docs) {
+      _categoryProducts.add(Product.buildFromMap(document));
+    }
+    products = _categoryProducts;
     return products;
   }
 
