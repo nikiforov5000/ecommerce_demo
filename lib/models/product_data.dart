@@ -18,7 +18,7 @@ class ProductData {
   static FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   static List<Product> products = [];
-  static List<String> _categories = [];
+  static List<ProductCategory> _categories = [];
 
   getCategoriesList() {
     return _categories;
@@ -40,7 +40,7 @@ class ProductData {
     return _categories.length;
   }
 
-  String getCategoryAt(int index) {
+  ProductCategory getCategoryAt(int index) {
     return _categories[index];
   }
 
@@ -56,22 +56,24 @@ class ProductData {
     return products;
   }
 
-  static Future<List<ProductCategory>>? getCategories() async {
-    List<ProductCategory> _categories = [];
+  static Future<List<ProductCategory>> getCategories() async {
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot =
         await _firestore.collection('categories').get();
       snapshot.docs.forEach((document) {
-        _categories.add(ProductCategory(
-          name: document['name'],
-          imgUrl: document['imgUrl'],
-        ));
+        print(document['name']);
+        if (!_categories.any((element) => element.name == document['name'])) {
+          _categories.add(ProductCategory(
+            name: document['name'],
+            imgUrl: document['imgUrl'],
+          ));
+        }
       });
     }
     catch (e) {
       print('product_data.dart -> getCategories() catch');
     }
-    return _categories;
+    return await _categories;
   }
 
   static Future<List<Product>> getAllProducts() async {
