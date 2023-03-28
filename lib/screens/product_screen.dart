@@ -84,7 +84,7 @@ class ProductImageCarousel extends StatelessWidget {
         return Builder(
           builder: (BuildContext context) {
             return GestureDetector(
-              child: ColorFilteredImage(product: product),
+              child: ColorFilteredImage(imgUrl: product.imgUrl),
               onTap: () {
                 Navigator.push<Widget>(
                   context,

@@ -13,6 +13,6 @@ class ProductTileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColorFilteredImage(product: product);
+    return ColorFilteredImage(imgUrl: product.imgUrl);
   }
 }

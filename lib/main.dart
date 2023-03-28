@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/user_account_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
           ShoppingCartScreen.id: (context) => ShoppingCartScreen(),
           CheckoutScreen.id: (context) => CheckoutScreen(),
           UserAccountScreen.id: (context) => UserAccountScreen(),
+          ProductsListScreen.id: (context) => ProductsListScreen(),
         },
         onGenerateRoute: (settings) {
           if (settings.name == ProductScreen.id) {

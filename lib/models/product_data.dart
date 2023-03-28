@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_demo/models/product_category.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:ecommerce_demo/models/product.dart';
@@ -12,14 +13,19 @@ extension StringExtension on String {
 }
 
 class ProductData {
+  static List<String> _categoriesImgUrls = [];
   final _auth = FirebaseAuth.instance;
   static FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   static List<Product> products = [];
-  static List<String> _categories = [];
+  static List<ProductCategory> _categories = [];
 
   getCategoriesList() {
     return _categories;
+  }
+
+  getCategoriesImgUrls() {
+    return _categoriesImgUrls;
   }
 
   getProduct(int index) {
@@ -34,20 +40,44 @@ class ProductData {
     return _categories.length;
   }
 
-  String getCategoryAt(int index) {
+  ProductCategory getCategoryAt(int index) {
     return _categories[index];
   }
 
   static getProductsOfCategory(String category) async {
-    List<Product> products = [];
+    List<Product> _categoryProducts = [];
+    print('product_data.dart -> getProductsOfCategory');
     QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
         .collection('products')
-        .where('category', isEqualTo: category)
+        .where('category', whereIn: [category, category.toUpperCase(), category.toLowerCase(), category.capitalize()])
+        // .where('category', isEqualTo: category)
         .get();
-    snapshot.docs.forEach((document) {
-      products.add(Product.buildFromMap(document));
-    });
+    print(snapshot.size);
+    for (var document in snapshot.docs) {
+      _categoryProducts.add(Product.buildFromMap(document));
+    }
+    products = _categoryProducts;
     return products;
+  }
+
+  static Future<List<ProductCategory>> getCategories() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot =
+        await _firestore.collection('categories').get();
+      snapshot.docs.forEach((document) {
+        print(document['name']);
+        if (!_categories.any((element) => element.name == document['name'])) {
+          _categories.add(ProductCategory(
+            name: document['name'],
+            imgUrl: document['imgUrl'],
+          ));
+        }
+      });
+    }
+    catch (e) {
+      print('product_data.dart -> getCategories() catch');
+    }
+    return await _categories;
   }
 
   static Future<List<Product>> getAllProducts() async {
@@ -58,6 +88,7 @@ class ProductData {
       snapshot.docs.forEach((document) {
         if (!_categories.contains(document['category'])) {
           _categories.add(document['category']);
+          _categoriesImgUrls.add(document['imgUrl']);
         }
         products.add(Product.buildFromMap(document));
       });
