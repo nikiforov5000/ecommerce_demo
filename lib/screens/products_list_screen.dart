@@ -9,6 +9,7 @@ import 'package:ecommerce_demo/widgets/category_button.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/product_tile.dart';
 import 'package:ecommerce_demo/widgets/search_bar.dart';
+import 'package:ecommerce_demo/widgets/sort_bar.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -60,6 +61,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
             SizedBox(height: 15.0,),
             SearchBar(),
             SizedBox(height: 15.0,),
+            SortBar(),
             Expanded(
               flex: 1,
               child: ListView(

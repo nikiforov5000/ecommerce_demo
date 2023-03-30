@@ -102,6 +102,13 @@ class ProductData {
     text = text.trim();
     products.removeWhere((product) => !contains(text, product));
   }
+
+  static void sortPriceLoToHi() {
+    print('product_data.dart -> sortPriceLoToHi');
+    products.sort((Product a, Product b) {
+      return a.price.compareTo(b.price);
+    });
+  }
 }
 
 bool contains(String text, Product product) {
