@@ -86,10 +86,10 @@ class ProductData {
           await _firestore.collection('products').get();
       snapshot.docs.forEach((document) {
         /// TODO remove category filling
-        if (!_categories.contains(document['category'])) {
-          _categories.add(document['category']);
-          _categoriesImgUrls.add(document['imgUrl']);
-        }
+        // if (!_categories.contains(document['category'])) {
+        //   _categories.add(document['category']);
+        //   _categoriesImgUrls.add(document['imgUrl']);
+        // }
         products.add(Product.buildFromMap(document));
       });
       print('product_data.getAllProducts products.length:' +
@@ -110,23 +110,22 @@ class ProductData {
     return products;
   }
 
-  static void findProducts(String text) async {
-    try {
-      QuerySnapshot<Map<String, dynamic>> snapshot =
-          await _firestore.collection('products')
-          .where('name', arrayContainsAny: makeVariations(text))
-              .get();
+  static Future<void> findProducts(String text) async {
+    products = [];
 
-      snapshot.docs.forEach((document) {
-        products.add(Product.buildFromMap(document));
-      });
-      print('product_data.findProducts products.length:' +
-          products.length.toString());
-    }
-    catch (e) {
-      print('product_data.dart -> getAllProducts() catch');
-    }
+    await getAllProducts();
+    text = text.trim();
+    products.removeWhere((product) => !contains(text, product));
+    print(products.length);
   }
+}
+
+bool contains(String text, Product product) {
+  final bool ifContain = product.title.toLowerCase().contains(text.toLowerCase())
+        || product.description.toLowerCase().contains(text.toLowerCase())
+        || product.category.toLowerCase().contains(text.toLowerCase());
+  print('${product.title} $text $ifContain');
+  return ifContain;
 }
 
 List<String> makeVariations(String text) {

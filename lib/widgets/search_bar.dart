@@ -1,6 +1,7 @@
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/constants/shadows.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
+import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class SearchBar extends StatefulWidget {
@@ -50,7 +51,10 @@ class _SearchBarState extends State<SearchBar> {
           ),
           GestureDetector(
             onTap: () {
-              ProductData.findProducts(controller.text);
+              setState(() async {
+                await ProductData.findProducts(controller.text);
+                Navigator.pushNamed(context, ProductsListScreen.id);
+              });
             },
             child: Container(
               decoration: BoxDecoration(
