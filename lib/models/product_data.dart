@@ -49,7 +49,7 @@ class ProductData {
     print('product_data.dart -> getProductsOfCategory');
     QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
         .collection('products')
-        .where('category', whereIn: [category, category.toUpperCase(), category.toLowerCase(), category.capitalize()])
+        .where('category', whereIn: makeVariations(category))
         // .where('category', isEqualTo: category)
         .get();
     print(snapshot.size);
@@ -81,11 +81,11 @@ class ProductData {
   }
 
   static Future<List<Product>> getAllProducts() async {
-    List<Product> products = [];
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot =
           await _firestore.collection('products').get();
       snapshot.docs.forEach((document) {
+        /// TODO remove category filling
         if (!_categories.contains(document['category'])) {
           _categories.add(document['category']);
           _categoriesImgUrls.add(document['imgUrl']);
@@ -109,4 +109,27 @@ class ProductData {
         products.length.toString());
     return products;
   }
+
+  static void findProducts(String text) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> snapshot =
+          await _firestore.collection('products')
+          .where('name', arrayContainsAny: makeVariations(text))
+              .get();
+
+      snapshot.docs.forEach((document) {
+        products.add(Product.buildFromMap(document));
+      });
+      print('product_data.findProducts products.length:' +
+          products.length.toString());
+    }
+    catch (e) {
+      print('product_data.dart -> getAllProducts() catch');
+    }
+  }
+}
+
+List<String> makeVariations(String text) {
+  text = text.trim();
+  return [text, text.toLowerCase(), text.toUpperCase(), text.capitalize()];
 }
