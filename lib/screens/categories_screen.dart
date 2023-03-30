@@ -1,9 +1,11 @@
+import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/product_category.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/widgets/category_tile.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/product_tile.dart';
+import 'package:ecommerce_demo/widgets/search_bar.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -47,25 +49,37 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         ],
       ),
       body:
-      GridView.count(
-        crossAxisCount: 2,
-        children: [
-          for (ProductCategory category in categories)
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15.0,
-                vertical: 10.0,
+      Container(
+        color: kBackgroundColor,
+        child: Column(
+          children: [
+            SizedBox(height: 20.0,),
+            SearchBar(),
+            SizedBox(height: 20.0,),
+            Flexible(
+              child: GridView.count(
+                crossAxisCount: 2,
+                children: [
+                  for (ProductCategory category in categories)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0,
+                        vertical: 10.0,
+                      ),
+                      child: CategoryTile(
+                        category: category,
+                        onTapCallback: () async {
+                          print('categories_screen.dart -> tapped ${category.name}');
+                          await ProductData.getProductsOfCategory(category.name);
+                          Navigator.pushNamed(context, ProductsListScreen.id);
+                        },
+                      ),
+                    )
+                ],
               ),
-              child: CategoryTile(
-                category: category,
-                onTapCallback: () async {
-                  print('categories_screen.dart -> tapped ${category.name}');
-                  await ProductData.getProductsOfCategory(category.name);
-                  Navigator.pushNamed(context, ProductsListScreen.id);
-                },
-              ),
-            )
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -8,6 +8,7 @@ import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/category_button.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/product_tile.dart';
+import 'package:ecommerce_demo/widgets/search_bar.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,12 +45,6 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
     // final user = userProvider.user;
     return Scaffold(
       appBar: AppBar(
-        leading: InkWell(
-          onTap: () {
-            SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-          },
-          child: Icon(Icons.arrow_back),
-        ),
         title: Text('eCommerce Demo'),
         actions: [
             LogoutButton(),
@@ -62,6 +57,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         color: kBackgroundColor,
         child: Column(
           children: [
+            SizedBox(height: 15.0,),
+            SearchBar(),
+            SizedBox(height: 15.0,),
             Expanded(
               flex: 1,
               child: ListView(
