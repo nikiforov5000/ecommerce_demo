@@ -27,7 +27,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('shopping_cart_screen.dart -> build');
     double total = shoppingCart.getSum();
+    print('\t total:$total');
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Cart'),
