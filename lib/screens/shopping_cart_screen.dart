@@ -27,9 +27,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('shopping_cart_screen.dart -> build');
     double total = shoppingCart.getSum();
-    print('\t total:$total');
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Cart'),
@@ -59,37 +58,48 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                       vertical: 12,
                     ),
                     decoration: kButtonDecoration,
-                    height: 70,
+                    height: height * 0.15,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Flexible(
                             child: ColorFilteredImage(imgUrl: product.imgUrl)),
                         Flexible(child: Text(product.getShortTitle())),
-                        Flexible(flex: 1, child: Container()),
                         Flexible(
                           child: Column(
                             children: [
+                              Expanded(child: Container(child: Text(
+                                '\$' + product.price.toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),),),),
                               Expanded(
-                                child: DropdownButton(
-                                  value: shoppingCart.getCartMap()[product],
-                                  items: List.generate(11, (index) {
-                                    return DropdownMenuItem(
-                                      child: Text(
-                                        index.toString()),
-                                        value: index,
-                                    );
-                                  }).getRange(1, 11).toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      if (value != null) {
-                                        shoppingCart.updateQty(
-                                          product: product,
-                                          qty: value as int,
+                                child: Row(
+                                  children: [
+                                    Text('Qty'),
+                                    SizedBox(width: 10.0,),
+                                    DropdownButton(
+                                      underline: SizedBox(),
+                                      value: shoppingCart.getCartMap()[product],
+                                      items: List.generate(11, (index) {
+                                        return DropdownMenuItem(
+                                          child: Text(
+                                            index.toString()),
+                                            value: index,
                                         );
-                                      }
-                                    });
-                                  },
+                                      }).getRange(1, 11).toList(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          if (value != null) {
+                                            shoppingCart.updateQty(
+                                              product: product,
+                                              qty: value as int,
+                                            );
+                                          }
+                                        });
+                                      },
+                                    ),
+                                  ],
                                 ),
                               ),
                               SizedBox(height: 10,),
