@@ -61,38 +61,45 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
             SizedBox(height: 15.0,),
             SearchBar(),
             SizedBox(height: 15.0,),
-            SortBar(onChangesCallback: (value) {
-              setState(() {
-                currentProducts = ProductData.products;
-              });
-            }),
+
             Expanded(
               flex: 1,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
+              child: Row(
                 children: [
-                  CategoryButton(
-                    label: 'All products',
-                    onTapCallback: () {
-                      ProductData.getAllProducts().then((products) {
-                        setState(() {
-                          currentProducts = products;
-                        });
-                      });
-                    },
-                  ),
-                  for (ProductCategory category in productData.getCategoriesList())
-                    CategoryButton(
-                      label: category.name,
-                      onTapCallback: () {
-                        ProductData.getProductsOfCategory(category.name)
-                            .then((products) {
-                          setState(() {
-                            currentProducts = products;
-                          });
-                        });
-                      },
+                  SortBar(onChangesCallback: (value) {
+                    setState(() {
+                      currentProducts = ProductData.products;
+                    });
+                  }),
+                  Flexible(
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        CategoryButton(
+                          label: 'All products',
+                          onTapCallback: () {
+                            ProductData.getAllProducts().then((products) {
+                              setState(() {
+                                currentProducts = products;
+                              });
+                            });
+                          },
+                        ),
+                        for (ProductCategory category in productData.getCategoriesList())
+                          CategoryButton(
+                            label: category.name,
+                            onTapCallback: () {
+                              ProductData.getProductsOfCategory(category.name)
+                                  .then((products) {
+                                setState(() {
+                                  currentProducts = products;
+                                });
+                              });
+                            },
+                          ),
+                      ],
                     ),
+                  ),
                 ],
               ),
             ),

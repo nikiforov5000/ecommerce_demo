@@ -3,11 +3,12 @@ import 'package:ecommerce_demo/constants/shadows.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:flutter/material.dart';
 
-enum SortBy { priceLo, priceHi, rateLo, rateHi, none }
+enum SortBy { none, priceLo, priceHi, rateLo, rateHi, }
 
 class SortBar extends StatefulWidget {
   final Function onChangesCallback;
   SortBar({required this.onChangesCallback});
+
   @override
   State<SortBar> createState() => _SortBarState();
 }
@@ -16,7 +17,6 @@ class _SortBarState extends State<SortBar> {
   @override
   SortBy _sortBy = SortBy.none;
   Widget build(BuildContext context) {
-
     ProductData.sortProducts(_sortBy);
 
     final height = MediaQuery.of(context).size.height;
@@ -41,12 +41,16 @@ class _SortBarState extends State<SortBar> {
               color: kDarkTextColor,
               size: 25.0,
             ),
-
           ),
           DropdownButton(
+            value: _sortBy,
+            underline: SizedBox(),
             items: [
-              for (var s in SortBy.values)
-                DropdownMenuItem(value: s, child: Text(s.name.capitalize())),
+              for (var sortBy in SortBy.values)
+                DropdownMenuItem(
+                  value: sortBy,
+                  child: getDropdownIcon(sortBy),
+                ),
             ],
             onChanged: (SortBy? value) {
               widget.onChangesCallback(value);
@@ -59,4 +63,47 @@ class _SortBarState extends State<SortBar> {
       ),
     );
   }
+}
+
+Widget getDropdownIcon(SortBy sortBy) {
+  double iconSize = 18.0;
+  Widget? name;
+  switch (sortBy) {
+    case SortBy.priceHi:
+      name = Row(
+        children: [
+          Icon(Icons.attach_money, size: iconSize,),
+          Icon(Icons.arrow_downward, size: iconSize,),
+        ],
+      );
+      break;
+    case SortBy.priceLo:
+      name = Row(
+        children: [
+          Icon(Icons.attach_money, size: iconSize,),
+          Icon(Icons.arrow_upward, size: iconSize,),
+        ],
+      );
+      break;
+    case SortBy.rateHi:
+      name = Row(
+        children: [
+          Icon(Icons.star_rate, size: iconSize,),
+          Icon(Icons.arrow_downward, size: iconSize,),
+        ],
+      );
+      break;
+    case SortBy.rateLo:
+      name = Row(
+        children: [
+          Icon(Icons.star_rate, size: iconSize,),
+          Icon(Icons.arrow_upward, size: iconSize,),
+        ],
+      );
+      break;
+
+    default:
+      name = Text('');
+  }
+  return name;
 }
