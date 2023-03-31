@@ -4,10 +4,14 @@ ShoppingCart shoppingCart = ShoppingCart();
 
 class ShoppingCart {
   Map<Product, int> _shoppingCart = {};
-  double sum = 0;
+  double _sum = 0;
 
   getCartMap() {
     return _shoppingCart;
+  }
+
+  removeFromCart(Product product) {
+    _shoppingCart.remove(product);
   }
 
   getSize() {
@@ -15,11 +19,11 @@ class ShoppingCart {
   }
 
   getSum() {
-    return sum;
+    return _sum;
   }
 
   addProduct(Product product, int quantity) {
-    sum += product.price * quantity;
+    _sum += product.price * quantity;
     if (_shoppingCart.keys.contains(product)) {
       quantity += _shoppingCart[product]!;
     }

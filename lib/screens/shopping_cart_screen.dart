@@ -27,7 +27,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('shopping_cart_screen.dart -> build');
     double total = shoppingCart.getSum();
+    print('\t total:$total');
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Cart'),
@@ -66,22 +68,39 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                         Flexible(child: Text(product.getShortTitle())),
                         Flexible(flex: 1, child: Container()),
                         Flexible(
-                          child: DropdownButton(
-                            value: shoppingCart.getCartMap()[product],
-                            items: List.generate(11, (index) {
-                              return DropdownMenuItem(
-                                child: Text(
-                                  index.toString()),
-                                  value: index,
-                              );
-                            }).getRange(1, 11).toList(),
-                            onChanged: (value) {
-                              setState(() {
-                                if (value != null) {
-                                  shoppingCart.getCartMap()[product] = value;
-                                }
-                              });
-                            },
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: DropdownButton(
+                                  value: shoppingCart.getCartMap()[product],
+                                  items: List.generate(11, (index) {
+                                    return DropdownMenuItem(
+                                      child: Text(
+                                        index.toString()),
+                                        value: index,
+                                    );
+                                  }).getRange(1, 11).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      if (value != null) {
+                                        shoppingCart.getCartMap()[product] = value;
+                                      }
+                                    });
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: 10,),
+                              Expanded(
+                                child: RemoveButton(
+                                  product: product,
+                                  onTapCallback: (callback) {
+                                    setState(() {
+                                      callback;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -120,6 +139,21 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           ],
         )),
       ),
+    );
+  }
+}
+
+class RemoveButton extends StatelessWidget{
+  RemoveButton({required this.product, required this.onTapCallback});
+  final Function onTapCallback;
+  final Product product;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        onTapCallback(shoppingCart.removeFromCart(product));
+      },
+      child: Text('Remove'),
     );
   }
 }
