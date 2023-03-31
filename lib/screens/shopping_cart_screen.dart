@@ -83,7 +83,10 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                                   onChanged: (value) {
                                     setState(() {
                                       if (value != null) {
-                                        shoppingCart.getCartMap()[product] = value;
+                                        shoppingCart.updateQty(
+                                          product: product,
+                                          qty: value as int,
+                                        );
                                       }
                                     });
                                   },
@@ -151,7 +154,7 @@ class RemoveButton extends StatelessWidget{
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        onTapCallback(shoppingCart.removeFromCart(product));
+        onTapCallback(shoppingCart.updateQty(product: product, qty: 0));
       },
       child: Text('Remove'),
     );

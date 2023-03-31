@@ -10,10 +10,6 @@ class ShoppingCart {
     return _shoppingCart;
   }
 
-  removeFromCart(Product product) {
-    _shoppingCart.remove(product);
-  }
-
   getSize() {
     return _shoppingCart.length;
   }
@@ -23,10 +19,28 @@ class ShoppingCart {
   }
 
   addProduct(Product product, int quantity) {
-    _sum += product.price * quantity;
     if (_shoppingCart.keys.contains(product)) {
       quantity += _shoppingCart[product]!;
     }
     _shoppingCart[product] = quantity;
+    updateSum();
+
+  }
+
+  void updateQty({required Product product, required int qty}) {
+    if (qty == 0) {
+      _shoppingCart.remove(product);
+    }
+    else {
+      _shoppingCart[product] = qty;
+    }
+    updateSum();
+  }
+
+  void updateSum() {
+    _sum = 0;
+    _shoppingCart.forEach((product, qty) {
+      _sum += product.price * qty;
+    });
   }
 }
