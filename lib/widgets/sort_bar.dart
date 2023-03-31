@@ -3,18 +3,21 @@ import 'package:ecommerce_demo/constants/shadows.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:flutter/material.dart';
 
-class SortBar extends StatefulWidget {
-  const SortBar({Key? key}) : super(key: key);
+enum SortBy { priceLo, priceHi, rateLo, rateHi, none }
 
+class SortBar extends StatefulWidget {
+  final Function onChangesCallback;
+  SortBar({required this.onChangesCallback});
   @override
   State<SortBar> createState() => _SortBarState();
 }
 
 class _SortBarState extends State<SortBar> {
-  bool sortPriceLoToHi = false;
-  bool sortPriceHiToLo = false;
   @override
+  SortBy _sortBy = SortBy.none;
   Widget build(BuildContext context) {
+
+    ProductData.sortProducts(_sortBy);
 
     final height = MediaQuery.of(context).size.height;
     return Container(
@@ -40,17 +43,17 @@ class _SortBarState extends State<SortBar> {
             ),
 
           ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                sortPriceLoToHi = true;
-                sortPriceHiToLo = false;
-                ProductData.sortPriceLoToHi();
-              });
+          DropdownButton(
+            items: [
+              for (var s in SortBy.values)
+                DropdownMenuItem(value: s, child: Text(s.name.capitalize())),
+            ],
+            onChanged: (SortBy? value) {
+              widget.onChangesCallback(value);
+              if (value != null && value != SortBy.none) {
+                _sortBy = value;
+              }
             },
-            child: Center(
-              child: Text('Price Low to High'),
-            ),
           ),
         ],
       ),

@@ -61,7 +61,11 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
             SizedBox(height: 15.0,),
             SearchBar(),
             SizedBox(height: 15.0,),
-            SortBar(),
+            SortBar(onChangesCallback: (value) {
+              setState(() {
+                currentProducts = ProductData.products;
+              });
+            }),
             Expanded(
               flex: 1,
               child: ListView(
