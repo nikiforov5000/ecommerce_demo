@@ -54,7 +54,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                   return Container(
                     margin: EdgeInsets.only(bottom: 15),
                     padding: EdgeInsets.symmetric(
-                      horizontal: 22,
+                      horizontal: 12,
                       vertical: 12,
                     ),
                     decoration: kButtonDecoration,
@@ -65,7 +65,16 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                       children: [
                         Flexible(
                             child: ColorFilteredImage(imgUrl: product.imgUrl)),
-                        Flexible(child: Text(product.getShortTitle())),
+                        SizedBox(width: 10,),
+                        Flexible(child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(product.getShortTitle()),
+                            SizedBox(height: 5.0,),
+                            Text(product.title, style: TextStyle(fontSize: 10.0),),
+                          ],
+                        )),
                         Flexible(
                           child: Column(
                             children: [
