@@ -10,6 +10,10 @@ class ShoppingCart {
     return _shoppingCart;
   }
 
+  removeFromCart(Product product) {
+    _shoppingCart.remove(product);
+  }
+
   getSize() {
     return _shoppingCart.length;
   }
