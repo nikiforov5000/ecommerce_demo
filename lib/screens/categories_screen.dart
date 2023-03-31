@@ -54,7 +54,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         child: Column(
           children: [
             SizedBox(height: 20.0,),
-            SearchBar(),
+            SearchBar(onChangesCallback: (value) {
+              setState(() {
+                currentProducts = ProductData.products;
+              });
+              Navigator.pushNamed(context, ProductsListScreen.id);
+            }),
             SizedBox(height: 20.0,),
             Flexible(
               child: GridView.count(

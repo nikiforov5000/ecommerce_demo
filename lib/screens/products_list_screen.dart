@@ -57,7 +57,11 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         color: kBackgroundColor,
         child: Column(children: [
           SizedBox(height: 15.0),
-          SearchBar(),
+          SearchBar(onChangesCallback: (value) {
+            setState(() {
+              currentProducts = ProductData.products;
+            });
+          }),
           SizedBox(height: 15.0),
           Expanded(flex: 1,
               child: Row(
