@@ -64,37 +64,64 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Flexible(
-                            child: ColorFilteredImage(imgUrl: product.imgUrl)),
-                        SizedBox(width: 10,),
-                        Flexible(child: Column(
+                          flex: 1,
+                          child: ColorFilteredImage(imgUrl: product.imgUrl)),
+                        SizedBox(width: 10),
+                        Flexible(
+                          flex: 2,
+                            child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(product.getShortTitle()),
-                            SizedBox(height: 5.0,),
-                            Text(product.title, style: TextStyle(fontSize: 10.0),),
+                            SizedBox(
+                              height: 5.0,
+                            ),
+                            Text(
+                              product.title,
+                              style: TextStyle(fontSize: 10.0),
+                            ),
                           ],
                         )),
+                        SizedBox(width: 10),
+
                         Flexible(
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Expanded(child: Container(child: Text(
-                                '\$' + product.price.toString(),
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold),),),),
+                              Expanded(
+                                child: Container(
+                                  child: Text(
+                                    '\$' + product.price.toString(),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
                               Expanded(
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+
                                   children: [
-                                    Text('Qty'),
-                                    SizedBox(width: 10.0,),
+                                    Text('Qty', style: TextStyle(fontSize: 13.0),),
+                                    SizedBox(
+                                      width: 10.0,
+                                    ),
                                     DropdownButton(
                                       underline: SizedBox(),
                                       value: shoppingCart.getCartMap()[product],
                                       items: List.generate(11, (index) {
                                         return DropdownMenuItem(
-                                          child: Text(
-                                            index.toString()),
-                                            value: index,
+                                          alignment: AlignmentDirectional.center,
+                                          child: Container(
+                                            margin: EdgeInsets.zero,
+                                            child: Text(
+                                              index.toString(),
+                                              style: TextStyle(fontSize: 15.0),
+                                            ),
+                                          ),
+                                          value: index,
                                         );
                                       }).getRange(1, 11).toList(),
                                       onChanged: (value) {
@@ -111,7 +138,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 10,),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Expanded(
                                 child: RemoveButton(
                                   product: product,
@@ -165,8 +194,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   }
 }
 
-class RemoveButton extends StatelessWidget{
+class RemoveButton extends StatelessWidget {
   RemoveButton({required this.product, required this.onTapCallback});
+
   final Function onTapCallback;
   final Product product;
   @override
@@ -175,7 +205,7 @@ class RemoveButton extends StatelessWidget{
       onTap: () {
         onTapCallback(shoppingCart.updateQty(product: product, qty: 0));
       },
-      child: Text('Remove'),
+      child: Text('Remove', style: TextStyle(fontSize: 10),),
     );
   }
 }
