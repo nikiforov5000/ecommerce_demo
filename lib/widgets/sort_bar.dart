@@ -27,7 +27,7 @@ class _SortBarState extends State<SortBar> {
     final height = MediaQuery.of(context).size.height;
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 14.0),
+      margin: const EdgeInsets.symmetric(horizontal: 5.0),
       decoration: BoxDecoration(
         boxShadow: k3DShadows,
         color: kTileColor,

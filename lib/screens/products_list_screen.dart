@@ -43,6 +43,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
     final userProvider = Provider.of<UserProvider>(context);
     // authService.user.first.then((value) => userProvider.setUser = value!);
     // final user = userProvider.user;
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text('eCommerce Demo'),
@@ -63,8 +64,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
             });
           }),
           SizedBox(height: 15.0),
-          Expanded(flex: 1,
-              child: Row(
+        Container(
+          height: height * 0.04,
+          child: Row(
                 children: [
                   SortBar(onChangesCallback: (value) {
                     setState(() {
