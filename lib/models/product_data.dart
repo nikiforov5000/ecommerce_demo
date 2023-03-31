@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/models/product_category.dart';
+import 'package:ecommerce_demo/widgets/sort_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:ecommerce_demo/models/product.dart';
@@ -101,6 +102,25 @@ class ProductData {
     await getAllProducts();
     text = text.trim();
     products.removeWhere((product) => !contains(text, product));
+  }
+
+  static void sortProducts(SortBy sortBy) {
+    switch(sortBy) {
+      case SortBy.priceHi:
+        products.sort((Product a, Product b) => a.price.compareTo(b.price));
+        break;
+      case SortBy.priceLo:
+        products.sort((Product a, Product b) => b.price.compareTo(a.price));
+        break;
+      case SortBy.rateHi:
+        products.sort((Product a, Product b) => a.rate.compareTo(b.rate));
+        break;
+      case SortBy.rateLo:
+        products.sort((Product a, Product b) => b.rate.compareTo(a.rate));
+        break;
+      default:
+        break;
+    }
   }
 }
 
