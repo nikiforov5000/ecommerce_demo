@@ -10,10 +10,6 @@ class ShoppingCart {
     return _shoppingCart;
   }
 
-  removeFromCart(Product product) {
-    _shoppingCart.remove(product);
-  }
-
   getSize() {
     return _shoppingCart.length;
   }
@@ -28,5 +24,14 @@ class ShoppingCart {
       quantity += _shoppingCart[product]!;
     }
     _shoppingCart[product] = quantity;
+  }
+
+  void updateQty({required Product product, required int qty}) {
+    if (qty == 0) {
+      _shoppingCart.remove(product);
+    }
+    else {
+      _shoppingCart[product] = qty;
+    }
   }
 }
