@@ -12,7 +12,6 @@ import 'package:ecommerce_demo/widgets/search_bar.dart';
 import 'package:ecommerce_demo/widgets/sort_bar.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 List<Product> currentProducts = [];
@@ -27,13 +26,13 @@ class ProductsListScreen extends StatefulWidget {
 }
 
 class _ProductsListScreenState extends State<ProductsListScreen> {
-
   @override
   void initState() {
     super.initState();
     setState(() {
       currentProducts = ProductData.products;
-      print('product_list_screen.dart -> currentProducts.length:${currentProducts.length}');
+      print(
+          'product_list_screen.dart -> currentProducts.length:${currentProducts.length}');
     });
   }
 
@@ -48,22 +47,19 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       appBar: AppBar(
         title: Text('eCommerce Demo'),
         actions: [
-            LogoutButton(),
-            UserAvatarWidget(),
+          LogoutButton(),
+          UserAvatarWidget(),
           // todo update UserAvatar to receive User
         ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         color: kBackgroundColor,
-        child: Column(
-          children: [
-            SizedBox(height: 15.0,),
-            SearchBar(),
-            SizedBox(height: 15.0,),
-
-            Expanded(
-              flex: 1,
+        child: Column(children: [
+          SizedBox(height: 15.0),
+          SearchBar(),
+          SizedBox(height: 15.0),
+          Expanded(flex: 1,
               child: Row(
                 children: [
                   SortBar(onChangesCallback: (value) {
@@ -85,7 +81,8 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                             });
                           },
                         ),
-                        for (ProductCategory category in productData.getCategoriesList())
+                        for (ProductCategory category
+                            in productData.getCategoriesList())
                           CategoryButton(
                             label: category.name,
                             onTapCallback: () {
@@ -115,6 +112,8 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
 }
 
 class ProductsList extends StatelessWidget {
+  const ProductsList({super.key});
+
   @override
   Widget build(BuildContext context) {
     print('ProductList build');
