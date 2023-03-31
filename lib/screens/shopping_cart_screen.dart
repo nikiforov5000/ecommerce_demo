@@ -1,17 +1,14 @@
-import 'package:ecommerce_demo/widgets/user_avatar.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/constants/decorations.dart';
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/models/shopping_cart.dart';
 import 'package:ecommerce_demo/screens/checkout_screen.dart';
-import 'package:ecommerce_demo/services/auth_service.dart';
-import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
+import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
+import 'package:ecommerce_demo/widgets/user_avatar.dart';
+import 'package:flutter/material.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
   const ShoppingCartScreen({Key? key}) : super(key: key);
@@ -30,19 +27,13 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Product> products = shoppingCart.getCartMap().keys.toList();
-    List<int> quantities = shoppingCart.getCartMap().values.toList();
-
-    final authService = Provider.of<AuthService>(context);
-    final userProvider = Provider.of<UserProvider>(context);
-    final user = userProvider.user;
-
     double total = shoppingCart.getSum();
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Cart'),
         actions: [
           UserAvatarWidget(),
+          LogoutButton(),
         ],
       ),
       body: Container(
@@ -57,24 +48,42 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               child: ListView.builder(
                 itemCount: shoppingCart.getSize(),
                 itemBuilder: (BuildContext context, int index) {
-                  int quantity =
-                      shoppingCart.getCartMap().values.elementAt(index);
                   Product product =
                       shoppingCart.getCartMap().keys.elementAt(index);
                   return Container(
                     margin: EdgeInsets.only(bottom: 15),
-                    padding: EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 22,
+                      vertical: 12,
+                    ),
                     decoration: kButtonDecoration,
                     height: 70,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
-                          child: ColorFilteredImage(imgUrl: product.imgUrl),
-                        ),
+                            child: ColorFilteredImage(imgUrl: product.imgUrl)),
                         Flexible(child: Text(product.getShortTitle())),
                         Flexible(flex: 1, child: Container()),
-                        Flexible(child: Text('x ' + quantity.toString())),
+                        Flexible(
+                          child: DropdownButton(
+                            value: shoppingCart.getCartMap()[product],
+                            items: List.generate(11, (index) {
+                              return DropdownMenuItem(
+                                child: Text(
+                                  index.toString()),
+                                  value: index,
+                              );
+                            }).getRange(1, 11).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                if (value != null) {
+                                  shoppingCart.getCartMap()[product] = value;
+                                }
+                              });
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   );
