@@ -22,7 +22,7 @@ const kProductScreenRatingTextStyle = TextStyle(
 
 const kButtonTextStyle = TextStyle(
   // fontFamily: 'Arsenal',
-  fontSize: 17.0,
+  fontSize: 15.0,
   color: kDarkTextColor,
 );
 
