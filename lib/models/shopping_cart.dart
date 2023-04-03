@@ -6,6 +6,8 @@ class ShoppingCart {
   Map<Product, int> _shoppingCart = {};
   double _sum = 0;
 
+  int get length => _shoppingCart.length;
+
   getCartMap() {
     return _shoppingCart;
   }

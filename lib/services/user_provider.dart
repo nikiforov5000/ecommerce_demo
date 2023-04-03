@@ -9,7 +9,14 @@ class UserProvider with ChangeNotifier {
 
   User? get user => _user == null ? null : _user;
 
-
+  Future<String> get getAddress async {
+    final snapshot = await _firestore
+        .collection('users')
+        .doc(_user!.uid)
+        .get();
+    final userData = snapshot.data();
+    return userData!['address'];
+  }
 
   set setUser(User user) {
     try {
