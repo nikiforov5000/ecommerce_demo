@@ -3,6 +3,7 @@ import 'package:ecommerce_demo/constants/decorations.dart';
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/models/shopping_cart.dart';
 import 'package:ecommerce_demo/screens/checkout_screen.dart';
+import 'package:ecommerce_demo/screens/order_summary.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
@@ -182,9 +183,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
               color: Colors.grey,
             ),
             RoundedButton(
-              labelWidget: ButtonText(text: 'Checkout'),
+              labelWidget: ButtonText(text: 'Next'),
               onTapCallback: () {
-                Navigator.pushNamed(context, CheckoutScreen.id);
+                Navigator.pushNamed(context, OrderSummary.id);
               },
             ),
           ],
