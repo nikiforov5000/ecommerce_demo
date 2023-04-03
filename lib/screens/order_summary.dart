@@ -1,4 +1,5 @@
 import 'package:ecommerce_demo/models/shopping_cart.dart';
+import 'package:ecommerce_demo/screens/order_success_screen.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
@@ -301,7 +302,9 @@ class OrderSummary extends StatelessWidget {
                     height: 20,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, OrderSuccessScreen.id);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       child: Text('Submit Order'),
