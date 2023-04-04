@@ -5,6 +5,7 @@ ShoppingCart shoppingCart = ShoppingCart();
 class ShoppingCart {
   Map<Product, int> _shoppingCart = {};
   double _sum = 0;
+  int _amount = 0;
 
   int get length => _shoppingCart.length;
 
@@ -43,6 +44,11 @@ class ShoppingCart {
     _sum = 0;
     _shoppingCart.forEach((product, qty) {
       _sum += product.price * qty;
+      _amount += qty;
     });
+  }
+
+  getAmount() {
+    return _amount;
   }
 }
