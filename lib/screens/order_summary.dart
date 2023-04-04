@@ -1,5 +1,5 @@
 import 'package:ecommerce_demo/models/shopping_cart.dart';
-import 'package:ecommerce_demo/screens/order_success_screen.dart';
+import 'package:ecommerce_demo/screens/order_success/order_success_screen.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';

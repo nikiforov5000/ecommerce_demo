@@ -1,4 +1,4 @@
-import 'package:ecommerce_demo/screens/order_success_screen.dart';
+import 'package:ecommerce_demo/screens/order_success/order_success_screen.dart';
 import 'package:ecommerce_demo/screens/order_summary.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/user_account_screen.dart';
