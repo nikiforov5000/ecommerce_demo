@@ -1,6 +1,5 @@
-import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/screens/login/widgets/login_alert_dialog.dart';
-import 'package:ecommerce_demo/screens/registration_screen/registration_screen.dart';
+import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
@@ -8,23 +7,25 @@ import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const String id = 'login_screen';
+class RegistrationScreen extends StatefulWidget {
+  static const String id = 'registration_screen';
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegistrationScreenState extends State<RegistrationScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final repeatPasswordController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
     final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.purple,
+      backgroundColor: Colors.orange,
       body: Builder(
         builder: (context) => Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -70,13 +71,33 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
 
               SizedBox(
+                height: 8.0,
+              ),
+              TextField(
+                controller: repeatPasswordController,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    border: InputBorder.none, hintText: 'Repeat password'),
+              ),
+
+              SizedBox(
                 height: 24.0,
               ),
               RoundedButton(
-                labelWidget: ButtonText(text: 'Log in'),
+                labelWidget: ButtonText(text: 'Register'),
                 onTapCallback: () async {
+                  if (passwordController.text != repeatPasswordController.text) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return RegisterAlertDialog();
+                      },
+                    );
+                    return;
+                  }
+
                   await authService
-                      .signInWithEmailAndPassword(
+                      .createUserWithEmailAndPassword(
                     emailController.text,
                     passwordController.text,
                   )
@@ -95,26 +116,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   });
                 },
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.0),
-                child: Text(
-                  'Or',
-                  textAlign: TextAlign.center,
-                  style: kButtonTextStyle,
-                ),
-              ),
               RoundedButton(
                 labelWidget: ButtonText(text: 'Sign-in with Google'),
                 onTapCallback: () async {
-                  await authService
-                      .signInWithGoogle()
-                      .then((value) => userProvider.setUser = value!);
-                },
-              ),
-              RoundedButton(
-                labelWidget: ButtonText(text: 'Register'),
-                onTapCallback: () {
-                  Navigator.pushNamed(context, RegistrationScreen.id);
+                  await authService.signInWithGoogle();
                 },
               ),
             ],
@@ -124,5 +129,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
 
 
