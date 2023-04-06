@@ -5,7 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ecommerce_demo/models/user.dart';
 
 class AuthService {
-  final _googleSignIn = GoogleSignIn();
+  // for further code improvement go to
+  /// https://github.com/flutter/packages/blob/main/packages/google_sign_in/google_sign_in/example/lib/main.dart
 
   final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
 
@@ -66,9 +67,17 @@ class AuthService {
   }
 
   Future<User?> signInWithGoogle() async {
+
+    GoogleSignIn googleSignIn = GoogleSignIn(
+      scopes: <String>[
+        'email',
+        'https://www.googleapis.com/auth/contacts.readonly',
+      ],
+    );
+
     print('sign-in with google button');
     try {
-      final googleUser = await _googleSignIn.signIn();
+      final googleUser = await googleSignIn.signIn();
       if (googleUser != null) {
         final googleAuth = await googleUser.authentication;
         final credential = auth.GoogleAuthProvider.credential(
