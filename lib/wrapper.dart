@@ -1,5 +1,5 @@
 import 'package:ecommerce_demo/models/user.dart';
-import 'package:ecommerce_demo/screens/categories_screen.dart';
+import 'package:ecommerce_demo/screens/categories_screen/categories_screen.dart';
 import 'package:ecommerce_demo/screens/login/login_screen.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
