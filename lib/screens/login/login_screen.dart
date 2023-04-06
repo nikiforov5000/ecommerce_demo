@@ -1,10 +1,10 @@
 import 'package:ecommerce_demo/constants/text_styles.dart';
-import 'package:ecommerce_demo/screens/registration_screen.dart';
+import 'package:ecommerce_demo/screens/registration_screen/registration_screen.dart';
+import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
-import 'package:ecommerce_demo/widgets/rounded_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,8 +16,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late String email;
-  late String password;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,56 +38,63 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Container(
                     height: 200.0,
                     child: Center(
-                        child: Text(
-                      'eCommerce Demo app',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 60,
-                          fontWeight: FontWeight.w100,
-                          color: Colors.blue),
-                    )),
+                      child: Text(
+                        'eCommerce Demo app',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 60,
+                            fontWeight: FontWeight.w100,
+                            color: Colors.blue),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 48.0,
+              SizedBox(height: 48.0),
+              TextField(
+                controller: emailController,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    border: InputBorder.none, hintText: 'Enter email'),
               ),
-              RoundedTextField(
-                  placeholder: 'Enter your email',
-                  color: Colors.lightBlueAccent,
-                  onChange: (value) {
-                    setState(() {
-                      email = value;
-                    });
-                  }),
-              SizedBox(
-                height: 8.0,
+              SizedBox(height: 8.0),
+              TextField(
+                controller: passwordController,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    border: InputBorder.none, hintText: 'Enter password'),
               ),
-              RoundedTextField(
-                  placeholder: 'Enter your password',
-                  color: Colors.lightBlueAccent,
-                  onChange: (value) {
-                    setState(() {
-                      password = value;
-                    });
-                  }),
-              SizedBox(
-                height: 24.0,
-              ),
+              SizedBox(height: 24.0),
               RoundedButton(
                 labelWidget: ButtonText(text: 'Log in'),
                 onTapCallback: () async {
                   await authService
                       .signInWithEmailAndPassword(
-                        email,
-                        password,
-                      )
-                      .then((value) => userProvider.setUser = value!);
+                    emailController.text,
+                    passwordController.text,
+                  )
+                      .then((value) {
+                    if (value == null) {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return showAlertDialogWithMessage(
+                              context, 'Please check email and password');
+                        },
+                      );
+                    } else {
+                      userProvider.setUser = value;
+                    }
+                  });
                 },
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 20.0),
-                child: Text('Or', textAlign: TextAlign.center, style: kButtonTextStyle,),
+                child: Text(
+                  'Or',
+                  textAlign: TextAlign.center,
+                  style: kButtonTextStyle,
+                ),
               ),
               RoundedButton(
                 labelWidget: ButtonText(text: 'Sign-in with Google'),
