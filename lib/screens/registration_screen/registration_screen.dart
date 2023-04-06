@@ -1,4 +1,3 @@
-import 'package:ecommerce_demo/screens/login/widgets/login_alert_dialog.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/user_provider.dart';
@@ -19,7 +18,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final passwordController = TextEditingController();
   final repeatPasswordController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
@@ -39,58 +37,50 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   child: Container(
                     height: 200.0,
                     child: Center(
-                        child: Text(
-                      'eCommerce Demo app',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 60,
-                          fontWeight: FontWeight.w100,
-                          color: Colors.blue),
-                    )),
+                      child: Text(
+                        'eCommerce Demo app',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 60,
+                            fontWeight: FontWeight.w100,
+                            color: Colors.blue),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 48.0,
-              ),
+              SizedBox(height: 48.0),
               TextField(
                 controller: emailController,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                     border: InputBorder.none, hintText: 'Enter email'),
               ),
-
-              SizedBox(
-                height: 8.0,
-              ),
+              SizedBox(height: 8.0),
               TextField(
                 controller: passwordController,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                     border: InputBorder.none, hintText: 'Enter password'),
               ),
-
-              SizedBox(
-                height: 8.0,
-              ),
+              SizedBox(height: 8.0),
               TextField(
                 controller: repeatPasswordController,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                     border: InputBorder.none, hintText: 'Repeat password'),
               ),
-
-              SizedBox(
-                height: 24.0,
-              ),
+              SizedBox(height: 24.0),
               RoundedButton(
                 labelWidget: ButtonText(text: 'Register'),
                 onTapCallback: () async {
-                  if (passwordController.text != repeatPasswordController.text) {
+                  if (passwordController.text !=
+                      repeatPasswordController.text) {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return RegisterAlertDialog();
+                        return showAlertDialogWithMessage(
+                            context, 'Please check passwords');
                       },
                     );
                     return;
@@ -103,11 +93,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   )
                       .then((value) {
                     if (value == null) {
-                      print('login_screen.dart -> user is null');
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return LoginAlertDialog();
+                          return showAlertDialogWithMessage(
+                              context, 'Please check email and password');
                         },
                       );
                     } else {
@@ -129,6 +119,3 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 }
-
-
-

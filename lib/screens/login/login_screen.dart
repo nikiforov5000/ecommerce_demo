@@ -1,6 +1,6 @@
 import 'package:ecommerce_demo/constants/text_styles.dart';
-import 'package:ecommerce_demo/screens/login/widgets/login_alert_dialog.dart';
 import 'package:ecommerce_demo/screens/registration_screen/registration_screen.dart';
+import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
@@ -38,40 +38,33 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Container(
                     height: 200.0,
                     child: Center(
-                        child: Text(
-                      'eCommerce Demo app',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 60,
-                          fontWeight: FontWeight.w100,
-                          color: Colors.blue),
-                    )),
+                      child: Text(
+                        'eCommerce Demo app',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 60,
+                            fontWeight: FontWeight.w100,
+                            color: Colors.blue),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 48.0,
-              ),
+              SizedBox(height: 48.0),
               TextField(
                 controller: emailController,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                     border: InputBorder.none, hintText: 'Enter email'),
               ),
-
-              SizedBox(
-                height: 8.0,
-              ),
+              SizedBox(height: 8.0),
               TextField(
                 controller: passwordController,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                     border: InputBorder.none, hintText: 'Enter password'),
               ),
-
-              SizedBox(
-                height: 24.0,
-              ),
+              SizedBox(height: 24.0),
               RoundedButton(
                 labelWidget: ButtonText(text: 'Log in'),
                 onTapCallback: () async {
@@ -82,11 +75,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   )
                       .then((value) {
                     if (value == null) {
-                      print('login_screen.dart -> user is null');
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return LoginAlertDialog();
+                          return showAlertDialogWithMessage(
+                              context, 'Please check email and password');
                         },
                       );
                     } else {
@@ -124,5 +117,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-
