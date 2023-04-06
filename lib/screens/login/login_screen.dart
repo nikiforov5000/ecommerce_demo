@@ -1,10 +1,10 @@
 import 'package:ecommerce_demo/constants/text_styles.dart';
+import 'package:ecommerce_demo/screens/login/widgets/login_alert_dialog.dart';
 import 'package:ecommerce_demo/screens/registration_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
-import 'package:ecommerce_demo/widgets/rounded_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,8 +16,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late String email;
-  late String password;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,25 +52,37 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 48.0,
               ),
-              RoundedTextField(
-                  placeholder: 'Enter your email',
-                  color: Colors.lightBlueAccent,
-                  onChange: (value) {
-                    setState(() {
-                      email = value;
-                    });
-                  }),
+              TextField(
+                controller: emailController,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    border: InputBorder.none, hintText: 'Enter email'),
+              ),
+              // RoundedTextField(
+              //     placeholder: 'Enter your email',
+              //     color: Colors.lightBlueAccent,
+              //     onChange: (value) {
+              //       setState(() {
+              //         email = value;
+              //       });
+              //     }),
               SizedBox(
                 height: 8.0,
               ),
-              RoundedTextField(
-                  placeholder: 'Enter your password',
-                  color: Colors.lightBlueAccent,
-                  onChange: (value) {
-                    setState(() {
-                      password = value;
-                    });
-                  }),
+              TextField(
+                controller: passwordController,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    border: InputBorder.none, hintText: 'Enter password'),
+              ),
+              // RoundedTextField(
+              //     placeholder: 'Enter your password',
+              //     color: Colors.lightBlueAccent,
+              //     onChange: (value) {
+              //       setState(() {
+              //         password = value;
+              //       });
+              //     }),
               SizedBox(
                 height: 24.0,
               ),
@@ -79,15 +91,31 @@ class _LoginScreenState extends State<LoginScreen> {
                 onTapCallback: () async {
                   await authService
                       .signInWithEmailAndPassword(
-                        email,
-                        password,
-                      )
-                      .then((value) => userProvider.setUser = value!);
+                    emailController.text,
+                    passwordController.text,
+                  )
+                      .then((value) {
+                    if (value == null) {
+                      print('login_screen.dart -> user is null');
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return LoginAlertDialog();
+                        },
+                      );
+                    } else {
+                      userProvider.setUser = value;
+                    }
+                  });
                 },
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 20.0),
-                child: Text('Or', textAlign: TextAlign.center, style: kButtonTextStyle,),
+                child: Text(
+                  'Or',
+                  textAlign: TextAlign.center,
+                  style: kButtonTextStyle,
+                ),
               ),
               RoundedButton(
                 labelWidget: ButtonText(text: 'Sign-in with Google'),
@@ -110,3 +138,5 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
+
