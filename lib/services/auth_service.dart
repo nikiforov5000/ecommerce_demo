@@ -37,6 +37,7 @@ class AuthService {
       email: email,
       password: password,
     );
+    return _localUserFromFirebaseAuth(credential.user);
 
   }
 

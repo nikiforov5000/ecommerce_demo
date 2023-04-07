@@ -1,3 +1,5 @@
+import 'package:ecommerce_demo/models/local_user.dart';
+import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,15 +10,12 @@ import 'package:ecommerce_demo/screens/user_account_screen.dart';
 class UserAvatarWidget extends StatelessWidget {
 
   Widget? avatar;
+  LocalUser? _localUser;
 
-  late final AuthService authService;
-  late final auth.User? authUser;
 
   @override
   Widget build(BuildContext context) {
-    authService = Provider.of<AuthService>(context);
-    authUser = authService.authUser;
-
+    _localUser = context.watch<LocalUserProvider>().localUser;
     buildUserAvatar();
     return GestureDetector(
       onTap: (){
@@ -29,7 +28,7 @@ class UserAvatarWidget extends StatelessWidget {
             child: CircleAvatar(
               backgroundColor: Colors.greenAccent,
               radius: 21,
-              child: avatar!,
+              // child: avatar!,
             ),
           )),
     );
@@ -37,12 +36,12 @@ class UserAvatarWidget extends StatelessWidget {
 
   void buildUserAvatar() {
     buildEmptyAvatar();
-    if (authUser != null) {
-      if (authUser!.photoURL != null) {
+    if (_localUser != null) {
+      if (_localUser!.photoUrl != null) {
         buildFromPhoto();
-      } else if (authUser!.displayName != null) {
+      } else if (_localUser!.displayName != null) {
         buildFromName();
-      } else if (authUser!.email != null) {
+      } else if (_localUser!.email != null) {
         buildFromEmail();
       }
     }
@@ -50,13 +49,13 @@ class UserAvatarWidget extends StatelessWidget {
 
   void buildFromPhoto() {
     avatar = CircleAvatar(
-      backgroundImage: NetworkImage(authUser!.photoURL!),
+      backgroundImage: NetworkImage(_localUser!.photoUrl!),
       radius: 18,
     );
   }
 
   void buildFromName() {
-    List<String>? namearr = authUser!.displayName?.split(' ');
+    List<String>? namearr = _localUser!.displayName?.split(' ');
     if (namearr != null) {
       String? initials = namearr.length > 1 ?
           namearr.getRange(0, 2)
@@ -78,25 +77,8 @@ class UserAvatarWidget extends StatelessWidget {
   }
 
   void buildFromEmail() {
-    String emailInitials = authUser!.email.toString().substring(0, 2).toUpperCase();
+    String emailInitials = _localUser!.email.toString().substring(0, 2).toUpperCase();
     avatar = Text(emailInitials);
   }
 }
 
-
-
-// InkWell(
-// child: Consumer<UserProvider>(
-// builder: (context, userProvider, _) {
-// return Text(
-// userProvider.user!.email,
-// style: TextStyle(
-// color: Colors.black,
-// ),
-// );
-// },
-// ),
-// onTap: () {
-// userProvider.setUserToNull();
-// authService.signOut();
-// },

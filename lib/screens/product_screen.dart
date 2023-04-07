@@ -10,7 +10,6 @@ import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/models/shopping_cart.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
-import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
@@ -26,19 +25,12 @@ class ProductScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    final authService = Provider.of<AuthService>(context);
-    final userProvider = Provider.of<UserProvider>(context);
-    final user = userProvider.user;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(product.title),
         actions: [
           UserAvatarWidget(),
-
-          // Text(userProvider.user == null ? 'null' : userProvider.user.email),
-          // todo update UserAvatar to receive User
-          // UserAvatarWidget(user: user),
         ],
       ),
       body: Container(

@@ -1,6 +1,7 @@
+import 'package:ecommerce_demo/models/local_user.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
-import 'package:ecommerce_demo/services/user_provider.dart';
+import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +19,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final passwordController = TextEditingController();
   final repeatPasswordController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
-    final userProvider = Provider.of<UserProvider>(context);
+    final userProvider = Provider.of<LocalUserProvider>(context);
+
     return Scaffold(
       backgroundColor: Colors.orange,
       body: Builder(
@@ -68,7 +71,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 controller: repeatPasswordController,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'Repeat password'),
+                    border: InputBorder.none, hintText: 'Re-enter password'),
               ),
               SizedBox(height: 24.0),
               RoundedButton(
@@ -85,33 +88,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     );
                     return;
                   }
-
-                  await authService
-                      .createUserWithEmailAndPassword(
-                    emailController.text,
-                    passwordController.text,
-                  )
-                      .then((value) {
-                    if (value == null) {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return showAlertDialogWithMessage(
-                              context, 'Please check email and password');
-                        },
+                  else {
+                      LocalUser? user =
+                          await authService.createUserWithEmailAndPassword(
+                        emailController.text,
+                        passwordController.text,
                       );
-                    } else {
-                      userProvider.setUser = value;
+                      userProvider.localUser = user;
+                      Navigator.pop(context);
                     }
-                  });
-                },
+                  }
               ),
-              RoundedButton(
-                labelWidget: ButtonText(text: 'Sign-in with Google'),
-                onTapCallback: () async {
-                  await authService.signInWithGoogle();
-                },
-              ),
+              // RoundedButton(
+              //   labelWidget: ButtonText(text: 'Sign-in with Google'),
+              //   onTapCallback: () async {
+              //     await authService.signInWithGoogle();
+              //   },
+              // ),
             ],
           ),
         ),

@@ -2,7 +2,7 @@ import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/screens/registration_screen/registration_screen.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
-import 'package:ecommerce_demo/services/user_provider.dart';
+import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
-    final userProvider = Provider.of<UserProvider>(context);
+    final _userProvider = Provider.of<LocalUserProvider>(context);
+
     return Scaffold(
       backgroundColor: Colors.purple,
       body: Builder(
@@ -68,24 +69,12 @@ class _LoginScreenState extends State<LoginScreen> {
               RoundedButton(
                 labelWidget: ButtonText(text: 'Log in'),
                 onTapCallback: () async {
-                  await authService
+                  final user = await authService
                       .signInWithEmailAndPassword(
                     emailController.text,
                     passwordController.text,
-                  )
-                      .then((value) {
-                    if (value == null) {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return showAlertDialogWithMessage(
-                              context, 'Please check email and password');
-                        },
-                      );
-                    } else {
-                      userProvider.setUser = value;
-                    }
-                  });
+                  );
+                  _userProvider.localUser = user;
                 },
               ),
               Padding(
@@ -96,14 +85,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: kButtonTextStyle,
                 ),
               ),
-              RoundedButton(
-                labelWidget: ButtonText(text: 'Sign-in with Google'),
-                onTapCallback: () async {
-                  await authService
-                      .signInWithGoogle()
-                      .then((value) => userProvider.setUser = value!);
-                },
-              ),
+              // RoundedButton(
+              //   labelWidget: ButtonText(text: 'Sign-in with Google'),
+              //   onTapCallback: () async {
+              //     await authService
+              //         .signInWithGoogle()
+              //         .then((value) => userProvider.setUser = value!);
+              //   },
+              // ),
               RoundedButton(
                 labelWidget: ButtonText(text: 'Register'),
                 onTapCallback: () {

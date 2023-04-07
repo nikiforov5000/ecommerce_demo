@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
-import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:ecommerce_demo/widgets/text_on_bankcard.dart';
 
@@ -18,8 +17,6 @@ class CheckoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
-    final userProvider = Provider.of<UserProvider>(context);
-    final user = userProvider.user;
 
     return Scaffold(
       appBar: AppBar(
