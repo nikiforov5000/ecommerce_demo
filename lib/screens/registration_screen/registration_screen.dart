@@ -19,7 +19,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final passwordController = TextEditingController();
   final repeatPasswordController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);

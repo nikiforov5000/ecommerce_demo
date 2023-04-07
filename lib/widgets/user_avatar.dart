@@ -1,25 +1,19 @@
 import 'package:ecommerce_demo/models/local_user.dart';
+import 'package:ecommerce_demo/screens/user_account_screen.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:ecommerce_demo/services/auth_service.dart';
-import 'package:ecommerce_demo/screens/user_account_screen.dart';
-
 class UserAvatarWidget extends StatelessWidget {
-
   Widget? avatar;
   LocalUser? _localUser;
-
 
   @override
   Widget build(BuildContext context) {
     _localUser = context.watch<LocalUserProvider>().localUser;
     buildUserAvatar();
     return GestureDetector(
-      onTap: (){
-        print('user account');
+      onTap: () {
         Navigator.pushNamed(context, UserAccountScreen.id);
       },
       child: Padding(
@@ -57,11 +51,9 @@ class UserAvatarWidget extends StatelessWidget {
   void buildFromName() {
     List<String>? namearr = _localUser!.displayName?.split(' ');
     if (namearr != null) {
-      String? initials = namearr.length > 1 ?
-          namearr.getRange(0, 2)
-          .map((e) => e = e[0])
-          .join('')
-      : namearr[0];
+      String? initials = namearr.length > 1
+          ? namearr.getRange(0, 2).map((e) => e = e[0]).join('')
+          : namearr[0];
       avatar = CircleAvatar(
         radius: 18,
         child: Text(initials),
@@ -77,8 +69,8 @@ class UserAvatarWidget extends StatelessWidget {
   }
 
   void buildFromEmail() {
-    String emailInitials = _localUser!.email.toString().substring(0, 2).toUpperCase();
+    String emailInitials =
+        _localUser!.email.toString().substring(0, 2).toUpperCase();
     avatar = Text(emailInitials);
   }
 }
-

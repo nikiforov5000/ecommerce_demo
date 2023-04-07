@@ -1,13 +1,10 @@
 import 'package:ecommerce_demo/widgets/bank_card.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/constants/text_styles.dart';
-import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
-import 'package:ecommerce_demo/widgets/text_on_bankcard.dart';
 
 class CheckoutScreen extends StatelessWidget {
   static const String id = 'checkout_screen';
@@ -16,7 +13,6 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthService>(context);
 
     return Scaffold(
       appBar: AppBar(

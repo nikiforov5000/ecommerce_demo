@@ -2,7 +2,6 @@ import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class UserAccountScreen extends StatelessWidget {
   static String id = 'user_account_screen';

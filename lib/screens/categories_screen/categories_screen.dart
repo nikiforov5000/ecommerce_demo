@@ -38,7 +38,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('categories_screen.dart -> categories.length:${categories.length}');
+
     return Scaffold(
       appBar: AppBar(
         title: Text('eCommerce'),

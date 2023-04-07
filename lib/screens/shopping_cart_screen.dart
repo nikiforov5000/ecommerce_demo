@@ -2,7 +2,6 @@ import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/constants/decorations.dart';
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/models/shopping_cart.dart';
-import 'package:ecommerce_demo/screens/checkout_screen.dart';
 import 'package:ecommerce_demo/screens/order_summary.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
@@ -21,11 +20,6 @@ class ShoppingCartScreen extends StatefulWidget {
 }
 
 class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     double total = shoppingCart.getSum();
