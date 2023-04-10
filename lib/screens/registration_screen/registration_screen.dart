@@ -1,4 +1,4 @@
-import 'package:ecommerce_demo/models/local_user.dart';
+import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';

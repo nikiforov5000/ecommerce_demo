@@ -1,4 +1,4 @@
-import 'package:ecommerce_demo/models/local_user.dart';
+import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/screens/user_account_screen.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:flutter/material.dart';

@@ -1,17 +1,45 @@
-import 'package:ecommerce_demo/models/local_user.dart';
+import 'package:ecommerce_demo/models/user/local_user.dart';
+import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
-import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
+
+
 class UserAccountScreen extends StatelessWidget {
   static String id = 'user_account_screen';
   LocalUser? _user;
+  UserAccount? _userAccount;
+
+  final emailController = TextEditingController();
+  final addressController = TextEditingController();
+  final fullNameController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+
+
+
+  getUserAccount() async {
+    _userAccount = await UserAccount.getUserAccount(uid: _user!.uid);
+  }
+
+  fillControllerText() {
+
+    emailController.text = _userAccount!.email;
+    addressController.text = _userAccount!.address ?? '';
+    fullNameController.text = _userAccount!.fullName ?? '';
+    phoneNumberController.text = _userAccount!.phoneNumber ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    getUserAccount();
+
+    fillControllerText();
+
     final userProvider = Provider.of<LocalUserProvider>(context);
     _user = userProvider.localUser;
     print(_user);
@@ -29,60 +57,39 @@ class UserAccountScreen extends StatelessWidget {
           SizedBox(height: 20.0,),
           Text('User Account'),
           _user != null
-            ? Column(
+              ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                userInfo(),
-                userProfileInput(),
+                EditTextField(label: 'Email', controller: emailController),
+                EditTextField(label: 'Address', controller: addressController),
+                EditTextField(label: 'Full Name', controller: fullNameController),
               ]
-            )
-            : Text('_user is null'),
+          )
+              : Text('_user is null'),
         ],
       ),
     );
   }
+}
 
-  userInfo() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(_user!.uid),
-          Text(_user!.email),
-        ],
-      ),
-    );
-  }
 
-  userProfileInput() {
-    TextEditingController nameController = TextEditingController();
-    TextEditingController addressController = TextEditingController();
+class EditTextField extends StatelessWidget{
 
-    return Column(
+  final String label;
+  final TextEditingController controller;
+  EditTextField({required this.label, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+
       children: [
-        TextField(
-          controller: nameController,
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-            hintText: 'Enter your name',
-          ),
-        ),
-        TextField(
-          controller: addressController,
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-            hintText: 'Enter your address',
-          ),
-        ),
-        RoundedButton(
-          labelWidget: Text('Save'),
-          onTapCallback: () {
-            // _userProvider!.updateUserInfo({
-            //   'name': nameController.text,
-            //   'address': addressController.text,
-            // });
-          },
-        ),
+        Flexible(child: Row(
+          children: [
+            Text(label),
+          ],
+        )),
+        Flexible(flex: 2,child: TextField(controller: controller)),
       ],
     );
   }

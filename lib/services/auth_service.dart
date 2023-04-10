@@ -1,4 +1,4 @@
-import 'package:ecommerce_demo/models/local_user.dart';
+import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
