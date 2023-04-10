@@ -9,7 +9,7 @@ class AuthService {
 
     return LocalUser(
       uid: user.uid,
-      email: user.email,
+      email: user.email!,
       displayName: user.displayName ?? '',
       photoUrl: user.photoURL ?? '',
     );

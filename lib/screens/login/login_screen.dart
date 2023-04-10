@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     emailController.text,
                     passwordController.text,
                   );
-                  _userProvider.localUser = user;
+                  // _userProvider.localUser = user;
                 },
               ),
               Padding(

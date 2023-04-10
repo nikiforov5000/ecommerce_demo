@@ -1,13 +1,13 @@
 class LocalUser {
   final String uid;
+  final String email;
   final String? displayName;
-  final String? email;
   final String? photoUrl;
 
   LocalUser({
     required this.uid,
+    required this.email,
     this.displayName,
-    this.email,
     this.photoUrl,
   });
 }
