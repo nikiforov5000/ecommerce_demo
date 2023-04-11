@@ -22,16 +22,13 @@ class UserAccount extends ChangeNotifier{
   });
 
   static fetchAccount({required String uid}) async {
-    print('user_account.dart -> fetchAccount()');
     final firestore = FirebaseFirestore.instance;
     final snapshot = await firestore.collection('users').doc(uid).get();
-    print('user_account.dart -> snapshot is ready');
     if (snapshot.data() == null) { return null; }
     return _snapshotToUserAccount(snapshot.data()!);
   }
 
   static _snapshotToUserAccount(Map<String, dynamic> data) {
-    print('user_account.dart -> _snapshotToUserAccount');
     final uid = data['uid'];
     final createdAt = (data['createdAt'] as Timestamp).toDate();
     final email = data['email'];
@@ -65,11 +62,9 @@ class UserAccount extends ChangeNotifier{
   }
 
   void update({required String address, required String phoneNumber}) async {
-
     await FirebaseFirestore.instance.collection('users').doc(uid).update({
       'address': address,
       'phoneNumber': phoneNumber,
     });
-
   }
 }

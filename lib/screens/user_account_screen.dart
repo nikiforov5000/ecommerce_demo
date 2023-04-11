@@ -19,21 +19,16 @@ class UserAccountScreen extends StatelessWidget {
   final addressController = TextEditingController();
   final phoneNumberController = TextEditingController();
 
+  UserAccountScreen({super.key});
 
   static fetchAccount({required String uid}) async {
-    print('user_account.dart -> getUserAccount()');
     final firestore = FirebaseFirestore.instance;
-    final snapshot = await firestore.collection('users').doc(uid).get().then((value) {
-      print(value);
-      return value;
-    });
-    print('user_account.dart -> snapshot is ready');
+    final snapshot = await firestore.collection('users').doc(uid).get();
     if (snapshot.data() == null) { return null; }
     return _snapshotToUserAccount(snapshot.data()!);
   }
 
   static _snapshotToUserAccount(Map<String, dynamic> data) {
-    print('user_account.dart -> _snapshotToUserAccount');
     final uid = data['uid'];
     final createdAt = (data['createdAt'] as Timestamp).toDate();
     final email = data['email'];
@@ -57,19 +52,12 @@ class UserAccountScreen extends StatelessWidget {
     );
   }
 
-
   getUserAccount() async {
-    print('user_account_screeen.dart -> getUserAccount()');
     _userAccount = await UserAccount.fetchAccount(uid: _user!.uid);
-    print('\t' + _userAccount!.email);
     fillControllerText();
-
   }
 
   fillControllerText() async {
-    print('user_account_screeen.dart -> fillControllerText()');
-
-    print('\t' + _userAccount.toString());
     emailController.text = _userAccount!.email;
     addressController.text = _userAccount!.address ?? '';
     phoneNumberController.text = _userAccount!.phoneNumber ?? '';
@@ -81,10 +69,7 @@ class UserAccountScreen extends StatelessWidget {
 
     final userProvider = Provider.of<LocalUserProvider>(context);
     _user = userProvider.localUser;
-
     getUserAccount();
-
-
     return Scaffold(
       appBar: AppBar(
         title: Text(_user == null ? 'null' : _user!.email),
@@ -95,8 +80,8 @@ class UserAccountScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(height: 20.0,),
-          Text('User Account'),
+          const SizedBox(height: 20.0,),
+          const Text('User Account'),
           _user != null
               ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -126,12 +111,11 @@ class EditTextField extends StatelessWidget{
 
   final String label;
   final TextEditingController controller;
-  EditTextField({required this.label, required this.controller});
+  const EditTextField({super.key, required this.label, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Row(
-
       children: [
         Flexible(child: Row(
           children: [
