@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
@@ -16,37 +17,77 @@ class UserAccountScreen extends StatelessWidget {
 
   final emailController = TextEditingController();
   final addressController = TextEditingController();
-  final fullNameController = TextEditingController();
   final phoneNumberController = TextEditingController();
 
 
-
-  getUserAccount() async {
-    _userAccount = await UserAccount.getUserAccount(uid: _user!.uid);
+  static fetchAccount({required String uid}) async {
+    print('user_account.dart -> getUserAccount()');
+    final firestore = FirebaseFirestore.instance;
+    final snapshot = await firestore.collection('users').doc(uid).get().then((value) {
+      print(value);
+      return value;
+    });
+    print('user_account.dart -> snapshot is ready');
+    if (snapshot.data() == null) { return null; }
+    return _snapshotToUserAccount(snapshot.data()!);
   }
 
-  fillControllerText() {
+  static _snapshotToUserAccount(Map<String, dynamic> data) {
+    print('user_account.dart -> _snapshotToUserAccount');
+    final uid = data['uid'];
+    final createdAt = (data['createdAt'] as Timestamp).toDate();
+    final email = data['email'];
+    final shoppingCartRef =
+    data['shoppingCartRef'] as DocumentReference<Map<String, dynamic>>;
 
+    String? phoneNumber = data['phoneNumber'];
+    String? address = data['address'];
+    DateTime? updatedAt = data['updatedAt'] != null
+        ? (data['updatedAt'] as Timestamp).toDate()
+        : null;
+
+    return UserAccount(
+      createdAt: createdAt,
+      uid: uid,
+      email: email,
+      shoppingCartRef: shoppingCartRef,
+      phoneNumber: phoneNumber,
+      address: address,
+      updatedAt: updatedAt,
+    );
+  }
+
+
+  getUserAccount() async {
+    print('user_account_screeen.dart -> getUserAccount()');
+    _userAccount = await UserAccount.fetchAccount(uid: _user!.uid);
+    print('\t' + _userAccount!.email);
+    fillControllerText();
+
+  }
+
+  fillControllerText() async {
+    print('user_account_screeen.dart -> fillControllerText()');
+
+    print('\t' + _userAccount.toString());
     emailController.text = _userAccount!.email;
-    // addressController.text = _userAccount!.address ?? '';
-    // fullNameController.text = _userAccount!.fullName ?? '';
-    // phoneNumberController.text = _userAccount!.phoneNumber ?? '';
+    addressController.text = _userAccount!.address ?? '';
+    phoneNumberController.text = _userAccount!.phoneNumber ?? '';
   }
 
   @override
   Widget build(BuildContext context) {
-
-    getUserAccount();
-
-    fillControllerText();
+    print('user_account_screeen.dart -> build()');
 
     final userProvider = Provider.of<LocalUserProvider>(context);
     _user = userProvider.localUser;
-    print(_user);
+
+    getUserAccount();
+
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_user!.email),
+        title: Text(_user == null ? 'null' : _user!.email),
         actions: [
           LogoutButton(),
           UserAvatarWidget(),
@@ -62,9 +103,17 @@ class UserAccountScreen extends StatelessWidget {
               children: [
                 EditTextField(label: 'Email', controller: emailController),
                 EditTextField(label: 'Address', controller: addressController),
-                EditTextField(label: 'Full Name', controller: fullNameController),
-              ]
-          )
+                EditTextField(label: 'Phone number', controller: phoneNumberController),
+                  ElevatedButton(
+                    onPressed: () {
+                      _userAccount!.update(
+                        address: addressController.text,
+                        phoneNumber: phoneNumberController.text,
+                      );
+                    },
+                    child: Text('Update'),
+                  ),
+                ])
               : Text('_user is null'),
         ],
       ),
