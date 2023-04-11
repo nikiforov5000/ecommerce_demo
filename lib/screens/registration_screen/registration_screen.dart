@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_demo/models/shopping_cart.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
+import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
@@ -93,7 +96,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         emailController.text,
                         passwordController.text,
                       );
+                      DocumentReference cartRef = await ShoppingCart.createShoppingCart(user!.uid);
                       userProvider.localUser = user;
+                      UserAccount.createFirestoreUserAccount(user, cartRef);
                       Navigator.pop(context);
                     }
                   }

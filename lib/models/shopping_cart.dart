@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/models/product.dart';
 
 ShoppingCart shoppingCart = ShoppingCart();
@@ -51,4 +52,9 @@ class ShoppingCart {
   getAmount() {
     return _amount;
   }
+
+  static createShoppingCart(String uid) {
+    return FirebaseFirestore.instance.collection('carts').add({'uid': uid});
+  }
+
 }

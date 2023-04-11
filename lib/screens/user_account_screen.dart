@@ -28,9 +28,9 @@ class UserAccountScreen extends StatelessWidget {
   fillControllerText() {
 
     emailController.text = _userAccount!.email;
-    addressController.text = _userAccount!.address ?? '';
-    fullNameController.text = _userAccount!.fullName ?? '';
-    phoneNumberController.text = _userAccount!.phoneNumber ?? '';
+    // addressController.text = _userAccount!.address ?? '';
+    // fullNameController.text = _userAccount!.fullName ?? '';
+    // phoneNumberController.text = _userAccount!.phoneNumber ?? '';
   }
 
   @override
