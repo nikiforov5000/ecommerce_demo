@@ -81,6 +81,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 ],
               ),
             ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     ProductData.addIdToAllProducts();
+            //   },
+            //   child: Text('Add id to all products'),
+            // ),
           ],
         ),
       ),
