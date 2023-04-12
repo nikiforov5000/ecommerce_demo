@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
+import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-
-
 
 class UserAccountScreen extends StatelessWidget {
   static String id = 'user_account_screen';
@@ -18,6 +17,7 @@ class UserAccountScreen extends StatelessWidget {
   final emailController = TextEditingController();
   final addressController = TextEditingController();
   final phoneNumberController = TextEditingController();
+
 
   UserAccountScreen({super.key});
 
@@ -72,35 +72,37 @@ class UserAccountScreen extends StatelessWidget {
     getUserAccount();
     return Scaffold(
       appBar: AppBar(
-        title: Text(_user == null ? 'null' : _user!.email),
+        title: Text('Your Account'),
         actions: [
           LogoutButton(),
           UserAvatarWidget(),
         ],
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 20.0,),
-          const Text('User Account'),
-          _user != null
-              ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: _user != null
+            ? Container(
+              child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                EditTextField(label: 'Email', controller: emailController),
+                const SizedBox(height: 20.0,),
+                Text('User: ${_user?.email}'),
                 EditTextField(label: 'Address', controller: addressController),
                 EditTextField(label: 'Phone number', controller: phoneNumberController),
-                  ElevatedButton(
-                    onPressed: () {
+                  RoundedButton(
+                    labelWidget: Text('Update'),
+                    onTapCallback: () {
                       _userAccount!.update(
+                        updatedAt: DateTime.now(),
                         address: addressController.text,
                         phoneNumber: phoneNumberController.text,
                       );
                     },
-                    child: Text('Update'),
                   ),
-                ])
-              : Text('_user is null'),
-        ],
+                ]),
+            )
+            : Text('_user is null'),
       ),
     );
   }
@@ -122,7 +124,16 @@ class EditTextField extends StatelessWidget{
             Text(label),
           ],
         )),
-        Flexible(flex: 2,child: TextField(controller: controller)),
+        Flexible(
+          flex: 2,
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: 'Enter your ${label}',
+              border: InputBorder.none
+            ),
+            controller: controller,
+          ),
+        ),
       ],
     );
   }
