@@ -1,14 +1,16 @@
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/constants/decorations.dart';
 import 'package:ecommerce_demo/models/product.dart';
-import 'package:ecommerce_demo/models/shopping_cart.dart';
+import 'package:ecommerce_demo/models/shoppint_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/screens/order_summary.dart';
+import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ShoppingCartScreen extends StatefulWidget {
   const ShoppingCartScreen({Key? key}) : super(key: key);
@@ -22,7 +24,9 @@ class ShoppingCartScreen extends StatefulWidget {
 class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   @override
   Widget build(BuildContext context) {
-    double total = shoppingCart.getSum();
+    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+    final _shoppingCart = _shoppingCartProvider.shoppingCart;
+    double total = _shoppingCart!.getSum();
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
@@ -42,10 +46,10 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: shoppingCart.getSize(),
+                itemCount: _shoppingCart.getSize(),
                 itemBuilder: (BuildContext context, int index) {
                   Product product =
-                      shoppingCart.getCartMap().keys.elementAt(index);
+                      _shoppingCart.getCartMap().keys.elementAt(index);
                   return Container(
                     margin: EdgeInsets.only(bottom: 15),
                     padding: EdgeInsets.symmetric(
@@ -105,7 +109,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                                     ),
                                     DropdownButton(
                                       underline: SizedBox(),
-                                      value: shoppingCart.getCartMap()[product],
+                                      value: _shoppingCart.getCartMap()[product],
                                       items: List.generate(11, (index) {
                                         return DropdownMenuItem(
                                           alignment: AlignmentDirectional.center,
@@ -122,7 +126,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                                       onChanged: (value) {
                                         setState(() {
                                           if (value != null) {
-                                            shoppingCart.updateQty(
+                                            _shoppingCart.updateQty(
                                               product: product,
                                               qty: value as int,
                                             );
@@ -138,6 +142,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                               ),
                               Expanded(
                                 child: RemoveButton(
+                                  shoppingCart: _shoppingCart,
                                   product: product,
                                   onTapCallback: (callback) {
                                     setState(() {
@@ -190,10 +195,11 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 }
 
 class RemoveButton extends StatelessWidget {
-  RemoveButton({required this.product, required this.onTapCallback});
+  RemoveButton({required this.product, required this.onTapCallback, required this.shoppingCart});
 
   final Function onTapCallback;
   final Product product;
+  final ShoppingCart shoppingCart;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

@@ -1,15 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/models/product.dart';
-import 'package:ecommerce_demo/models/shopping_cart.dart';
+import 'package:ecommerce_demo/models/shoppint_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
+import 'package:provider/provider.dart';
 
 class ProductScreen extends StatelessWidget {
   static const String id = 'product_screen';
@@ -104,6 +106,8 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
 
   @override
   Widget build(BuildContext context) {
+    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+    final _shoppingCart = _shoppingCartProvider.shoppingCart;
     return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -163,7 +167,7 @@ class _ButtonsBlockState extends State<ButtonsBlock> {
           RoundedButton(
               labelWidget: ButtonText(text: 'Add to Cart'),
               onTapCallback: () {
-                shoppingCart.addProduct(widget.product, quantity);
+                _shoppingCart!.addProduct(widget.product, quantity);
               }),
           RoundedButton(
               labelWidget: ButtonText(text: 'Go to Cart'),
