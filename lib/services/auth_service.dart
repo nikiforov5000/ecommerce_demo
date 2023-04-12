@@ -1,105 +1,47 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:google_sign_in/google_sign_in.dart';
-
-import 'package:ecommerce_demo/models/user.dart';
+import 'package:ecommerce_demo/models/user/local_user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
-  // for further code improvement go to
-  /// https://github.com/flutter/packages/blob/main/packages/google_sign_in/google_sign_in/example/lib/main.dart
+  final _firebaseAuth = FirebaseAuth.instance;
 
-  final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
+  LocalUser? _localUserFromFirebaseAuth(User? user) {
+    if (user == null) { return null; }
 
-  User? _userFromFirebase(auth.User? user) {
-    if (user == null) {
-      return null;
-    }
-    return User(email: user.email!, uid: user.uid);
+    return LocalUser(
+      uid: user.uid,
+      email: user.email!,
+      displayName: user.displayName ?? '',
+      photoUrl: user.photoURL ?? '',
+    );
   }
 
-  Stream<User?> get user {
-    return _firebaseAuth.authStateChanges().map(_userFromFirebase);
+  Stream<LocalUser?>? get user {
+    return _firebaseAuth.authStateChanges().map(_localUserFromFirebaseAuth);
   }
 
-  auth.User? get authUser {
-    return _firebaseAuth.currentUser;
+  Future<LocalUser?> signInWithEmailAndPassword(
+      String email, String password
+      ) async {
+    final credential = await _firebaseAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    return _localUserFromFirebaseAuth(credential.user);
   }
 
-  Future<User?> signInWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
-    try {
-      final credential = await _firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return _userFromFirebase(credential.user);
-    }
-      catch (e) {
-        print('auth_service.dart -> signInWithEmailAndPassword:$e');
-      }
-  }
+  Future<LocalUser?> createUserWithEmailAndPassword(
+      String email, String password
+      ) async {
+    final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return _localUserFromFirebaseAuth(credential.user);
 
-  Future<User?> createUserWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
-    try {
-      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return _userFromFirebase(credential.user);
-    }
-    catch (e) {
-      print('auth_service.dart -> createUserWithEmailAndPassword:$e');
-    }
   }
 
   Future<void> signOut() async {
-    try {
-      return await _firebaseAuth.signOut();
-    }
-    catch (e) {
-      print('auth_service.dart -> signOut:$e');
-    }
-  }
-
-  Future<User?> signInWithGoogle() async {
-
-    GoogleSignIn googleSignIn = GoogleSignIn(
-      scopes: <String>[
-        'email',
-        'https://www.googleapis.com/auth/contacts.readonly',
-      ],
-    );
-
-    print('sign-in with google button');
-    try {
-      final googleUser = await googleSignIn.signIn();
-      if (googleUser != null) {
-        final googleAuth = await googleUser.authentication;
-        final credential = auth.GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
-        );
-        final userCredential =
-            await _firebaseAuth.signInWithCredential(credential);
-        if (userCredential != null
-            && userCredential.additionalUserInfo != null
-            && userCredential.additionalUserInfo!.isNewUser
-            ) {
-          final currentUser = _firebaseAuth.currentUser;
-          if (currentUser != null) {
-            await currentUser.updateDisplayName(googleUser.displayName);
-            return _userFromFirebase(currentUser);
-          }
-        }
-        print('all good, next is navigator');
-      }
-    } catch (e) {
-      print('Error signing in with Google: $e');
-    }
+    return await _firebaseAuth.signOut();
   }
 }

@@ -1,16 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/models/shopping_cart.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
-import 'package:ecommerce_demo/services/auth_service.dart';
-import 'package:ecommerce_demo/services/user_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
@@ -19,26 +15,18 @@ class ProductScreen extends StatelessWidget {
   static const String id = 'product_screen';
   final Product product;
 
-  ProductScreen({required this.product}) {}
+  ProductScreen({required this.product});
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    final authService = Provider.of<AuthService>(context);
-    final userProvider = Provider.of<UserProvider>(context);
-    final user = userProvider.user;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(product.title),
         actions: [
           UserAvatarWidget(),
-
-          // Text(userProvider.user == null ? 'null' : userProvider.user.email),
-          // todo update UserAvatar to receive User
-          // UserAvatarWidget(user: user),
         ],
       ),
       body: Container(
@@ -90,7 +78,7 @@ class ProductImageCarousel extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        ImageScreen(product: product, index: i),
+                        LargeImageScreen(product: product, index: i),
                   ),
                 );
               },
@@ -241,8 +229,8 @@ class AboutProduct extends StatelessWidget {
   }
 }
 
-class ImageScreen extends StatelessWidget {
-  const ImageScreen({required this.product, required this.index});
+class LargeImageScreen extends StatelessWidget {
+  const LargeImageScreen({required this.product, required this.index});
 
   final int index;
   final Product product;

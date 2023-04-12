@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecommerce_demo/models/user.dart';
-import 'package:ecommerce_demo/services/user_provider.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/models/user/local_user.dart';
+import 'package:ecommerce_demo/models/user_account/user_account.dart';
+import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
@@ -9,78 +11,128 @@ import 'package:provider/provider.dart';
 
 class UserAccountScreen extends StatelessWidget {
   static String id = 'user_account_screen';
-  User? user;
-  UserProvider? _userProvider;
+  LocalUser? _user;
+  UserAccount? _userAccount;
+
+  final emailController = TextEditingController();
+  final addressController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+
+
+  UserAccountScreen({super.key});
+
+  static fetchAccount({required String uid}) async {
+    final firestore = FirebaseFirestore.instance;
+    final snapshot = await firestore.collection('users').doc(uid).get();
+    if (snapshot.data() == null) { return null; }
+    return _snapshotToUserAccount(snapshot.data()!);
+  }
+
+  static _snapshotToUserAccount(Map<String, dynamic> data) {
+    final uid = data['uid'];
+    final createdAt = (data['createdAt'] as Timestamp).toDate();
+    final email = data['email'];
+    final shoppingCartRef =
+    data['shoppingCartRef'] as DocumentReference<Map<String, dynamic>>;
+
+    String? phoneNumber = data['phoneNumber'];
+    String? address = data['address'];
+    DateTime? updatedAt = data['updatedAt'] != null
+        ? (data['updatedAt'] as Timestamp).toDate()
+        : null;
+
+    return UserAccount(
+      createdAt: createdAt,
+      uid: uid,
+      email: email,
+      shoppingCartRef: shoppingCartRef,
+      phoneNumber: phoneNumber,
+      address: address,
+      updatedAt: updatedAt,
+    );
+  }
+
+  getUserAccount() async {
+    _userAccount = await UserAccount.fetchAccount(uid: _user!.uid);
+    fillControllerText();
+  }
+
+  fillControllerText() async {
+    emailController.text = _userAccount!.email;
+    addressController.text = _userAccount!.address ?? '';
+    phoneNumberController.text = _userAccount!.phoneNumber ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
-    _userProvider = Provider.of<UserProvider>(context);
-    user = _userProvider!.user;
+    print('user_account_screeen.dart -> build()');
+
+    final userProvider = Provider.of<LocalUserProvider>(context);
+    _user = userProvider.localUser;
+    getUserAccount();
     return Scaffold(
       appBar: AppBar(
-        title: Text(user!.email),
+        title: Text('Your Account'),
         actions: [
           LogoutButton(),
           UserAvatarWidget(),
         ],
       ),
-      body: Column(
-        children: [
-          Text('User Account'),
-          user != null
-            ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: _user != null
+            ? Container(
+              child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                userInfo(),
-                userProfileInput(),
-              ]
+                const SizedBox(height: 20.0,),
+                Text('User: ${_user?.email}'),
+                EditTextField(label: 'Address', controller: addressController),
+                EditTextField(label: 'Phone number', controller: phoneNumberController),
+                  RoundedButton(
+                    labelWidget: Text('Update'),
+                    onTapCallback: () {
+                      _userAccount!.update(
+                        updatedAt: DateTime.now(),
+                        address: addressController.text,
+                        phoneNumber: phoneNumberController.text,
+                      );
+                    },
+                  ),
+                ]),
             )
-            : Text('user is null'),
-        ],
+            : Text('_user is null'),
       ),
     );
   }
+}
 
-  userInfo() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(user!.uid),
-          Text(user!.email),
-        ],
-      ),
-    );
-  }
 
-  userProfileInput() {
-    TextEditingController nameController = TextEditingController();
-    TextEditingController addressController = TextEditingController();
+class EditTextField extends StatelessWidget{
 
-    return Column(
+  final String label;
+  final TextEditingController controller;
+  const EditTextField({super.key, required this.label, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       children: [
-        TextField(
-          controller: nameController,
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-            hintText: 'Enter your name',
+        Flexible(child: Row(
+          children: [
+            Text(label),
+          ],
+        )),
+        Flexible(
+          flex: 2,
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: 'Enter your ${label}',
+              border: InputBorder.none
+            ),
+            controller: controller,
           ),
-        ),
-        TextField(
-          controller: addressController,
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-            hintText: 'Enter your address',
-          ),
-        ),
-        RoundedButton(
-          labelWidget: Text('Save'),
-          onTapCallback: () {
-            _userProvider!.updateUserInfo({
-              'name': nameController.text,
-              'address': addressController.text,
-            });
-          },
         ),
       ],
     );
