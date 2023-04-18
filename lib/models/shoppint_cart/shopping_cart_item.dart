@@ -6,13 +6,15 @@ class ShoppingCartItem {
   double? price;
   int? quantity;
   String? imgUrl;
+  String? title;
 
   ShoppingCartItem({
-    this.imgUrl,
-    this.productId,
-    this.additionDate,
     this.quantity,
+    this.imgUrl,
     this.price,
+    this.additionDate,
+    this.title,
+    this.productId,
   });
 
   ShoppingCartItem.fromMap(Map<String, dynamic> data)
@@ -22,15 +24,15 @@ class ShoppingCartItem {
         quantity = data['quantity'],
         price = data['price'];
 
-  factory ShoppingCartItem.fromFirestore(DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    final data = snapshot.data();
+  factory ShoppingCartItem.fromFirestore(Map<String, dynamic> data) {
     if (data == null) { return ShoppingCartItem(); }
     return ShoppingCartItem(
-      imgUrl: data['imgUrl'],
       productId: data['id'],
-      additionDate: data['additionDate'],
+      title: data['title'],
+      additionDate: (data['additionDate'] as Timestamp).toDate(),
+      price: data['price'].toDouble(),
+      imgUrl: data['imgUrl'],
       quantity: data['quantity'],
-      price: data['price'],
     );
   }
 

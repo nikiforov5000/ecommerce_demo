@@ -16,9 +16,10 @@ class ShoppingCart {
     return _shoppingCart;
   }
 
-  getSize() {
-    return _shoppingCart.length;
-  }
+  // getSize()  {
+  //     _amount = FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').count();
+  //   // return
+  // }
 
   getSum() {
     return _sum;
@@ -28,9 +29,10 @@ class ShoppingCart {
     FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').add({
       'productId': product.id,
       'title': product.getShortTitle(),
+      'additionDate': DateTime.now(),
       'price': product.price,
       'imgUrl': product.imgUrl,
-      'qty': quantity
+      'quantity': quantity,
     });
 
     if (_shoppingCart.keys.contains(product)) {
