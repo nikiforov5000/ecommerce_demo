@@ -42,7 +42,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
     final _shoppingCart = _shoppingCartProvider.shoppingCart;
 
-    print('categories_screen.dart -> ' + context.read<LocalUserProvider>().localUser!.email);
+    // print('categories_screen.dart -> ' + context.read<LocalUserProvider>().localUser!.email);
     return Scaffold(
       appBar: AppBar(
         title: Text('eCommerce'),

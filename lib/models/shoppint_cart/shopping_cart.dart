@@ -25,7 +25,13 @@ class ShoppingCart {
   }
 
   addProduct(Product product, int quantity) {
-    FirebaseFirestore.instance.collection('carts').doc();
+    FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').add({
+      'productId': product.id,
+      'title': product.getShortTitle(),
+      'price': product.price,
+      'imgUrl': product.imgUrl,
+      'qty': quantity
+    });
 
     if (_shoppingCart.keys.contains(product)) {
       quantity += _shoppingCart[product]!;
