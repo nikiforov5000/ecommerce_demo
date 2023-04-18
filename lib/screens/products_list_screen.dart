@@ -42,12 +42,14 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   Widget build(BuildContext context) {
     final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
     final _shoppingCart = _shoppingCartProvider.shoppingCart;
+    print('product_list_screen -> shoppingCart.id:' + _shoppingCart!.id);
     print('ProductsListScreen().build');
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text('eCommerce Demo'),
         actions: [
+          // Text(_shoppingCart!.id, style: TextStyle(color: Colors.black),),
           LogoutButton(),
           UserAvatarWidget(),
         ],

@@ -23,6 +23,9 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+    final _shoppingCart = _shoppingCartProvider.shoppingCart;
+    print('product_screen -> shoppingCart.id:' + _shoppingCart!.id);
 
     return Scaffold(
       appBar: AppBar(

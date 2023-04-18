@@ -26,6 +26,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   Widget build(BuildContext context) {
     final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
     final _shoppingCart = _shoppingCartProvider.shoppingCart;
+    print('shopping_cart_screen -> shoppingCart.id:' + _shoppingCart!.id);
     double total = _shoppingCart!.getSum();
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
