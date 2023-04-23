@@ -25,14 +25,18 @@ class ShoppingCart {
     return _sum;
   }
 
-  addProduct(Product product, int quantity) {
-    FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').add({
+  addProduct(Product product, int quantity) async {
+    var ref = await FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').add({
       'productId': product.id,
       'title': product.getShortTitle(),
       'additionDate': DateTime.now(),
       'price': product.price,
       'imgUrl': product.imgUrl,
       'quantity': quantity,
+    });
+
+    ref.update({
+      'id': ref.id,
     });
 
     if (_shoppingCart.keys.contains(product)) {

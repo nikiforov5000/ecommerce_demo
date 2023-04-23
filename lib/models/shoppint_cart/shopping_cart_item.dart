@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ShoppingCartItem {
+  String id;
   DateTime? additionDate;
   String? productId;
   double? price;
@@ -9,6 +10,7 @@ class ShoppingCartItem {
   String? title;
 
   ShoppingCartItem({
+    required this.id,
     this.quantity,
     this.imgUrl,
     this.price,
@@ -17,17 +19,18 @@ class ShoppingCartItem {
     this.productId,
   });
 
-  ShoppingCartItem.fromMap(Map<String, dynamic> data)
-      : imgUrl = data['imgUrl'],
-        productId = data['id'],
-        additionDate = (data['additionDate'] as Timestamp).toDate(),
-        quantity = data['quantity'],
-        price = data['price'];
+  // ShoppingCartItem.fromMap(Map<String, dynamic> data)
+  //     : imgUrl = data['imgUrl'],
+  //       productId = data['id'],
+  //       additionDate = (data['additionDate'] as Timestamp).toDate(),
+  //       quantity = data['quantity'],
+  //       price = data['price'];
 
   factory ShoppingCartItem.fromFirestore(Map<String, dynamic> data) {
-    if (data == null) { return ShoppingCartItem(); }
+    // if (data == null) { return ShoppingCartItem(id: null); }
     return ShoppingCartItem(
-      productId: data['id'],
+      id: data['id'],
+      productId: data['productId'],
       title: data['title'],
       additionDate: (data['additionDate'] as Timestamp).toDate(),
       price: data['price'].toDouble(),

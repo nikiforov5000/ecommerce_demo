@@ -313,33 +313,7 @@ class CartListViewItemCard extends StatelessWidget {
                       SizedBox(
                         width: 10.0,
                       ),
-                      // DropdownButton(
-                      //   underline: SizedBox(),
-                      //   value: shoppingCart.getCartMap()[product],
-                      //   items: List.generate(11, (index) {
-                      //     return DropdownMenuItem(
-                      //       alignment: AlignmentDirectional.center,
-                      //       child: Container(
-                      //         margin: EdgeInsets.zero,
-                      //         child: Text(
-                      //           index.toString(),
-                      //           style: TextStyle(fontSize: 15.0),
-                      //         ),
-                      //       ),
-                      //       value: index,
-                      //     );
-                      //   }).getRange(1, 11).toList(),
-                      //   onChanged: (value) {
-                      //     setState(() {
-                      //       if (value != null) {
-                      //         shoppingCart.updateQty(
-                      //           product: product,
-                      //           qty: value as int,
-                      //         );
-                      //       }
-                      //     });
-                      //   },
-                      // ),
+                      QuantityDropdownButton(),
                     ],
                   ),
                 ),
@@ -366,3 +340,34 @@ class CartListViewItemCard extends StatelessWidget {
     );
   }
 }
+
+class QuantityDropdownButton extends StatefulWidget {
+  const QuantityDropdownButton({Key? key}) : super(key: key);
+
+  @override
+  State<QuantityDropdownButton> createState() => QuantityDropdownButton_State();
+}
+
+class QuantityDropdownButton_State extends State<QuantityDropdownButton> {
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton(underline: SizedBox(),
+      items: [],
+      onChanged: (value) {  },
+      // value: shoppingCart.getCartMap()[product],
+      // items: List.generate(11, (index) {
+      //   return DropdownMenuItem(alignment: AlignmentDirectional.center,
+      //     child: Container(margin: EdgeInsets.zero,
+      //       child: Text(index.toString(), style: TextStyle(fontSize: 15.0),),),
+      //     value: index,);
+      // }).getRange(1, 11).toList(),
+      // onChanged: (value) {
+      //   setState(() {
+      //     if (value != null) {
+      //       shoppingCart.updateQty(product: product, qty: value as int,);
+      //     }
+      //   });
+    );
+  }
+}
+
