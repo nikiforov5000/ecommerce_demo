@@ -26,7 +26,10 @@ class ShoppingCart {
   }
 
   addProduct(Product product, int quantity) async {
-    var ref = await FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').add({
+    var ref = await FirebaseFirestore.instance.collection('carts')
+        .doc(id)
+        .collection('cartItems')
+        .add({
       'productId': product.id,
       'title': product.getShortTitle(),
       'additionDate': DateTime.now(),
@@ -70,7 +73,7 @@ class ShoppingCart {
 
   static createShoppingCart(String uid) {
     return FirebaseFirestore.instance.collection('carts').add({'uid': uid});
+    // return FirebaseFirestore.instance.collection('users').doc(uid).collection('carts').
   }
 
 }
-

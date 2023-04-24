@@ -57,7 +57,7 @@ class UserAccount extends ChangeNotifier{
       'createdAt': DateTime.now(),
       'email': user.email,
       'uid': user.uid,
-      'shoppingCartRef': cartRef,
+      'cartRef': cartRef,
     });
   }
 
