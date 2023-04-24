@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/models/product.dart';
+import 'package:ecommerce_demo/models/shoppint_cart/shopping_cart_item.dart';
 
 
 class ShoppingCart {
@@ -15,11 +16,6 @@ class ShoppingCart {
   getCartMap() {
     return _shoppingCart;
   }
-
-  // getSize()  {
-  //     _amount = FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').count();
-  //   // return
-  // }
 
   getSum() {
     return _sum;
@@ -62,13 +58,20 @@ class ShoppingCart {
     updateSum();
   }
 
-  void updateQty({required Product product, required int qty}) {
-    if (qty == 0) {
-      _shoppingCart.remove(product);
-    }
-    else {
-      _shoppingCart[product] = qty;
-    }
+  void updateQty({required ShoppingCartItem cartItem, required int qty}) async {
+    final _firestore = FirebaseFirestore.instance;
+    final _cartRef = _firestore.collection('carts').doc(id);
+    final _cartItemRef = _cartRef.collection('cartItems').doc(cartItem.id);
+    var data = { 'quantity': qty };
+    _cartItemRef.update(data);
+    // FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').doc(cartItem.id).update();
+
+    // if (qty == 0) {
+    //   _shoppingCart.remove(product);
+    // }
+    // else {
+    //   _shoppingCart[product] = qty;
+    // }
     updateSum();
   }
 

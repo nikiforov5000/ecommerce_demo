@@ -7,6 +7,7 @@ import 'package:ecommerce_demo/models/shoppint_cart/shopping_cart_item.dart';
 import 'package:ecommerce_demo/screens/order_summary.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
+import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
@@ -93,7 +94,7 @@ class RemoveButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        onTapCallback(shoppingCart.updateQty(product: product, qty: 0));
+        // onTapCallback(shoppingCart.updateQty(product: product, qty: 0));
       },
       child: Text('Remove', style: TextStyle(fontSize: 10),),
     );
@@ -272,36 +273,21 @@ class CartListViewItemCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          CartItemImage(cartItem: cartItem),
+
+          SizedBox(width: 10),
           Flexible(
-              flex: 2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Text(product.getShortTitle()),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Text(
-                    cartItem.title!,
-                    style: TextStyle(fontSize: 10.0),
-                  ),
-                ],
-              )),
+            flex: 2,
+            child: Text(cartItem.title!),
+          ),
           SizedBox(width: 10),
           Flexible(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Expanded(
-                  child: Container(
-                    child: Text(
-                      '\$' + cartItem.price.toString(),
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
+                CartItemPriceWidget(cartItem: cartItem),
+
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -313,7 +299,7 @@ class CartListViewItemCard extends StatelessWidget {
                       SizedBox(
                         width: 10.0,
                       ),
-                      QuantityDropdownButton(),
+                      QuantityDropdownButton(cartItem: cartItem,),
                     ],
                   ),
                 ),
@@ -341,8 +327,21 @@ class CartListViewItemCard extends StatelessWidget {
   }
 }
 
+class CartItemImage extends StatelessWidget {
+  CartItemImage({required this.cartItem});
+  final ShoppingCartItem cartItem;
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      child: ColorFilteredImage(imgUrl: cartItem.imgUrl!),
+    );
+  }
+}
+
 class QuantityDropdownButton extends StatefulWidget {
-  const QuantityDropdownButton({Key? key}) : super(key: key);
+  const QuantityDropdownButton({Key? key, required this.cartItem}) : super(key: key);
+  final ShoppingCartItem cartItem;
 
   @override
   State<QuantityDropdownButton> createState() => QuantityDropdownButton_State();
@@ -351,23 +350,42 @@ class QuantityDropdownButton extends StatefulWidget {
 class QuantityDropdownButton_State extends State<QuantityDropdownButton> {
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(underline: SizedBox(),
-      items: [],
-      onChanged: (value) {  },
-      // value: shoppingCart.getCartMap()[product],
-      // items: List.generate(11, (index) {
-      //   return DropdownMenuItem(alignment: AlignmentDirectional.center,
-      //     child: Container(margin: EdgeInsets.zero,
-      //       child: Text(index.toString(), style: TextStyle(fontSize: 15.0),),),
-      //     value: index,);
-      // }).getRange(1, 11).toList(),
-      // onChanged: (value) {
-      //   setState(() {
-      //     if (value != null) {
-      //       shoppingCart.updateQty(product: product, qty: value as int,);
-      //     }
-      //   });
+    var shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+    var shoppingCart = shoppingCartProvider.shoppingCart;
+    return DropdownButton(
+      underline: SizedBox(),
+      value: widget.cartItem.quantity! ?? 0,
+      items: List.generate(11, (index) {
+        return DropdownMenuItem(alignment: AlignmentDirectional.center,
+          child: Container(margin: EdgeInsets.zero,
+            child: Text(index.toString(), style: TextStyle(fontSize: 15.0),),),
+          value: index,);
+      }).getRange(1, 11).toList(),
+    //
+      onChanged: (value) {
+        setState(() {
+          if (value != null) {
+            shoppingCart?.updateQty(cartItem: widget.cartItem, qty: value);
+          }
+        });
+      }
     );
   }
 }
 
+class CartItemPriceWidget extends StatelessWidget {
+  const CartItemPriceWidget({Key? key, required this.cartItem}) : super(key: key);
+  final ShoppingCartItem cartItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return  Expanded(
+      child: Container(
+        child: Text(
+          '\$' + cartItem.price.toString(),
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+}
