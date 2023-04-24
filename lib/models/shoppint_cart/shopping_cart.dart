@@ -26,21 +26,34 @@ class ShoppingCart {
   }
 
   addProduct(Product product, int quantity) async {
-    var ref = await FirebaseFirestore.instance.collection('carts')
-        .doc(id)
-        .collection('cartItems')
-        .add({
-      'productId': product.id,
-      'title': product.getShortTitle(),
-      'additionDate': DateTime.now(),
-      'price': product.price,
-      'imgUrl': product.imgUrl,
-      'quantity': quantity,
-    });
+    var cartItemsRef = await FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems');
+    var query = cartItemsRef.where('productId', isEqualTo: product.id).limit(1);
+    var snapshots = await query.get();
 
-    ref.update({
-      'id': ref.id,
-    });
+    if (snapshots.docs.isNotEmpty) {
+      print('shopping_cart.dart -> addProduct() the product is there already, incrementing');
+      cartItemsRef.doc(snapshots.docs.first.id).update(
+          {'quantity': FieldValue.increment(quantity)});
+    }
+    else {
+      var cartItemRef = await FirebaseFirestore.instance.collection('carts')
+          .doc(id)
+          .collection('cartItems')
+          .add({
+        'productId': product.id,
+        'title': product.getShortTitle(),
+        'additionDate': DateTime.now(),
+        'price': product.price,
+        'imgUrl': product.imgUrl,
+        'quantity': quantity,
+      });
+
+      cartItemRef.update({
+        'id': cartItemRef.id,
+      });
+    }
+
+
 
     if (_shoppingCart.keys.contains(product)) {
       quantity += _shoppingCart[product]!;
