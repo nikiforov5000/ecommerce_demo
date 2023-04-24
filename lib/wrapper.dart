@@ -1,10 +1,9 @@
-import 'package:ecommerce_demo/models/shoppint_cart/shopping_cart.dart';
+import 'package:ecommerce_demo/models/shopping_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/screens/categories_screen/categories_screen.dart';
 import 'package:ecommerce_demo/screens/login/login_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
-import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

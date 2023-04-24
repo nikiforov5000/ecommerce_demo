@@ -1,4 +1,4 @@
-import 'package:ecommerce_demo/models/shoppint_cart/shopping_cart.dart';
+import 'package:ecommerce_demo/models/shopping_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/screens/order_success/constants.dart';
 import 'package:ecommerce_demo/screens/order_success/widgets/big_and_small_text_column.dart';
 import 'package:ecommerce_demo/screens/order_success/widgets/circle_check_icon_widget.dart';

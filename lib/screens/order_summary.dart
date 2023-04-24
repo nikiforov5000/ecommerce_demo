@@ -1,4 +1,3 @@
-import 'package:ecommerce_demo/models/shoppint_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/screens/order_success/order_success_screen.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';

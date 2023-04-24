@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecommerce_demo/models/shoppint_cart/shopping_cart.dart';
+import 'package:ecommerce_demo/models/shopping_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';

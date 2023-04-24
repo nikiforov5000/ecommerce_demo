@@ -1,4 +1,4 @@
-import 'package:ecommerce_demo/models/shoppint_cart/shopping_cart.dart';
+import 'package:ecommerce_demo/models/shopping_cart/shopping_cart.dart';
 import 'package:flutter/cupertino.dart';
 
 class ShoppingCartProvider extends ChangeNotifier {

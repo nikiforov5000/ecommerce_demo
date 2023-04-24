@@ -2,7 +2,6 @@ import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/models/product_category.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
-import 'package:ecommerce_demo/models/shoppint_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/category_button.dart';
