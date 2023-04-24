@@ -85,18 +85,20 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
 }
 
 class RemoveButton extends StatelessWidget {
-  RemoveButton({required this.product, required this.onTapCallback, required this.shoppingCart});
+  RemoveButton({required this.cartItem});
 
-  final Function onTapCallback;
-  final Product product;
-  final ShoppingCart shoppingCart;
+  final ShoppingCartItem cartItem;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // onTapCallback(shoppingCart.updateQty(product: product, qty: 0));
-      },
-      child: Text('Remove', style: TextStyle(fontSize: 10),),
+    var shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+    var shoppingCart = shoppingCartProvider.shoppingCart;
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          shoppingCart!.removeCartItem(cartItem);
+        },
+        child: Text('Remove', style: TextStyle(fontSize: 10),),
+      ),
     );
   }
 }
@@ -306,18 +308,7 @@ class CartListViewItemCard extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                Expanded(
-                  child: Placeholder(),
-                  // child: RemoveButton(
-                  //   shoppingCart: shoppingCart,
-                  //   product: product,
-                  //   onTapCallback: (callback) {
-                  //     setState(() {
-                  //       callback;
-                  //     });
-                  //   },
-                  // ),
-                ),
+                RemoveButton(cartItem: cartItem)
               ],
             ),
           ),
