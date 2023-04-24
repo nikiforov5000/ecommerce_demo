@@ -3,6 +3,7 @@ import 'package:ecommerce_demo/screens/order_summary.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/user_account_screen.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
+import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,7 @@ import 'package:ecommerce_demo/screens/checkout_screen.dart';
 import 'package:ecommerce_demo/screens/login/login_screen.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:ecommerce_demo/screens/registration_screen/registration_screen.dart';
-import 'package:ecommerce_demo/screens/shopping_cart_screen.dart';
+import 'package:ecommerce_demo/screens/shopping_cart_screen/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/constants/text_styles.dart';
@@ -35,8 +36,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LocalUserProvider()),
+        ChangeNotifierProvider(create: (_) => ShoppingCartProvider()),
         Provider<AuthService>(create: (_) => AuthService()),
-        // Provider<LocalUserProvider>(create: (_) => LocalUserProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

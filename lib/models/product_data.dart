@@ -44,6 +44,17 @@ class ProductData {
     return _categories[index];
   }
 
+  // static addIdToAllProducts() async {
+  //   QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
+  //       .collection('products')
+  //       .get();
+  //   for (var doc in snapshot.docs) {
+  //     _firestore.collection('products').doc(doc.id).update({
+  //       'id': doc.id
+  //     });
+  //   }
+  // }
+
   static getProductsOfCategory(String category) async {
     List<Product> categoryProducts = [];
     QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore

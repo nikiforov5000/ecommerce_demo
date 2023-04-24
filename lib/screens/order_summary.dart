@@ -1,15 +1,18 @@
-import 'package:ecommerce_demo/models/shopping_cart.dart';
 import 'package:ecommerce_demo/screens/order_success/order_success_screen.dart';
+import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OrderSummary extends StatelessWidget {
   static const String id = 'order_summary';
 
   @override
   Widget build(BuildContext context) {
-    final totalSum = shoppingCart.getSum();
+    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+    final _shoppingCart = _shoppingCartProvider.shoppingCart;
+    final totalSum = _shoppingCart!.getSum();
 
     return Scaffold(
       appBar: AppBar(

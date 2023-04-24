@@ -3,6 +3,7 @@ import 'package:ecommerce_demo/models/product_category.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
+import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/category_tile.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/search_bar.dart';
@@ -37,7 +38,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('categories_screen.dart -> ' + context.read<LocalUserProvider>().localUser!.email);
+
+    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+    final _shoppingCart = _shoppingCartProvider.shoppingCart;
+
+    // print('categories_screen.dart -> ' + context.read<LocalUserProvider>().localUser!.email);
     return Scaffold(
       appBar: AppBar(
         title: Text('eCommerce'),
@@ -81,6 +86,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 ],
               ),
             ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     ProductData.addIdToAllProducts();
+            //   },
+            //   child: Text('Add id to all products'),
+            // ),
           ],
         ),
       ),

@@ -1,12 +1,14 @@
-import 'package:ecommerce_demo/models/shopping_cart.dart';
+import 'package:ecommerce_demo/models/shopping_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/screens/order_success/constants.dart';
 import 'package:ecommerce_demo/screens/order_success/widgets/big_and_small_text_column.dart';
 import 'package:ecommerce_demo/screens/order_success/widgets/circle_check_icon_widget.dart';
 import 'package:ecommerce_demo/screens/order_success/widgets/small_text.dart';
 import 'package:ecommerce_demo/screens/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/user_account_screen.dart';
+import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -18,8 +20,12 @@ class OrderSuccessScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final total = shoppingCart.getSum();
-    final itemsAmount = shoppingCart.getAmount();
+
+    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+    final _shoppingCart = _shoppingCartProvider.shoppingCart;
+
+    final total = _shoppingCart!.getSum();
+    final itemsAmount = _shoppingCart.getAmount();
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

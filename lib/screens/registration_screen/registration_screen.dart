@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecommerce_demo/models/shopping_cart.dart';
+import 'package:ecommerce_demo/models/shopping_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
+import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
     final userProvider = Provider.of<LocalUserProvider>(context);
+    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
 
     return Scaffold(
       backgroundColor: Colors.orange,
@@ -96,9 +98,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         emailController.text,
                         passwordController.text,
                       );
-                      DocumentReference cartRef = await ShoppingCart.createShoppingCart(user!.uid);
                       userProvider.localUser = user;
+                      DocumentReference cartRef = await ShoppingCart.createShoppingCart(user!.uid);
                       UserAccount.createFirestoreUserAccount(user, cartRef);
+                      _shoppingCartProvider.shoppingCart = ShoppingCart(id: cartRef.id);
+
+
                       Navigator.pop(context);
                     }
                   }
