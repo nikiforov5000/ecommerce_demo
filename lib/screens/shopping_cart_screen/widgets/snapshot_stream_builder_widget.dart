@@ -9,6 +9,8 @@ class SnapshotStreamBuilderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('SnapshotStreamBuilderWidget() -> build');
+    print('shoppingCart.id:' + shoppingCart.id);
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('carts')

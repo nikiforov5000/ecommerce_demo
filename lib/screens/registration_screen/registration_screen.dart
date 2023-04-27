@@ -99,10 +99,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         passwordController.text,
                       );
                       userProvider.localUser = user;
-                      DocumentReference cartRef = await ShoppingCart.createShoppingCart(user!.uid);
-                      UserAccount.createFirestoreUserAccount(user, cartRef);
-                      _shoppingCartProvider.shoppingCart = ShoppingCart(id: cartRef.id);
-
+                      String cartId = await ShoppingCart.createShoppingCart(user!.uid);
+                      await UserAccount.createFirestoreUserAccount(user, cartId);
+                      _shoppingCartProvider.shoppingCart = ShoppingCart(id: cartId);
 
                       Navigator.pop(context);
                     }
