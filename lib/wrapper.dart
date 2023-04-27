@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 Future<void> _setCurrentShoppingCart(ShoppingCartProvider shoppingCartProvider, LocalUser user) async {
   final userAccount = await UserAccount.fetchAccount(uid: user.uid);
+  print('wrapper.dart -> _setCurrentShoppingCart() -> userAccount: $userAccount');
   shoppingCartProvider.shoppingCart = ShoppingCart(id: userAccount.shoppingCartRef.id);
 }
 
@@ -19,7 +20,7 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
-    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+    final shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
 
     return StreamBuilder<LocalUser?>(
       stream: authService.user,
@@ -32,7 +33,7 @@ class Wrapper extends StatelessWidget {
           }
           else {
             print('wrapper.dart -> user is ${user.email}');
-            _setCurrentShoppingCart(_shoppingCartProvider, user);
+            _setCurrentShoppingCart(shoppingCartProvider, user);
             return CategoriesScreen();
           }
         } else {
