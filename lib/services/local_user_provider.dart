@@ -8,7 +8,6 @@ class LocalUserProvider extends ChangeNotifier {
 
   set localUser(LocalUser? user) {
     _localUser = user;
-    // notifyListeners();
   }
 
 }
