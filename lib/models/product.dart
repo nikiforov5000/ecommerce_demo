@@ -33,4 +33,6 @@ class Product {
         rate: data['rate'],
         category: data['category']);
   }
+
+
 }
