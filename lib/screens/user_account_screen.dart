@@ -32,8 +32,7 @@ class UserAccountScreen extends StatelessWidget {
     final uid = data['uid'];
     final createdAt = (data['createdAt'] as Timestamp).toDate();
     final email = data['email'];
-    final shoppingCartRef =
-    data['shoppingCartRef'] as DocumentReference<Map<String, dynamic>>;
+    final cartId = data['cartId'];
 
     String? phoneNumber = data['phoneNumber'];
     String? address = data['address'];
@@ -45,7 +44,7 @@ class UserAccountScreen extends StatelessWidget {
       createdAt: createdAt,
       uid: uid,
       email: email,
-      shoppingCartRef: shoppingCartRef,
+      cartId: cartId,
       phoneNumber: phoneNumber,
       address: address,
       updatedAt: updatedAt,

@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 class UserAccount extends ChangeNotifier{
   final String uid;
   final String email;
-  final DocumentReference<Map<String, dynamic>> shoppingCartRef;
+  final String cartId;
   final DateTime createdAt;
   DateTime? updatedAt;
   String? address;
@@ -15,25 +15,30 @@ class UserAccount extends ChangeNotifier{
     required this.createdAt,
     required this.uid,
     required this.email,
-    required this.shoppingCartRef,
+    required this.cartId,
     this.phoneNumber,
     this.address,
     this.updatedAt,
   });
 
   static fetchAccount({required String uid}) async {
-    final firestore = FirebaseFirestore.instance;
-    final snapshot = await firestore.collection('users').doc(uid).get();
-    if (snapshot.data() == null) { return null; }
-    return _snapshotToUserAccount(snapshot.data()!);
+    print('user_account.dart -> fetchAccount() uid:$uid');
+    try {
+      final firestore = FirebaseFirestore.instance;
+      final userRef = await firestore.collection('users').doc(uid).get();
+      final data = userRef.data() ?? {};
+      return await _snapshotToUserAccount(data);
+    }
+    catch (e) {
+      print('user_account.dart -> fetchAccount() error:$e');
+    }
   }
 
   static _snapshotToUserAccount(Map<String, dynamic> data) {
     final uid = data['uid'];
     final createdAt = (data['createdAt'] as Timestamp).toDate();
     final email = data['email'];
-    final shoppingCartRef =
-        data['shoppingCartRef'] as DocumentReference<Map<String, dynamic>>;
+    final cartId = data['cartId'];
 
     String? phoneNumber = data['phoneNumber'];
     String? address = data['address'];
@@ -45,19 +50,19 @@ class UserAccount extends ChangeNotifier{
       createdAt: createdAt,
       uid: uid,
       email: email,
-      shoppingCartRef: shoppingCartRef,
+      cartId: cartId,
       phoneNumber: phoneNumber,
       address: address,
       updatedAt: updatedAt,
     );
   }
 
-  static void createFirestoreUserAccount(LocalUser user, DocumentReference cartRef) async {
-    await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+  static createFirestoreUserAccount(LocalUser user, String cartId) async {
+    return await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
       'createdAt': DateTime.now(),
       'email': user.email,
       'uid': user.uid,
-      'cartRef': cartRef,
+      'cartId': cartId,
     });
   }
 

@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 Future<void> _setCurrentShoppingCart(ShoppingCartProvider shoppingCartProvider, LocalUser user) async {
-  final userAccount = await UserAccount.fetchAccount(uid: user.uid);
+  final UserAccount userAccount = await UserAccount.fetchAccount(uid: user.uid);
   print('wrapper.dart -> _setCurrentShoppingCart() -> userAccount: $userAccount');
-  shoppingCartProvider.shoppingCart = ShoppingCart(id: userAccount.shoppingCartRef.id);
+  shoppingCartProvider.shoppingCart = ShoppingCart(id: userAccount.cartId);
 }
 
 class Wrapper extends StatelessWidget {

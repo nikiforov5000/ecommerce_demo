@@ -35,45 +35,44 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       body: Container(
         color: kBackgroundColor,
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-        child: Container(
-            child: Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Expanded(
-              child: SnapshotStreamBuilderWidget(
-                shoppingCart: shoppingCart,
+        Expanded(
+          child: SnapshotStreamBuilderWidget(
+            shoppingCart: shoppingCart,
+          ),
+        ),
+        Container(
+          height: 2,
+          color: Colors.grey,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('Total price: '),
+              Text(
+                total.toStringAsFixed(2),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-            ),
-            Container(
-              height: 2,
-              color: Colors.grey,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Total price: '),
-                  Text(
-                    total.toStringAsFixed(2),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: 2,
-              color: Colors.grey,
-            ),
-            RoundedButton(
-              labelWidget: ButtonText(text: 'Next'),
-              onTapCallback: () {
-                Navigator.pushNamed(context, OrderSummary.id);
-              },
-            ),
+            ],
+          ),
+        ),
+        Container(
+          height: 2,
+          color: Colors.grey,
+        ),
+        RoundedButton(
+          labelWidget: ButtonText(text: 'Next'),
+          onTapCallback: () {
+            Navigator.pushNamed(context, OrderSummary.id);
+          },
+        ),
           ],
-        )),
+        ),
       ),
     );
   }

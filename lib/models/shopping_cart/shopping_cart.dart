@@ -80,7 +80,8 @@ class ShoppingCart {
   }
 
   static createShoppingCart(String uid) {
-    return FirebaseFirestore.instance.collection('carts').add({'uid': uid});
+    var cartRef = FirebaseFirestore.instance.collection('carts').add({'uid': uid});
+    return cartRef.then((value) => value.id);
   }
 
   void removeCartItem(ShoppingCartItem cartItem) {
