@@ -1,7 +1,8 @@
 import 'package:ecommerce_demo/constants/decorations.dart';
 import 'package:ecommerce_demo/models/shopping_cart/shopping_cart_item.dart';
-import 'package:ecommerce_demo/screens/shopping_cart_screen/widgets/cart_item/price_widget.dart';
+import 'package:ecommerce_demo/screens/shopping_cart_screen/widgets/cart_item/info_section.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen/widgets/cart_item/image_widget.dart';
+import 'package:ecommerce_demo/screens/shopping_cart_screen/widgets/cart_item/price_widget.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen/widgets/cart_item/quantity_dropdown_button_widget.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen/widgets/cart_item/remove_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class CardWidget extends StatelessWidget {
           const SizedBox(width: 10),
           Flexible(
             flex: 2,
-            child: Text(cartItem.title!),
+            child: InfoSection(cartItem: cartItem),
           ),
           const SizedBox(width: 10),
           Flexible(
@@ -57,6 +58,5 @@ class CardWidget extends StatelessWidget {
     );
   }
 }
-
 
 

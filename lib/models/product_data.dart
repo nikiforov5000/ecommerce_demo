@@ -20,6 +20,12 @@ class ProductData {
   static List<Product> products = [];
   static final List<ProductCategory> _categories = [];
 
+  static getProduct(String id) {
+    for (var product in products) {
+      if (product.id == id) { return product; }
+    }
+  }
+
   getCategoriesList() {
     return _categories;
   }
@@ -28,7 +34,7 @@ class ProductData {
     return _categoriesImgUrls;
   }
 
-  getProduct(int index) {
+  getProductAt(int index) {
     return products[index];
   }
 
