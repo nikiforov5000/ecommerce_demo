@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/models/user_account/user_account.dart';
+import 'package:ecommerce_demo/screens/shopping_cart_screen/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
@@ -74,7 +75,6 @@ class UserAccountScreen extends StatelessWidget {
         title: Text('Your Account'),
         actions: [
           LogoutButton(),
-          UserAvatarWidget(),
         ],
       ),
       body: Container(
@@ -97,6 +97,12 @@ class UserAccountScreen extends StatelessWidget {
                         address: addressController.text,
                         phoneNumber: phoneNumberController.text,
                       );
+                    },
+                  ),
+                RoundedButton(
+                  labelWidget: Text('My cart'),
+                    onTapCallback: () {
+                      Navigator.pushNamed(context, ShoppingCartScreen.id);
                     },
                   ),
                 ]),
