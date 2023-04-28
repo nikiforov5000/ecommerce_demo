@@ -18,7 +18,7 @@ class _CartIconStreamBuilderState extends State<CartIconStreamBuilder> {
 
           // return CreateIcon();
     return StreamBuilder<int>(
-      stream: cart!.isNotEmptyStream().debounceTime(Duration(seconds: 1)),
+      stream: cart!.isNotEmptyStream(),
       initialData: 0,
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data! > 0) {
@@ -40,10 +40,22 @@ class CreateIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: AlignmentDirectional.topEnd,
       children: [
         CircleCartIcon(),
+        SmallNumberIcon (amount: amount),
       ]
     );
+  }
+}
+
+class SmallNumberIcon extends StatelessWidget {
+  final int amount;
+  SmallNumberIcon({required this.amount});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(amount.toString(), style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.red),);
   }
 }
 

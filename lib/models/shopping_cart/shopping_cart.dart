@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/models/shopping_cart/shopping_cart_item.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ShoppingCart {
   final Map<Product, int> _shoppingCart = {};
@@ -104,6 +105,6 @@ class ShoppingCart {
 
   Stream<int> isNotEmptyStream() {
     final cartRef = FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').snapshots();
-    return cartRef.map((event) => event.docs.length);
+    return cartRef.map((event) => event.docs.length).debounceTime(const Duration(seconds: 1));
   }
 }
