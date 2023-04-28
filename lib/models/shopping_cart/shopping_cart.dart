@@ -67,6 +67,7 @@ class ShoppingCart {
     var data = {'quantity': qty};
     cartItemRef.update(data);
     updateSum();
+    _amount -= qty;
   }
 
   void updateSum() {
@@ -89,21 +90,20 @@ class ShoppingCart {
   void removeCartItem(ShoppingCartItem cartItem) {
     final cartRef = FirebaseFirestore.instance.collection('carts').doc(id);
     cartRef.collection('cartItems').doc(cartItem.id).delete();
+
+
   }
-  bool isNotEmpty() {
+
+  setItemsAmount() {
     final cartRef = FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').get();
-    bool ans = false;
     cartRef.then((value) {
-      ans = value.docs.length > 0;
+      final length = value.docs.length;
+      _amount = length;
     });
-    return ans;
-
   }
 
-  // isNotEmpty() async {
-  //   final cartRef = FirebaseFirestore.instance.collection('carts').doc(id);
-  //   final snapshot = await cartRef.collection('cartItems').get();
-  //   return snapshot.docs.isNotEmpty;
-  // }
-
+  Stream<bool> isNotEmptyStream() {
+    final cartRef = FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').snapshots();
+    return cartRef.map((event) => event.docs.isNotEmpty);
+  }
 }

@@ -12,7 +12,9 @@ import 'package:provider/provider.dart';
 Future<void> _setCurrentShoppingCart(ShoppingCartProvider shoppingCartProvider, LocalUser user) async {
   final UserAccount userAccount = await UserAccount.fetchAccount(uid: user.uid);
   print('wrapper.dart -> _setCurrentShoppingCart() -> userAccount: $userAccount');
-  shoppingCartProvider.shoppingCart = ShoppingCart(id: userAccount.cartId);
+  ShoppingCart shoppingCart = ShoppingCart(id: userAccount.cartId);
+  shoppingCart.setItemsAmount();
+  shoppingCartProvider.shoppingCart = shoppingCart;
 }
 
 class Wrapper extends StatelessWidget {
