@@ -3,6 +3,7 @@ import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen/shopping_cart_screen.dart';
+import 'package:ecommerce_demo/screens/user_account_screen/text_field_with_label.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/widgets/cart_icon/stream_builder.dart';
 import 'package:ecommerce_demo/widgets/icon_template.dart';
@@ -72,6 +73,7 @@ class UserAccountScreen extends StatelessWidget {
     final userProvider = Provider.of<LocalUserProvider>(context);
     _user = userProvider.localUser;
     getUserAccount();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Account'),
@@ -116,33 +118,3 @@ class UserAccountScreen extends StatelessWidget {
   }
 }
 
-
-class EditTextField extends StatelessWidget{
-
-  final String label;
-  final TextEditingController controller;
-  const EditTextField({super.key, required this.label, required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Flexible(child: Row(
-          children: [
-            Text(label),
-          ],
-        )),
-        Flexible(
-          flex: 2,
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: 'Enter your ${label}',
-              border: InputBorder.none
-            ),
-            controller: controller,
-          ),
-        ),
-      ],
-    );
-  }
-}
