@@ -31,7 +31,7 @@ class ProductScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(product.title),
         actions: [
-          CartIcon(),
+          CartIconStreamBuilder(),
           UserAvatarWidget(),
         ],
       ),
