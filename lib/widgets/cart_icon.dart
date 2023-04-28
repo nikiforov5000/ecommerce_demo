@@ -17,12 +17,13 @@ class _CartIconStreamBuilderState extends State<CartIconStreamBuilder> {
 
 
           // return CreateIcon();
-    return StreamBuilder<bool>(
+    return StreamBuilder<int>(
       stream: cart!.isNotEmptyStream().debounceTime(Duration(seconds: 1)),
-      initialData: false,
+      initialData: 0,
       builder: (context, snapshot) {
-        if (snapshot.hasData && snapshot.data == true) {
-          return CreateIcon();
+        if (snapshot.hasData && snapshot.data! > 0) {
+          int amount = snapshot.data!;
+          return CreateIcon(amount: amount);
         }
         return Container();
       }
@@ -32,6 +33,8 @@ class _CartIconStreamBuilderState extends State<CartIconStreamBuilder> {
 
 
 class CreateIcon extends StatelessWidget {
+  final amount;
+  CreateIcon({required this.amount});
   TextStyle style = TextStyle(color: Colors.black);
 
   @override

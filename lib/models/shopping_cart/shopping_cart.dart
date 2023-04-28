@@ -102,8 +102,8 @@ class ShoppingCart {
     });
   }
 
-  Stream<bool> isNotEmptyStream() {
+  Stream<int> isNotEmptyStream() {
     final cartRef = FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').snapshots();
-    return cartRef.map((event) => event.docs.isNotEmpty);
+    return cartRef.map((event) => event.docs.length);
   }
 }
