@@ -4,6 +4,7 @@ import 'package:ecommerce_demo/models/product_category.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
+import 'package:ecommerce_demo/widgets/cart_icon/stream_builder.dart';
 import 'package:ecommerce_demo/widgets/category_button.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/product_tile.dart';
@@ -48,7 +49,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       appBar: AppBar(
         title: Text('eCommerce Demo'),
         actions: [
-          // Text(_shoppingCart!.id, style: TextStyle(color: Colors.black),),
+          CartIconStreamBuilder(),
           LogoutButton(),
           UserAvatarWidget(),
         ],
