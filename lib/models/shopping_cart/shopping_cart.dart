@@ -12,6 +12,8 @@ class ShoppingCart {
 
   int get length => _shoppingCart.length;
 
+
+
   getCartMap() {
     return _shoppingCart;
   }
@@ -88,4 +90,20 @@ class ShoppingCart {
     final cartRef = FirebaseFirestore.instance.collection('carts').doc(id);
     cartRef.collection('cartItems').doc(cartItem.id).delete();
   }
+  bool isNotEmpty() {
+    final cartRef = FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').get();
+    bool ans = false;
+    cartRef.then((value) {
+      ans = value.docs.length > 0;
+    });
+    return ans;
+
+  }
+
+  // isNotEmpty() async {
+  //   final cartRef = FirebaseFirestore.instance.collection('carts').doc(id);
+  //   final snapshot = await cartRef.collection('cartItems').get();
+  //   return snapshot.docs.isNotEmpty;
+  // }
+
 }
