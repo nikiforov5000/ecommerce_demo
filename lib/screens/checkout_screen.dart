@@ -1,4 +1,5 @@
 import 'package:ecommerce_demo/widgets/bank_card.dart';
+import 'package:ecommerce_demo/widgets/icon_template.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class CheckoutScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Checkout'),
         actions: [
-          UserAvatarWidget(),
+          AppBarIconTemplate(child: UserAvatarWidget()),
         ],
       ),
       body: Container(

@@ -6,6 +6,7 @@ import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/cart_icon/stream_builder.dart';
 import 'package:ecommerce_demo/widgets/category_button.dart';
+import 'package:ecommerce_demo/widgets/icon_template.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/product_tile.dart';
 import 'package:ecommerce_demo/widgets/search_bar.dart';
@@ -49,9 +50,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
       appBar: AppBar(
         title: Text('eCommerce Demo'),
         actions: [
-          CartIconStreamBuilder(),
-          LogoutButton(),
-          UserAvatarWidget(),
+          AppBarIconTemplate(child: CartIconStreamBuilder()),
+          AppBarIconTemplate(child: UserAvatarWidget()),
+          AppBarIconTemplate(child: LogoutButton()),
         ],
       ),
       body: Container(

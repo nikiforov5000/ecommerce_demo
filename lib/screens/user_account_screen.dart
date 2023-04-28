@@ -5,6 +5,7 @@ import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/widgets/cart_icon/stream_builder.dart';
+import 'package:ecommerce_demo/widgets/icon_template.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
@@ -75,8 +76,8 @@ class UserAccountScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Your Account'),
         actions: [
-          CartIconStreamBuilder(),
-          LogoutButton(),
+          AppBarIconTemplate(child: CartIconStreamBuilder()),
+          AppBarIconTemplate(child: LogoutButton()),
         ],
       ),
       body: Container(

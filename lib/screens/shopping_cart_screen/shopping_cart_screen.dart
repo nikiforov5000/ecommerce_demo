@@ -3,6 +3,7 @@ import 'package:ecommerce_demo/screens/order_summary.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen/widgets/snapshot_stream_builder_widget.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
+import 'package:ecommerce_demo/widgets/icon_template.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
@@ -28,8 +29,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       appBar: AppBar(
         title: const Text('Your Cart'),
         actions: [
-          UserAvatarWidget(),
-          LogoutButton(),
+          AppBarIconTemplate(child: UserAvatarWidget()),
+          AppBarIconTemplate(child: LogoutButton()),
         ],
       ),
       body: Container(
