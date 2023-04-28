@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/screens/user_account_screen.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
@@ -16,24 +17,22 @@ class UserAvatarWidget extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(context, UserAccountScreen.id);
       },
-      child: Padding(
-          padding: EdgeInsets.only(right: 20.0),
-          child: Center(
-            child: CircleAvatar(
-              backgroundColor: Colors.greenAccent,
-              radius: 21,
-            ),
-          ),
-      ),
+      child: avatar,
     );
   }
 
   void buildUserAvatar() {
+    print('user_avatar.dart -> buildUserAvatar()');
+
+    // buildFromEmail();
+        // buildFromName();
+        // buildFromPhoto();
+        // return;
     buildEmptyAvatar();
     if (_localUser != null) {
-      if (_localUser!.photoUrl != null) {
+      if (_localUser!.photoUrl != null && _localUser!.photoUrl != '') {
         buildFromPhoto();
-      } else if (_localUser!.displayName != null) {
+      } else if (_localUser!.displayName != null && _localUser!.displayName != '') {
         buildFromName();
       } else if (_localUser!.email != null) {
         buildFromEmail();
@@ -42,22 +41,24 @@ class UserAvatarWidget extends StatelessWidget {
   }
 
   void buildFromPhoto() {
-    avatar = CircleAvatar(
-      backgroundImage: NetworkImage(_localUser!.photoUrl!),
-      radius: 18,
-    );
+    print('user_avatar.dart -> buildFromPhoto()');
+    try {
+      print('user_avatar.dart -> buildFromPhoto() photoUrl:' + _localUser!.photoUrl!);
+      avatar = Image.network(_localUser!.photoUrl!);
+    }
+    catch (e) {
+      avatar = Text('User', style: TextStyle(color: kAppBarIconColor),);
+    }
   }
 
   void buildFromName() {
+    print('user_avatar.dart -> buildFromName()');
     List<String>? namearr = _localUser!.displayName?.split(' ');
     if (namearr != null) {
       String? initials = namearr.length > 1
           ? namearr.getRange(0, 2).map((e) => e = e[0]).join('')
           : namearr[0];
-      avatar = CircleAvatar(
-        radius: 18,
-        child: Text(initials),
-      );
+      avatar = Text(initials, style: TextStyle(color: kAppBarIconColor),);
     }
   }
 
@@ -71,6 +72,6 @@ class UserAvatarWidget extends StatelessWidget {
   void buildFromEmail() {
     String emailInitials =
         _localUser!.email.toString().substring(0, 2).toUpperCase();
-    avatar = Text(emailInitials);
+    avatar = Text(emailInitials, style: TextStyle(color: kAppBarIconColor),);
   }
 }
