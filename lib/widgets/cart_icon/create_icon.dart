@@ -1,4 +1,4 @@
-import 'package:ecommerce_demo/widgets/cart_icon/circle_cart_icon.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/widgets/cart_icon/small_number_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +11,9 @@ class CreateIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: AlignmentDirectional.topEnd,
+      alignment: AlignmentDirectional.center,
       children: [
-        const CircleCartIcon(),
-        SmallNumberIcon(amount: _amount),
+        Icon(Icons.shopping_cart, color: kAppBarIconColor, size: 23,),
       ],
     );
   }
