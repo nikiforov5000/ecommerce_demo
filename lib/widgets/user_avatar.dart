@@ -22,9 +22,9 @@ class UserAvatarWidget extends StatelessWidget {
             child: CircleAvatar(
               backgroundColor: Colors.greenAccent,
               radius: 21,
-              // child: avatar!,
             ),
-          )),
+          ),
+      ),
     );
   }
 

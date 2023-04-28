@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/models/shopping_cart/shopping_cart_item.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ShoppingCart {
   final Map<Product, int> _shoppingCart = {};
@@ -11,6 +12,8 @@ class ShoppingCart {
   ShoppingCart({required this.id});
 
   int get length => _shoppingCart.length;
+
+
 
   getCartMap() {
     return _shoppingCart;
@@ -65,6 +68,7 @@ class ShoppingCart {
     var data = {'quantity': qty};
     cartItemRef.update(data);
     updateSum();
+    _amount -= qty;
   }
 
   void updateSum() {
@@ -87,5 +91,20 @@ class ShoppingCart {
   void removeCartItem(ShoppingCartItem cartItem) {
     final cartRef = FirebaseFirestore.instance.collection('carts').doc(id);
     cartRef.collection('cartItems').doc(cartItem.id).delete();
+
+
+  }
+
+  setItemsAmount() {
+    final cartRef = FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').get();
+    cartRef.then((value) {
+      final length = value.docs.length;
+      _amount = length;
+    });
+  }
+
+  Stream<int> isNotEmptyStream() {
+    final cartRef = FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').snapshots();
+    return cartRef.map((event) => event.docs.length).debounceTime(const Duration(seconds: 1));
   }
 }
