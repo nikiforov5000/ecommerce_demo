@@ -83,6 +83,7 @@ class UserAccountScreen extends StatelessWidget {
         ],
       ),
       body: Container(
+        color: kBackgroundColor,
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: _user != null
             ? Container(
@@ -117,4 +118,6 @@ class UserAccountScreen extends StatelessWidget {
     );
   }
 }
+
+
 
