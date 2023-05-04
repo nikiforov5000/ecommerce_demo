@@ -1,12 +1,15 @@
-import 'package:flutter/material.dart';
-
 import 'package:ecommerce_demo/constants/decorations.dart';
 import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/screens/product_list_screen/widgets/product_tile_image.dart';
+import 'package:flutter/material.dart';
 
 class ProductTile extends StatelessWidget {
-  ProductTile({required this.product, required this.onTapCallback});
+  const ProductTile({
+    Key? key,
+    required this.product,
+    required this.onTapCallback,
+  }) : super(key: key);
 
   final Product product;
   final VoidCallback onTapCallback;
@@ -16,7 +19,7 @@ class ProductTile extends StatelessWidget {
     return InkWell(
       onTap: onTapCallback,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: kButtonDecoration,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -61,7 +61,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             SizedBox(height: 20.0,),
             SearchBar(onChangesCallback: (value) {
               setState(() {
-                currentProducts = ProductData.products;
+                displayedProducts = ProductData.products;
               });
               Navigator.pushNamed(context, ProductsListScreen.id);
             }),

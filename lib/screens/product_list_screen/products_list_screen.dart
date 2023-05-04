@@ -13,7 +13,7 @@ import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-List<Product> currentProducts = [];
+List<Product> displayedProducts = [];
 
 class ProductsListScreen extends StatefulWidget {
   static const String id = 'productListScreen';
@@ -29,9 +29,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   void initState() {
     super.initState();
     setState(() {
-      currentProducts = ProductData.products;
+      displayedProducts = ProductData.products;
       print(
-        'product_list_screen.dart -> currentProducts.length:${currentProducts.length}');
+        'product_list_screen.dart -> currentProducts.length:${displayedProducts.length}');
     });
   }
 
@@ -58,7 +58,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
             const SizedBox(height: 15.0),
             SearchBar(onChangesCallback: (value) {
               setState(() {
-                currentProducts = ProductData.products;
+                displayedProducts = ProductData.products;
               });
             }),
             const SizedBox(height: 15.0),
@@ -66,12 +66,12 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
               children: [
                 SortBar(onChangesCallback: (value) {
                   setState(() {
-                    currentProducts = ProductData.products;
+                    displayedProducts = ProductData.products;
                   });
                 }),
-                CategoryBar(onChangesCallback: () {
+                CategoryBar(onCategoryChanged: () {
                   setState(() {
-                    currentProducts = ProductData.products;
+                    displayedProducts = ProductData.products;
                   });
                 }),
               ],

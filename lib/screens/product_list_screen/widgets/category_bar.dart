@@ -3,40 +3,42 @@ import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_list_screen/widgets/category_button.dart';
 import 'package:flutter/material.dart';
 
-class CategoryBar extends StatefulWidget {
-  final Function onChangesCallback;
+class CategoryBar extends StatelessWidget {
+  final VoidCallback onCategoryChanged;
 
-  CategoryBar({required this.onChangesCallback, super.key});
+  const CategoryBar({
+    Key? key,
+    required this.onCategoryChanged,
+  }) : super(key: key);
 
-  @override
-  State<CategoryBar> createState() => _CategoryBarState();
-}
-
-class _CategoryBarState extends State<CategoryBar> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 2,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            CategoryButton(
-              label: 'All products',
-              onTapCallback: () async {
-                await ProductData.getAllProducts();
-                widget.onChangesCallback();
-              },
-            ),
-            for (ProductCategory category in productData.getCategoriesList())
-              CategoryButton(
-                label: category.name,
+      child: SizedBox(
+        height: 70,
+        child: ListView.builder(
+          itemCount: productData.getCategoriesLength() + 1,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) {
+            if (index == 0) {
+              return CategoryButton(
+                label: 'All products',
                 onTapCallback: () async {
-                  await ProductData.getProductsOfCategory(category.name);
-                  widget.onChangesCallback();
+                  await ProductData.getAllProducts();
+                  onCategoryChanged();
                 },
-              ),
-          ],
+              );
+            }
+            ProductCategory category =
+                productData.getCategoriesList()[index - 1];
+            return CategoryButton(
+              label: category.name,
+              onTapCallback: () async {
+                await ProductData.getProductsOfCategory(category.name);
+                onCategoryChanged();
+              },
+            );
+          },
         ),
       ),
     );

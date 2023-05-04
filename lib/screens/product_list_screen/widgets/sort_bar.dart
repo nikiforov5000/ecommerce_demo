@@ -13,7 +13,10 @@ enum SortBy {
 
 class SortBar extends StatefulWidget {
   final Function onChangesCallback;
-  const SortBar({super.key, required this.onChangesCallback});
+  const SortBar({
+    Key? key,
+    required this.onChangesCallback,
+  }) : super(key: key);
 
   @override
   State<SortBar> createState() => _SortBarState();
@@ -50,7 +53,7 @@ class _SortBarState extends State<SortBar> {
           ),
           DropdownButton(
             value: _sortBy,
-            underline: SizedBox(),
+            underline: const SizedBox(),
             items: [
               for (var sortBy in SortBy.values)
                 DropdownMenuItem(
@@ -73,35 +76,37 @@ class _SortBarState extends State<SortBar> {
 
 Widget getDropdownIcon(SortBy sortBy) {
   double iconSize = 18.0;
-  Widget? itemIcon;
 
   switch (sortBy) {
     case SortBy.priceHi:
-      itemIcon = Row(children: [
-        Icon(Icons.attach_money, size: iconSize),
-        Icon(Icons.arrow_downward, size: iconSize),
-      ]);
-      break;
+      return Row(
+        children: [
+          Icon(Icons.attach_money, size: iconSize),
+          Icon(Icons.arrow_downward, size: iconSize),
+        ],
+      );
     case SortBy.priceLo:
-      itemIcon = Row(children: [
-        Icon(Icons.attach_money, size: iconSize),
-        Icon(Icons.arrow_upward, size: iconSize),
-      ]);
-      break;
+      return Row(
+        children: [
+          Icon(Icons.attach_money, size: iconSize),
+          Icon(Icons.arrow_upward, size: iconSize),
+        ],
+      );
     case SortBy.rateHi:
-      itemIcon = Row(children: [
-        Icon(Icons.star_rate, size: iconSize),
-        Icon(Icons.arrow_downward, size: iconSize),
-      ]);
-      break;
+      return Row(
+        children: [
+          Icon(Icons.star_rate, size: iconSize),
+          Icon(Icons.arrow_downward, size: iconSize),
+        ],
+      );
     case SortBy.rateLo:
-      itemIcon = Row(children: [
-        Icon(Icons.star_rate, size: iconSize),
-        Icon(Icons.arrow_upward, size: iconSize),
-      ]);
-      break;
+      return Row(
+        children: [
+          Icon(Icons.star_rate, size: iconSize),
+          Icon(Icons.arrow_upward, size: iconSize),
+        ],
+      );
     default:
-      itemIcon = Text('');
+      return const Text('');
   }
-  return itemIcon;
 }
