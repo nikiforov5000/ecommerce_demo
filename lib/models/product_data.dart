@@ -95,15 +95,19 @@ class ProductData {
   }
 
   static Future<List<Product>> getAllProducts() async {
+    print('product_data.dart -> getAllProducts()');
     try {
       QuerySnapshot<Map<String, dynamic>> snapshot =
           await _firestore.collection('products').get();
-      for (var document in snapshot.docs) {
-        products.add(Product.buildFromMap(document));
+      if (snapshot.docs.isNotEmpty) {
+        products.clear();
+        for (var document in snapshot.docs) {
+          products.add(Product.buildFromMap(document));
+        }
       }
     }
     catch (e) {
-      print('product_data.dart -> getAllProducts() catch');
+      print('\t error catch');
     }
     return products;
   }

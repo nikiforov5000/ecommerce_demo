@@ -1,11 +1,11 @@
 import 'package:ecommerce_demo/models/product_category.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
-import 'package:ecommerce_demo/screens/product_list_screen/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/product_list_screen/widgets/category_button.dart';
 import 'package:flutter/material.dart';
 
 class CategoryBar extends StatefulWidget {
   final Function onChangesCallback;
+
   CategoryBar({required this.onChangesCallback, super.key});
 
   @override
@@ -30,30 +30,12 @@ class _CategoryBarState extends State<CategoryBar> {
             ),
             for (ProductCategory category in productData.getCategoriesList())
               CategoryButton(
-                  label: category.name,
-                  onTapCallback: () async {
-                    await ProductData.getProductsOfCategory(category.name);
-                    widget.onChangesCallback();
-                  },
+                label: category.name,
+                onTapCallback: () async {
+                  await ProductData.getProductsOfCategory(category.name);
+                  widget.onChangesCallback();
+                },
               ),
-              // GestureDetector(
-              //   onTap: () async {
-              //   },
-              //   child: Text(category.name),
-              //
-              // )
-              // CategoryButton(
-              //   label: category.name,
-              //   onTapCallback: () {
-              //     ProductData.getProductsOfCategory(category.name).then(
-              //       (products) {
-              //         setState(() {
-              //           currentProducts = products;
-              //         });
-              //       },
-              //     );
-              //   },
-              // ),
           ],
         ),
       ),
