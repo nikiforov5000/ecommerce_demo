@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/shopping_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/models/user_account/user_account.dart';
+import 'package:ecommerce_demo/screens/login/login_text_field.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';
+import 'package:ecommerce_demo/screens/registration_screen/widgets/register_button.dart';
+import 'package:ecommerce_demo/screens/welcome_screen/widgets/logo.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
@@ -25,12 +29,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthService>(context);
-    final userProvider = Provider.of<LocalUserProvider>(context);
-    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+
 
     return Scaffold(
-      backgroundColor: Colors.orange,
+      backgroundColor: kBackgroundColor,
       body: Builder(
         builder: (context) => Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -38,81 +40,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Flexible(
-                child: Hero(
-                  tag: 'logo',
-                  child: Container(
-                    height: 200.0,
-                    child: Center(
-                      child: Text(
-                        'eCommerce Demo app',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 60,
-                            fontWeight: FontWeight.w100,
-                            color: Colors.blue),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 48.0),
-              TextField(
-                controller: emailController,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'Enter email'),
-              ),
+              Logo(),
+              LoginTextField(label: 'Email', controller: emailController,),
               SizedBox(height: 8.0),
-              TextField(
-                controller: passwordController,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'Enter password'),
-              ),
+              LoginTextField(label: 'Password', controller: passwordController,),
               SizedBox(height: 8.0),
-              TextField(
-                controller: repeatPasswordController,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'Re-enter password'),
+              LoginTextField(label: 'Repeat password', controller: repeatPasswordController,),
+              RegisterButton(
+                emailController: emailController,
+                passwordController: passwordController,
+                repeatPasswordController: repeatPasswordController,
               ),
-              SizedBox(height: 24.0),
-              RoundedButton(
-                labelWidget: ButtonText(text: 'Register'),
-                onTapCallback: () async {
-                  if (passwordController.text !=
-                      repeatPasswordController.text) {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return showAlertDialogWithMessage(
-                            context, 'Please check passwords');
-                      },
-                    );
-                    return;
-                  }
-                  else {
-                      LocalUser? user =
-                          await authService.createUserWithEmailAndPassword(
-                        emailController.text,
-                        passwordController.text,
-                      );
-                      userProvider.localUser = user;
-                      String cartId = await ShoppingCart.createShoppingCart(user!.uid);
-                      await UserAccount.createFirestoreUserAccount(user, cartId);
-                      _shoppingCartProvider.shoppingCart = ShoppingCart(id: cartId);
 
-                      Navigator.pop(context);
-                    }
-                  }
-              ),
-              // RoundedButton(
-              //   labelWidget: ButtonText(text: 'Sign-in with Google'),
-              //   onTapCallback: () async {
-              //     await authService.signInWithGoogle();
-              //   },
-              // ),
             ],
           ),
         ),

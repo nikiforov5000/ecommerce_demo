@@ -1,3 +1,4 @@
+import 'package:ecommerce_demo/screens/categories_screen/categories_screen.dart';
 import 'package:ecommerce_demo/screens/order_success/order_success_screen.dart';
 import 'package:ecommerce_demo/screens/order_summary.dart';
 import 'package:ecommerce_demo/screens/product_list_screen/products_list_screen.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: Wrapper.id,
         routes: {
+          CategoriesScreen.id: (context) => CategoriesScreen(),
           Wrapper.id: (context) => Wrapper(),
           LoginScreen.id: (context) => LoginScreen(),
           RegistrationScreen.id: (context) => RegistrationScreen(),

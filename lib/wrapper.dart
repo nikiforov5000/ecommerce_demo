@@ -3,6 +3,7 @@ import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/screens/categories_screen/categories_screen.dart';
 import 'package:ecommerce_demo/screens/login/login_screen.dart';
+import 'package:ecommerce_demo/screens/welcome_screen/welcome_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
@@ -33,12 +34,14 @@ class Wrapper extends StatelessWidget {
           final LocalUser? user = snapshot.data;
           if (user == null) {
             print('wrapper.dart -> user is NULL');
-            return LoginScreen();
+            return WelcomeScreen();
           }
           else {
             print('wrapper.dart -> user is ${user.email}');
             userProvider.localUser = user;
             _setCurrentShoppingCart(shoppingCartProvider, user);
+            // Navigator.pop;
+            Navigator.popUntil(context, (route) => route.isFirst);
             return CategoriesScreen();
           }
         } else {

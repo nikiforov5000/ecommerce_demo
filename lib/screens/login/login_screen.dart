@@ -1,8 +1,8 @@
-import 'package:ecommerce_demo/constants/text_styles.dart';
-import 'package:ecommerce_demo/screens/registration_screen/registration_screen.dart';
-import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/screens/login/login_text_field.dart';
+import 'package:ecommerce_demo/screens/welcome_screen/widgets/logo.dart';
+import 'package:ecommerce_demo/screens/welcome_screen/welcome_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
-import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +22,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
-    final _userProvider = Provider.of<LocalUserProvider>(context);
 
     return Scaffold(
-      backgroundColor: Colors.purple,
+      backgroundColor: kBackgroundColor,
       body: Builder(
         builder: (context) => Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -33,70 +32,26 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Flexible(
-                child: Hero(
-                  tag: 'logo',
-                  child: Container(
-                    height: 200.0,
-                    child: Center(
-                      child: Text(
-                        'eCommerce Demo app',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 60,
-                            fontWeight: FontWeight.w100,
-                            color: Colors.blue),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 48.0),
-              TextField(
+              Logo(),
+              LoginTextField(
                 controller: emailController,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'Enter email'),
+                label: 'Email',
               ),
               SizedBox(height: 8.0),
-              TextField(
+              LoginTextField(
                 controller: passwordController,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'Enter password'),
+                label: 'Password',
               ),
               SizedBox(height: 24.0),
               RoundedButton(
                 labelWidget: ButtonText(text: 'Log in'),
                 onTapCallback: () async {
+                  print('login_screen.dart -> Login button -> emailController.text: ${emailController.text}');
                   final user = await authService
                       .signInWithEmailAndPassword(
                     emailController.text,
                     passwordController.text,
                   );
-                  // _userProvider.localUser = user;
-                },
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.0),
-                child: Text(
-                  'Or',
-                  textAlign: TextAlign.center,
-                  style: kButtonTextStyle,
-                ),
-              ),
-              // RoundedButton(
-              //   labelWidget: ButtonText(text: 'Sign-in with Google'),
-              //   onTapCallback: () async {
-              //     await authService
-              //         .signInWithGoogle()
-              //         .then((value) => userProvider.setUser = value!);
-              //   },
-              // ),
-              RoundedButton(
-                labelWidget: ButtonText(text: 'Register'),
-                onTapCallback: () {
-                  Navigator.pushNamed(context, RegistrationScreen.id);
                 },
               ),
             ],
