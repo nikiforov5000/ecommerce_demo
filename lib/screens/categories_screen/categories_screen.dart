@@ -14,6 +14,8 @@ import 'package:provider/provider.dart';
 
 class CategoriesScreen extends StatefulWidget {
 
+  static const String id = 'categories_screen';
+
   @override
   State<CategoriesScreen> createState() => _CategoriesScreenState();
 }
