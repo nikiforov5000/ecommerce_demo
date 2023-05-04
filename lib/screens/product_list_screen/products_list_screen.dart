@@ -69,10 +69,14 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
                     currentProducts = ProductData.products;
                   });
                 }),
-                CategoryBar(currentProducts: currentProducts,),
+                CategoryBar(onChangesCallback: () {
+                  setState(() {
+                    currentProducts = ProductData.products;
+                  });
+                }),
               ],
             ),
-            ProductsList(currentProducts: currentProducts,),
+            ProductsList(),
           ],
         ),
       ),

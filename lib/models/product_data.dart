@@ -62,6 +62,7 @@ class ProductData {
   // }
 
   static getProductsOfCategory(String category) async {
+    print('product_data.dart -> getProductsOfCategory()');
     List<Product> categoryProducts = [];
     QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
         .collection('products')

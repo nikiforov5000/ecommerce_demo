@@ -1,24 +1,25 @@
-import 'package:ecommerce_demo/models/product.dart';
+import 'package:ecommerce_demo/screens/product_list_screen/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/product_list_screen/widgets/product_tile.dart';
 import 'package:ecommerce_demo/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 
-class ProductsList extends StatelessWidget {
-  final List<Product> currentProducts;
-  ProductsList({required this.currentProducts});
+class ProductsList extends StatefulWidget {
+  @override
+  State<ProductsList> createState() => _ProductsListState();
+}
 
+class _ProductsListState extends State<ProductsList> {
   @override
   Widget build(BuildContext context) {
-    print('ProductList build');
-    return Expanded(
-      flex: 10,
+    print('product_list.dart -> build()');
+    return Flexible(
       child: GridView.count(
         crossAxisCount: 2,
         children: [
           for (var product in currentProducts)
             Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
               child: ProductTile(
                 product: product,
                 onTapCallback: () {

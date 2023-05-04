@@ -11,18 +11,16 @@ class CategoryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTapCallback,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5),
-        decoration: kButtonDecoration,
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 4),
+      decoration: kButtonDecoration,
+      child: InkWell(
+        onTap: onTapCallback,
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(label,
-                textAlign: TextAlign.center,
-                style: kButtonTextStyle
-            ),
+          child: Text(label,
+              textAlign: TextAlign.center,
+              style: kButtonTextStyle
           ),
         ),
       ),
