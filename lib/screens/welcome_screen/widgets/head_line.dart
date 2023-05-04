@@ -1,4 +1,4 @@
-import 'package:ecommerce_demo/screens/welcome_screen/head_line_text.dart';
+import 'package:ecommerce_demo/screens/welcome_screen/widgets/head_line_text.dart';
 import 'package:flutter/material.dart';
 
 class HeadLine extends StatelessWidget {

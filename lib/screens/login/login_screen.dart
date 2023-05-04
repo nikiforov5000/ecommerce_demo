@@ -1,6 +1,6 @@
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/screens/login/login_text_field.dart';
-import 'package:ecommerce_demo/screens/welcome_screen/logo.dart';
+import 'package:ecommerce_demo/screens/welcome_screen/widgets/logo.dart';
 import 'package:ecommerce_demo/screens/welcome_screen/welcome_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';

@@ -6,7 +6,7 @@ import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/screens/login/login_text_field.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/register_alert_dialog.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/register_button.dart';
-import 'package:ecommerce_demo/screens/welcome_screen/logo.dart';
+import 'package:ecommerce_demo/screens/welcome_screen/widgets/logo.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';

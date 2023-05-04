@@ -1,9 +1,9 @@
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/screens/login/login_screen.dart';
 import 'package:ecommerce_demo/screens/registration_screen/registration_screen.dart';
-import 'package:ecommerce_demo/screens/welcome_screen/head_line.dart';
-import 'package:ecommerce_demo/screens/welcome_screen/logo.dart';
-import 'package:ecommerce_demo/screens/welcome_screen/welcome_title.dart';
+import 'package:ecommerce_demo/screens/welcome_screen/widgets/head_line.dart';
+import 'package:ecommerce_demo/screens/welcome_screen/widgets/logo.dart';
+import 'package:ecommerce_demo/screens/welcome_screen/widgets/welcome_title.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:flutter/material.dart';
