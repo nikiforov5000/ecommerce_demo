@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/models/product_category.dart';
-import 'package:ecommerce_demo/widgets/sort_bar.dart';
+import 'package:ecommerce_demo/screens/product_list_screen/widgets/sort_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:ecommerce_demo/models/product.dart';
