@@ -17,6 +17,8 @@ class SnackBarMessage {
       makeSnackBar('Password could not be shorter than 6 char');
   static SnackBar passwordsDoNotMatch = makeSnackBar('Passwords should match');
   static SnackBar couldNotBeEmpty = makeSnackBar('Fields could not be empty');
+  static SnackBar googleSigninNotAvailableOnWeb = makeSnackBar('Google sign-in is not available in browser');
+
 
   static SnackBar makeSnackBar(message) {
     return SnackBar(
