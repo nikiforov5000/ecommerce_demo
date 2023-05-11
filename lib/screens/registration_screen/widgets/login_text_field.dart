@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class LoginTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
@@ -15,7 +14,7 @@ class LoginTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return                             Container(
+    return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.grey.shade300),
@@ -32,7 +31,6 @@ class LoginTextField extends StatelessWidget {
           ),
         ),
       ),
-    )    ;
+    );
   }
 }
-

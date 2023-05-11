@@ -1,5 +1,5 @@
 import 'package:ecommerce_demo/constants/colors.dart';
-import 'package:ecommerce_demo/screens/login/login_screen.dart';
+import 'package:ecommerce_demo/screens/login_screen/login_screen.dart';
 import 'package:ecommerce_demo/screens/registration_screen/registration_screen.dart';
 import 'package:ecommerce_demo/screens/welcome_screen/widgets/head_line.dart';
 import 'package:ecommerce_demo/screens/welcome_screen/widgets/logo.dart';
@@ -66,6 +66,7 @@ class Buttons extends StatelessWidget {
             },
           ),
         ),
+
       ],
     );
   }
