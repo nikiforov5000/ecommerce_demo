@@ -27,39 +27,42 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       body: Builder(
         builder: (context) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              const Logo(),
-              LoginTextField(
-                label: 'Email',
-                controller: emailController,
-              ),
-              const SizedBox(height: 8.0),
-              LoginTextField(
-                isPassword: true,
-                label: 'Password',
-                controller: passwordController,
-              ),
-              const SizedBox(height: 8.0),
-              LoginTextField(
-                isPassword: true,
-                label: 'Repeat password',
-                controller: repeatPasswordController,
-              ),
-              const SizedBox(height: 24.0),
-              RegisterButton(
-                emailController: emailController,
-                passwordController: passwordController,
-                repeatPasswordController: repeatPasswordController,
-              ),
-              // const SizedBox(height: 8.0),
-              const SizedBox(height: 8.0),
-              OrDivider(),
-              const SizedBox(height: 8.0),
-              const GoogleSignInButton(),
-            ],
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(top: 50),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                const Logo(),
+                LoginTextField(
+                  label: 'Email',
+                  controller: emailController,
+                ),
+                const SizedBox(height: 8.0),
+                LoginTextField(
+                  isPassword: true,
+                  label: 'Password',
+                  controller: passwordController,
+                ),
+                const SizedBox(height: 8.0),
+                LoginTextField(
+                  isPassword: true,
+                  label: 'Repeat password',
+                  controller: repeatPasswordController,
+                ),
+                const SizedBox(height: 24.0),
+                RegisterButton(
+                  emailController: emailController,
+                  passwordController: passwordController,
+                  repeatPasswordController: repeatPasswordController,
+                ),
+                // const SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
+                OrDivider(),
+                const SizedBox(height: 8.0),
+                const GoogleSignInButton(),
+              ],
+            ),
           ),
         ),
       ),

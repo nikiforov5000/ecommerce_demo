@@ -50,11 +50,47 @@ class AuthService {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      return await _firebaseAuth
-          .signInWithCredential(credential)
-          .then((value) => _localUserFromFirebaseAuth(value.user));
+      final userCredential = await _firebaseAuth.signInWithCredential(credential);
+      if (userCredential.additionalUserInfo!.isNewUser) {
+        final currentUser = _firebaseAuth.currentUser;
+        if (currentUser != null) {
+          await currentUser.updateDisplayName(googleUser.displayName);
+        }
+        return _localUserFromFirebaseAuth(_firebaseAuth.currentUser);
+      }
     }
     return null;
+
+
+
+
+    /*
+     try {
+                    final googleUser = await _googleSignIn.signIn();
+                    if (googleUser != null) {
+                      final googleAuth = await googleUser.authentication;
+                      final credential = GoogleAuthProvider.credential(
+                        accessToken: googleAuth.accessToken,
+                        idToken: googleAuth.idToken,
+                      );
+                      final userCredential = await _auth.signInWithCredential(credential);
+                      if (userCredential.additionalUserInfo!.isNewUser) {
+                        final currentUser = _auth.currentUser;
+                        if (currentUser != null) {
+                          await currentUser.updateDisplayName(googleUser.displayName);
+                        }
+                      }
+                      Navigator.pushNamed(context, ProductsListScreen.id);
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
+    */
+
+
+
+
+
   }
 
   Future<void> signOut() async {
