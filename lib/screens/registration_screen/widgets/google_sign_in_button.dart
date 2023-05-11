@@ -12,7 +12,16 @@ class GoogleSignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
     return RoundedButton(
-      labelWidget: Text('Google Sing-in'),
+      labelWidget: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Image.asset('assets/logo/google-logo.png'),
+          ),
+          Text('Google Sing-in'),
+        ],
+      ),
       onTapCallback: () async {
         try {
           final user = await authService.signInWithGoogle();
