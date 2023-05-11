@@ -1,5 +1,7 @@
 import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/screens/registration_screen/widgets/google_sign_in_button.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/login_text_field.dart';
+import 'package:ecommerce_demo/screens/registration_screen/widgets/or.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/register_button.dart';
 import 'package:ecommerce_demo/screens/welcome_screen/widgets/logo.dart';
 import 'package:flutter/material.dart';
@@ -46,11 +48,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 label: 'Repeat password',
                 controller: repeatPasswordController,
               ),
+              const SizedBox(height: 24.0),
               RegisterButton(
                 emailController: emailController,
                 passwordController: passwordController,
                 repeatPasswordController: repeatPasswordController,
               ),
+              // const SizedBox(height: 8.0),
+              const SizedBox(height: 8.0),
+              OrDivider(),
+              const SizedBox(height: 8.0),
+              const GoogleSignInButton(),
             ],
           ),
         ),
@@ -58,3 +66,4 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 }
+

@@ -17,6 +17,7 @@ class RoundedButton extends StatelessWidget {
     return InkWell(
       onTap: onTapCallback,
       child: Container(
+        height: 50.0,
         margin: EdgeInsets.all(9),
         decoration: kButtonDecoration,
         child: Center(

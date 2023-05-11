@@ -6,13 +6,13 @@ class UserAccount extends ChangeNotifier{
   final String uid;
   final String email;
   final String cartId;
-  final DateTime createdAt;
+  final DateTime? createdAt;
   DateTime? updatedAt;
   String? address;
   String? phoneNumber;
 
   UserAccount({
-    required this.createdAt,
+    this.createdAt,
     required this.uid,
     required this.email,
     required this.cartId,
@@ -35,8 +35,9 @@ class UserAccount extends ChangeNotifier{
   }
 
   static _snapshotToUserAccount(Map<String, dynamic> data) {
+
     final uid = data['uid'];
-    final createdAt = (data['createdAt'] as Timestamp).toDate();
+    final createdAt = data['createdAt'] == null ? null : (data['createdAt'] as Timestamp).toDate();
     final email = data['email'];
     final cartId = data['cartId'];
 
