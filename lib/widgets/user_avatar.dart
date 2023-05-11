@@ -25,14 +25,15 @@ class UserAvatarWidget extends StatelessWidget {
     print('user_avatar.dart -> buildUserAvatar()');
 
     // buildFromEmail();
-        // buildFromName();
-        // buildFromPhoto();
-        // return;
+    // buildFromName();
+    // buildFromPhoto();
+    // return;
     buildEmptyAvatar();
     if (_localUser != null) {
       if (_localUser!.photoUrl != null && _localUser!.photoUrl != '') {
         buildFromPhoto();
-      } else if (_localUser!.displayName != null && _localUser!.displayName != '') {
+      } else if (_localUser!.displayName != null &&
+          _localUser!.displayName != '') {
         buildFromName();
       } else if (_localUser!.email != null) {
         buildFromEmail();
@@ -43,11 +44,15 @@ class UserAvatarWidget extends StatelessWidget {
   void buildFromPhoto() {
     print('user_avatar.dart -> buildFromPhoto()');
     try {
-      print('user_avatar.dart -> buildFromPhoto() photoUrl:' + _localUser!.photoUrl!);
-      avatar = Image.network(_localUser!.photoUrl!);
-    }
-    catch (e) {
-      avatar = Text('User', style: TextStyle(color: kAppBarIconColor),);
+      print('user_avatar.dart -> buildFromPhoto() photoUrl:' +
+          _localUser!.photoUrl!);
+      avatar =
+          CircleAvatar(backgroundImage: NetworkImage(_localUser!.photoUrl!));
+    } catch (e) {
+      avatar = Text(
+        'User',
+        style: TextStyle(color: kAppBarIconColor),
+      );
     }
   }
 
@@ -58,7 +63,10 @@ class UserAvatarWidget extends StatelessWidget {
       String? initials = namearr.length > 1
           ? namearr.getRange(0, 2).map((e) => e = e[0]).join('')
           : namearr[0];
-      avatar = Text(initials, style: TextStyle(color: kAppBarIconColor),);
+      avatar = Text(
+        initials,
+        style: TextStyle(color: kAppBarIconColor),
+      );
     }
   }
 
@@ -72,6 +80,9 @@ class UserAvatarWidget extends StatelessWidget {
   void buildFromEmail() {
     String emailInitials =
         _localUser!.email.toString().substring(0, 2).toUpperCase();
-    avatar = Text(emailInitials, style: TextStyle(color: kAppBarIconColor),);
+    avatar = Text(
+      emailInitials,
+      style: TextStyle(color: kAppBarIconColor),
+    );
   }
 }
