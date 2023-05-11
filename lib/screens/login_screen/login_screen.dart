@@ -26,31 +26,34 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Builder(
         builder: (context) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              const Logo(),
-              LoginTextField(
-                controller: emailController,
-                label: 'Email',
-              ),
-              const SizedBox(height: 8.0),
-              LoginTextField(
-                isPassword: true,
-                controller: passwordController,
-                label: 'Password',
-              ),
-              const SizedBox(height: 24.0),
-              LoginButton(
-                passwordController: passwordController,
-                emailController: emailController,
-              ),
-              const SizedBox(height: 8.0),
-              OrDivider(),
-              const SizedBox(height: 8.0),
-              const GoogleSignInButton(),
-            ],
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(top: 50),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                const Logo(),
+                LoginTextField(
+                  controller: emailController,
+                  label: 'Email',
+                ),
+                const SizedBox(height: 8.0),
+                LoginTextField(
+                  isPassword: true,
+                  controller: passwordController,
+                  label: 'Password',
+                ),
+                const SizedBox(height: 24.0),
+                LoginButton(
+                  passwordController: passwordController,
+                  emailController: emailController,
+                ),
+                const SizedBox(height: 8.0),
+                OrDivider(),
+                const SizedBox(height: 8.0),
+                const GoogleSignInButton(),
+              ],
+            ),
           ),
         ),
       ),

@@ -37,9 +37,10 @@ class Wrapper extends StatelessWidget {
           }
           else {
             print('wrapper.dart -> user is ${user.email}');
+            print('\t --> id: ${user.uid}');
             userProvider.localUser = user;
+
             _setCurrentShoppingCart(shoppingCartProvider, user);
-            // Navigator.pop;
             Navigator.popUntil(context, (route) => route.isFirst);
             return CategoriesScreen();
           }
