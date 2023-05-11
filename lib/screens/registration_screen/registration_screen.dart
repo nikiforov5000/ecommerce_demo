@@ -1,4 +1,5 @@
 import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/screens/registration_screen/widgets/google_sign_in_button.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/login_text_field.dart';
 import 'package:ecommerce_demo/screens/registration_screen/widgets/register_button.dart';
 import 'package:ecommerce_demo/screens/welcome_screen/widgets/logo.dart';
@@ -51,6 +52,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 passwordController: passwordController,
                 repeatPasswordController: repeatPasswordController,
               ),
+              GoogleSignInButton(),
             ],
           ),
         ),
