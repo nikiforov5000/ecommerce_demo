@@ -39,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 8.0),
               LoginTextField(
+                isPassword: true,
                 controller: passwordController,
                 label: 'Password',
               ),

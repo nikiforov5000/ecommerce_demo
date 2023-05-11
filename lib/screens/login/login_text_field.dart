@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class LoginTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
+  final bool? isPassword;
 
   const LoginTextField({
     required this.label,
     required this.controller,
+    this.isPassword,
     Key? key,
   }) : super(key: key);
 
@@ -21,6 +23,7 @@ class LoginTextField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: TextField(
+          obscureText: isPassword ?? false,
           controller: controller,
           textAlign: TextAlign.center,
           decoration: InputDecoration(
