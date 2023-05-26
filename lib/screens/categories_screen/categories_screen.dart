@@ -61,7 +61,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         child: Column(
           children: [
             SizedBox(height: 20.0,),
-            SearchBar(onChangesCallback: (value) {
+            MySearchBar(onChangesCallback: (value) {
               setState(() {
                 displayedProducts = ProductData.products;
               });

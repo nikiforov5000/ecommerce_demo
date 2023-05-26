@@ -3,15 +3,15 @@ import 'package:ecommerce_demo/constants/shadows.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:flutter/material.dart';
 
-class SearchBar extends StatefulWidget {
+class MySearchBar extends StatefulWidget {
   final Function onChangesCallback;
-  SearchBar({required this.onChangesCallback});
+  MySearchBar({required this.onChangesCallback});
 
   @override
-  State<SearchBar> createState() => _SearchBarState();
+  State<MySearchBar> createState() => _MySearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _MySearchBarState extends State<MySearchBar> {
   final TextEditingController controller = TextEditingController();
 
   @override

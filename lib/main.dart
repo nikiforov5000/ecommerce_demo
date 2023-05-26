@@ -21,6 +21,7 @@ import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/wrapper.dart';
 import 'firebase_options.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
