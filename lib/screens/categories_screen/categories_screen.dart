@@ -6,6 +6,7 @@ import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/cart_icon/stream_builder.dart';
 import 'package:ecommerce_demo/widgets/category_tile.dart';
 import 'package:ecommerce_demo/widgets/icon_template.dart';
+import 'package:ecommerce_demo/widgets/logo_home_button.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/search_bar.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
@@ -13,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CategoriesScreen extends StatefulWidget {
-
   static const String id = 'categories_screen';
 
   @override
@@ -21,7 +21,6 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
-
   List<ProductCategory> categories = [];
   ProductData productData = ProductData();
 
@@ -32,8 +31,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   }
 
   Future<void> _loadCategories() async {
-    List<ProductCategory> loadedCategories = await
-        ProductData.getCategories();
+    List<ProductCategory> loadedCategories = await ProductData.getCategories();
     setState(() {
       categories = loadedCategories;
     });
@@ -41,33 +39,35 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
     final _shoppingCart = _shoppingCartProvider.shoppingCart;
 
     // print('categories_screen.dart -> ' + context.read<LocalUserProvider>().localUser!.email);
     return Scaffold(
       appBar: AppBar(
-        title: Text('eCommerce'),
+        title: const LogoHomeButton(),
         actions: [
-          AppBarIconTemplate(child: CartIconStreamBuilder()),
+          AppBarIconTemplate(child: const CartIconStreamBuilder()),
           AppBarIconTemplate(child: UserAvatarWidget()),
           AppBarIconTemplate(child: LogoutButton()),
         ],
       ),
-      body:
-      Container(
+      body: Container(
         color: kBackgroundColor,
         child: Column(
           children: [
-            SizedBox(height: 20.0,),
+            const SizedBox(
+              height: 20.0,
+            ),
             MySearchBar(onChangesCallback: (value) {
               setState(() {
                 displayedProducts = ProductData.products;
               });
               Navigator.pushNamed(context, ProductsListScreen.id);
             }),
-            SizedBox(height: 20.0,),
+            const SizedBox(
+              height: 20.0,
+            ),
             Flexible(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -81,8 +81,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       child: CategoryTile(
                         category: category,
                         onTapCallback: () async {
-                          print('categories_screen.dart -> tapped ${category.name}');
-                          await ProductData.getProductsOfCategory(category.name);
+                          print(
+                              'categories_screen.dart -> tapped ${category.name}');
+                          await ProductData.getProductsOfCategory(
+                              category.name);
                           Navigator.pushNamed(context, ProductsListScreen.id);
                         },
                       ),
@@ -90,12 +92,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 ],
               ),
             ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     ProductData.addIdToAllProducts();
-            //   },
-            //   child: Text('Add id to all products'),
-            // ),
           ],
         ),
       ),
