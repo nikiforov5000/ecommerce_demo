@@ -44,23 +44,25 @@ class ProductScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
           horizontal: 20.0,
         ),
-        child: Column(
-          children: [
-            SizedBox(
-              height: screenHeight * .03,
-            ),
-            ProductImageCarousel(
-              product: product,
-            ),
-            SizedBox(
-              height: screenHeight * .03,
-            ),
-            ButtonsBlock(product: product),
-            SizedBox(
-              height: screenHeight * .03,
-            ),
-            Expanded(child: AboutProduct(product: product)),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: screenHeight * .03,
+              ),
+              ProductImageCarousel(
+                product: product,
+              ),
+              SizedBox(
+                height: screenHeight * .03,
+              ),
+              ButtonsBlock(product: product),
+              SizedBox(
+                height: screenHeight * .03,
+              ),
+              AboutProduct(product: product),
+            ],
+          ),
         ),
       ),
     );
@@ -227,13 +229,11 @@ class AboutProduct extends StatelessWidget {
         SizedBox(
           height: 10.0,
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Text(
-              product.description,
-              style: kProductDescriptionTextStyle,
-            ),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Text(
+            product.description,
+            style: kProductDescriptionTextStyle,
           ),
         ),
       ],
