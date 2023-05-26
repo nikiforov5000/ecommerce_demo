@@ -1,7 +1,7 @@
 import 'package:ecommerce_demo/screens/categories_screen/categories_screen.dart';
 import 'package:ecommerce_demo/screens/login_screen/login_screen.dart';
 import 'package:ecommerce_demo/screens/order_success/order_success_screen.dart';
-import 'package:ecommerce_demo/screens/order_summary.dart';
+import 'package:ecommerce_demo/screens/order_summary/order_summary.dart';
 import 'package:ecommerce_demo/screens/product_list_screen/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/user_account_screen/user_account_screen.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ecommerce_demo/screens/checkout_screen.dart';
-import 'package:ecommerce_demo/screens/product_screen.dart';
+import 'package:ecommerce_demo/screens/product_screen/product_screen.dart';
 import 'package:ecommerce_demo/screens/registration_screen/registration_screen.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen/shopping_cart_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';

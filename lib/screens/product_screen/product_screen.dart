@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/cart_icon/stream_builder.dart';
 import 'package:ecommerce_demo/widgets/icon_template.dart';
+import 'package:ecommerce_demo/widgets/logo_home_button.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class ProductScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(product.title),
+        title: const LogoHomeButton(),
         actions: [
           AppBarIconTemplate(child: CartIconStreamBuilder()),
           AppBarIconTemplate(child: UserAvatarWidget()),

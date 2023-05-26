@@ -1,9 +1,10 @@
 import 'package:ecommerce_demo/constants/colors.dart';
-import 'package:ecommerce_demo/screens/order_summary.dart';
+import 'package:ecommerce_demo/screens/order_summary/order_summary.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen/widgets/snapshot_stream_builder_widget.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/icon_template.dart';
+import 'package:ecommerce_demo/widgets/logo_home_button.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
@@ -27,7 +28,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
     double total = shoppingCart!.getSum();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Cart'),
+        title: const LogoHomeButton(),
         actions: [
           AppBarIconTemplate(child: UserAvatarWidget()),
           AppBarIconTemplate(child: LogoutButton()),

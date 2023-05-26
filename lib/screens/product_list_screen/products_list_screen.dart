@@ -7,6 +7,7 @@ import 'package:ecommerce_demo/screens/product_list_screen/widgets/sort_bar.dart
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/cart_icon/stream_builder.dart';
 import 'package:ecommerce_demo/widgets/icon_template.dart';
+import 'package:ecommerce_demo/widgets/logo_home_button.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/search_bar.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
@@ -43,7 +44,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
     print('ProductsListScreen().build');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('eCommerce Demo'),
+        title: const LogoHomeButton(),
         actions: [
           AppBarIconTemplate(child: const CartIconStreamBuilder()),
           AppBarIconTemplate(child: UserAvatarWidget()),

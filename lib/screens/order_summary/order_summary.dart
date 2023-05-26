@@ -1,6 +1,7 @@
 import 'package:ecommerce_demo/screens/order_success/order_success_screen.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/icon_template.dart';
+import 'package:ecommerce_demo/widgets/logo_home_button.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class OrderSummary extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order Summary'),
+        title: const LogoHomeButton(),
         actions: [
           AppBarIconTemplate(child: UserAvatarWidget()),
           AppBarIconTemplate(child: LogoutButton()),
@@ -32,7 +33,7 @@ class OrderSummary extends StatelessWidget {
             children: [
               Flexible(
                 child: ListView(children: [
-                  Column(
+                  const Column(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -55,7 +56,7 @@ class OrderSummary extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Card(
@@ -70,7 +71,7 @@ class OrderSummary extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   'Payment',
                                   style: TextStyle(
                                       fontSize: 16,
@@ -78,7 +79,7 @@ class OrderSummary extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {},
-                                  child: Text(
+                                  child: const Text(
                                     'Edit',
                                     style: TextStyle(
                                         fontSize: 16,
@@ -88,10 +89,10 @@ class OrderSummary extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Row(
@@ -136,7 +137,7 @@ class OrderSummary extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   'Shipping address',
                                   style: TextStyle(
                                       fontSize: 16,
@@ -144,7 +145,7 @@ class OrderSummary extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {},
-                                  child: Text(
+                                  child: const Text(
                                     'Edit',
                                     style: TextStyle(
                                         fontSize: 16,
@@ -154,10 +155,10 @@ class OrderSummary extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
@@ -173,10 +174,10 @@ class OrderSummary extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
@@ -192,10 +193,10 @@ class OrderSummary extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
@@ -220,7 +221,7 @@ class OrderSummary extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(top: 20.0),
+                    margin: const EdgeInsets.only(top: 20.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       color: Colors.grey.shade100,
@@ -230,7 +231,7 @@ class OrderSummary extends StatelessWidget {
                             horizontal: 20.0, vertical: 30.0),
                         child: Column(
                           children: [
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
@@ -241,51 +242,51 @@ class OrderSummary extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   'Subtotal',
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.black54),
                                 ),
                                 Text(
                                   '\$${totalSum * 0.9}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   'Delivery',
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.black54),
                                 ),
                                 Text(
                                   '\$${totalSum * 0.1}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                const Text(
                                   'Total',
                                   style: TextStyle(
                                       fontSize: 16,
@@ -293,7 +294,7 @@ class OrderSummary extends StatelessWidget {
                                 ),
                                 Text(
                                   '\$$totalSum',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -302,15 +303,15 @@ class OrderSummary extends StatelessWidget {
                           ],
                         )),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, OrderSuccessScreen.id);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 15),
                       child: Text('Submit Order'),
                     ),
                   ),

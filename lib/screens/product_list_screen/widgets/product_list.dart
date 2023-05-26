@@ -1,7 +1,7 @@
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/screens/product_list_screen/products_list_screen.dart';
 import 'package:ecommerce_demo/screens/product_list_screen/widgets/product_tile.dart';
-import 'package:ecommerce_demo/screens/product_screen.dart';
+import 'package:ecommerce_demo/screens/product_screen/product_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductsList extends StatelessWidget {
