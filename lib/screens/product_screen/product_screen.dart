@@ -1,5 +1,10 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
+import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/models/product.dart';
+import 'package:ecommerce_demo/screens/product_screen/widgets/buttons_block.dart';
+import 'package:ecommerce_demo/screens/product_screen/widgets/product_description.dart';
+import 'package:ecommerce_demo/screens/product_screen/widgets/product_image_carousel.dart';
+import 'package:ecommerce_demo/screens/product_screen/widgets/product_rating.dart';
+import 'package:ecommerce_demo/screens/product_screen/widgets/product_short_title.dart';
 import 'package:ecommerce_demo/widgets/cart_icon/stream_builder.dart';
 import 'package:ecommerce_demo/widgets/icon_template.dart';
 import 'package:ecommerce_demo/widgets/logo_home_button.dart';
@@ -7,34 +12,25 @@ import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 
-import 'package:ecommerce_demo/constants/colors.dart';
-import 'package:ecommerce_demo/constants/text_styles.dart';
-import 'package:ecommerce_demo/models/product.dart';
-import 'package:ecommerce_demo/screens/shopping_cart_screen/shopping_cart_screen.dart';
-import 'package:ecommerce_demo/widgets/buttonText.dart';
-import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
-import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
-import 'package:provider/provider.dart';
-
 class ProductScreen extends StatelessWidget {
   static const String id = 'product_screen';
-  final Product product;
+  final Product _product;
 
-  ProductScreen({required this.product});
+  const ProductScreen({
+    Key? key,
+    required Product product,
+  })  : _product = product,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
-    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
-    final _shoppingCart = _shoppingCartProvider.shoppingCart;
-    print('product_screen -> shoppingCart.id:' + _shoppingCart!.id);
 
     return Scaffold(
       appBar: AppBar(
         title: const LogoHomeButton(),
         actions: [
-          AppBarIconTemplate(child: CartIconStreamBuilder()),
+          AppBarIconTemplate(child: const CartIconStreamBuilder()),
           AppBarIconTemplate(child: UserAvatarWidget()),
           AppBarIconTemplate(child: LogoutButton()),
         ],
@@ -47,232 +43,20 @@ class ProductScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(height: screenHeight * .03),
+              ProductImageCarousel(_product),
+              SizedBox(height: screenHeight * .03),
+              ButtonsBlock(_product),
               SizedBox(
                 height: screenHeight * .03,
               ),
-              ProductImageCarousel(
-                product: product,
-              ),
-              SizedBox(
-                height: screenHeight * .03,
-              ),
-              ButtonsBlock(product: product),
-              SizedBox(
-                height: screenHeight * .03,
-              ),
-              AboutProduct(product: product),
+              ProductShortTitle(_product),
+              ProductRating(_product),
+              ProductDescription(_product),
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-class ProductImageCarousel extends StatelessWidget {
-  final Product product;
-
-  const ProductImageCarousel({super.key, required this.product});
-
-  @override
-  Widget build(BuildContext context) {
-    // return const Placeholder();
-    return CarouselSlider(
-      // options: CarouselOptions(height: 200.0),
-      options: CarouselOptions(viewportFraction: 1, enlargeCenterPage: true),
-      items: [1, 2, 3, 4, 5].map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return GestureDetector(
-              child: ColorFilteredImage(imgUrl: product.imgUrl),
-              onTap: () {
-                Navigator.push<Widget>(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        LargeImageScreen(product: product, index: i),
-                  ),
-                );
-              },
-            );
-          },
-        );
-      }).toList(),
-    );
-  }
-}
-
-class ButtonsBlock extends StatefulWidget {
-  const ButtonsBlock({required this.product});
-
-  final Product product;
-
-  @override
-  State<ButtonsBlock> createState() => _ButtonsBlockState();
-}
-
-class _ButtonsBlockState extends State<ButtonsBlock> {
-  int quantity = 1;
-
-  @override
-  Widget build(BuildContext context) {
-    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
-    final _shoppingCart = _shoppingCartProvider.shoppingCart;
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Container(),
-                flex: 2,
-              ),
-              Expanded(
-                child: RoundedButton(
-                  labelWidget: Icon(
-                    Icons.remove,
-                    color: kDarkTextColor,
-                    size: 15,
-                  ),
-                  onTapCallback: () {
-                    setState(() {
-                      if (quantity > 1) {
-                        quantity--;
-                      }
-                    });
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                ),
-                child: Text(
-                  quantity.toString(),
-                  style: kProductScreenQuantityTextStyle,
-                ),
-              ),
-              Expanded(
-                child: RoundedButton(
-                  labelWidget: Icon(
-                    Icons.add,
-                    color: kDarkTextColor,
-                    size: 15,
-                  ),
-                  onTapCallback: () {
-                    setState(() {
-                      quantity++;
-                    });
-                  },
-                ),
-              ),
-              Expanded(
-                child: Container(),
-                flex: 2,
-              ),
-            ],
-          ),
-          RoundedButton(
-              labelWidget: ButtonText(text: 'Add to Cart'),
-              onTapCallback: () {
-                _shoppingCart!.addProduct(widget.product, quantity);
-              }),
-          RoundedButton(
-              labelWidget: ButtonText(text: 'Go to Cart'),
-              onTapCallback: () {
-                Navigator.pushNamed(context, ShoppingCartScreen.id);
-              }),
-        ]);
-  }
-}
-
-class AboutProduct extends StatelessWidget {
-  const AboutProduct({required this.product});
-
-  final Product product;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          product.title,
-          style: kProductScreenTitleTextStyle,
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(
-          height: 10.0,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Rating: ',
-              style: kProductScreenRatingTextStyle,
-            ),
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: getRatingColor(product.rate),
-              ),
-              child: Text(
-                product.rate.toString(),
-                style: kProductScreenRatingTextStyle,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 10.0,
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Text(
-            product.description,
-            style: kProductDescriptionTextStyle,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class LargeImageScreen extends StatelessWidget {
-  const LargeImageScreen({required this.product, required this.index});
-
-  final int index;
-  final Product product;
-
-  @override
-  Widget build(BuildContext context) {
-    // return const Placeholder();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(product.title),
-      ),
-      body: CarouselSlider(
-        options: CarouselOptions(
-          initialPage: index,
-          enlargeCenterPage: true,
-          height: MediaQuery.of(context).size.height,
-        ),
-        items: [1, 2, 3, 4, 5].map((i) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Image.network(
-                product.imgUrl,
-                fit: BoxFit.fitWidth,
-                width: double.infinity,
-              );
-            },
-          );
-        }).toList(),
-      ),
-    );
-    ;
   }
 }
