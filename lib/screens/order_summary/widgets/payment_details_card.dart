@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 class PaymentDetailsCard extends StatelessWidget {
   const PaymentDetailsCard({Key? key}) : super(key: key);
 

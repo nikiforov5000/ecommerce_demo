@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 class PrivacyPolicyText extends StatelessWidget {
   const PrivacyPolicyText({Key? key}) : super(key: key);
 
