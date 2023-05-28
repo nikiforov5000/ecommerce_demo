@@ -38,9 +38,9 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
-    final _shoppingCart = _shoppingCartProvider.shoppingCart;
-    print('product_list_screen -> shoppingCart.id:' + _shoppingCart!.id);
+    // final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
+    // final _shoppingCart = _shoppingCartProvider.shoppingCart;
+    // print('product_list_screen -> shoppingCart.id:' + _shoppingCart!.id);
     print('ProductsListScreen().build');
     return Scaffold(
       appBar: AppBar(
