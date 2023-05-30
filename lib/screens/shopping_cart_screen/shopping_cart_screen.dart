@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/screens/order_summary/order_summary.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen/widgets/snapshot_stream_builder_widget.dart';
+import 'package:ecommerce_demo/screens/shopping_cart_screen/widgets/total_price.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:ecommerce_demo/widgets/buttonText.dart';
 import 'package:ecommerce_demo/widgets/icon_template.dart';
@@ -8,6 +10,7 @@ import 'package:ecommerce_demo/widgets/logo_home_button.dart';
 import 'package:ecommerce_demo/widgets/logout_button.dart';
 import 'package:ecommerce_demo/widgets/rounded_button_widget.dart';
 import 'package:ecommerce_demo/widgets/user_avatar.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +28,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   Widget build(BuildContext context) {
     final shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
     final shoppingCart = shoppingCartProvider.shoppingCart;
-    double total = shoppingCart!.getSum();
+    print('shopping_cart.dart -> _sum' + shoppingCart!.getSum().toString());
+    shoppingCart?.fetchTotal();
+    print('shopping_cart.dart -> _sum' + shoppingCart!.getSum().toString());
     return Scaffold(
       appBar: AppBar(
         title: const LogoHomeButton(),
@@ -52,16 +57,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text('Total price: '),
-              Text(
-                total.toStringAsFixed(2),
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
+          child: TotalPrice(),
         ),
         Container(
           height: 2,
@@ -79,5 +75,8 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
     );
   }
 }
+
+
+
 
 
