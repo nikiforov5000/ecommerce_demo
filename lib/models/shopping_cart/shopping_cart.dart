@@ -13,6 +13,8 @@ class ShoppingCart {
 
   int get length => _shoppingCart.length;
 
+  set sum(double sum) { _sum = sum; }
+
 
 
   getCartMap() {
@@ -58,7 +60,7 @@ class ShoppingCart {
       quantity += _shoppingCart[product]!;
     }
     _shoppingCart[product] = quantity;
-    updateSum();
+    _sum += (product.price * quantity);
   }
 
   void updateQty({required ShoppingCartItem cartItem, required int qty}) async {
@@ -106,5 +108,27 @@ class ShoppingCart {
   Stream<int> isNotEmptyStream() {
     final cartRef = FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems').snapshots();
     return cartRef.map((event) => event.docs.length).debounceTime(const Duration(seconds: 1));
+  }
+
+  void fetchTotal() async {
+    _sum = 0;
+    final itemsRef = FirebaseFirestore.instance
+        .collection('carts')
+        .doc(id)
+        .collection('cartItems');
+    print('shopping_cart.dart -> fetchTotal() -> itemsRef.snapshots().first.toString()');
+    await itemsRef.snapshots().first.then(
+        (value) {
+          print('value:' + value.toString());
+          value.docs.forEach((element) {
+            double price = element.data()['price'];
+            int quantity = element.data()['quantity'];
+            _sum += (price * quantity);
+          });
+        });
+    // _sum = await itemsRef.snapshots().first.then((value) {
+    //   value.docs.map((e) => e.data()['price'];
+    // }
+    // );
   }
 }
