@@ -2,6 +2,7 @@ import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/screens/product_screen/widgets/buttons_block.dart';
+import 'package:ecommerce_demo/screens/product_screen/widgets/price.dart';
 import 'package:ecommerce_demo/screens/product_screen/widgets/product_description.dart';
 import 'package:ecommerce_demo/screens/product_screen/widgets/product_image_carousel.dart';
 import 'package:ecommerce_demo/screens/product_screen/widgets/product_rating.dart';
@@ -57,19 +58,6 @@ class ProductScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class Price extends StatelessWidget {
-  final Product _product;
-  Price(this._product, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      '\$${_product.price.toStringAsFixed(2)}',
-      style: kButtonTextStyle,
     );
   }
 }
