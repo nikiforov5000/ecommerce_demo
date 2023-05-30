@@ -64,3 +64,5 @@ getRatingColor(double rating) {
   }
   return Colors.transparent;
 }
+
+const kSortTextStyle = TextStyle(fontWeight: FontWeight.normal, fontSize: 13);
