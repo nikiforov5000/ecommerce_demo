@@ -1,4 +1,5 @@
 import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/screens/product_screen/widgets/buttons_block.dart';
 import 'package:ecommerce_demo/screens/product_screen/widgets/product_description.dart';
@@ -46,10 +47,9 @@ class ProductScreen extends StatelessWidget {
               SizedBox(height: screenHeight * .03),
               ProductImageCarousel(_product),
               SizedBox(height: screenHeight * .03),
+              Price(_product),
               ButtonsBlock(_product),
-              SizedBox(
-                height: screenHeight * .03,
-              ),
+              SizedBox(height: screenHeight * .03),
               ProductShortTitle(_product),
               ProductRating(_product),
               ProductDescription(_product),
@@ -60,3 +60,17 @@ class ProductScreen extends StatelessWidget {
     );
   }
 }
+
+class Price extends StatelessWidget {
+  final Product _product;
+  Price(this._product, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '\$${_product.price.toStringAsFixed(2)}',
+      style: kButtonTextStyle,
+    );
+  }
+}
+
