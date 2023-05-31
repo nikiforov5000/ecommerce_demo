@@ -71,7 +71,7 @@ class OrderSuccessScreen extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       BigAndSmallTextColumn(
-                                          '\$$total', 'Total amount'),
+                                          '\$${total.toStringAsFixed(2)}', 'Total amount'),
                                       BigAndSmallTextColumn(
                                           'x$itemsAmount', 'Items ordered'),
                                       BigAndSmallTextColumn(
