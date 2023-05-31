@@ -99,15 +99,7 @@ class OrderSummaryPrice extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, OrderSuccessScreen.id);
-          },
-          child: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 15),
-            child: Text('Submit Order'),
-          ),
-        ),
+
       ],
     );
   }
