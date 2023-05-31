@@ -51,7 +51,7 @@ class OrderSummaryPrice extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '\$${totalSum * 0.9}',
+                      '\$${(totalSum * 0.9).toStringAsFixed(2)}',
                       style: const TextStyle(
                         fontSize: 16,
                       ),
@@ -69,7 +69,7 @@ class OrderSummaryPrice extends StatelessWidget {
                       style: TextStyle(fontSize: 16, color: Colors.black54),
                     ),
                     Text(
-                      '\$${totalSum * 0.1}',
+                      '\$${(totalSum * 0.1).toStringAsFixed(2)}',
                       style: const TextStyle(fontSize: 16),
                     ),
                   ],
