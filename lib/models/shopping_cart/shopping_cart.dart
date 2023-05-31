@@ -69,8 +69,7 @@ class ShoppingCart {
     final cartItemRef = cartRef.collection('cartItems').doc(cartItem.id);
     var data = {'quantity': qty};
     cartItemRef.update(data);
-    updateSum();
-    _amount -= qty;
+    fetchTotal();
   }
 
   void updateSum() {
@@ -112,6 +111,7 @@ class ShoppingCart {
 
   void fetchTotal() async {
     _sum = 0;
+    _amount = 0;
     final itemsRef = FirebaseFirestore.instance
         .collection('carts')
         .doc(id)
@@ -123,6 +123,7 @@ class ShoppingCart {
           value.docs.forEach((element) {
             double price = element.data()['price'];
             int quantity = element.data()['quantity'];
+            _amount += quantity;
             _sum += (price * quantity);
           });
         });
