@@ -63,6 +63,18 @@ class ShoppingCart {
     _sum += (product.price * quantity);
   }
 
+  void emptyCart() {
+    print('shopping_cart.dart -> emptyCart()');
+    final firestore = FirebaseFirestore.instance;
+    final cartItemsSnapshot = firestore.collection('carts').doc(id).collection('cartItems').snapshots();
+
+    cartItemsSnapshot.first.then((snapshot) {
+      for (var doc in snapshot.docs) {
+        doc.reference.delete();
+      }
+    });
+  }
+
   void updateQty({required ShoppingCartItem cartItem, required int qty}) async {
     final firestore = FirebaseFirestore.instance;
     final cartRef = firestore.collection('carts').doc(id);
