@@ -1,6 +1,6 @@
 import 'package:ecommerce_demo/constants/colors.dart';
-import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/models/product.dart';
+import 'package:ecommerce_demo/screens/product_screen/widgets/breadcrumbs.dart';
 import 'package:ecommerce_demo/screens/product_screen/widgets/buttons_block.dart';
 import 'package:ecommerce_demo/screens/product_screen/widgets/price.dart';
 import 'package:ecommerce_demo/screens/product_screen/widgets/product_description.dart';
@@ -45,6 +45,8 @@ class ProductScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(height: screenHeight * .015),
+              Breadcrumbs(_product),
               SizedBox(height: screenHeight * .03),
               ProductImageCarousel(_product),
               SizedBox(height: screenHeight * .03),
@@ -61,4 +63,3 @@ class ProductScreen extends StatelessWidget {
     );
   }
 }
-
