@@ -144,4 +144,10 @@ class ShoppingCart {
     // }
     // );
   }
+
+  Future<bool> isProductInCart(Product product) async {
+    final cartItemsRef = FirebaseFirestore.instance.collection('carts').doc(id).collection('cartItems');
+    QuerySnapshot querySnapshot = await cartItemsRef.where('productId', isEqualTo: product.id).get();
+    return querySnapshot.docs.length > 0;
+  }
 }
