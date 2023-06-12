@@ -12,19 +12,18 @@ class CartIconStreamBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<ShoppingCartProvider>(context);
     final ShoppingCart? cart = cartProvider.shoppingCart;
-    return StreamBuilder<int>(
-      stream: cart?.isNotEmptyStream(),
+    return StreamBuilder<int>(stream: cart?.isNotEmptyStream(),
       initialData: 0,
       builder: (context, snapshot) {
-        if (snapshot.hasData && snapshot.data! > 0) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, ShoppingCartScreen.id);
-            },
-            child: const CreateIcon(),
-          );
-        }
-        return Container();
+        return GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              ShoppingCartScreen.id,
+            );
+          },
+          child: CreateIcon(snapshot.hasData && snapshot.data! > 0),
+        );
       },
     );
   }
