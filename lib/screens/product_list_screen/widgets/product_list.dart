@@ -9,9 +9,8 @@ class ProductsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const SliverGridDelegate sliverGridDelegate =
-      SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2);
-
+      const SliverGridDelegate sliverGridDelegate =
+        SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2);
     return Flexible(
       child: GridView.builder(
         itemCount: displayedProducts.length,
