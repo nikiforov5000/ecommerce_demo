@@ -45,6 +45,7 @@ class ProductScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(height: screenHeight * .015),
               Breadcrumbs(_product),
               SizedBox(height: screenHeight * .03),
               ProductImageCarousel(_product),

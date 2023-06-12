@@ -70,4 +70,5 @@ const kSortTextStyle = TextStyle(fontWeight: FontWeight.normal, fontSize: 13);
 TextStyle kBreadcrumbsTextStyle = kButtonTextStyle.copyWith(
   color: Colors.blue.shade600,
   decoration: TextDecoration.underline,
+  fontSize: 12,
 );

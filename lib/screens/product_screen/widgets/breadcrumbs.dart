@@ -1,3 +1,5 @@
+import 'package:ecommerce_demo/constants/colors.dart';
+import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_screen/widgets/hyperlink_text.dart';
@@ -15,11 +17,16 @@ class Breadcrumbs extends StatelessWidget {
         HyperlinkText(_product.category.capitalize()),
         Text(' / '),
         Expanded(
-            child: Text(
-          _product.title.capitalize(),
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-        )),
+          child: Text(
+            _product.title.capitalize(),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: kBreadcrumbsTextStyle.copyWith(
+              color: kDarkTextColor,
+              decoration: TextDecoration.none,
+            ),
+          ),
+        ),
       ],
     );
   }
