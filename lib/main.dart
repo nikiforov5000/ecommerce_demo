@@ -66,10 +66,11 @@ class MyApp extends StatelessWidget {
         },
         theme: ThemeData().copyWith(
           appBarTheme: AppBarTheme().copyWith(
-            color: kTileColor,
+
+            color: kAppBarBackgrooundColor,
             titleTextStyle: kAppbarTextStyle,
             elevation: 0.5,
-            iconTheme: IconThemeData(color: kDarkTextColor),
+            iconTheme: IconThemeData(color: kBackgroundColor),
           ),
         ),
       ),
