@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'circle.dart';
 
 class CircleCheckIconWidget extends StatelessWidget {
-  const CircleCheckIconWidget({
-    super.key,
-  });
+  const CircleCheckIconWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,19 +12,9 @@ class CircleCheckIconWidget extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Circle(
-            size: 50,
-            color: Colors.white,
-          ),
-          Circle(
-            size: 40,
-            color: kCardBackgroundColor,
-            widget: Icon(
-              Icons.check_rounded,
-              color: Colors.white,
-              size: 30,
-            ),
-          ),
+          Circle(size: 50, color: Colors.white),
+          Circle(size: 40, color: kCardBackgroundColor),
+          const Icon(Icons.check_rounded, color: Colors.white, size: 30),
         ],
       ),
     );
