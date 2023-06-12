@@ -7,6 +7,7 @@ import 'package:ecommerce_demo/screens/product_screen/widgets/product_descriptio
 import 'package:ecommerce_demo/screens/product_screen/widgets/product_image_carousel.dart';
 import 'package:ecommerce_demo/screens/product_screen/widgets/product_rating.dart';
 import 'package:ecommerce_demo/screens/product_screen/widgets/product_short_title.dart';
+import 'package:ecommerce_demo/screens/product_screen/widgets/see_also.dart';
 import 'package:ecommerce_demo/widgets/cart_icon/stream_builder.dart';
 import 'package:ecommerce_demo/widgets/icon_template.dart';
 import 'package:ecommerce_demo/widgets/logo_home_button.dart';
@@ -56,6 +57,8 @@ class ProductScreen extends StatelessWidget {
               ProductShortTitle(_product),
               ProductRating(_product),
               ProductDescription(_product),
+              SizedBox(height: screenHeight * .03),
+              SeeAlso(_product.category),
             ],
           ),
         ),
