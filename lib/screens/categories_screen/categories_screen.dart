@@ -39,10 +39,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
-    final _shoppingCart = _shoppingCartProvider.shoppingCart;
 
-    // print('categories_screen.dart -> ' + context.read<LocalUserProvider>().localUser!.email);
     return Scaffold(
       appBar: AppBar(
         title: const LogoHomeButton(),

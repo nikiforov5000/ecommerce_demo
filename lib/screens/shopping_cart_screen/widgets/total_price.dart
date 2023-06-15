@@ -21,6 +21,11 @@ class TotalPrice extends StatelessWidget {
                 .collection('cartItems').snapshots(),
             builder: (BuildContext context, snapshot) {
               double total = 0.0;
+              if (snapshot.connectionState == ConnectionState.waiting
+              || snapshot.data == null
+              ) {
+                return Center(child: CircularProgressIndicator());
+              }
               for (var element in snapshot.data!.docs) {
                 double price = element.data()['price'];
                 int quantity = element.data()['quantity'];
