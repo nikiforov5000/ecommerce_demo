@@ -26,7 +26,6 @@ class RegisterButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
-    final userProvider = Provider.of<LocalUserProvider>(context);
     final shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
 
     return RoundedButton(
@@ -50,14 +49,6 @@ class RegisterButton extends StatelessWidget {
               .showSnackBar(SnackBarMessage.passwordsDoNotMatch);
         } else {
           try {
-            LocalUser? user = await authService.createUserWithEmailAndPassword(
-              email,
-              password,
-            );
-            userProvider.localUser = user;
-            String cartId = await ShoppingCart.createShoppingCart(user!.uid);
-            await UserAccount.createFirestoreUserAccount(user, cartId);
-            shoppingCartProvider.shoppingCart = ShoppingCart(id: cartId);
 
             Navigator.pop;
           } on FirebaseAuthException catch (e) {

@@ -1,3 +1,5 @@
+// import 'dart:html';
+
 import 'package:ecommerce_demo/models/shopping_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/models/user_account/user_account.dart';
@@ -9,9 +11,10 @@ import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-Future<void> _setCurrentShoppingCart(ShoppingCartProvider shoppingCartProvider, LocalUser user) async {
+Future<void> _setCurrentShoppingCart(
+    ShoppingCartProvider shoppingCartProvider, LocalUser user) async {
   final UserAccount userAccount = await UserAccount.fetchAccount(uid: user.uid);
-  print('wrapper.dart -> _setCurrentShoppingCart() -> userAccount: $userAccount');
+  // print('wrapper.dart -> _setCurrentShoppingCart() -> userAccount: $userAccount');
   ShoppingCart shoppingCart = ShoppingCart(id: userAccount.cartId);
   shoppingCart.setItemsAmount();
   shoppingCartProvider.shoppingCart = shoppingCart;
@@ -34,14 +37,12 @@ class Wrapper extends StatelessWidget {
           if (user == null) {
             print('wrapper.dart -> user is NULL');
             return WelcomeScreen();
-          }
-          else {
-            print('wrapper.dart -> user is ${user.email}');
-            print('\t --> id: ${user.uid}');
+          } else {
             userProvider.localUser = user;
-
             _setCurrentShoppingCart(shoppingCartProvider, user);
-            Navigator.popUntil(context, (route) => route.isFirst);
+            Future.microtask((){
+              Navigator.popUntil(context, (route) => route.isFirst);
+            });
             return CategoriesScreen();
           }
         } else {

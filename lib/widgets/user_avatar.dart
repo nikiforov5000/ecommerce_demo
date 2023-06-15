@@ -11,7 +11,7 @@ class UserAvatarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _localUser = context.watch<LocalUserProvider>().localUser;
+    // _localUser = context.watch<LocalUserProvider>().localUser;
     buildUserAvatar();
     return GestureDetector(
       onTap: () {
@@ -29,46 +29,48 @@ class UserAvatarWidget extends StatelessWidget {
     // buildFromPhoto();
     // return;
     buildEmptyAvatar();
-    if (_localUser != null) {
-      if (_localUser!.photoUrl != null && _localUser!.photoUrl != '') {
-        buildFromPhoto();
-      } else if (_localUser!.displayName != null &&
-          _localUser!.displayName != '') {
-        buildFromName();
-      } else if (_localUser!.email != null) {
-        buildFromEmail();
-      }
-    }
+    /// TODO redo avatars with new user code
+    ///
+    // if (_localUser != null) {
+    //   if (_localUser!.photoUrl != null && _localUser!.photoUrl != '') {
+    //     buildFromPhoto();
+    //   } else if (_localUser!.displayName != null &&
+    //       _localUser!.displayName != '') {
+    //     buildFromName();
+    //   } else if (_localUser!.email != null) {
+    //     buildFromEmail();
+    //   }
+    // }
   }
 
-  void buildFromPhoto() {
-    print('user_avatar.dart -> buildFromPhoto()');
-    try {
-      print('user_avatar.dart -> buildFromPhoto() photoUrl:' +
-          _localUser!.photoUrl!);
-      avatar =
-          CircleAvatar(backgroundImage: NetworkImage(_localUser!.photoUrl!));
-    } catch (e) {
-      avatar = Text(
-        'User',
-        style: TextStyle(color: kAppBarIconColor),
-      );
-    }
-  }
+  // void buildFromPhoto() {
+  //   print('user_avatar.dart -> buildFromPhoto()');
+  //   try {
+  //     print('user_avatar.dart -> buildFromPhoto() photoUrl:' +
+  //         _localUser!.photoUrl!);
+  //     avatar =
+  //         CircleAvatar(backgroundImage: NetworkImage(_localUser!.photoUrl!));
+  //   } catch (e) {
+  //     avatar = Text(
+  //       'User',
+  //       style: TextStyle(color: kAppBarIconColor),
+  //     );
+  //   }
+  // }
 
-  void buildFromName() {
-    print('user_avatar.dart -> buildFromName()');
-    List<String>? namearr = _localUser!.displayName?.split(' ');
-    if (namearr != null) {
-      String? initials = namearr.length > 1
-          ? namearr.getRange(0, 2).map((e) => e = e[0]).join('')
-          : namearr[0];
-      avatar = Text(
-        initials,
-        style: TextStyle(color: kAppBarIconColor),
-      );
-    }
-  }
+  // void buildFromName() {
+  //   print('user_avatar.dart -> buildFromName()');
+  //   List<String>? namearr = _localUser!.displayName?.split(' ');
+  //   if (namearr != null) {
+  //     String? initials = namearr.length > 1
+  //         ? namearr.getRange(0, 2).map((e) => e = e[0]).join('')
+  //         : namearr[0];
+  //     avatar = Text(
+  //       initials,
+  //       style: TextStyle(color: kAppBarIconColor),
+  //     );
+  //   }
+  // }
 
   void buildEmptyAvatar() {
     avatar = Icon(

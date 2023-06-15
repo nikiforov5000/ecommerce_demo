@@ -39,7 +39,7 @@ class LoginButton extends StatelessWidget {
           print(
               'login_screen.dart -> Login button -> emailController.text: ${emailController.text}');
           try {
-            final user = await authService.signInWithEmailAndPassword(
+            await authService.signInWithEmailAndPassword(
               emailController.text,
               passwordController.text,
             );

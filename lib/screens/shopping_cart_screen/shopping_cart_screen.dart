@@ -28,9 +28,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   Widget build(BuildContext context) {
     final shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
     final shoppingCart = shoppingCartProvider.shoppingCart;
-    print('shopping_cart.dart -> _sum' + shoppingCart!.getSum().toString());
+    // print('shopping_cart.dart -> _sum' + shoppingCart!.getSum().toString());
     shoppingCart?.fetchTotal();
-    print('shopping_cart.dart -> _sum' + shoppingCart!.getSum().toString());
+    // print('shopping_cart.dart -> _sum' + shoppingCart!.getSum().toString());
     return Scaffold(
       appBar: AppBar(
         title: const LogoHomeButton(),
@@ -48,7 +48,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
           children: [
         Expanded(
           child: SnapshotStreamBuilderWidget(
-            shoppingCart: shoppingCart,
+            shoppingCart: shoppingCart!,
           ),
         ),
         Container(
