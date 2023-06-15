@@ -57,7 +57,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
         child: Column(
           children: [
             const SizedBox(height: 15.0),
-            MySearchBar(onChangesCallback: (value) {
+            CategoryBar(onCategoryChanged: () {
               setState(() {
                 displayedProducts = ProductData.products;
               });
@@ -65,12 +65,15 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
             const SizedBox(height: 15.0),
             Row(
               children: [
+                Expanded(
+                  flex: 2,
+                  child: MySearchBar(onChangesCallback: (value) {
+                    setState(() {
+                      displayedProducts = ProductData.products;
+                    });
+                  }),
+                ),
                 SortBar(onChangesCallback: (value) {
-                  setState(() {
-                    displayedProducts = ProductData.products;
-                  });
-                }),
-                CategoryBar(onCategoryChanged: () {
                   setState(() {
                     displayedProducts = ProductData.products;
                   });
