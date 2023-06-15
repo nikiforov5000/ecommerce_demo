@@ -25,6 +25,26 @@ class SortBar extends StatefulWidget {
 
 class _SortBarState extends State<SortBar> {
   SortBy _sortBy = SortBy.none;
+
+  List<DropdownMenuItem<SortBy>> dropdownItemsList = [];
+
+  void fillList() {
+    for (var sortBy in SortBy.values) {
+      DropdownMenuItem<SortBy> item = DropdownMenuItem(
+        alignment: AlignmentDirectional.center,
+        value: sortBy,
+        child: getDropdownItemText(sortBy),
+      );
+      dropdownItemsList.add(item);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fillList();
+  }
+
   @override
   Widget build(BuildContext context) {
     ProductData.sortProducts(_sortBy);
@@ -33,35 +53,32 @@ class _SortBarState extends State<SortBar> {
     return Container(
       decoration: BoxDecoration(
         boxShadow: k3DShadows,
-        color: kTileColor,
+        color: kBackgroundColor,
         borderRadius: BorderRadius.circular(10),
       ),
       height: height * 0.06,
-      child: DropdownButton(
-        iconSize: 20,
-        padding: EdgeInsets.zero,
-        value: _sortBy,
-        underline: const SizedBox(),
-        items: [
-          for (var sortBy in SortBy.values)
-            DropdownMenuItem(
-              alignment: AlignmentDirectional.center,
-              value: sortBy,
-              child: getDropdownIcon(sortBy),
-            ),
-        ],
-        onChanged: (SortBy? value) {
-          widget.onChangesCallback(value);
-          if (value != null && value != SortBy.none) {
-            _sortBy = value;
-          }
-        },
+      child: Center(
+        child: DropdownButton(
+          alignment: AlignmentDirectional.center,
+          isDense: true,
+          iconSize: 20,
+          padding: EdgeInsets.zero,
+          value: _sortBy,
+          underline: const SizedBox(),
+          items: dropdownItemsList,
+          onChanged: (SortBy? value) {
+            widget.onChangesCallback(value);
+            if (value != null && value != SortBy.none) {
+              _sortBy = value;
+            }
+          },
+        ),
       ),
     );
   }
 }
 
-Widget getDropdownIcon(SortBy sortBy) {
+Widget getDropdownItemText(SortBy sortBy) {
   switch (sortBy) {
     case SortBy.priceHi:
       return const Text('Price: Low to high', style: kSortTextStyle);
@@ -72,6 +89,6 @@ Widget getDropdownIcon(SortBy sortBy) {
     case SortBy.rateLo:
       return const Text('Rating: High to low', style: kSortTextStyle);
     default:
-      return const SizedBox();
+      return const Icon(Icons.sort);
   }
 }

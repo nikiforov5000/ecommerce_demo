@@ -29,7 +29,7 @@ class _MySearchBarState extends State<MySearchBar> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Padding(
-            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            padding: EdgeInsets.only(left: 10.0, right: 10.0),
             child: Icon(Icons.search, color: kDarkTextColor, size: 25.0),
           ),
           Flexible(
