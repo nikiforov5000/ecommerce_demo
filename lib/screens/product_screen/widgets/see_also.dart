@@ -1,6 +1,7 @@
 import 'package:ecommerce_demo/constants/text_styles.dart';
 import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/screens/product_list_screen/widgets/product_tile.dart';
+import 'package:ecommerce_demo/screens/product_screen/product_screen.dart';
 import 'package:flutter/material.dart';
 
 class SeeAlso extends StatelessWidget {
@@ -26,9 +27,20 @@ class SeeAlso extends StatelessWidget {
         GridView.count(
           shrinkWrap: true,
           crossAxisCount: 2,
-          children: ProductData.getProductsOfCategory(_category).map((e) {
-            return ProductTile(product: e, onTapCallback: () {});
-          }).toList(),
+          children: ProductData.products.map(
+            (product) {
+              return ProductTile(
+                product: product,
+                onTapCallback: () {
+                  Navigator.pushNamed(
+                    context,
+                    ProductScreen.id,
+                    arguments: product,
+                  );
+                },
+              );
+            },
+          ).toList(),
         ),
       ],
     );
