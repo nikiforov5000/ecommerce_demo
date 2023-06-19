@@ -5,6 +5,7 @@
 What?
 The application is a comprehensive eCommerce platform built with Flutter. 
 It allows users to browse products, add them to a shopping cart, and manage their orders. 
+
 Check it out here: https://ecommerce-demo-9fa8b.web.app/
 
 How?
