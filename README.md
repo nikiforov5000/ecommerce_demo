@@ -2,22 +2,29 @@
 
 <h2> A Flutter mobile eCommerce application. </h2>
 
-You can try this app in your browser in responsive mode: https://ecommerce-demo-9fa8b.web.app/
+    What?
+    The application is a comprehensive eCommerce platform built with Flutter. 
+    It allows users to browse products, add them to a shopping cart, and manage their orders. 
+    Check it out here: https://ecommerce-demo-9fa8b.web.app/
 
-When a user registers on your Flutter app, a new user account is created in Firebase Authentication, and a new document is added to the "users" collection in Firestore. Additionally, a new document is created in the "shoppingCarts" collection, which is associated with the user's ID.
+    How?
+    Users begin by creating an account, which simultaneously creates a profile in Firebase Authentication and Firestore. 
+    Upon account creation, a unique shopping cart is assigned. 
+    Users can then add products to their cart, with each item stored in the "cartItems" subcollection, capturing necessary details like the addition date, image URL, price, product ID, quantity, and title.
 
-Each shopping cart in the "shoppingCarts" collection contains a "cartItems" subcollection, which holds all the items added to the cart. Each cart item is represented by a document within this subcollection, and contains the following fields:
-
-    additionDate: The date and time the item was added to the cart.
-    id: A unique identifier for the cart item.
-    imgUrl: The URL of the product image.
-    price: The price of the product.
-    productId: A unique identifier for the product.
-    quantity: The quantity of the product added to the cart.
-    title: The title or name of the product.
-
-This database structure allows you to easily retrieve a user's shopping cart and its contents, and track the items they have added to their cart. It also enables you to associate a user's shopping cart with their account and maintain a record of their cart history.
-
+    Why?
+    I embarked on this project to challenge myself and explore the intricacies of developing a full-fledged eCommerce application with Flutter. 
+    The goal was to grasp how various components - user authentication, database management, and frontend development - synergize to create a seamless shopping experience.
+    
+    Learned?
+     - Gained proficiency in developing complex widget trees in Flutter to create dynamic, responsive, and intuitive user interfaces.
+     - Leveraged Flutter for front-end development to create a seamless and interactive user interface.
+     - Implemented Provider package for efficient state management and dependency injection.
+     - Utilized Firebase for back-end operations, specifically its Authentication and Firestore modules for user management and database functionalities.
+     - Employed APIs to fetch product data, enriching the application's features.
+     - Integrated Firebase Cloud Storage for application hosting.
+     - Developed an understanding of how these different technologies and tools interplay in a real-world application setting.
+     -------------------------
  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/welcome_screen.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/login-screen.png" width=250px>  
 <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/register.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/google-sign-in.png" width=250px>
 
