@@ -18,7 +18,9 @@ Each shopping cart in the "shoppingCarts" collection contains a "cartItems" subc
 
 This database structure allows you to easily retrieve a user's shopping cart and its contents, and track the items they have added to their cart. It also enables you to associate a user's shopping cart with their account and maintain a record of their cart history.
 
- <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/welcome_screen.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/login-screen.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/register.png" width=250px>
+ <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/welcome_screen.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/login-screen.png" width=250px>  
+<img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/register.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/google-sign-in.png" width=250px>
+
 
 <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/categories_screen.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/products-list-screen.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/products-list-screen-search.png" width=250px>
 
