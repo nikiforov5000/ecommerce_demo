@@ -3,6 +3,7 @@ import 'package:ecommerce_demo/screens/order_summary/widgets/card_title.dart';
 import 'package:ecommerce_demo/screens/order_summary/widgets/edit_title.dart';
 import 'package:ecommerce_demo/screens/order_summary/widgets/line_text.dart';
 import 'package:ecommerce_demo/screens/order_summary/widgets/line_title.dart';
+import 'package:ecommerce_demo/screens/user_account_screen/user_account_screen.dart';
 import 'package:flutter/material.dart';
 
 class UserShippingDetails extends StatelessWidget {
@@ -24,7 +25,9 @@ class UserShippingDetails extends StatelessWidget {
               children: [
                 const CartTitle('Shipping address'),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, UserAccountScreen.id);
+                  },
                   child: const EditTitle(),
                 ),
               ],
