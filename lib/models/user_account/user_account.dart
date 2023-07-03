@@ -83,18 +83,17 @@ class UserAccount extends ChangeNotifier {
   }
 
   void update({
-    required String address,
-    required String phoneNumber,
-    required DateTime updatedAt,
-    required String zipCode,
-    required String fullName,
+    String? address,
+    String? phoneNumber,
+    String? zipCode,
+    String? fullName,
   }) async {
     await FirebaseFirestore.instance.collection('users').doc(uid).update({
       'address': address,
       'phoneNumber': phoneNumber,
       'zipCode': zipCode,
       'fullName': fullName,
-      'updatedAt': updatedAt,
+      'updatedAt': DateTime.now(),
     });
   }
 }

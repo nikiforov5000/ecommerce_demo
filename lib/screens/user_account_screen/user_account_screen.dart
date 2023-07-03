@@ -90,7 +90,6 @@ class UserAccountScreen extends StatelessWidget {
                   labelWidget: Text('Update'),
                   onTapCallback: () {
                     _userAccount!.update(
-                      updatedAt: DateTime.now(),
                       address: addressController.text,
                       phoneNumber: phoneNumberController.text,
                       fullName: nameController.text,
