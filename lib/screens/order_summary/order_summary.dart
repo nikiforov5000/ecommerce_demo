@@ -35,7 +35,7 @@ class OrderSummary extends StatelessWidget {
           child: Column(
             children: [
               Flexible(
-                child: ListView(children: const [
+                child: ListView(children: [
                   ScreenHeader(),
                   SizedBox(height: 10),
                   PrivacyPolicyText(),
