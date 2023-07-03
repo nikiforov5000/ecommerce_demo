@@ -67,7 +67,7 @@ class UserShippingDetails extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 30),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -78,13 +78,13 @@ class UserShippingDetails extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Boris Nikiforov',
+                  _userAccount.displayedName ?? '--',
                   style: TextStyle(fontSize: 16),
                 ),
               ],
             ),
             const SizedBox(height: 10),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -95,13 +95,13 @@ class UserShippingDetails extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Moda Cd. No:10',
+                  _userAccount.address ?? '--',
                   style: TextStyle(fontSize: 16),
                 ),
               ],
             ),
             const SizedBox(height: 10),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -112,7 +112,7 @@ class UserShippingDetails extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '34710',
+                  _userAccount.zipCode ?? '--',
                   style: TextStyle(fontSize: 16),
                 ),
               ],
