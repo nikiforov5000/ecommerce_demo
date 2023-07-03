@@ -5,25 +5,28 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ShippingAddressDetailsCard extends StatelessWidget {
-  ShippingAddressDetailsCard({Key? key,}) : super(key: key);
+  ShippingAddressDetailsCard({
+    Key? key,
+  }) : super(key: key);
   UserAccount? _userAccount;
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<LocalUserProvider>(context);
     final localUser = provider.localUser;
-    // _userAccount = UserAccount.fetchAccount(uid: localUser!.uid);
+
     return FutureBuilder(
-        future: UserAccount.fetchAccount(uid: localUser!.uid),
-        builder: (BuildContext context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
-            _userAccount = snapshot.data as UserAccount?;
-            return UserShippingDetails(_userAccount!);
-          }
-        });
+      future: UserAccount.fetchAccount(uid: localUser!.uid),
+      builder: (BuildContext context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          _userAccount = snapshot.data as UserAccount?;
+          return UserShippingDetails(_userAccount!);
+        }
+      },
+    );
   }
 }

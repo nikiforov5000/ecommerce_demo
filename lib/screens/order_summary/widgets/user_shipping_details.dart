@@ -37,7 +37,7 @@ class UserShippingDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const LineTitle('Name'),
-                LineText(_userAccount.displayedName),
+                LineText(_userAccount.fullName),
               ],
             ),
             const SizedBox(height: 10),
