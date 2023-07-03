@@ -10,7 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:ecommerce_demo/screens/checkout_screen.dart';
+import 'package:ecommerce_demo/screens/checkout_screen_unused.dart';
 import 'package:ecommerce_demo/screens/product_screen/product_screen.dart';
 import 'package:ecommerce_demo/screens/registration_screen/registration_screen.dart';
 import 'package:ecommerce_demo/screens/shopping_cart_screen/shopping_cart_screen.dart';

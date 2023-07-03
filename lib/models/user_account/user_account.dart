@@ -2,6 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:flutter/foundation.dart';
 
+class Address {
+  String? streetAddress;
+  String? zipCode;
+}
+
 class UserAccount extends ChangeNotifier{
   final String uid;
   final String email;
@@ -10,6 +15,10 @@ class UserAccount extends ChangeNotifier{
   DateTime? updatedAt;
   String? address;
   String? phoneNumber;
+  String? displayedName;
+  String? zipCode;
+
+
 
   UserAccount({
     this.createdAt,
@@ -19,6 +28,8 @@ class UserAccount extends ChangeNotifier{
     this.phoneNumber,
     this.address,
     this.updatedAt,
+    this.displayedName,
+    this.zipCode
   });
 
   static fetchAccount({required String uid}) async {
