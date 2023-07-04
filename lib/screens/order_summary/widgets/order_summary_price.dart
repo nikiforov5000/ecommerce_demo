@@ -1,4 +1,7 @@
-import 'package:ecommerce_demo/screens/order_success/order_success_screen.dart';
+import 'package:ecommerce_demo/screens/order_success/constants.dart';
+import 'package:ecommerce_demo/screens/order_summary/widgets/card_title.dart';
+import 'package:ecommerce_demo/screens/order_summary/widgets/line_text.dart';
+import 'package:ecommerce_demo/screens/order_summary/widgets/line_title.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,16 +14,16 @@ class OrderSummaryPrice extends StatelessWidget {
     final shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
     final shoppingCart = shoppingCartProvider.shoppingCart;
     final totalSum = shoppingCart!.getSum();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(top: 20.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: Colors.grey.shade100,
-          ),
-          child: Padding(
+    return Card(
+      color: kCardLightBackgroundColor,
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 20.0,
               vertical: 30.0,
@@ -30,32 +33,15 @@ class OrderSummaryPrice extends StatelessWidget {
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Order Summary',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                    CardTitle('Order Summary'),
                   ],
                 ),
                 const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Subtotal',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    Text(
-                      '\$${(totalSum * 0.9).toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
+                    const LineTitle('Subtotal'),
+                    LineText('\$${(totalSum * 0.9).toStringAsFixed(2)}'),
                   ],
                 ),
                 const SizedBox(
@@ -64,43 +50,24 @@ class OrderSummaryPrice extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Delivery',
-                      style: TextStyle(fontSize: 16, color: Colors.black54),
-                    ),
-                    Text(
-                      '\$${(totalSum * 0.1).toStringAsFixed(2)}',
-                      style: const TextStyle(fontSize: 16),
-                    ),
+                    const LineTitle('Delivery'),
+                    LineText('\$${(totalSum * 0.1).toStringAsFixed(2)}'),
                   ],
                 ),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Total',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '\$$totalSum',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    const CardTitle('Total'),
+                    CardTitle('\$$totalSum'),
                   ],
                 ),
               ],
             ),
           ),
-        ),
-        const SizedBox(height: 20),
-
-      ],
+          const SizedBox(height: 20),
+        ],
+      ),
     );
   }
 }
