@@ -1,4 +1,5 @@
 import 'package:ecommerce_demo/models/shopping_cart/shopping_cart.dart';
+import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/screens/order_summary/widgets/order_summary_price.dart';
 import 'package:ecommerce_demo/screens/order_summary/widgets/payment_details_card.dart';
 import 'package:ecommerce_demo/screens/order_summary/widgets/privacy_policy_text.dart';

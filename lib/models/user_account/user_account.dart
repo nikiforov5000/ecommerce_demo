@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
+import 'package:ecommerce_demo/utils/is_not_null_and_not_empty.dart';
 import 'package:flutter/foundation.dart';
 
 class Address {
@@ -95,5 +96,12 @@ class UserAccount extends ChangeNotifier {
       'fullName': fullName,
       'updatedAt': DateTime.now(),
     });
+  }
+
+  bool hasShippingDetails() {
+    return isNotNullAndNotEmpty(address) &&
+        isNotNullAndNotEmpty(phoneNumber) &&
+        isNotNullAndNotEmpty(zipCode) &&
+        isNotNullAndNotEmpty(fullName);
   }
 }
