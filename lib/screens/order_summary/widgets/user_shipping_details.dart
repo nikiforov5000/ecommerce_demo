@@ -23,7 +23,7 @@ class UserShippingDetails extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const CartTitle('Shipping address'),
+                const CardTitle('Shipping address'),
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, UserAccountScreen.id);

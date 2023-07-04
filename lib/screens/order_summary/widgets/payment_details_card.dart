@@ -1,4 +1,7 @@
-
+import 'package:ecommerce_demo/screens/order_summary/widgets/card_title.dart';
+import 'package:ecommerce_demo/screens/order_summary/widgets/edit_title.dart';
+import 'package:ecommerce_demo/screens/order_summary/widgets/line_text.dart';
+import 'package:ecommerce_demo/screens/order_summary/widgets/pseudo_bank_card.dart';
 import 'package:flutter/material.dart';
 
 class PaymentDetailsCard extends StatelessWidget {
@@ -6,72 +9,36 @@ class PaymentDetailsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return                   Card(
+    return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10)),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 20.0, vertical: 30.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Payment',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: const Text(
-                      'Edit',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.teal),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.credit_card),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Text(
-                        '••••',
-                        style: TextStyle(
-                            fontSize: 16, color: Colors.black54),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Text(
-                        '9643',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    '11/25',
-                    style: TextStyle(
-                        fontSize: 16, color: Colors.black54),
-                  ),
-                ],
-              ),
-            ],
-          )),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const CardTitle('Payment'),
+                GestureDetector(
+                  onTap: () {},
+                  child: const EditTitle(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                PseudoBankCard(),
+                LineText('11/25'),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
-

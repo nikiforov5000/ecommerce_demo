@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class CartTitle extends StatelessWidget {
+class CardTitle extends StatelessWidget {
   final String _title;
-  const CartTitle(this._title, {Key? key}) : super(key: key);
+  const CardTitle(this._title, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

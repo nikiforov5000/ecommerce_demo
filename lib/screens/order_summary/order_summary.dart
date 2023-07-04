@@ -1,5 +1,5 @@
+import 'package:ecommerce_demo/constants/colors.dart';
 import 'package:ecommerce_demo/models/shopping_cart/shopping_cart.dart';
-import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/screens/order_summary/widgets/order_summary_price.dart';
 import 'package:ecommerce_demo/screens/order_summary/widgets/payment_details_card.dart';
 import 'package:ecommerce_demo/screens/order_summary/widgets/privacy_policy_text.dart';
@@ -17,6 +17,8 @@ import 'package:provider/provider.dart';
 class OrderSummary extends StatelessWidget {
   static const String id = 'order_summary';
 
+  const OrderSummary({super.key});
+
   @override
   Widget build(BuildContext context) {
     final ShoppingCartProvider cartProvider =
@@ -32,17 +34,17 @@ class OrderSummary extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
-          color: Colors.white,
+          color: kBackgroundColor,
           padding: const EdgeInsets.only(
               left: 10.0, right: 10.0, top: 10.0, bottom: 20.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ScreenHeader(),
-                SizedBox(height: 10),
-                PrivacyPolicyText(),
-                SizedBox(height: 20),
-                PaymentDetailsCard(),
+                const ScreenHeader(),
+                const SizedBox(height: 10),
+                const PrivacyPolicyText(),
+                const SizedBox(height: 20),
+                const PaymentDetailsCard(),
                 ShippingAddressDetailsCard(),
                 const OrderSummaryPrice(),
                 SubmitButton(shoppingCart!),
