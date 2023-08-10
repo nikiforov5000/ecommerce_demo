@@ -6,6 +6,7 @@ import 'package:ecommerce_demo/screens/product_list_screen/products_list_screen.
 import 'package:ecommerce_demo/screens/user_account_screen/user_account_screen.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
+import 'package:ecommerce_demo/services/user_account_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => UserAccountProvider()),
         ChangeNotifierProvider(create: (_) => LocalUserProvider()),
         ChangeNotifierProvider(create: (_) => ShoppingCartProvider()),
         Provider<AuthService>(create: (_) => AuthService()),

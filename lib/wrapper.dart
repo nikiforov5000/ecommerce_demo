@@ -4,10 +4,12 @@ import 'package:ecommerce_demo/models/shopping_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/screens/categories_screen/categories_screen.dart';
+import 'package:ecommerce_demo/screens/user_account_screen/user_account_screen.dart';
 import 'package:ecommerce_demo/screens/welcome_screen/welcome_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
 import 'package:ecommerce_demo/services/local_user_provider.dart';
 import 'package:ecommerce_demo/services/shopping_cart_provider.dart';
+import 'package:ecommerce_demo/services/user_account_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +31,8 @@ class Wrapper extends StatelessWidget {
     final shoppingCartProvider = Provider.of<ShoppingCartProvider>(context);
     final userProvider = Provider.of<LocalUserProvider>(context);
 
+    final userAccountProvider = Provider.of<UserAccountProvider>(context);
+
     return StreamBuilder<LocalUser?>(
       stream: authService.user,
       builder: (_, AsyncSnapshot<LocalUser?> snapshot) {
@@ -43,6 +47,10 @@ class Wrapper extends StatelessWidget {
             Future.microtask((){
               Navigator.popUntil(context, (route) => route.isFirst);
             });
+            if (userAccountProvider.userAccount == null || isChecking()) {
+              UserAccount.fetchAccount(uid: user.uid).then((value) {userAccountProvider.userAccount = value; });
+            }
+            return UserAccountScreen();
             return CategoriesScreen();
           }
         } else {
@@ -55,4 +63,10 @@ class Wrapper extends StatelessWidget {
       },
     );
   }
+}
+
+
+bool isChecking() {
+  print('isChecking');
+  return false;
 }
