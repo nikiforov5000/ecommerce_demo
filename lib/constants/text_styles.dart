@@ -72,3 +72,20 @@ TextStyle kBreadcrumbsTextStyle = kButtonTextStyle.copyWith(
   decoration: TextDecoration.underline,
   fontSize: 12,
 );
+
+const kHeaderTextStyle = TextStyle(
+  fontSize: 20,
+);
+
+
+TextStyle kProfileDetailsItemLabelTextStyle = TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.w500,
+  color: Colors.grey.shade600,
+);
+TextStyle kProfileDetailsItemTextTextStyle = const TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.normal,
+  color: kDarkTextColor,
+);
+

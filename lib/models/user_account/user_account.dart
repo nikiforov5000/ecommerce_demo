@@ -14,21 +14,49 @@ class UserAccount extends ChangeNotifier {
   final String cartId;
   final DateTime? createdAt;
   DateTime? updatedAt;
-  String? address;
-  String? phoneNumber;
-  String? fullName;
-  String? zipCode;
+  String? _address;
+  String? _phoneNumber;
+  String? _fullName;
+  String? _zipCode;
 
   UserAccount(
       {this.createdAt,
       required this.uid,
       required this.email,
       required this.cartId,
-      this.phoneNumber,
-      this.address,
       this.updatedAt,
-      this.fullName,
-      this.zipCode});
+      phoneNumber,
+      address,
+      fullName,
+      zipCode})
+      : _address = address,
+        _phoneNumber = phoneNumber,
+        _fullName = fullName,
+        _zipCode = zipCode;
+
+  String? get fullName => _fullName;
+
+  String get address => _address ?? '';
+
+  String get zipCode => _zipCode ?? '';
+
+  String get phoneNumber => _phoneNumber ?? '';
+
+  set address(String newAddress) {
+    if (newAddress.isNotEmpty) {
+      _address = newAddress;
+    }
+  }
+  set zipCode(String newZipCode) {
+    if (newZipCode.isNotEmpty) {
+      _zipCode = newZipCode;
+    }
+  }
+  set phoneNumber(String newPhoneNumber) {
+    if (newPhoneNumber.isNotEmpty) {
+      _phoneNumber = newPhoneNumber;
+    }
+  }
 
   static fetchAccount({required String uid}) async {
     print('user_account.dart -> fetchAccount() uid:$uid');
@@ -83,25 +111,21 @@ class UserAccount extends ChangeNotifier {
     });
   }
 
-  void update({
-    String? address,
-    String? phoneNumber,
-    String? zipCode,
-    String? fullName,
-  }) async {
+  void update() async {
+    print('user_account.dart -> update() -> address$address, phoneNumber$phoneNumber, zipCode$zipCode, fullName$fullName');
     await FirebaseFirestore.instance.collection('users').doc(uid).update({
-      'address': address,
-      'phoneNumber': phoneNumber,
-      'zipCode': zipCode,
-      'fullName': fullName,
+      'address': _address,
+      'phoneNumber': _phoneNumber,
+      'zipCode': _zipCode,
+      'fullName': _fullName,
       'updatedAt': DateTime.now(),
     });
   }
 
   bool hasShippingDetails() {
-    return isNotNullAndNotEmpty(address) &&
-        isNotNullAndNotEmpty(phoneNumber) &&
-        isNotNullAndNotEmpty(zipCode) &&
-        isNotNullAndNotEmpty(fullName);
+    return isNotNullAndNotEmpty(_address) &&
+        isNotNullAndNotEmpty(_phoneNumber) &&
+        isNotNullAndNotEmpty(_zipCode) &&
+        isNotNullAndNotEmpty(_fullName);
   }
 }
