@@ -47,15 +47,27 @@ class UserAccount extends ChangeNotifier {
       _address = newAddress;
     }
   }
+
   set zipCode(String newZipCode) {
     if (newZipCode.isNotEmpty) {
       _zipCode = newZipCode;
     }
   }
+
   set phoneNumber(String newPhoneNumber) {
     if (newPhoneNumber.isNotEmpty) {
       _phoneNumber = newPhoneNumber;
     }
+  }
+
+  static Stream<UserAccount> userAccountStream({required String uid}) {
+    final firestore = FirebaseFirestore.instance;
+    final userRef = firestore.collection('users').doc(uid);
+
+    return userRef.snapshots().map((snapshot) {
+      final data = snapshot.data();
+      return _snapshotToUserAccount(data as Map<String, dynamic>);
+    });
   }
 
   static fetchAccount({required String uid}) async {
@@ -112,7 +124,12 @@ class UserAccount extends ChangeNotifier {
   }
 
   void update() async {
-    print('user_account.dart -> update() -> address$address, phoneNumber$phoneNumber, zipCode$zipCode, fullName$fullName');
+    print('user_account.dart -> update() '
+        '-> address$address, '
+        'phoneNumber$phoneNumber, '
+        'zipCode$zipCode, '
+        'fullName$fullName');
+
     await FirebaseFirestore.instance.collection('users').doc(uid).update({
       'address': _address,
       'phoneNumber': _phoneNumber,

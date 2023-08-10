@@ -18,9 +18,9 @@ class EditDetailsBody extends StatelessWidget {
 
   void fillControllers() {
     if (_userAccount != null) {
-      _addressController.text = _userAccount!.address ?? '';
-      _zipCodeController.text = _userAccount!.zipCode ?? '';
-      _phoneNumberController.text = _userAccount!.phoneNumber ?? '';
+      _addressController.text = _userAccount!.address;
+      _zipCodeController.text = _userAccount!.zipCode;
+      _phoneNumberController.text = _userAccount!.phoneNumber;
     }
   }
 

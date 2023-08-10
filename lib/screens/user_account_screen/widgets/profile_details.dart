@@ -18,27 +18,32 @@ class ProfileDetails extends StatelessWidget {
     if (_userAccount == null) {
       return const CircularProgressIndicator();
     }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        ProfileDetailsItem(
-          label: 'Email',
-          text: _userAccount!.email,
-        ),
-        ProfileDetailsItem(
-          label: 'Street Address',
-          text: _userAccount!.address,
-        ),
-        ProfileDetailsItem(
-          label: 'ZIP Code',
-          text: _userAccount!.zipCode,
-        ),
-        ProfileDetailsItem(
-          label: 'Phone Number',
-          text: _userAccount!.phoneNumber,
-        ),
-      ],
+    return StreamBuilder(
+      stream: UserAccount.userAccountStream(uid: _userAccount!.uid),
+      builder: (BuildContext context, snapshot) {
+        print('profile_details.dart -> StreamBuilder()');
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ProfileDetailsItem(
+              label: 'Email',
+              text: _userAccount!.email,
+            ),
+            ProfileDetailsItem(
+              label: 'Street Address',
+              text: _userAccount!.address,
+            ),
+            ProfileDetailsItem(
+              label: 'ZIP Code',
+              text: _userAccount!.zipCode,
+            ),
+            ProfileDetailsItem(
+              label: 'Phone Number',
+              text: _userAccount!.phoneNumber,
+            ),
+          ],
+        );
+      },
     );
   }
 }
-

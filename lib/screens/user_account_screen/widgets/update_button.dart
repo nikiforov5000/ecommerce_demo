@@ -23,6 +23,9 @@ class UpdateButton extends StatelessWidget {
 
   void update() {
     _userAccount.address = _addressController.text;
+    _userAccount.phoneNumber = _phoneNumberController.text;
+    _userAccount.zipCode = _zipCodeController.text;
+    _userAccount.update();
   }
 
   @override
