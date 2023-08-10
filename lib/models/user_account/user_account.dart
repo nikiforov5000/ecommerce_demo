@@ -124,13 +124,7 @@ class UserAccount extends ChangeNotifier {
   }
 
   void update() async {
-    print('user_account.dart -> update() '
-        '-> address$address, '
-        'phoneNumber$phoneNumber, '
-        'zipCode$zipCode, '
-        'fullName$fullName');
-
-    await FirebaseFirestore.instance.collection('users').doc(uid).update({
+   await FirebaseFirestore.instance.collection('users').doc(uid).update({
       'address': _address,
       'phoneNumber': _phoneNumber,
       'zipCode': _zipCode,

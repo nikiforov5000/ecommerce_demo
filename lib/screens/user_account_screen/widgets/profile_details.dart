@@ -21,7 +21,6 @@ class ProfileDetails extends StatelessWidget {
     return StreamBuilder(
       stream: UserAccount.userAccountStream(uid: _userAccount!.uid),
       builder: (BuildContext context, snapshot) {
-        print('profile_details.dart -> StreamBuilder()');
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

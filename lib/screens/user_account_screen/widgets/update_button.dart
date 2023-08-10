@@ -31,9 +31,8 @@ class UpdateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RoundedButton(
-      labelWidget: Text('Update'),
+      labelWidget: const Text('Update'),
       onTapCallback: () {
-        print('update_button.dart -> build');
         update();
         Navigator.pop(context);
       },

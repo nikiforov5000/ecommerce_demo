@@ -22,7 +22,7 @@ class EditEntryIcon extends StatelessWidget {
       },
     );
   }
-  /// TODO finish update
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

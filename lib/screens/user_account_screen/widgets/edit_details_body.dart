@@ -12,9 +12,9 @@ class EditDetailsBody extends StatelessWidget {
   UserAccountProvider? _userAccountProvider;
   UserAccount? _userAccount;
 
-  TextEditingController _addressController = TextEditingController();
-  TextEditingController _zipCodeController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _zipCodeController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
 
   void fillControllers() {
     if (_userAccount != null) {
@@ -59,7 +59,7 @@ class EditDetailsBody extends StatelessWidget {
               ),
               Flexible(
                 child: RoundedButton(
-                  labelWidget: Text(
+                  labelWidget: const Text(
                     'Cancel',
                     style: kButtonTextStyle,
                   ),
