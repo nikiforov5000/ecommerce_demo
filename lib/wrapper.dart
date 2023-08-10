@@ -50,7 +50,6 @@ class Wrapper extends StatelessWidget {
             if (userAccountProvider.userAccount == null || isChecking()) {
               UserAccount.fetchAccount(uid: user.uid).then((value) {userAccountProvider.userAccount = value; });
             }
-            return UserAccountScreen();
             return CategoriesScreen();
           }
         } else {
