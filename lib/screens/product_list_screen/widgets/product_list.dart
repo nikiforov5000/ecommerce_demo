@@ -14,7 +14,10 @@ class ProductsList extends StatelessWidget {
     return Flexible(
       child: GridView.builder(
         itemCount: displayedProducts.length,
-        gridDelegate: sliverGridDelegate,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 4 / 6,
+        ),
         itemBuilder: (BuildContext context, int index) {
           Product product = displayedProducts[index];
           return Padding(
