@@ -89,3 +89,5 @@ TextStyle kProfileDetailsItemTextTextStyle = const TextStyle(
   color: kDarkTextColor,
 );
 
+const kBlueRatingNumberTextStyle = TextStyle(color: Colors.blue, fontSize: 12);
+const kPriceTextStyle = TextStyle(fontSize: 20, color: kDarkTextColor);

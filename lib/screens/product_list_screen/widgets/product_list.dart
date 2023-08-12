@@ -1,6 +1,6 @@
 import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/screens/product_list_screen/products_list_screen.dart';
-import 'package:ecommerce_demo/screens/product_list_screen/widgets/product_tile.dart';
+import 'package:ecommerce_demo/screens/product_list_screen/product_tile/product_tile.dart';
 import 'package:ecommerce_demo/screens/product_screen/product_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,10 @@ class ProductsList extends StatelessWidget {
     return Flexible(
       child: GridView.builder(
         itemCount: displayedProducts.length,
-        gridDelegate: sliverGridDelegate,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 4 / 6,
+        ),
         itemBuilder: (BuildContext context, int index) {
           Product product = displayedProducts[index];
           return Padding(

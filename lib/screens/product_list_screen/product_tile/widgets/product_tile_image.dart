@@ -1,18 +1,16 @@
-import 'package:flutter/material.dart';
-
-import 'package:ecommerce_demo/models/product.dart';
 import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
+import 'package:flutter/material.dart';
 
 class ProductTileImage extends StatelessWidget {
   const ProductTileImage({
     Key? key,
-    required this.product,
+    required this.imageUrl,
   }) : super(key: key);
 
-  final Product product;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
-    return ColorFilteredImage(imgUrl: product.imgUrl);
+    return ColorFilteredImage(imgUrl: imageUrl);
   }
 }

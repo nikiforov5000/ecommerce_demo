@@ -1,9 +1,12 @@
 // import 'dart:html';
 
+import 'package:ecommerce_demo/models/product_data.dart';
 import 'package:ecommerce_demo/models/shopping_cart/shopping_cart.dart';
 import 'package:ecommerce_demo/models/user/local_user.dart';
 import 'package:ecommerce_demo/models/user_account/user_account.dart';
 import 'package:ecommerce_demo/screens/categories_screen/categories_screen.dart';
+import 'package:ecommerce_demo/screens/product_list_screen/products_list_screen.dart';
+import 'package:ecommerce_demo/screens/product_screen/product_screen.dart';
 import 'package:ecommerce_demo/screens/user_account_screen/user_account_screen.dart';
 import 'package:ecommerce_demo/screens/welcome_screen/welcome_screen.dart';
 import 'package:ecommerce_demo/services/auth_service.dart';
@@ -50,6 +53,8 @@ class Wrapper extends StatelessWidget {
             if (userAccountProvider.userAccount == null || isChecking()) {
               UserAccount.fetchAccount(uid: user.uid).then((value) {userAccountProvider.userAccount = value; });
             }
+            ProductData.getAllProducts();
+            return ProductsListScreen();
             return CategoriesScreen();
           }
         } else {
