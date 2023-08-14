@@ -21,10 +21,9 @@ class ProductImageSection extends StatelessWidget {
           ),
           color: kWhiteColor,
         ),
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: ProductTileImage(imageUrl: product.imgUrl),
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+        alignment: AlignmentDirectional.center,
+        child: ProductTileImage(imageUrl: product.imgUrl),
       ),
     );
   }

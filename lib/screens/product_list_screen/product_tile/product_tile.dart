@@ -19,11 +19,10 @@ class ProductTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTapCallback,
       child: Container(
-        decoration: kButtonDecoration,
+        decoration: kButtonDecoration.copyWith(color: Colors.grey.shade200),
         child: Column(
           children: [
             ProductImageSection(product: product),
-            // Flexible(flex: 3, child: SizedBox()),
             ProductDetailsSection(product: product),
           ],
         ),
