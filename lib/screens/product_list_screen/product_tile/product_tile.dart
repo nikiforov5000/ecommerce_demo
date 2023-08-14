@@ -18,46 +18,49 @@ class ProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: kButtonDecoration,
-      child: Column(
-        children: [
-          Flexible(
-            flex: 6,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(8),
-                  topRight: Radius.circular(8),
-                ),
-                color: Colors.grey.shade200,
-              ),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ProductTileImage(imageUrl: product.imgUrl),
-                ),
-              ),
-            ),
-          ),
-          Flexible(
-            flex: 4,
-            child: FittedBox(
+    return GestureDetector(
+      onTap: onTapCallback,
+      child: Container(
+        decoration: kButtonDecoration,
+        child: Column(
+          children: [
+            Flexible(
+              flex: 6,
               child: Container(
-                width: MediaQuery.of(context).size.width / 3,
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    ProductTitle(title: product.title),
-                    ProductRating(rating: product.rate),
-                    const SizedBox(height: 3),
-                    ProductPrice(price: product.price),
-                  ],
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8),
+                    topRight: Radius.circular(8),
+                  ),
+                  color: Colors.grey.shade200,
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ProductTileImage(imageUrl: product.imgUrl),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+            Flexible(
+              flex: 4,
+              child: FittedBox(
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 3,
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      ProductTitle(title: product.title),
+                      ProductRating(rating: product.rate),
+                      const SizedBox(height: 3),
+                      ProductPrice(price: product.price),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
