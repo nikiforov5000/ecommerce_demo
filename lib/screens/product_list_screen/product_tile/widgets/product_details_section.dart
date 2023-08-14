@@ -4,7 +4,6 @@ import 'package:ecommerce_demo/screens/product_list_screen/product_tile/widgets/
 import 'package:ecommerce_demo/screens/product_list_screen/product_tile/widgets/product_title.dart';
 import 'package:flutter/material.dart';
 
-
 class ProductDetailsSection extends StatelessWidget {
   const ProductDetailsSection({Key? key, required this.product})
       : super(key: key);
@@ -16,11 +15,11 @@ class ProductDetailsSection extends StatelessWidget {
     return Flexible(
       flex: 4,
       child: FittedBox(
-        child: Container(
-          color: Colors.grey.shade200,
+        child: SizedBox(
           width: MediaQuery.of(context).size.width / 3,
           child: Column(
             children: [
+              const SizedBox(height: 10),
               ProductTitle(title: product.title),
               ProductRating(rating: product.rate),
               const SizedBox(height: 3),
@@ -32,4 +31,3 @@ class ProductDetailsSection extends StatelessWidget {
     );
   }
 }
-

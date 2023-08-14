@@ -23,6 +23,7 @@ class ProductTile extends StatelessWidget {
         child: Column(
           children: [
             ProductImageSection(product: product),
+            // Flexible(flex: 3, child: SizedBox()),
             ProductDetailsSection(product: product),
           ],
         ),
