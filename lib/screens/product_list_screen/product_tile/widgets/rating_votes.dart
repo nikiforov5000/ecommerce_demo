@@ -9,6 +9,7 @@ class RatingVotes extends StatelessWidget {
     return Text(
       '(126)',
       style: kSmallFontTextStyle.copyWith(fontSize: 10),
+      maxLines: 1,
     );
   }
 }

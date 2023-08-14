@@ -13,7 +13,9 @@ class ProductRating extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Flexible(child: RatingNumber(rating)),
+        Flexible(
+          child: RatingNumber(rating),
+        ),
         const SizedBox(
           width: 5,
         ),
@@ -21,7 +23,9 @@ class ProductRating extends StatelessWidget {
         const SizedBox(
           width: 5,
         ),
-        const Flexible(child: RatingVotes()),
+        const Flexible(
+          child: RatingVotes(),
+        ),
       ],
     );
   }
