@@ -1,4 +1,3 @@
-import 'package:ecommerce_demo/widgets/color_filtered_image.dart';
 import 'package:flutter/material.dart';
 
 class ProductTileImage extends StatelessWidget {
@@ -11,6 +10,6 @@ class ProductTileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColorFilteredImage(imgUrl: imageUrl);
+    return Image.network(imageUrl);
   }
 }

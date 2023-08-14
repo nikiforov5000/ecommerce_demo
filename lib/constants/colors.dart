@@ -8,4 +8,5 @@ const kAppBarIconBackgroundColor = Color(0xffc1c2c9);
 const kAppBarIconColor = Color(0xff333333);
 const kDarkBlueLogoColor = Color(0xff213255);
 final kAppBarBackgrooundColor = kDarkBlueLogoColor;
+const kWhiteColor = Colors.white;
 

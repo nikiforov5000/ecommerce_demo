@@ -13,9 +13,6 @@ class ColorFilteredImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColorFiltered(
-      colorFilter: ColorFilter.mode(kTileColor, BlendMode.darken),
-      child: Image.network(imgUrl),
-    );
+    return Image.network(imgUrl);
   }
 }
