@@ -36,3 +36,5 @@ Learned?
 
 <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/order_summary_screen.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/order_success_screen.png" width=250px>  <img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/user-account-screen.png" width=250px>
 
+<img src="https://github.com/nikiforov5000/ecommerce_demo/blob/master/screenshots/user-account-screen-edit.png" width=250px>
+
