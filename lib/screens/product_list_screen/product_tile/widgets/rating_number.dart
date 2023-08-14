@@ -11,6 +11,7 @@ class RatingNumber extends StatelessWidget {
     return Text(
       rating.toString(),
       style: kBlueRatingNumberTextStyle,
+      maxLines: 1,
     );
   }
 }

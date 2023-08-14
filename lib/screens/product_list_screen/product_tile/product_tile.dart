@@ -42,17 +42,18 @@ class ProductTile extends StatelessWidget {
           ),
           Flexible(
             flex: 4,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  ProductTitle(title: product.title),
-                  ProductRating(rating: product.rate),
-                  const SizedBox(
-                    height: 3,
-                  ),
-                  ProductPrice(price: product.price),
-                ],
+            child: FittedBox(
+              child: Container(
+                width: MediaQuery.of(context).size.width / 3,
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    ProductTitle(title: product.title),
+                    ProductRating(rating: product.rate),
+                    const SizedBox(height: 3),
+                    ProductPrice(price: product.price),
+                  ],
+                ),
               ),
             ),
           ),

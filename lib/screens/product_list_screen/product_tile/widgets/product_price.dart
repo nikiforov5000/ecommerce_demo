@@ -1,4 +1,5 @@
 import 'package:ecommerce_demo/constants/text_styles.dart';
+import 'package:ecommerce_demo/constants/units.dart';
 import 'package:flutter/material.dart';
 
 class ProductPrice extends StatelessWidget {
@@ -13,7 +14,7 @@ class ProductPrice extends StatelessWidget {
   String? wholeStr;
   String? centsStr;
 
-  String currency = 'TL';
+
 
   void fillMoneyVariables() {
     thousands = (price / 1000).floor();
@@ -43,6 +44,10 @@ class ProductPrice extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Text(
+          currency,
+          style: kPriceTextStyle.copyWith(fontSize: 15),
+        ),
         Text(thousandsStr!, style: kPriceTextStyle),
         Text(wholeStr!, style: kPriceTextStyle),
         Column(
@@ -59,10 +64,6 @@ class ProductPrice extends StatelessWidget {
         ),
         const SizedBox(
           width: 3,
-        ),
-        Text(
-          currency,
-          style: kPriceTextStyle.copyWith(fontSize: 15),
         ),
       ],
     );
